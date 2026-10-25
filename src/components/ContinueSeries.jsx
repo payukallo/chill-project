@@ -2,8 +2,8 @@ import Movie1 from "../assets/images/alice-in-borderland-width.png";
 import Movie2 from "../assets/images/my-perfect-stranger-width.png";
 import Movie3 from "../assets/images/all-of-us-are-dead-width.png";
 import Movie4 from "../assets/images/ted-lasso-width.png";
-import { BoxMovie } from "./boxMovie";
-import { BottomText, NewEpisode } from "./textMovieImage";
+import { BoxMovie } from "./BoxMovie";
+import { BottomText, NewEpisode } from "./TextMovieImage";
 
 export function ContinueSeries() {
 

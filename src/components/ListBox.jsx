@@ -1,4 +1,4 @@
-import { BoxMovie } from "./boxMovie";
+import { BoxMovie } from "./BoxMovie";
 import Movie1 from "../assets/images/all-of-us-are-dead.png";
 import Movie2 from "../assets/images/bay-max.png";
 import Movie3 from "../assets/images/my-hero-academia.png";
@@ -11,7 +11,7 @@ import Movie9 from "../assets/images/spider-man.png";
 import Movie10 from "../assets/images/sonic-2.png";
 import Movie11 from "../assets/images/megan.png";
 import Movie12 from "../assets/images/dilan-1991.png";
-import { NewEpisode, Top10 } from "./textMovieImage";
+import { NewEpisode, Top10 } from "./TextMovieImage";
 
 export function ListBox() {
   return (

@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router";
-import LoginPage from "../pages/login";
-import RegisterPage from "../pages/register";
-import HomePage from "../pages/home";
-import MyListPage from "../pages/myList";
-import SeriesPage from "../pages/series";
-import MoviesPage from "../pages/movies";
+import LoginPage from "../pages/Login";
+import RegisterPage from "../pages/Register";
+import HomePage from "../pages/Home";
+import MyListPage from "../pages/MyList";
+import SeriesPage from "../pages/Series";
+import MoviesPage from "../pages/Movies";
 export const router = createBrowserRouter([
   {
     path: "/",

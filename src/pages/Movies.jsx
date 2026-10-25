@@ -1,9 +1,9 @@
 import "../assets/styles/movies.css";
-import { Navbar } from "../components/navbar";
-import { HeadTextMovies } from "../components/headText";
-import { HeadBtn } from "../components/headBtn";
-import { Footer } from "../components/footer";
-import { MoviesContent } from "../components/moviesContent";
+import { Navbar } from "../layouts/Navbar";
+import { HeadTextMovies } from "../components/HeadText";
+import { HeadBtn } from "../components/HeadBtn";
+import { Footer } from "../layouts/Footer";
+import { MoviesContent } from "../components/MoviesContent";
 
 const MoviesPage = () => {
   return (
