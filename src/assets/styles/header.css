@@ -1,0 +1,155 @@
+header {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  background-size: cover;
+  background-repeat: none;
+  width: 1440px;
+  height: 587px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 80px;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(75, 63, 63, 0),
+    rgba(16, 18, 19, 0.743),
+    rgb(24, 26, 28)
+  );
+}
+
+.head-text {
+  display: flex;
+  flex-direction: column;
+  width: 668px;
+  height: 148px;
+  gap: 20px;
+}
+
+.head-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 350px;
+  gap: 10px;
+}
+
+button {
+  font-family: Lato;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.2px;
+}
+
+.btn-left button img {
+  display: flex;
+  width: 24px;
+}
+
+.info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.age {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid var(--text-light-secondary);
+  color: var(--text-light-secondary);
+  border-radius: 24px;
+  width: 52px;
+  height: 45px;
+}
+
+.head-btn img {
+  width: 50px;
+}
+
+#volume {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 580px), (max-height: 900px) {
+  header {
+    width: 360px;
+    height: 225px;
+  }
+
+  header .heading-1 {
+    font-size: 24px;
+  }
+
+  header .body-large-regular,
+  header .body-large-medium {
+    font-size: 12px;
+  }
+
+  .header {
+    width: 100%;
+    padding: 18px;
+    gap: 25px;
+  }
+
+  .head-text {
+    width: 320px;
+    height: auto;
+    gap: 11px;
+  }
+
+  .head-text p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 12px;
+  }
+
+  .head-btn {
+    align-items: center;
+  }
+
+  .btn-left {
+    width: 221px;
+    height: 25px;
+    gap: 8px;
+  }
+
+  .btn-left button {
+    height: 25px;
+    padding: 4px 12px;
+    font-size: 12px;
+  }
+
+  .btn-left button img {
+    width: 12px;
+    height: 12px;
+  }
+
+  span.age {
+    border-radius: 24px;
+    width: 30px;
+    height: 25px;
+  }
+
+  .head-btn img {
+    width: 24px;
+  }
+}
