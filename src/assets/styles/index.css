@@ -1,0 +1,32 @@
+@import url("./navbar.css");
+@import url("./header.css");
+@import url("./content.css");
+@import url("./footer.css");
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light-primary);
+  background-color: var(--page-header-background);
+}
+
+.home-page header {
+  background-image: url(../images/navbar-img.png);
+  background-position: center center;
+}
+
+.home-page footer {
+  margin-top: 80px;
+}
+
+@media (max-width: 580px), (max-height: 900px) {
+  .home-page {
+    width: 360px;
+  }
+
+  .home-page footer {
+    margin-top: 27px;
+  }
+}
