@@ -3,8 +3,8 @@ import Movie2 from "../assets/images/jurassic-world.png";
 import Movie3 from "../assets/images/sonic-2.png";
 import Movie4 from "../assets/images/all-of-us-are-dead.png";
 import Movie5 from "../assets/images/big-hero-5.png";
-import { BoxMovie } from "./boxMovie";
-import { NewEpisode, Top10 } from "./textMovieImage";
+import { BoxMovie } from "./BoxMovie";
+import { NewEpisode, Top10 } from "./TextMovieImage";
 
 export function TopRating() {
   return (

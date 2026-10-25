@@ -53,7 +53,7 @@
   translate: 40%;
 }
 .movie-list::scroll-button(right):disabled,
-.movie-top::scroll-button(left):disabled {
+.movie-list::scroll-button(left):disabled {
   opacity: 0.5;
   cursor: auto;
 }

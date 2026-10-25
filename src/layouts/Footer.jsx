@@ -1,5 +1,5 @@
 import MovieLogo from "../assets/logo/movie.png";
-import { RightFoot } from "./rightFoot";
+import { RightFoot } from "./RightFoot";
 export function Footer() {
   return (
     <footer className="body-medium-medium">

@@ -3,8 +3,8 @@ import Movie2 from "../assets/images/quantumania.png";
 import Movie3 from "../assets/images/guardians-of-the-galaxy.png";
 import Movie4 from "../assets/images/a-man-called-otto.png";
 import Movie5 from "../assets/images/little-mermaid.png";
-import { BoxMovie } from "./boxMovie";
-import { Top10 } from "./textMovieImage";
+import { BoxMovie } from "./BoxMovie";
+import { Top10 } from "./TextMovieImage";
 
 export function Trending() {
   return (
