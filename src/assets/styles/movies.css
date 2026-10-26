@@ -12,11 +12,6 @@ body {
   background-color: var(--page-header-background);
 }
 
-.movies-page header {
-  background-image: url(../images/navbar-img-movies.png);
-  background-position: 50% 7%;
-}
-
 .movies-page footer {
   margin-top: 80px;
 }

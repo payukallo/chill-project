@@ -1,4 +1,9 @@
-export function Title(props) {
+interface ITitle {
+  title: string;
+  subTitle: string;
+}
+
+export function Title(props: ITitle) {
   const { title, subTitle } = props;
   return (
     <div className="title">

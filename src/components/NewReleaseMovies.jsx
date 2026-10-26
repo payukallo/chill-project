@@ -1,10 +1,6 @@
-import Movie1 from "../assets/images/little-mermaid.png";
-import Movie2 from "../assets/images/duty-after-school.png";
-import Movie3 from "../assets/images/big-hero-5.png";
-import Movie4 from "../assets/images/all-of-us-are-dead.png";
-import Movie5 from "../assets/images/missing.png";
-import { BoxMovie } from "./BoxMovie";
-import { NewEpisode, Top10 } from "./TextMovieImage";
+import { DutyAfterSchool, Missing } from "./MovieList/NewReleaseList";
+import { AllOfUsAreDead, BigHero6 } from "./MovieList/TopRatingList";
+import { LittleMermaid } from "./MovieList/TrendingList";
 
 export function NewRelease() {
   return (
@@ -12,34 +8,19 @@ export function NewRelease() {
       <h3 className="heading-3">Rilis Baru</h3>
       <div className="movie-list">
         <div className="box">
-          <BoxMovie movieImg={Movie1} textTop10={<Top10 />} />
+          <LittleMermaid />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie2} textNewEpisode={<NewEpisode />} />
+          <DutyAfterSchool />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie3} textTop10={<Top10 />} />
+          <BigHero6 />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie4} textNewEpisode={<NewEpisode />} />
+          <AllOfUsAreDead />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie5} />
-        </div>
-        <div className="box">
-          <BoxMovie movieImg={Movie1} textTop10={<Top10 />} />
-        </div>
-        <div className="box">
-          <BoxMovie movieImg={Movie2} textNewEpisode={<NewEpisode />} />
-        </div>
-        <div className="box">
-          <BoxMovie movieImg={Movie3} textTop10={<Top10 />} />
-        </div>
-        <div className="box">
-          <BoxMovie movieImg={Movie4} textNewEpisode={<NewEpisode />} />
-        </div>
-        <div className="box">
-          <BoxMovie movieImg={Movie5} />
+          <Missing />
         </div>
       </div>
     </div>

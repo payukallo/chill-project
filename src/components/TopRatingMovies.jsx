@@ -1,10 +1,4 @@
-import Movie1 from "../assets/images/suzume.png";
-import Movie2 from "../assets/images/jurassic-world.png";
-import Movie3 from "../assets/images/sonic-2.png";
-import Movie4 from "../assets/images/all-of-us-are-dead.png";
-import Movie5 from "../assets/images/big-hero-5.png";
-import { BoxMovie } from "./BoxMovie";
-import { NewEpisode, Top10 } from "./TextMovieImage";
+import { AllOfUsAreDead, BigHero6, JurassicWorld, Sonic2, Suzume } from "./MovieList/TopRatingList";
 
 export function TopRating() {
   return (
@@ -12,34 +6,34 @@ export function TopRating() {
       <h3 className="heading-3">Top Rating Film dan Series Hari Ini</h3>
       <div className="movie-list">
         <div className="box">
-          <BoxMovie movieImg={Movie1} newEpisode={<NewEpisode />} />
+          <Suzume />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie2} />
+          <JurassicWorld />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie3} />
+          <Sonic2 />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie4} newEpisode={<NewEpisode />} />
+          <AllOfUsAreDead />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie5} top10={<Top10 />} />
+          <BigHero6 />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie1} newEpisode={<NewEpisode />} />
+          <Suzume />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie2} />
+          <JurassicWorld />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie3} />
+          <Sonic2 />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie4} newEpisode={<NewEpisode />} />
+          <AllOfUsAreDead />
         </div>
         <div className="box">
-          <BoxMovie movieImg={Movie5} top10={<Top10 />} />
+          <BigHero6 />
         </div>
       </div>
     </div>

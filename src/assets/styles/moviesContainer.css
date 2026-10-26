@@ -9,16 +9,12 @@
 
 .movie-list {
   display: flex;
-  gap: 24px;
+  gap: 28px;
   width: 1280px;
   overflow-x: auto;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   scroll-marker-group: after;
-}
-
-.movie-list {
-  gap: 28px;
 }
 
 .movie-list::scroll-marker-group {
@@ -67,6 +63,10 @@
 
 .box::scroll-marker:target-current {
   background-color: var(--text-light-secondary);
+}
+
+.bottom-text {
+  display: none;
 }
 
 .box {
