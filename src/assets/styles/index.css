@@ -12,11 +12,6 @@ body {
   background-color: var(--page-header-background);
 }
 
-.home-page header {
-  background-image: url(../images/navbar-img.png);
-  background-position: center center;
-}
-
 .home-page footer {
   margin-top: 80px;
 }

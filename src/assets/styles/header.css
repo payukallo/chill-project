@@ -1,34 +1,51 @@
 header {
   display: flex;
-  justify-content: center;
-  align-items: end;
-  background-size: cover;
-  background-repeat: none;
-  width: 1440px;
   height: 587px;
+  position: relative;
+}
+
+header img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: 50% 15%;
 }
 
 .header {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 40px;
-  padding: 80px;
+  align-items: end;
   width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 80px;
   background: linear-gradient(
     to bottom,
-    rgba(75, 63, 63, 0),
-    rgba(16, 18, 19, 0.743),
-    rgb(24, 26, 28)
+    rgba(0, 0, 0, 0),
+    rgba(16, 18, 19, 0.66),
+    rgb(24, 26, 28, 1)
+
   );
+}
+
+.head-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 258px;
+  gap: 40px;
 }
 
 .head-text {
   display: flex;
   flex-direction: column;
   width: 668px;
-  height: 148px;
+  height: 173px;
   gap: 20px;
+}
+
+.head-title {
+  height: 53px;
 }
 
 .head-btn {
@@ -106,24 +123,33 @@ button {
     width: 100%;
     padding: 18px;
     gap: 25px;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0),
+      rgba(24, 26, 28, 1)
+    );
+  }
+
+  .head-bottom {
+    height: 116px;
+    gap: 11px;
+  }
+
+  .head-title {
+    height: 29px;
   }
 
   .head-text {
     width: 320px;
-    height: auto;
     gap: 11px;
   }
 
-  .head-text p {
+  .head-description {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
     font-size: 12px;
-  }
-
-  .head-btn {
-    align-items: center;
   }
 
   .btn-left {
