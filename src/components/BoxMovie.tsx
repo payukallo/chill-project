@@ -13,8 +13,8 @@ export function BoxMovie(props: IBoxMovie) {
     <>
       <img src={movieImg} alt="" />
       <div>
-        {isPremium ? <p className="premium body-small-bold">Premium</p> : <></>}
-        {isNewEpisode ? (
+        {isPremium ? <p className="premium body-small-bold">Premium</p>  : <></>}
+        {isNewEpisode && !isPremium ? (
           <p className="new-episode body-small-bold">Episode Baru</p>
         ) : (
           <></>

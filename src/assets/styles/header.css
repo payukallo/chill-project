@@ -13,7 +13,8 @@ header img {
 
 .header {
   display: flex;
-  align-items: end;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -23,8 +24,58 @@ header img {
     rgba(0, 0, 0, 0),
     rgba(16, 18, 19, 0.66),
     rgb(24, 26, 28, 1)
-
   );
+}
+
+.btn-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -25px;
+  width: 115px;
+  height: 44px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--paper-background);
+}
+
+.btn-header:hover {
+  background-color: var(--extra-background);
+}
+
+.dropdown-header {
+  position: relative;
+  display: inline-block;
+  background-color: var(--page-header-background);
+  color: var(--text-light-primary);
+  border: none;
+  width: 0;
+  list-style: none;
+  border-radius: 4px;
+}
+
+.dropdown-genre {
+  position: absolute;
+  overflow: hidden;
+  top: 20px;
+  z-index: 2;
+  background-color: rgba(34, 40, 42, 1);
+  border-radius: 4px;
+  display: grid;
+  grid-template-rows: repeat(7, auto);
+  grid-auto-flow: column;
+}
+
+.dropdown-genre a {
+  display: block;
+  padding: 8px 12px;
+  width: 196px;
+  height: 36;
+}
+
+.dropdown-genre a:hover {
+  background-color: var(--extra-background);
 }
 
 .head-bottom {
@@ -62,14 +113,6 @@ header img {
   gap: 10px;
 }
 
-button {
-  font-family: Lato;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 140%;
-  letter-spacing: 0.2px;
-}
-
 .btn-left button img {
   display: flex;
   width: 24px;
@@ -79,6 +122,10 @@ button {
   display: flex;
   gap: 8px;
   align-items: center;
+}
+
+.btn-left button:hover {
+  background-color: var(--info-hover);
 }
 
 .age {
@@ -104,6 +151,14 @@ button {
   margin: 0;
 }
 
+#volume img {
+  border-radius: 50%;
+}
+
+#volume :hover {
+  background-color: var(--grey-scale-600);
+}
+
 @media (max-width: 580px), (max-height: 900px) {
   header {
     width: 360px;
@@ -120,6 +175,7 @@ button {
   }
 
   .header {
+    justify-content: flex-end;
     width: 100%;
     padding: 18px;
     gap: 25px;
@@ -128,6 +184,10 @@ button {
       rgba(0, 0, 0, 0),
       rgba(24, 26, 28, 1)
     );
+  }
+
+  .dropdown-header {
+    display: none;
   }
 
   .head-bottom {

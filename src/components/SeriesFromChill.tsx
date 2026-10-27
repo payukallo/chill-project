@@ -22,6 +22,21 @@ export function SeriesFromChill() {
         <div className="box">
           <Missing />
         </div>
+         <div className="box">
+          <LittleMermaid />
+        </div>
+        <div className="box">
+          <DutyAfterSchool />
+        </div>
+        <div className="box">
+          <BigHero6 />
+        </div>
+        <div className="box">
+          <AllOfUsAreDead />
+        </div>
+        <div className="box">
+          <Missing />
+        </div>
       </div>
     </div>
   );

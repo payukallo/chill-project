@@ -1,5 +1,5 @@
-import LogoInfo from "../assets/logo/!.png";
-import LogoVolume from "../assets/logo/mute-volume.png";
+import LogoInfo from "../logo/!.png";
+import LogoVolume from "../logo/mute-volume.png";
 
 export function HeadBtn() {
   return (
@@ -12,7 +12,7 @@ export function HeadBtn() {
         </button>
         <span className="age body-large-regular">18+</span>
       </div>
-      <button id="volume">
+      <button id="volume" >
         <img src={LogoVolume} alt="" />
       </button>
     </div>

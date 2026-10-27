@@ -33,36 +33,43 @@ a {
   width: 40px;
 }
 
-.profile ul {
+.btn-icon {
+  border: none;
+}
+
+.dropdown-navbar {
+  position: relative;
+  display: inline-block;
   background-color: var(--page-header-background);
   color: var(--text-light-primary);
-  width: 20px;
+  width: fit-content;
   border: none;
   list-style: none;
   border-radius: 4px;
 }
 
-.profile ul ul {
-  display: none;
-  position: relative;
-  line-height: 30px;
-  top: 100px;
-  right: 80px;
+.dropdown-profile {
+  position: absolute;
+  overflow: hidden;
+  top: 60px;
+  right: -60px;
   width: 158px;
-  padding: 4px;
+  height: 128px;
   z-index: 2;
   background-color: var(--page-header-background);
+  border-radius: 4px;
 }
 
-.profile ul ul li a:hover {
+.dropdown-profile a {
+  display: block;
+  padding: 8px 12px;
+}
+
+.profile a:hover {
   color: var(--primary-color);
 }
 
-.profile ul li:hover > ul {
-  display: block;
-}
-
-.profile ul img {
+.profile a img {
   width: 30px;
   padding-right: 5px;
 }
@@ -71,13 +78,12 @@ a {
   display: flex;
   align-items: center;
   background-color: var(--page-header-background);
-  padding: 12px;
 }
 
 @media (max-width: 580px), (max-height: 900px) {
-  
   nav.body-large-medium,
-  nav .body-small-medium {
+  nav .body-small-medium,
+  .btn-icon {
     font-size: 10px;
   }
 
@@ -101,31 +107,45 @@ a {
   }
 
   .profile {
-    gap: 8px;
+    gap: 4px;
   }
 
   .profile img {
     width: 20px;
   }
 
-  .profile ul {
-    width: 5px;
-  }
-
-  .profile ul ul {
-    top: 52px;
-    right: 90px;
-    line-height: 25px;
-    width: 100px;
-    padding: 4px;
-  }
-
-  .profile ul img {
+  .dropdown-profile a img {
     width: 16px;
     padding-right: 2px;
   }
 
-  .profile a {
-    padding: 2px;
+  .btn-icon {
+    padding: 4px;
+    height: 20px;
+  }
+
+  .dropdown-navbar {
+    position: relative;
+    display: inline-block;
+    background-color: var(--page-header-background);
+    color: var(--text-light-primary);
+    width: 10px;
+    border: none;
+    list-style: none;
+    border-radius: 4px;
+  }
+
+  .dropdown-profile {
+    top: 25px;
+    right: -5px;
+    width: 113px;
+    height: 104px;
+    z-index: 2;
+    background-color: var(--page-header-background);
+    border-radius: 4px;
+  }
+
+  .dropdown-profile a {
+    padding: 8px 12px;
   }
 }

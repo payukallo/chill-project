@@ -62,7 +62,7 @@ export function LittleMermaid() {
   return (
   <BoxMovie   
   movieImg={LittleMermaidImg}
-  isPremium={false}
+  isPremium={true}
   isTop10={false}
   isNewEpisode={false}
   title={"Little Mermaid"}
