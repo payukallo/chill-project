@@ -78,6 +78,10 @@
   scroll-snap-align: start;
 }
 
+.box:hover {
+  cursor: pointer;
+}
+
 .box img {
   width: 100%;
   height: 100%;

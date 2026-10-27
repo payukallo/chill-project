@@ -1,5 +1,6 @@
 header {
   display: flex;
+  width: 100%;
   height: 587px;
   position: relative;
 }
@@ -25,6 +26,15 @@ header img {
     rgba(16, 18, 19, 0.66),
     rgb(24, 26, 28, 1)
   );
+}
+
+.head-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 258px;
+  gap: 40px;
 }
 
 .btn-header {
@@ -76,15 +86,6 @@ header img {
 
 .dropdown-genre a:hover {
   background-color: var(--extra-background);
-}
-
-.head-bottom {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  height: 258px;
-  gap: 40px;
 }
 
 .head-text {
@@ -149,6 +150,8 @@ header img {
   align-items: center;
   padding: 0;
   margin: 0;
+  background-color: transparent;
+  border: none;
 }
 
 #volume img {
