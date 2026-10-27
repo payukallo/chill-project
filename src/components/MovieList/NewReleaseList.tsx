@@ -6,7 +6,7 @@ export function DutyAfterSchool() {
   return (
   <BoxMovie   
   movieImg={DutyAfterSchoolImg}
-  isPremium={false}
+  isPremium={true}
   isTop10={false}
   isNewEpisode={true}
   title={"Duty After School"}
@@ -19,7 +19,7 @@ export function Missing() {
   return (
   <BoxMovie   
   movieImg={MissingImg}
-  isPremium={false}
+  isPremium={true}
   isTop10={false}
   isNewEpisode={false}
   title={"Missing"}

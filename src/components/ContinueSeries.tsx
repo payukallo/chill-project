@@ -17,6 +17,18 @@ export function ContinueSeries() {
          <div className="box-top">
           <TedLassoContinue />
         </div>
+         <div className="box-top">
+          <AliceInBorderlandContinue />
+        </div>
+         <div className="box-top">
+          <MyPerfectStrangerContinue />
+        </div>
+         <div className="box-top">
+          <AllOfUsAreDeadContinue />
+        </div>
+         <div className="box-top">
+          <TedLassoContinue />
+        </div>
       </div>
     </div>
   );

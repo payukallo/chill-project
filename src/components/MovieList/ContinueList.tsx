@@ -27,7 +27,7 @@ export function AllOfUsAreDeadContinue() {
   movieImg={AllOfUsAreDeadImgWidth}
   isPremium={false}
   isTop10={false}
-  isNewEpisode={false}
+  isNewEpisode={true}
   title={"All of Us Are Dead"}
   rating={"\u2605 4.2/5"}
   />

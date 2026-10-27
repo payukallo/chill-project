@@ -1,3 +1,4 @@
+import { DropDownHeader } from "./Genre";
 import { HeadBtn } from "./HeadBtn";
 import { HeadText } from "./HeadText";
 
@@ -13,6 +14,7 @@ export function Header(props: IHeader) {
     <header>
       <img src={image} alt="" />
       <div className="header">
+        <DropDownHeader/>
         <div className="head-bottom">
           <HeadText title={title} description={description} />
            <HeadBtn />

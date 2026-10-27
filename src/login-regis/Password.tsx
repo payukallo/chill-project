@@ -1,4 +1,8 @@
-export function Password(props) {
+interface IPassword {
+  paraPassword: String;
+}
+
+export function Password(props: IPassword) {
   const { paraPassword } = props;
   return (
     <div className="password body-large-medium">

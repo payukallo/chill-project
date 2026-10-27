@@ -1,5 +1,11 @@
 import GoogleLogo from "../assets/logo/google.png";
-export function LoginRegisBtn(props) {
+
+interface ILoginRegisBtn {
+  upBtn: string;
+  downBtn: string;
+}
+
+export function LoginRegisBtn(props: ILoginRegisBtn) {
   const { upBtn, downBtn } = props;
   return (
     <div className="login-regis-btn">

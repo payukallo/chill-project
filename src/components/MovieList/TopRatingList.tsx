@@ -49,7 +49,7 @@ export function AllOfUsAreDead() {
   return (
   <BoxMovie   
   movieImg={AllOfUsAreDeadImg}
-  isPremium={false}
+  isPremium={true}
   isTop10={false}
   isNewEpisode={true}
   title={"All Of Us Are Dead"}
@@ -62,7 +62,7 @@ export function BigHero6() {
   return (
   <BoxMovie   
   movieImg={BigHero6Img}
-  isPremium={false}
+  isPremium={true}
   isTop10={true}
   isNewEpisode={false}
   title={"Big Hero 6"}

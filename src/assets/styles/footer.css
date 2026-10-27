@@ -64,6 +64,19 @@ footer {
   gap: 14px;
 }
 
+
+.foot-genre.small,
+.foot-help.small {
+  display: none;
+  position: relative;
+}
+
+.genre-list.small,
+.help-list.small {
+  position: absolute;
+  overflow: hidden;
+}
+
 @media (max-width: 580px), (max-height: 900px) {
   footer .body-medium-medium {
     font-size: 12px;
@@ -94,10 +107,63 @@ footer {
     gap: 8px;
   }
 
-  .genre,
-  .help-list {
+  .foot-genre,
+  .foot-help {
     display: none;
   }
+
+
+.foot-genre.small,
+.foot-help.small {
+  display: block;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.genre-list.small {
+  z-index: 2;
+  background-color: var(--paper-background);
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, auto);
+  gap: 2px;
+  left: 10px;
+  bottom: 30px;
+  border-radius: 5px;
+}
+
+.help-list.small {
+  z-index: 2;
+  background-color: var(--paper-background);
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, auto);
+  gap: 2px;
+  left: 130px;
+  bottom  : 30px;
+  border-radius: 5px;
+}
+
+
+.genre-list.small a,
+.help-list.small a  {
+  padding: 7px;
+  line-height: 1.5;
+}
+
+button.genre-small-screen,
+button.help-small-screen {
+  border: none;
+}
+
+button.genre-small-screen:hover,
+button.help-small-screen:hover, 
+.genre-list.small a:hover,
+.help-list.small a:hover {
+  background-color: var(--extra-background) ;
+}
 
   .foot-logo img {
     width: 84px;
