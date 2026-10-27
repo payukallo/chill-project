@@ -8,7 +8,7 @@ import { Footer } from "../layouts/Footer";
 
 const MoviesPage = () => {
   return (
-    <main className="movies-page">
+    <main className="movies-page box-pop-up-content">
       <Navbar />
       <Header
         image={MovieImg}

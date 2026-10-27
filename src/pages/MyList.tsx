@@ -5,7 +5,7 @@ import { Footer } from "../layouts/Footer.jsx";
 
 const MyListPage = () => {
   return (
-    <main className="my-list-page">
+    <main className="my-list-page box-pop-up-content">
       <Navbar />
       <MyListMovies />
       <Footer />

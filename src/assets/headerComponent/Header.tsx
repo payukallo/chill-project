@@ -17,9 +17,8 @@ export function Header(props: IHeader) {
         <DropDownHeader/>
         <div className="head-bottom">
           <HeadText title={title} description={description} />
-           <HeadBtn />
+          <HeadBtn />
         </div>
-       
       </div>
     </header>
   );

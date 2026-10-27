@@ -10,6 +10,7 @@ body {
   justify-content: center;
   color: var(--text-light-primary);
   background-color: var(--page-header-background);
+  width: 100%;
 }
 
 .home-page footer {

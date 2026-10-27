@@ -46,6 +46,7 @@ a {
   border: none;
   list-style: none;
   border-radius: 4px;
+  z-index: 2;
 }
 
 .dropdown-profile {
