@@ -1,7 +1,7 @@
 import "../assets/styles/index.css";
 import MovieImg from "../assets/images/navbar-img.png";
 import { Navbar } from "../layouts/Navbar";
-import { Header } from "../assets/headerComponent/Header";
+import { Header } from "../components/headerComponent/Header";
 import { HomeContent } from "../components/HomeContent";
 import { Footer } from "../layouts/Footer";
 

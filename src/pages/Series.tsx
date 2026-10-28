@@ -1,7 +1,7 @@
 import "../assets/styles/series.css";
 import MovieImg from "../assets/images/navbar-img-series.png";
 import { Navbar } from "../layouts/Navbar";
-import { Header } from "../assets/headerComponent/Header";
+import { Header } from "../components/headerComponent/Header";
 import { SeriesContent } from "../components/SeriesContent";
 import { Footer } from "../layouts/Footer";
 

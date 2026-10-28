@@ -14,6 +14,7 @@ interface IPopUpMovie {
   cast: string;
   genre: string;
   filmMaker: string;
+  totalEpisode: string;
   onClose: () => void;
 }
 
@@ -32,6 +33,7 @@ export function PopUpMovie(props: IPopUpMovie) {
     cast,
     genre,
     filmMaker,
+    totalEpisode,
     onClose,
   } = props;
 
@@ -43,9 +45,7 @@ export function PopUpMovie(props: IPopUpMovie) {
       <div className="top-pop-up-container">
         <img src={movieImg} alt="" />
         <div className="top-pop-up">
-          <button className="close" onClick={onClose}>
-            X
-          </button>
+          <button className="close" onClick={onClose}>x</button>
           <div className="head-pop-up">
             <span className="pop-up-title heading-3">{title}</span>
             <div className="pop-up-btn">
@@ -62,49 +62,48 @@ export function PopUpMovie(props: IPopUpMovie) {
           </div>
         </div>
       </div>
-      <div className="bottom-pop-up">
-        <div className="pop-up-description body-medium-regular">
-          <div className="description-left">
-            <div className="year">
-              <span>{year}</span>
-              <span>{duration}</span>
-              <span className="age-recommendation">{ageRecommendation}</span>
+        <div className="bottom-pop-up">
+          <div className="pop-up-description body-medium-regular">
+            <div className="description-left">
+              <div className="year">
+                <span>{year}</span>
+                <span>{totalEpisode}</span>
+                <div className="age-recommendation">
+                  <span>{ageRecommendation}</span>
+                </div>
+              </div>
+              <p>{movieDescription}</p>
             </div>
-            <p>{movieDescription}</p>
+            <div className="description-right">
+              <div className="description-right-list">
+                <div className="span-pop-up">
+                  <span>Cast</span>
+                </div>
+                <p>: {cast}</p>
+              </div>
+              <div className="description-right-list">
+                <div className="span-pop-up">
+                  <span>Genre</span>
+                </div>
+                <p>: {genre}</p>
+              </div>
+              <div className="description-right-list">
+                <div className="span-pop-up">
+                  <span>Pembuat Film</span>
+                </div>
+                <p>: {filmMaker}</p>
+              </div>
+            </div>
           </div>
-          <div className="description-right">
-            <div className="description-right-list">
-              <div className="span-pop-up">
-                <span>Cast</span>
-                <div>:</div>
-              </div>
-              <p>{cast}</p>
-            </div>
-            <div className="description-right-list">
-              <div className="span-pop-up">
-                <span>Genre</span>
-                <div>:</div>
-              </div>
-              <p>{genre}</p>
-            </div>
-            <div className="description-right-list">
-              <div className="span-pop-up">
-                <span>Pembuat Film</span>
-                <div>:</div>
-              </div>
-              <p>{filmMaker}</p>
+          <div className="pop-up-recommendation">
+            <span className="heading-4">Rekomendasi Film</span>
+            <div className="box-recommendation">
+              <div className="box">{recommendationMovie1}</div>
+              <div className="box">{recommendationMovie2}</div>
+              <div className="box">{recommendationMovie3}</div>
             </div>
           </div>
         </div>
-        <div className="pop-up-recommendation">
-          <span className="heading-4">Rekomendasi Film</span>
-          <div className="box-recommendation">
-            <div className="box">{recommendationMovie1}</div>
-            <div className="box">{recommendationMovie2}</div>
-            <div className="box">{recommendationMovie3}</div>
-          </div>
-        </div>
-      </div>
     </div>,
     mainElement,
   );

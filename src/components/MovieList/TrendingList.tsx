@@ -45,7 +45,7 @@ export function Quantumania() {
       movieDescription={
         "Masih goyah karena kehilangan Gamora, Peter Quill mengumpulkan timnya untuk mempertahankan alam semesta dan salah satu dari mereka - sebuah misi yang bisa berarti akhir dari Penjaga jika tidak berhasil."
       }
-      ageRecommendation={"PG-13"}
+      ageRecommendation={"12+"}
       recommendationMovie1={<BayMax />}
       recommendationMovie2={<MyHeroAcademia />}
       recommendationMovie3={<BlueLock />}
@@ -70,7 +70,7 @@ export function GuardiansOfTheGalaxy() {
       movieDescription={
         "Masih goyah karena kehilangan Gamora, Peter Quill mengumpulkan timnya untuk mempertahankan alam semesta dan salah satu dari mereka - sebuah misi yang bisa berarti akhir dari Penjaga jika tidak berhasil."
       }
-      ageRecommendation={"PG-13"}
+      ageRecommendation={"16+"}
       recommendationMovie1={<BayMax />}
       recommendationMovie2={<MyHeroAcademia />}
       recommendationMovie3={<BlueLock />}
@@ -95,7 +95,7 @@ export function AManCalledOtto() {
       movieDescription={
         "Masih goyah karena kehilangan Gamora, Peter Quill mengumpulkan timnya untuk mempertahankan alam semesta dan salah satu dari mereka - sebuah misi yang bisa berarti akhir dari Penjaga jika tidak berhasil."
       }
-      ageRecommendation={"PG-13"}
+      ageRecommendation={"15+"}
       recommendationMovie1={<BayMax />}
       recommendationMovie2={<MyHeroAcademia />}
       recommendationMovie3={<BlueLock />}
@@ -120,7 +120,7 @@ export function LittleMermaid() {
       movieDescription={
         "Masih goyah karena kehilangan Gamora, Peter Quill mengumpulkan timnya untuk mempertahankan alam semesta dan salah satu dari mereka - sebuah misi yang bisa berarti akhir dari Penjaga jika tidak berhasil."
       }
-      ageRecommendation={"PG-13"}
+      ageRecommendation={"13+"}
       recommendationMovie1={<BayMax />}
       recommendationMovie2={<MyHeroAcademia />}
       recommendationMovie3={<BlueLock />}

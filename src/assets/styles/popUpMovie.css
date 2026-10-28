@@ -7,10 +7,7 @@
 
 .pop-up-overlay {
   position: absolute;
-  width: 933px;
-  height: 1250px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   flex-direction: column;
   background-color: var(--page-header-background);
@@ -18,18 +15,23 @@
   border-radius: 16px;
 }
 
-.pop-up {
-  position: absolute;
+.bottom-pop-up-series {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 933px;
-  height: 554px;
-  overflow-y: auto;
+  height: 224px;
+  padding: 24px 80px;
+  gap: 40px;
+}
+
+.pop-up-description-series {
+  display: flex;
+  justify-content: space-between;
+  height: 176px;
 }
 
 .top-pop-up-container {
+  top: 0;
   position: relative;
   width: 933px;
   height: 554px;
@@ -47,7 +49,6 @@
   align-items: flex-end;
   width: 933px;
   height: 554px;
-  z-index: 4;
   top: 0px;
   background: linear-gradient(
     to bottom,
@@ -64,6 +65,7 @@ button.close {
   width: 30px;
   height: 30px;
   border-radius: 36px;
+  font-size: 22px;
   border: none;
   background-color: var(--page-header-background);
   color: var(--text-light-primary);
@@ -76,7 +78,7 @@ button.close {
   width: 100%;
   height: 103px;
   gap: 40px;
-  margin: 80px 106px;
+  margin: 106px 80px;
 }
 
 .close-btn {
@@ -84,10 +86,7 @@ button.close {
 }
 
 .pop-up-title {
-  display: flex;
-  width: 668px;
-  height: 173px;
-  gap: 20px;
+  height: 35px;
 }
 
 .pop-up-btn {
@@ -102,7 +101,6 @@ button.close {
   align-items: center;
   justify-content: space-between;
   width: 175px;
-  
 }
 
 .pop-up-button-left {
@@ -133,7 +131,7 @@ button.close {
 .bottom-pop-up {
   display: flex;
   flex-direction: column;
-  position: relative;
+  width: 933px;
   height: 696px;
   padding: 40px 80px;
   gap: 40px;
@@ -142,24 +140,7 @@ button.close {
 .pop-up-description {
   display: flex;
   justify-content: space-between;
-  width: 773px;
   height: 154px;
-  gap: 40px;
-}
-
-.year {
-  display: flex;
-  height: 30px;
-  gap: 16px;
-  width: 100%;
-}
-
-.age-recommendation {
-border: 1px solid var(--text-light-secondary);
-border-radius: 4px;
-width: 67px;
-text-align: center;
-line-height: 1.7;
 }
 
 .description-left {
@@ -168,31 +149,40 @@ line-height: 1.7;
   padding: 0;
 }
 
-.description-left p {
-  width: 381px;
-}
-
-.pop-up-recommendation {
+.year {
   display: flex;
-  flex-direction: column;
-  width: 773px;
-  height: 422px;
-  gap: 28px;
+  align-items: center;
+  height: 30px;
+  gap: 16px;
 }
 
-.box-recommendation {
+.pg {
+  border: 1px solid var(--text-light-secondary);
+  border-radius: 4px;
+  width: 67px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.age-recommendation {
   display: flex;
-  flex-direction: row;
-  gap: 28px;
-}
-
-.head-pop-up img {
-  width: 50px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--text-light-secondary);
+  height: 26px;
+  width: 26px;
+  line-height: 1.2;
+  font-size: 10px;
+  border-radius: 16px;
+  display: none;
 }
 
 .description-right {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 351px;
+  padding: 10px;
 }
 
 .description-right-list {
@@ -203,15 +193,197 @@ line-height: 1.7;
 .description-right-list span {
   display: flex;
   width: 110px;
-  height: 100%;
 }
 
 .description-right-list p {
   display: flex;
-  width: 199px;
-  height: 100%;
+  width: 200px;
 }
 
 .span-pop-up {
   display: flex;
+}
+
+.pop-up-recommendation {
+  display: flex;
+  flex-direction: column;
+  height: 422px;
+  gap: 28px;
+}
+
+.box-recommendation {
+  display: flex;
+  gap: 28px;
+}
+
+.head-pop-up img {
+  width: 50px;
+}
+
+@media (max-width: 580px), (max-height: 900px) {
+  .pop-up-overlay .heading-3 {
+    font-size: 16px;
+  }
+
+  .pop-up-overlay .heading-4 {
+    font-size: 12px;
+  }
+
+  .pop-up-overlay .body-medium-bold {
+    font-size: 12px;
+  }
+
+  .pop-up-overlay p,
+  .pop-up-overlay span {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+
+  .pop-up-overlay {
+    border-radius: 6px;
+  }
+
+  .bottom-pop-up-series {
+    width: 320px;
+    height: 172px;
+    padding: 10px 20px;
+  }
+
+  .pop-up-description {
+    flex-direction: column;
+    height: 175px;
+  }
+
+  .top-pop-up-container {
+    height: 190px;
+    width: 320px;
+  }
+
+  .top-pop-up-container img {
+    border-radius: 6px;
+  }
+
+  .top-pop-up {
+    width: 320px;
+    height: 190px;
+  }
+
+  button.close {
+    top: 10px;
+    right: 10px;
+    width: 16px;
+    height: 16px;
+    border-radius: 12px;
+    font-size: 10px;
+    text-align: center;
+    justify-content: center;
+    padding: 2.5px;
+  }
+
+  .head-pop-up {
+    height: 55.3px;
+    gap: 8.3px;
+    margin: 16.5px 27.5px;
+  }
+
+  .pop-up-title {
+    height: 22px;
+  }
+
+  .pop-up-btn {
+    height: 25px;
+  }
+
+  .pop-up-btn-left {
+    width: 87px;
+  }
+
+  .pop-up-button-left {
+    width: 55px;
+    height: 25px;
+  }
+
+  button.pop-up-button-left {
+    padding: 5px;
+  }
+
+  .age-recommendation {
+    display: flex;
+  }
+
+  .add-pop-up {
+    border-radius: 16px;
+    width: 24px;
+    height: 24px;
+    font-size: 20px;
+  }
+
+  .bottom-pop-up {
+    width: 320px;
+    height: 391px;
+    padding: 20px 20px;
+    gap: 0px;
+  }
+
+  .pop-up-description {
+    flex-direction: column;
+    height: 186px;
+  }
+
+  .year {
+    height: 29px;
+    gap: 10px;
+  }
+
+  .pg {
+    width: 40px;
+    line-height: 1.7;
+  }
+
+  .description-left {
+    width: 100%;
+    height: 77.75px;
+  }
+
+  .description-right {
+    width: 100%;
+    height: 72px;
+    padding: 0;
+  }
+
+  .description-right-list span {
+    width: 65px;
+  }
+
+  .description-left p {
+    width: 100%;
+    text-align: justify;
+    line-height: 1.5;
+    max-height: 4.5em;
+    overflow: hidden;
+  }
+
+  .pop-up-recommendation {
+    height: 205px;
+    gap: 8px;
+    padding-top: 24px;
+  }
+
+  .box-recommendation {
+    gap: 10px;
+  }
+
+  .box-recommendation .box {
+    width: 87px;
+    height: 132px;
+  }
+
+  .box-recommendation .box img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .head-pop-up img {
+    width: 25px;
+  }
 }
