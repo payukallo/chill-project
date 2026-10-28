@@ -42,7 +42,7 @@ export function BoxMovie(props: IBoxMovie) {
   const { isOpen, setIsOpen } = Dropdown();
   return (
     <>
-      <div>
+      <>
         <img src={movieImg} alt={title} onClick={() => setIsOpen(true)} />
         <div>
           {isPremium && <p className="premium body-small-bold">Premium</p>}
@@ -55,7 +55,7 @@ export function BoxMovie(props: IBoxMovie) {
           <p className="heading-6">{title}</p>
           <p className="body-small-regular">{rating}</p>
         </div>
-      </div>
+      </>
 
       {isOpen && (
         <>

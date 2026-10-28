@@ -1,5 +1,5 @@
-import LogoInfo from "../logo/!.png";
-import LogoVolume from "../logo/mute-volume.png";
+import LogoInfo from "../../assets/logo/!.png";
+import LogoVolume from "../../assets/logo/mute-volume.png";
 
 export function HeadBtn() {
   return (

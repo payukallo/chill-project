@@ -20,7 +20,7 @@ export function Suzume() {
       movieDescription={
         "Masih goyah karena kehilangan Gamora, Peter Quill mengumpulkan timnya untuk mempertahankan alam semesta dan salah satu dari mereka - sebuah misi yang bisa berarti akhir dari Penjaga jika tidak berhasil."
       }
-      ageRecommendation={"PG-13"}
+      ageRecommendation={"18+"}
       recommendationMovie1={<BayMax />}
       recommendationMovie2={<MyHeroAcademia />}
       recommendationMovie3={<BlueLock />}
@@ -45,7 +45,7 @@ export function JurassicWorld() {
       movieDescription={
         "Masih goyah karena kehilangan Gamora, Peter Quill mengumpulkan timnya untuk mempertahankan alam semesta dan salah satu dari mereka - sebuah misi yang bisa berarti akhir dari Penjaga jika tidak berhasil."
       }
-      ageRecommendation={"PG-13"}
+      ageRecommendation={"13+"}
       recommendationMovie1={<BayMax />}
       recommendationMovie2={<MyHeroAcademia />}
       recommendationMovie3={<BlueLock />}
@@ -70,7 +70,7 @@ export function Sonic2() {
       movieDescription={
         "Masih goyah karena kehilangan Gamora, Peter Quill mengumpulkan timnya untuk mempertahankan alam semesta dan salah satu dari mereka - sebuah misi yang bisa berarti akhir dari Penjaga jika tidak berhasil."
       }
-      ageRecommendation={"PG-13"}
+      ageRecommendation={"13+"}
       recommendationMovie1={<BayMax />}
       recommendationMovie2={<MyHeroAcademia />}
       recommendationMovie3={<BlueLock />}
@@ -95,7 +95,7 @@ export function AllOfUsAreDead() {
       movieDescription={
         "Masih goyah karena kehilangan Gamora, Peter Quill mengumpulkan timnya untuk mempertahankan alam semesta dan salah satu dari mereka - sebuah misi yang bisa berarti akhir dari Penjaga jika tidak berhasil."
       }
-      ageRecommendation={"PG-13"}
+      ageRecommendation={"13+"}
       recommendationMovie1={<BayMax />}
       recommendationMovie2={<MyHeroAcademia />}
       recommendationMovie3={<BlueLock />}
@@ -120,7 +120,7 @@ export function BigHero6() {
       movieDescription={
         "Masih goyah karena kehilangan Gamora, Peter Quill mengumpulkan timnya untuk mempertahankan alam semesta dan salah satu dari mereka - sebuah misi yang bisa berarti akhir dari Penjaga jika tidak berhasil."
       }
-      ageRecommendation={"PG-13"}
+      ageRecommendation={"15+"}
       recommendationMovie1={<BayMax />}
       recommendationMovie2={<MyHeroAcademia />}
       recommendationMovie3={<BlueLock />}

@@ -1,0 +1,36 @@
+
+
+.bottom-pop-up-series {
+  display: flex;
+  flex-direction: column;
+  width: 933px;
+  height: 224px;
+  padding: 24px 80px;
+  gap: 40px;
+}
+
+.pop-up-description-series {
+  display: flex;
+  justify-content: space-between;
+  height: 176px;
+}
+
+
+
+@media (max-width: 580px), (max-height: 900px) {
+  
+
+  .bottom-pop-up-series {
+    width: 320px;
+    height: 172px;
+    padding: 10px 20px;
+  }
+
+  .pop-up-description {
+    flex-direction: column;
+    height: 175px;
+  }
+
+
+
+}

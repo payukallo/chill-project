@@ -92,9 +92,11 @@
   align-items: center;
   justify-content: space-between;
   position: absolute;
+  bottom: 0;
   width: 100%;
   height: 54px;
   padding: 16px;
+  border-radius: 8px;
   background: linear-gradient(rgba(0, 0, 0, 0) 37.04%, rgba(0, 0, 0, 0.5) 100%);
 }
 
