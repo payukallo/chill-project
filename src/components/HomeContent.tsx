@@ -1,14 +1,14 @@
 import { ContinueMovies } from "./ContinueMovies";
-import { NewRelease } from "./NewReleaseMovies";
-import { Trending } from "./TrendingMovies";
-import { TopRating } from "./TopRatingMovies";
+import { NewRelease } from "./NewRelease";
+import { TrendingMovies } from "./TrendingMovies";
+import { TopRatingMoviesSeries } from "./TopRatingMovies AndSeries";
 
 export function HomeContent() {
   return (
     <div className="content">
       <ContinueMovies />
-      <TopRating />
-      <Trending />
+      <TopRatingMoviesSeries />
+      <TrendingMovies />
       <NewRelease />
     </div>
   );

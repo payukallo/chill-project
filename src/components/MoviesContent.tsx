@@ -1,6 +1,6 @@
-import { NewRelease } from "./NewReleaseMovies";
-import { Trending } from "./TrendingMovies";
-import { TopRating } from "./TopRatingMovies";
+import { NewRelease } from "./NewRelease";
+import { TrendingMovies } from "./TrendingMovies";
+import { TopRatingMovies } from "./TopRatingMovies";
 import { ContinueMovies } from "./ContinueMovies";
 import { MoviesFromChill } from "./MoviesFromChill ";
 
@@ -9,8 +9,8 @@ export function MoviesContent() {
     <div className="content">
       <ContinueMovies />
       <MoviesFromChill/>
-      <TopRating />
-      <Trending />
+      <TopRatingMovies />
+      <TrendingMovies />
       <NewRelease />
     </div>
   );
