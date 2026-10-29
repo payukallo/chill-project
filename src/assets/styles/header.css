@@ -97,7 +97,10 @@ header img {
 }
 
 .head-title {
-  height: 53px;
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-end ;
+  height: 103px;
 }
 
 .head-btn {

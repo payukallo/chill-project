@@ -1,6 +1,6 @@
 import "../assets/styles/login.css";
 import { Logo } from "../login-regis/Logo";
-import { Title } from "../components/Title";
+import { Title } from "../login-regis/Title";
 import { UserName } from "../login-regis/UserName";
 import { Password } from "../login-regis/Password";
 import { NewAccount } from "../login-regis/NewAccount";
