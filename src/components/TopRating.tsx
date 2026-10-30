@@ -10,7 +10,6 @@ export function TopRatingMovies({ movies, headTitle, on_click }: ITopRatingMovie
   return (
     <div className="movies">
       <h3 className="heading-3">{headTitle}</h3>
-
       <div className="movie-list">
         {movies.map((movie) => (
           <div className="box">

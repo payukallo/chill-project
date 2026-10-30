@@ -23,24 +23,19 @@ export function PopUpMovieTop({
     <div className="pop-up-overlay pop-up-movie-top">
       <div className="top-pop-up-container">
         <img src={movie.banner_url} alt={movie.title} />
-
         <div className="top-pop-up">
           <button className="close" onClick={onClose}>
             x
           </button>
-
           <div className="head-pop-up">
             <span className="pop-up-title heading-3">{movie.title}</span>
-
             <div className="pop-up-btn">
               <div className="pop-up-btn-left">
                 <button className="pop-up-button-left body-medium-bold">
                   Mulai
                 </button>
-
                 <button className="add-pop-up text-light-secondary">+</button>
               </div>
-
               <button id="volume">
                 <img src={MuteVolume} alt="Volume" />
               </button>
@@ -48,7 +43,6 @@ export function PopUpMovieTop({
           </div>
         </div>
       </div>
-
       <div className="bottom-pop-up">
         <div className="pop-up-description body-medium-regular">
           <div className="description-left">
@@ -59,10 +53,8 @@ export function PopUpMovieTop({
                 <span>{movie.age}</span>
               </div>
             </div>
-
             <p>{movie.description}</p>
           </div>
-
           <div className="description-right">
             <div className="description-right-list">
               <div className="span-pop-up">
@@ -70,14 +62,12 @@ export function PopUpMovieTop({
               </div>
               <p>: {movie.cast}</p>
             </div>
-
             <div className="description-right-list">
               <div className="span-pop-up">
                 <span>Genre</span>
               </div>
               <p>: {movie.genre?.join(", ") ?? "Belum tersedia"}</p>
             </div>
-
             <div className="description-right-list">
               <div className="span-pop-up">
                 <span>Pembuat Film</span>
@@ -86,7 +76,6 @@ export function PopUpMovieTop({
             </div>
           </div>
         </div>
-
         <div className="pop-up-recommendation">
           <span className="heading-4">Rekomendasi Film</span>
           <div className="box-recommendation"></div>

@@ -5,6 +5,9 @@ import Star from "../assets/logo/star.png";
 import Exit from "../assets/logo/keluar.png";
 import { NavLink } from "react-router";
 import { Dropdown } from "../assets/utils/dropdown.ts";
+import { logoutUser } from "../components/ProtectedRoute.tsx";
+
+
 
 export function Navbar() {
   const { isOpen, setIsOpen, dropdownRef } = Dropdown();
@@ -35,10 +38,10 @@ export function Navbar() {
                 <img src={Star} alt="" />
                 Ubah Premium
               </a>
-              <NavLink to="/login">
+              <button onClick={logoutUser} >
                 <img src={Exit} alt="" />
                 Keluar
-              </NavLink>
+              </button>
             </div>
           )}
         </div>

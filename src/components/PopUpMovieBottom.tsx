@@ -48,7 +48,6 @@ export function PopUpMovieBottom({
           </div>
         </div>
       </div>
-
       <div className="bottom-pop-up">
         <div className="pop-up-description body-medium-regular">
           <div className="description-left">
@@ -59,10 +58,8 @@ export function PopUpMovieBottom({
                 <span>{movie.age}</span>
               </div>
             </div>
-
             <p>{movie.description}</p>
           </div>
-
           <div className="description-right">
             <div className="description-right-list">
               <div className="span-pop-up">
@@ -70,14 +67,12 @@ export function PopUpMovieBottom({
               </div>
               <p>: {movie.cast}</p>
             </div>
-
             <div className="description-right-list">
               <div className="span-pop-up">
                 <span>Genre</span>
               </div>
               <p>: {movie.genre?.join(", ") ?? "Belum tersedia"}</p>
             </div>
-
             <div className="description-right-list">
               <div className="span-pop-up">
                 <span>Pembuat Film</span>
@@ -86,7 +81,6 @@ export function PopUpMovieBottom({
             </div>
           </div>
         </div>
-
         <div className="pop-up-recommendation">
           <span className="heading-4">Rekomendasi Film</span>
           <div className="box-recommendation"></div>
