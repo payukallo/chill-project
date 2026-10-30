@@ -6,7 +6,7 @@
       "title": "Don't Look Up",
       "cover_url": "./src/assets/images/movie-01.jpg",
       "rating": "★ 4.5/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2021,
@@ -17,7 +17,8 @@
       "cast": "Leonardo DiCaprio, Jennifer Lawrence, Meryl Streep",
       "genre": ["Komedi", "Drama", "Fiksi Ilmiah"],
       "film_maker": "Adam McKay",
-      "banner_url": "./src/assets/images/movie-01-banner.jpg"
+      "banner_url": "./src/assets/images/movie-01-banner.jpg",
+      "recommendation_movie_1": [7, 3, 5]
     },
     {
       "id": 2,
@@ -25,7 +26,7 @@
       "title": "Sonic the Hedgehog 2",
       "cover_url": "./src/assets/images/movie-02.jpg",
       "rating": "★ 4.3/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2022,
@@ -36,7 +37,8 @@
       "cast": "Ben Schwartz, James Marsden, Idris Elba",
       "genre": ["Aksi", "Petualangan", "Komedi"],
       "film_maker": "Jeff Fowler",
-      "banner_url": "./src/assets/images/movie-02-banner.jpg"
+      "banner_url": "./src/assets/images/movie-02-banner.jpg",
+      "recommendation_movie_1": [19, 9, 12]
     },
     {
       "id": 3,
@@ -44,7 +46,7 @@
       "title": "Interstellar",
       "cover_url": "./src/assets/images/movie-03.jpg",
       "rating": "★ 4.8/5",
-      "category": ["TopRatingToday", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2014,
@@ -55,7 +57,8 @@
       "cast": "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
       "genre": ["Drama", "Petualangan", "Fiksi Ilmiah"],
       "film_maker": "Christopher Nolan",
-      "banner_url": "./src/assets/images/movie-03-banner.jpg"
+      "banner_url": "./src/assets/images/movie-03-banner.jpg",
+      "recommendation_movie_1": [29, 15, 2]
     },
     {
       "id": 4,
@@ -63,7 +66,7 @@
       "title": "Inception",
       "cover_url": "./src/assets/images/movie-04.jpg",
       "rating": "★ 4.7/5",
-      "category": ["TopRatingToday", "Trending"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2010,
@@ -74,7 +77,8 @@
       "cast": "Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page",
       "genre": ["Aksi", "Petualangan", "Fiksi Ilmiah"],
       "film_maker": "Christopher Nolan",
-      "banner_url": "./src/assets/images/movie-04-banner.jpg"
+      "banner_url": "./src/assets/images/movie-04-banner.jpg",
+      "recommendation_movie_1": [25, 27, 18]
     },
     {
       "id": 5,
@@ -82,7 +86,7 @@
       "title": "Spider-Man: No Way Home",
       "cover_url": "./src/assets/images/movie-05.jpg",
       "rating": "★ 4.6/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2021,
@@ -93,7 +97,8 @@
       "cast": "Tom Holland, Zendaya, Benedict Cumberbatch",
       "genre": ["Aksi", "Petualangan", "Fantasi"],
       "film_maker": "Jon Watts",
-      "banner_url": "./src/assets/images/movie-05-banner.jpg"
+      "banner_url": "./src/assets/images/movie-05-banner.jpg",
+      "recommendation_movie_1": [20, 29, 10]
     },
     {
       "id": 6,
@@ -101,7 +106,7 @@
       "title": "Avengers: Endgame",
       "cover_url": "./src/assets/images/movie-06.jpg",
       "rating": "★ 4.8/5",
-      "category": ["TopRatingToday", "Trending"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2019,
@@ -112,7 +117,8 @@
       "cast": "Robert Downey Jr., Chris Evans, Mark Ruffalo",
       "genre": ["Aksi", "Petualangan", "Drama"],
       "film_maker": "Anthony Russo, Joe Russo",
-      "banner_url": "./src/assets/images/movie-06-banner.jpg"
+      "banner_url": "./src/assets/images/movie-06-banner.jpg",
+      "recommendation_movie_1": [22, 10, 4]
     },
     {
       "id": 7,
@@ -120,7 +126,7 @@
       "title": "The Martian",
       "cover_url": "./src/assets/images/movie-07.jpg",
       "rating": "★ 4.5/5",
-      "category": ["FromChill", "TopRatingToday"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2015,
@@ -131,7 +137,8 @@
       "cast": "Matt Damon, Jessica Chastain, Kristen Wiig",
       "genre": ["Petualangan", "Drama", "Fiksi Ilmiah"],
       "film_maker": "Ridley Scott",
-      "banner_url": "./src/assets/images/movie-07-banner.jpg"
+      "banner_url": "./src/assets/images/movie-07-banner.jpg",
+      "recommendation_movie_1": [12, 11, 15]
     },
     {
       "id": 8,
@@ -139,7 +146,7 @@
       "title": "Gravity",
       "cover_url": "./src/assets/images/movie-08.jpg",
       "rating": "★ 4.2/5",
-      "category": ["FromChill", "Trending"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2013,
@@ -150,7 +157,8 @@
       "cast": "Sandra Bullock, George Clooney",
       "genre": ["Drama", "Thriller", "Fiksi Ilmiah"],
       "film_maker": "Alfonso Cuarón",
-      "banner_url": "./src/assets/images/movie-08-banner.jpg"
+      "banner_url": "./src/assets/images/movie-08-banner.jpg",
+      "recommendation_movie_1": [5, 23, 6]
     },
     {
       "id": 9,
@@ -158,7 +166,7 @@
       "title": "Dune",
       "cover_url": "./src/assets/images/movie-09.jpg",
       "rating": "★ 4.6/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2021,
@@ -169,7 +177,8 @@
       "cast": "Timothée Chalamet, Rebecca Ferguson, Oscar Isaac",
       "genre": ["Petualangan", "Drama", "Fiksi Ilmiah"],
       "film_maker": "Denis Villeneuve",
-      "banner_url": "./src/assets/images/movie-09-banner.jpg"
+      "banner_url": "./src/assets/images/movie-09-banner.jpg",
+      "recommendation_movie_1": [3, 1, 11]
     },
     {
       "id": 10,
@@ -177,7 +186,7 @@
       "title": "Blade Runner 2049",
       "cover_url": "./src/assets/images/movie-10.jpg",
       "rating": "★ 4.4/5",
-      "category": ["TopRatingToday", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2017,
@@ -188,7 +197,8 @@
       "cast": "Ryan Gosling, Harrison Ford, Ana de Armas",
       "genre": ["Drama", "Misteri", "Fiksi Ilmiah"],
       "film_maker": "Denis Villeneuve",
-      "banner_url": "./src/assets/images/movie-10-banner.jpg"
+      "banner_url": "./src/assets/images/movie-10-banner.jpg",
+      "recommendation_movie_1": [5, 23, 13]
     },
     {
       "id": 11,
@@ -196,7 +206,7 @@
       "title": "The Dark Knight",
       "cover_url": "./src/assets/images/movie-11.jpg",
       "rating": "★ 4.9/5",
-      "category": ["TopRatingToday", "Trending"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2008,
@@ -207,7 +217,8 @@
       "cast": "Christian Bale, Heath Ledger, Aaron Eckhart",
       "genre": ["Aksi", "Drama", "Kriminal"],
       "film_maker": "Christopher Nolan",
-      "banner_url": "./src/assets/images/movie-11-banner.jpg"
+      "banner_url": "./src/assets/images/movie-11-banner.jpg",
+      "recommendation_movie_1": [25, 16, 19]
     },
     {
       "id": 12,
@@ -215,7 +226,7 @@
       "title": "Doctor Strange",
       "cover_url": "./src/assets/images/movie-12.jpg",
       "rating": "★ 4.4/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2016,
@@ -226,7 +237,8 @@
       "cast": "Benedict Cumberbatch, Chiwetel Ejiofor, Rachel McAdams",
       "genre": ["Aksi", "Petualangan", "Fantasi"],
       "film_maker": "Scott Derrickson",
-      "banner_url": "./src/assets/images/movie-12-banner.jpg"
+      "banner_url": "./src/assets/images/movie-12-banner.jpg",
+      "recommendation_movie_1": [15, 11, 3]
     },
     {
       "id": 13,
@@ -234,7 +246,7 @@
       "title": "Black Panther",
       "cover_url": "./src/assets/images/movie-13.jpg",
       "rating": "★ 4.5/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2018,
@@ -245,7 +257,8 @@
       "cast": "Chadwick Boseman, Michael B. Jordan, Lupita Nyong'o",
       "genre": ["Aksi", "Petualangan", "Fiksi Ilmiah"],
       "film_maker": "Ryan Coogler",
-      "banner_url": "./src/assets/images/movie-13-banner.jpg"
+      "banner_url": "./src/assets/images/movie-13-banner.jpg",
+      "recommendation_movie_1": [2, 17, 11]
     },
     {
       "id": 14,
@@ -253,7 +266,7 @@
       "title": "Guardians of the Galaxy",
       "cover_url": "./src/assets/images/movie-14.jpg",
       "rating": "★ 4.5/5",
-      "category": ["FromChill", "Trending"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2014,
@@ -264,7 +277,8 @@
       "cast": "Chris Pratt, Zoe Saldaña, Dave Bautista",
       "genre": ["Aksi", "Petualangan", "Komedi"],
       "film_maker": "James Gunn",
-      "banner_url": "./src/assets/images/movie-14-banner.jpg"
+      "banner_url": "./src/assets/images/movie-14-banner.jpg",
+      "recommendation_movie_1": [13, 30, 26]
     },
     {
       "id": 15,
@@ -272,7 +286,7 @@
       "title": "Life of Pi",
       "cover_url": "./src/assets/images/movie-15.jpg",
       "rating": "★ 4.3/5",
-      "category": ["TopRatingToday", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2012,
@@ -283,7 +297,8 @@
       "cast": "Suraj Sharma, Irrfan Khan, Tabu",
       "genre": ["Petualangan", "Drama", "Fantasi"],
       "film_maker": "Ang Lee",
-      "banner_url": "./src/assets/images/movie-15-banner.jpg"
+      "banner_url": "./src/assets/images/movie-15-banner.jpg",
+      "recommendation_movie_1": [17, 6, 30]
     },
     {
       "id": 16,
@@ -291,7 +306,7 @@
       "title": "Avatar",
       "cover_url": "./src/assets/images/movie-16.jpg",
       "rating": "★ 4.7/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2009,
@@ -302,7 +317,8 @@
       "cast": "Sam Worthington, Zoe Saldaña, Sigourney Weaver",
       "genre": ["Aksi", "Petualangan", "Fantasi"],
       "film_maker": "James Cameron",
-      "banner_url": "./src/assets/images/movie-16-banner.jpg"
+      "banner_url": "./src/assets/images/movie-16-banner.jpg",
+      "recommendation_movie_1": [21, 8, 10]
     },
     {
       "id": 17,
@@ -310,7 +326,7 @@
       "title": "Avatar: The Way of Water",
       "cover_url": "./src/assets/images/movie-17.jpg",
       "rating": "★ 4.6/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2022,
@@ -321,7 +337,8 @@
       "cast": "Sam Worthington, Zoe Saldaña, Sigourney Weaver",
       "genre": ["Aksi", "Petualangan", "Fantasi"],
       "film_maker": "James Cameron",
-      "banner_url": "./src/assets/images/movie-17-banner.jpg"
+      "banner_url": "./src/assets/images/movie-17-banner.jpg",
+      "recommendation_movie_1": [23, 30, 13]
     },
     {
       "id": 18,
@@ -329,7 +346,7 @@
       "title": "The Matrix",
       "cover_url": "./src/assets/images/movie-18.jpg",
       "rating": "★ 4.7/5",
-      "category": ["TopRatingToday", "Trending"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 1999,
@@ -340,7 +357,8 @@
       "cast": "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss",
       "genre": ["Aksi", "Fiksi Ilmiah"],
       "film_maker": "Lana Wachowski, Lilly Wachowski",
-      "banner_url": "./src/assets/images/movie-18-banner.jpg"
+      "banner_url": "./src/assets/images/movie-18-banner.jpg",
+      "recommendation_movie_1": [19, 21, 22]
     },
     {
       "id": 19,
@@ -348,7 +366,7 @@
       "title": "Joker",
       "cover_url": "./src/assets/images/movie-19.jpg",
       "rating": "★ 4.4/5",
-      "category": ["TopRatingToday", "FromChill"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2019,
@@ -359,7 +377,8 @@
       "cast": "Joaquin Phoenix, Robert De Niro, Zazie Beetz",
       "genre": ["Kriminal", "Drama", "Thriller"],
       "film_maker": "Todd Phillips",
-      "banner_url": "./src/assets/images/movie-19-banner.jpg"
+      "banner_url": "./src/assets/images/movie-19-banner.jpg",
+      "recommendation_movie_1": [30, 5, 22]
     },
     {
       "id": 20,
@@ -367,7 +386,7 @@
       "title": "The Shawshank Redemption",
       "cover_url": "./src/assets/images/movie-20.jpg",
       "rating": "★ 4.9/5",
-      "category": ["TopRatingToday", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 1994,
@@ -378,7 +397,8 @@
       "cast": "Tim Robbins, Morgan Freeman, Bob Gunton",
       "genre": ["Drama", "Kriminal"],
       "film_maker": "Frank Darabont",
-      "banner_url": "./src/assets/images/movie-20-banner.jpg"
+      "banner_url": "./src/assets/images/movie-20-banner.jpg",
+      "recommendation_movie_1": [6, 1, 15]
     },
     {
       "id": 21,
@@ -386,7 +406,7 @@
       "title": "Jurassic Park",
       "cover_url": "./src/assets/images/movie-21.jpg",
       "rating": "★ 4.5/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 1993,
@@ -397,7 +417,8 @@
       "cast": "Sam Neill, Laura Dern, Jeff Goldblum",
       "genre": ["Petualangan", "Fiksi Ilmiah", "Thriller"],
       "film_maker": "Steven Spielberg",
-      "banner_url": "./src/assets/images/movie-21-banner.jpg"
+      "banner_url": "./src/assets/images/movie-21-banner.jpg",
+      "recommendation_movie_1": [3, 6, 25]
     },
     {
       "id": 22,
@@ -405,7 +426,7 @@
       "title": "Parasite",
       "cover_url": "./src/assets/images/movie-22.jpg",
       "rating": "★ 4.7/5",
-      "category": ["TopRatingToday", "Trending"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2019,
@@ -416,7 +437,8 @@
       "cast": "Song Kang-ho, Lee Sun-kyun, Cho Yeo-jeong",
       "genre": ["Drama", "Thriller", "Komedi"],
       "film_maker": "Bong Joon-ho",
-      "banner_url": "./src/assets/images/movie-22-banner.jpg"
+      "banner_url": "./src/assets/images/movie-22-banner.jpg",
+      "recommendation_movie_1": [9, 16, 19]
     },
     {
       "id": 23,
@@ -424,7 +446,7 @@
       "title": "3 Idiots",
       "cover_url": "./src/assets/images/movie-23.jpg",
       "rating": "★ 4.8/5",
-      "category": ["FromChill", "TopRatingToday"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2009,
@@ -435,7 +457,8 @@
       "cast": "Aamir Khan, R. Madhavan, Sharman Joshi",
       "genre": ["Komedi", "Drama"],
       "film_maker": "Rajkumar Hirani",
-      "banner_url": "./src/assets/images/movie-23-banner.jpg"
+      "banner_url": "./src/assets/images/movie-23-banner.jpg",
+      "recommendation_movie_1": [28, 7, 25]
     },
     {
       "id": 24,
@@ -443,7 +466,7 @@
       "title": "The Lord of the Rings: The Fellowship of the Ring",
       "cover_url": "./src/assets/images/movie-24.jpg",
       "rating": "★ 4.8/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2001,
@@ -454,7 +477,8 @@
       "cast": "Elijah Wood, Ian McKellen, Viggo Mortensen",
       "genre": ["Petualangan", "Drama", "Fantasi"],
       "film_maker": "Peter Jackson",
-      "banner_url": "./src/assets/images/movie-24-banner.jpg"
+      "banner_url": "./src/assets/images/movie-24-banner.jpg",
+      "recommendation_movie_1": [5, 19, 23]
     },
     {
       "id": 25,
@@ -462,7 +486,7 @@
       "title": "The Intouchables",
       "cover_url": "./src/assets/images/movie-25.jpg",
       "rating": "★ 4.6/5",
-      "category": ["FromChill", "TopRatingToday"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2011,
@@ -473,7 +497,8 @@
       "cast": "François Cluzet, Omar Sy, Anne Le Ny",
       "genre": ["Komedi", "Drama"],
       "film_maker": "Olivier Nakache, Éric Toledano",
-      "banner_url": "./src/assets/images/movie-25-banner.jpg"
+      "banner_url": "./src/assets/images/movie-25-banner.jpg",
+      "recommendation_movie_1": [3, 4, 28]
     },
     {
       "id": 26,
@@ -481,7 +506,7 @@
       "title": "Harry Potter and the Sorcerer's Stone",
       "cover_url": "./src/assets/images/movie-26.jpg",
       "rating": "★ 4.6/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2001,
@@ -492,7 +517,8 @@
       "cast": "Daniel Radcliffe, Rupert Grint, Emma Watson",
       "genre": ["Petualangan", "Keluarga", "Fantasi"],
       "film_maker": "Chris Columbus",
-      "banner_url": "./src/assets/images/movie-26-banner.jpg"
+      "banner_url": "./src/assets/images/movie-26-banner.jpg",
+      "recommendation_movie_1": [16, 8, 3]
     },
     {
       "id": 27,
@@ -500,7 +526,7 @@
       "title": "Pirates of the Caribbean: The Curse of the Black Pearl",
       "cover_url": "./src/assets/images/movie-27.jpg",
       "rating": "★ 4.5/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2003,
@@ -511,7 +537,8 @@
       "cast": "Johnny Depp, Geoffrey Rush, Orlando Bloom",
       "genre": ["Aksi", "Petualangan", "Fantasi"],
       "film_maker": "Gore Verbinski",
-      "banner_url": "./src/assets/images/movie-27-banner.jpg"
+      "banner_url": "./src/assets/images/movie-27-banner.jpg",
+      "recommendation_movie_1": [26, 16, 13]
     },
     {
       "id": 28,
@@ -519,7 +546,7 @@
       "title": "Forrest Gump",
       "cover_url": "./src/assets/images/movie-28.jpg",
       "rating": "★ 4.8/5",
-      "category": ["TopRatingToday", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 1994,
@@ -530,7 +557,8 @@
       "cast": "Tom Hanks, Robin Wright, Gary Sinise",
       "genre": ["Drama", "Romantis"],
       "film_maker": "Robert Zemeckis",
-      "banner_url": "./src/assets/images/movie-28-banner.jpg"
+      "banner_url": "./src/assets/images/movie-28-banner.jpg",
+      "recommendation_movie_1": [16, 19, 2]
     },
     {
       "id": 29,
@@ -538,7 +566,7 @@
       "title": "Spirited Away",
       "cover_url": "./src/assets/images/movie-29.jpg",
       "rating": "★ 4.8/5",
-      "category": ["FromChill", "TopRatingToday"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2001,
@@ -549,7 +577,8 @@
       "cast": "Rumi Hiiragi, Miyu Irino, Mari Natsuki",
       "genre": ["Animasi", "Petualangan", "Fantasi"],
       "film_maker": "Hayao Miyazaki",
-      "banner_url": "./src/assets/images/movie-29-banner.jpg"
+      "banner_url": "./src/assets/images/movie-29-banner.jpg",
+      "recommendation_movie_1": [30, 5, 8]
     },
     {
       "id": 30,
@@ -557,7 +586,7 @@
       "title": "Your Name",
       "cover_url": "./src/assets/images/movie-30.jpg",
       "rating": "★ 4.7/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2016,
@@ -568,7 +597,8 @@
       "cast": "Ryunosuke Kamiki, Mone Kamishiraishi, Masami Nagasawa",
       "genre": ["Animasi", "Drama", "Romantis"],
       "film_maker": "Makoto Shinkai",
-      "banner_url": "./src/assets/images/movie-30-banner.jpg"
+      "banner_url": "./src/assets/images/movie-30-banner.jpg",
+      "recommendation_movie_1": [3, 14, 24]
     }
   ],
 
@@ -579,7 +609,7 @@
       "title": "Stranger Things",
       "cover_url": "./src/assets/images/series-01.jpg",
       "rating": "★ 4.8/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": true,
       "is_new_episode": true,
       "is_top_10": true,
       "year": 2016,
@@ -598,7 +628,7 @@
       "title": "Wednesday",
       "cover_url": "./src/assets/images/series-02.jpg",
       "rating": "★ 4.7/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": true,
       "is_top_10": true,
       "year": 2022,
@@ -617,7 +647,7 @@
       "title": "The Last of Us",
       "cover_url": "./src/assets/images/series-03.jpg",
       "rating": "★ 4.9/5",
-      "category": ["TopRatingToday", "Trending"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2023,
@@ -636,7 +666,7 @@
       "title": "Breaking Bad",
       "cover_url": "./src/assets/images/series-04.jpg",
       "rating": "★ 4.9/5",
-      "category": ["TopRatingToday", "Trending"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2008,
@@ -655,7 +685,7 @@
       "title": "Squid Game",
       "cover_url": "./src/assets/images/series-05.jpg",
       "rating": "★ 4.6/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": true,
       "is_new_episode": true,
       "is_top_10": true,
       "year": 2021,
@@ -674,7 +704,7 @@
       "title": "The Witcher",
       "cover_url": "./src/assets/images/series-06.jpg",
       "rating": "★ 4.5/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2019,
@@ -693,7 +723,7 @@
       "title": "Money Heist",
       "cover_url": "./src/assets/images/series-07.jpg",
       "rating": "★ 4.7/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2017,
@@ -712,7 +742,7 @@
       "title": "Loki",
       "cover_url": "./src/assets/images/series-08.jpg",
       "rating": "★ 4.6/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2021,
@@ -731,7 +761,7 @@
       "title": "The Mandalorian",
       "cover_url": "./src/assets/images/series-09.jpg",
       "rating": "★ 4.7/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2019,
@@ -750,7 +780,7 @@
       "title": "The Umbrella Academy",
       "cover_url": "./src/assets/images/series-10.jpg",
       "rating": "★ 4.4/5",
-      "category": ["FromChill", "TopRatingToday"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2019,
@@ -769,7 +799,7 @@
       "title": "Game of Thrones",
       "cover_url": "./src/assets/images/series-11.jpg",
       "rating": "★ 4.8/5",
-      "category": ["TopRatingToday", "Trending"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2011,
@@ -788,7 +818,7 @@
       "title": "House of the Dragon",
       "cover_url": "./src/assets/images/series-12.jpg",
       "rating": "★ 4.6/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2022,
@@ -807,7 +837,7 @@
       "title": "The Boys",
       "cover_url": "./src/assets/images/series-13.jpg",
       "rating": "★ 4.7/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2019,
@@ -826,7 +856,7 @@
       "title": "Peaky Blinders",
       "cover_url": "./src/assets/images/series-14.jpg",
       "rating": "★ 4.8/5",
-      "category": ["TopRatingToday", "Trending"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2013,
@@ -845,7 +875,7 @@
       "title": "Dark",
       "cover_url": "./src/assets/images/series-15.jpg",
       "rating": "★ 4.7/5",
-      "category": ["TopRatingToday", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2017,
@@ -864,7 +894,7 @@
       "title": "Sherlock",
       "cover_url": "./src/assets/images/series-16.jpg",
       "rating": "★ 4.8/5",
-      "category": ["TopRatingToday", "Trending"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2010,
@@ -883,7 +913,7 @@
       "title": "The Crown",
       "cover_url": "./src/assets/images/series-17.jpg",
       "rating": "★ 4.5/5",
-      "category": ["TopRatingToday", "FromChill"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2016,
@@ -902,7 +932,7 @@
       "title": "Arcane",
       "cover_url": "./src/assets/images/series-18.jpg",
       "rating": "★ 4.9/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2021,
@@ -921,7 +951,7 @@
       "title": "One Piece",
       "cover_url": "./src/assets/images/series-19.jpg",
       "rating": "★ 4.7/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": true,
       "is_new_episode": true,
       "is_top_10": true,
       "year": 2023,
@@ -940,7 +970,7 @@
       "title": "The Walking Dead",
       "cover_url": "./src/assets/images/series-20.jpg",
       "rating": "★ 4.5/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2010,
@@ -959,7 +989,7 @@
       "title": "Vikings",
       "cover_url": "./src/assets/images/series-21.jpg",
       "rating": "★ 4.6/5",
-      "category": ["TopRatingToday", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2013,
@@ -978,7 +1008,7 @@
       "title": "The Queen's Gambit",
       "cover_url": "./src/assets/images/series-22.jpg",
       "rating": "★ 4.8/5",
-      "category": ["TopRatingToday", "FromChill"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2020,
@@ -997,7 +1027,7 @@
       "title": "Lupin",
       "cover_url": "./src/assets/images/series-23.jpg",
       "rating": "★ 4.5/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2021,
@@ -1016,7 +1046,7 @@
       "title": "The Sandman",
       "cover_url": "./src/assets/images/series-24.jpg",
       "rating": "★ 4.5/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2022,
@@ -1035,7 +1065,7 @@
       "title": "Cobra Kai",
       "cover_url": "./src/assets/images/series-25.jpg",
       "rating": "★ 4.5/5",
-      "category": ["FromChill", "TopRatingToday"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2018,
@@ -1054,7 +1084,7 @@
       "title": "Alice in Borderland",
       "cover_url": "./src/assets/images/series-26.jpg",
       "rating": "★ 4.6/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": false,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2020,
@@ -1073,7 +1103,7 @@
       "title": "The Office",
       "cover_url": "./src/assets/images/series-27.jpg",
       "rating": "★ 4.6/5",
-      "category": ["FromChill", "TopRatingToday"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": false,
       "year": 2005,
@@ -1092,7 +1122,7 @@
       "title": "Friends",
       "cover_url": "./src/assets/images/series-28.jpg",
       "rating": "★ 4.7/5",
-      "category": ["TopRatingToday", "FromChill"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 1994,
@@ -1111,7 +1141,7 @@
       "title": "Attack on Titan",
       "cover_url": "./src/assets/images/series-29.jpg",
       "rating": "★ 4.9/5",
-      "category": ["Trending", "TopRatingToday"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2013,
@@ -1130,7 +1160,7 @@
       "title": "Demon Slayer",
       "cover_url": "./src/assets/images/series-30.jpg",
       "rating": "★ 4.8/5",
-      "category": ["Trending", "FromChill"],
+      "top_rating_today": true,
       "is_new_episode": false,
       "is_top_10": true,
       "year": 2019,
@@ -1143,112 +1173,5 @@
       "film_maker": "Koyoharu Gotouge",
       "banner_url": "./src/assets/images/series-30-banner.jpg"
     }
-  ],
-
-  "top_rating_series": [
-    { "id": 1, "movie_id": 14 },
-    { "id": 2, "movie_id": 27 },
-    { "id": 3, "movie_id": 9 },
-    { "id": 4, "movie_id": 19 },
-    { "id": 5, "movie_id": 2 },
-    { "id": 6, "movie_id": 30 },
-    { "id": 7, "movie_id": 12 },
-    { "id": 8, "movie_id": 18 },
-    { "id": 9, "movie_id": 5 },
-    { "id": 10, "movie_id": 25 }
-  ],
-  "top_rating_movie": [
-    { "id": 1, "movie_id": 12 },
-    { "id": 2, "movie_id": 25 },
-    { "id": 3, "movie_id": 7 },
-    { "id": 4, "movie_id": 30 },
-    { "id": 5, "movie_id": 18 },
-    { "id": 6, "movie_id": 1 },
-    { "id": 7, "movie_id": 9 },
-    { "id": 8, "movie_id": 16 },
-    { "id": 9, "movie_id": 22 },
-    { "id": 10, "movie_id": 27 }
-  ],
-  "top_rating_movie_series": [
-    { "id": 1, "movie_id": 25 },
-    { "id": 2, "movie_id": 12 },
-    { "id": 3, "movie_id": 30 },
-    { "id": 4, "movie_id": 7 },
-    { "id": 5, "movie_id": 1 },
-    { "id": 6, "movie_id": 18 },
-    { "id": 7, "movie_id": 16 },
-    { "id": 8, "movie_id": 9 },
-    { "id": 9, "movie_id": 27 },
-    { "id": 10, "movie_id": 22 },
-    { "id": 11, "movie_id": 27 },
-    { "id": 12, "movie_id": 14 },
-    { "id": 13, "movie_id": 19 },
-    { "id": 14, "movie_id": 9 },
-    { "id": 15, "movie_id": 30 },
-    { "id": 16, "movie_id": 2 },
-    { "id": 17, "movie_id": 18 },
-    { "id": 18, "movie_id": 12 },
-    { "id": 19, "movie_id": 25 },
-    { "id": 20, "movie_id": 5 }
-  ],
-  "new_release": [
-    { "id": 1, "movie_id": 17 },
-    { "id": 2, "movie_id": 2 },
-    { "id": 3, "movie_id": 9 },
-    { "id": 4, "movie_id": 5 },
-    { "id": 5, "movie_id": 13 },
-    { "id": 6, "movie_id": 30 },
-    { "id": 7, "movie_id": 16 },
-    { "id": 8, "movie_id": 22 },
-    { "id": 9, "movie_id": 24 },
-    { "id": 10, "movie_id": 26 }
-  ],
-  "continue_movie": [
-    { "id": 1, "movie_id": 10 },
-    { "id": 2, "movie_id": 21 },
-    { "id": 3, "movie_id": 15 },
-    { "id": 4, "movie_id": 28 },
-    { "id": 5, "movie_id": 3 },
-    { "id": 6, "movie_id": 19 },
-    { "id": 7, "movie_id": 6 },
-    { "id": 8, "movie_id": 23 },
-    { "id": 9, "movie_id": 14 },
-    { "id": 10, "movie_id": 1 }
-  ],
-  "continue_series": [
-    { "id": 1, "movie_id": 6 },
-    { "id": 2, "movie_id": 23 },
-    { "id": 3, "movie_id": 14 },
-    { "id": 4, "movie_id": 26 },
-    { "id": 5, "movie_id": 8 },
-    { "id": 6, "movie_id": 11 },
-    { "id": 7, "movie_id": 29 },
-    { "id": 8, "movie_id": 2 },
-    { "id": 9, "movie_id": 18 },
-    { "id": 10, "movie_id": 27 }
-  ],
-  "movie_from_chill": [
-    { "id": 1, "movie_id": 28 },
-    { "id": 2, "movie_id": 15 },
-    { "id": 3, "movie_id": 23 },
-    { "id": 4, "movie_id": 7 },
-    { "id": 5, "movie_id": 25 },
-    { "id": 6, "movie_id": 3 },
-    { "id": 7, "movie_id": 20 },
-    { "id": 8, "movie_id": 4 },
-    { "id": 9, "movie_id": 13 },
-    { "id": 10, "movie_id": 21 }
-  ],
-  "series_from_chill": [
-    { "id": 1, "movie_id": 29 },
-    { "id": 2, "movie_id": 18 },
-    { "id": 3, "movie_id": 21 },
-    { "id": 4, "movie_id": 30 },
-    { "id": 5, "movie_id": 12 },
-    { "id": 6, "movie_id": 7 },
-    { "id": 7, "movie_id": 16 },
-    { "id": 8, "movie_id": 25 },
-    { "id": 9, "movie_id": 5 },
-    { "id": 10, "movie_id": 10 }
   ]
 }

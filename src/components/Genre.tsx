@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { Dropdown } from "../../assets/utils/dropdown";
+import { Dropdown } from "../assets/utils/dropdown";
 
 export function DropDownHeader() {
   const { isOpen, setIsOpen, dropdownRef } = Dropdown();
