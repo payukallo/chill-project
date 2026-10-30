@@ -1,14 +1,20 @@
-export function UserName() {
+interface IUserName {
+  autoComplete: string;
+}
+
+export function UserName(props:IUserName) {
+  const {autoComplete} = props
   return (
     <div className="user-name body-large-medium">
       <label htmlFor="userName">Username</label>
-      <input
+      <input 
         className="body-medium-regular"
-        id="userName"
+        id="username"
         type="text"
-        name="userName"
+        name="username"
         placeholder="Masukkan username"
         required
+        autoComplete={autoComplete}
       />
     </div>
   );

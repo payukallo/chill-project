@@ -156,6 +156,7 @@ footer {
 button.genre-small-screen,
 button.help-small-screen {
   border: none;
+  background-color: transparent;
 }
 
 button.genre-small-screen:hover,

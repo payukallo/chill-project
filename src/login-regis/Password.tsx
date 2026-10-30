@@ -1,18 +1,19 @@
 interface IPassword {
-  paraPassword: String;
+  paraPassword: string;
+  inputName: string;
 }
 
-export function Password(props: IPassword) {
-  const { paraPassword } = props;
+
+export function Password({ paraPassword, inputName }: IPassword) {
   return (
     <div className="password body-large-medium">
-      <label htmlFor="password">{paraPassword}</label>
+      <label >{paraPassword}</label>
       <input
         className="body-medium-regular"
         id="password"
         type="password"
-        name="password"
-        placeholder="Masukkan kata sandi"
+        name={inputName}
+        placeholder={paraPassword}
         required
       />
     </div>

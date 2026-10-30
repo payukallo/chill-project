@@ -1,7 +1,7 @@
 {
   "movies": [
     {
-      "id": 1,
+      "id": "1",
       "type": 1,
       "title": "Don't Look Up",
       "cover_url": "./src/assets/images/movie-01.jpg",
@@ -15,13 +15,21 @@
       "age": "18+",
       "description": "Dua astronom berusaha memperingatkan dunia tentang komet yang akan menghantam Bumi.",
       "cast": "Leonardo DiCaprio, Jennifer Lawrence, Meryl Streep",
-      "genre": ["Komedi", "Drama", "Fiksi Ilmiah"],
+      "genre": [
+        "Komedi",
+        "Drama",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Adam McKay",
       "banner_url": "./src/assets/images/movie-01-banner.jpg",
-      "recommendation_movie_1": [7, 3, 5]
+      "recommendation_movie_1": [
+        7,
+        3,
+        5
+      ]
     },
     {
-      "id": 2,
+      "id": "2",
       "type": 1,
       "title": "Sonic the Hedgehog 2",
       "cover_url": "./src/assets/images/movie-02.jpg",
@@ -35,13 +43,21 @@
       "age": "7+",
       "description": "Sonic dan Tails bekerja sama untuk menghentikan rencana Dr. Robotnik.",
       "cast": "Ben Schwartz, James Marsden, Idris Elba",
-      "genre": ["Aksi", "Petualangan", "Komedi"],
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Komedi"
+      ],
       "film_maker": "Jeff Fowler",
       "banner_url": "./src/assets/images/movie-02-banner.jpg",
-      "recommendation_movie_1": [19, 9, 12]
+      "recommendation_movie_1": [
+        19,
+        9,
+        12
+      ]
     },
     {
-      "id": 3,
+      "id": "3",
       "type": 1,
       "title": "Interstellar",
       "cover_url": "./src/assets/images/movie-03.jpg",
@@ -55,13 +71,21 @@
       "age": "13+",
       "description": "Sekelompok penjelajah mencari planet baru demi menyelamatkan umat manusia.",
       "cast": "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
-      "genre": ["Drama", "Petualangan", "Fiksi Ilmiah"],
+      "genre": [
+        "Drama",
+        "Petualangan",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Christopher Nolan",
       "banner_url": "./src/assets/images/movie-03-banner.jpg",
-      "recommendation_movie_1": [29, 15, 2]
+      "recommendation_movie_1": [
+        29,
+        15,
+        2
+      ]
     },
     {
-      "id": 4,
+      "id": "4",
       "type": 1,
       "title": "Inception",
       "cover_url": "./src/assets/images/movie-04.jpg",
@@ -75,13 +99,21 @@
       "age": "13+",
       "description": "Seorang pencuri memasuki mimpi orang lain untuk mencuri rahasia dan menjalankan misi berbahaya.",
       "cast": "Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page",
-      "genre": ["Aksi", "Petualangan", "Fiksi Ilmiah"],
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Christopher Nolan",
       "banner_url": "./src/assets/images/movie-04-banner.jpg",
-      "recommendation_movie_1": [25, 27, 18]
+      "recommendation_movie_1": [
+        25,
+        27,
+        18
+      ]
     },
     {
-      "id": 5,
+      "id": "5",
       "type": 1,
       "title": "Spider-Man: No Way Home",
       "cover_url": "./src/assets/images/movie-05.jpg",
@@ -95,13 +127,21 @@
       "age": "13+",
       "description": "Peter Parker meminta bantuan Doctor Strange setelah identitasnya sebagai Spider-Man terungkap.",
       "cast": "Tom Holland, Zendaya, Benedict Cumberbatch",
-      "genre": ["Aksi", "Petualangan", "Fantasi"],
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Fantasi"
+      ],
       "film_maker": "Jon Watts",
       "banner_url": "./src/assets/images/movie-05-banner.jpg",
-      "recommendation_movie_1": [20, 29, 10]
+      "recommendation_movie_1": [
+        20,
+        29,
+        10
+      ]
     },
     {
-      "id": 6,
+      "id": "6",
       "type": 1,
       "title": "Avengers: Endgame",
       "cover_url": "./src/assets/images/movie-06.jpg",
@@ -115,13 +155,21 @@
       "age": "13+",
       "description": "Para Avengers yang tersisa berusaha membalikkan kehancuran akibat tindakan Thanos.",
       "cast": "Robert Downey Jr., Chris Evans, Mark Ruffalo",
-      "genre": ["Aksi", "Petualangan", "Drama"],
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Drama"
+      ],
       "film_maker": "Anthony Russo, Joe Russo",
       "banner_url": "./src/assets/images/movie-06-banner.jpg",
-      "recommendation_movie_1": [22, 10, 4]
+      "recommendation_movie_1": [
+        22,
+        10,
+        4
+      ]
     },
     {
-      "id": 7,
+      "id": "7",
       "type": 1,
       "title": "The Martian",
       "cover_url": "./src/assets/images/movie-07.jpg",
@@ -135,13 +183,21 @@
       "age": "13+",
       "description": "Seorang astronaut berusaha bertahan hidup di Mars setelah ditinggalkan oleh timnya.",
       "cast": "Matt Damon, Jessica Chastain, Kristen Wiig",
-      "genre": ["Petualangan", "Drama", "Fiksi Ilmiah"],
+      "genre": [
+        "Petualangan",
+        "Drama",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Ridley Scott",
       "banner_url": "./src/assets/images/movie-07-banner.jpg",
-      "recommendation_movie_1": [12, 11, 15]
+      "recommendation_movie_1": [
+        12,
+        11,
+        15
+      ]
     },
     {
-      "id": 8,
+      "id": "8",
       "type": 1,
       "title": "Gravity",
       "cover_url": "./src/assets/images/movie-08.jpg",
@@ -155,13 +211,21 @@
       "age": "13+",
       "description": "Dua astronaut berjuang kembali ke Bumi setelah kecelakaan menghancurkan pesawat mereka.",
       "cast": "Sandra Bullock, George Clooney",
-      "genre": ["Drama", "Thriller", "Fiksi Ilmiah"],
+      "genre": [
+        "Drama",
+        "Thriller",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Alfonso Cuarón",
       "banner_url": "./src/assets/images/movie-08-banner.jpg",
-      "recommendation_movie_1": [5, 23, 6]
+      "recommendation_movie_1": [
+        5,
+        23,
+        6
+      ]
     },
     {
-      "id": 9,
+      "id": "9",
       "type": 1,
       "title": "Dune",
       "cover_url": "./src/assets/images/movie-09.jpg",
@@ -175,13 +239,21 @@
       "age": "13+",
       "description": "Paul Atreides melakukan perjalanan ke planet gurun Arrakis yang menyimpan sumber daya berharga.",
       "cast": "Timothée Chalamet, Rebecca Ferguson, Oscar Isaac",
-      "genre": ["Petualangan", "Drama", "Fiksi Ilmiah"],
+      "genre": [
+        "Petualangan",
+        "Drama",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Denis Villeneuve",
       "banner_url": "./src/assets/images/movie-09-banner.jpg",
-      "recommendation_movie_1": [3, 1, 11]
+      "recommendation_movie_1": [
+        3,
+        1,
+        11
+      ]
     },
     {
-      "id": 10,
+      "id": "10",
       "type": 1,
       "title": "Blade Runner 2049",
       "cover_url": "./src/assets/images/movie-10.jpg",
@@ -195,13 +267,21 @@
       "age": "18+",
       "description": "Seorang blade runner menemukan rahasia yang dapat mengubah hubungan manusia dan replika.",
       "cast": "Ryan Gosling, Harrison Ford, Ana de Armas",
-      "genre": ["Drama", "Misteri", "Fiksi Ilmiah"],
+      "genre": [
+        "Drama",
+        "Misteri",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Denis Villeneuve",
       "banner_url": "./src/assets/images/movie-10-banner.jpg",
-      "recommendation_movie_1": [5, 23, 13]
+      "recommendation_movie_1": [
+        5,
+        23,
+        13
+      ]
     },
     {
-      "id": 11,
+      "id": "11",
       "type": 1,
       "title": "The Dark Knight",
       "cover_url": "./src/assets/images/movie-11.jpg",
@@ -215,13 +295,21 @@
       "age": "13+",
       "description": "Batman menghadapi Joker yang meneror Gotham dan menguji batas moral para penduduknya.",
       "cast": "Christian Bale, Heath Ledger, Aaron Eckhart",
-      "genre": ["Aksi", "Drama", "Kriminal"],
+      "genre": [
+        "Aksi",
+        "Drama",
+        "Kriminal"
+      ],
       "film_maker": "Christopher Nolan",
       "banner_url": "./src/assets/images/movie-11-banner.jpg",
-      "recommendation_movie_1": [25, 16, 19]
+      "recommendation_movie_1": [
+        25,
+        16,
+        19
+      ]
     },
     {
-      "id": 12,
+      "id": "12",
       "type": 1,
       "title": "Doctor Strange",
       "cover_url": "./src/assets/images/movie-12.jpg",
@@ -235,13 +323,21 @@
       "age": "13+",
       "description": "Seorang ahli bedah mempelajari ilmu mistis setelah kecelakaan mengubah hidupnya.",
       "cast": "Benedict Cumberbatch, Chiwetel Ejiofor, Rachel McAdams",
-      "genre": ["Aksi", "Petualangan", "Fantasi"],
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Fantasi"
+      ],
       "film_maker": "Scott Derrickson",
       "banner_url": "./src/assets/images/movie-12-banner.jpg",
-      "recommendation_movie_1": [15, 11, 3]
+      "recommendation_movie_1": [
+        15,
+        11,
+        3
+      ]
     },
     {
-      "id": 13,
+      "id": "13",
       "type": 1,
       "title": "Black Panther",
       "cover_url": "./src/assets/images/movie-13.jpg",
@@ -255,13 +351,21 @@
       "age": "13+",
       "description": "T'Challa kembali ke Wakanda untuk mengambil takhta dan melindungi kerajaannya.",
       "cast": "Chadwick Boseman, Michael B. Jordan, Lupita Nyong'o",
-      "genre": ["Aksi", "Petualangan", "Fiksi Ilmiah"],
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Ryan Coogler",
       "banner_url": "./src/assets/images/movie-13-banner.jpg",
-      "recommendation_movie_1": [2, 17, 11]
+      "recommendation_movie_1": [
+        2,
+        17,
+        11
+      ]
     },
     {
-      "id": 14,
+      "id": "14",
       "type": 1,
       "title": "Guardians of the Galaxy",
       "cover_url": "./src/assets/images/movie-14.jpg",
@@ -275,13 +379,21 @@
       "age": "13+",
       "description": "Sekelompok petualang luar angkasa bersatu untuk melindungi galaksi dari ancaman.",
       "cast": "Chris Pratt, Zoe Saldaña, Dave Bautista",
-      "genre": ["Aksi", "Petualangan", "Komedi"],
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Komedi"
+      ],
       "film_maker": "James Gunn",
       "banner_url": "./src/assets/images/movie-14-banner.jpg",
-      "recommendation_movie_1": [13, 30, 26]
+      "recommendation_movie_1": [
+        13,
+        30,
+        26
+      ]
     },
     {
-      "id": 15,
+      "id": "15",
       "type": 1,
       "title": "Life of Pi",
       "cover_url": "./src/assets/images/movie-15.jpg",
@@ -295,13 +407,21 @@
       "age": "13+",
       "description": "Seorang remaja bertahan hidup di laut bersama seekor harimau setelah kapal karam.",
       "cast": "Suraj Sharma, Irrfan Khan, Tabu",
-      "genre": ["Petualangan", "Drama", "Fantasi"],
+      "genre": [
+        "Petualangan",
+        "Drama",
+        "Fantasi"
+      ],
       "film_maker": "Ang Lee",
       "banner_url": "./src/assets/images/movie-15-banner.jpg",
-      "recommendation_movie_1": [17, 6, 30]
+      "recommendation_movie_1": [
+        17,
+        6,
+        30
+      ]
     },
     {
-      "id": 16,
+      "id": "16",
       "type": 1,
       "title": "Avatar",
       "cover_url": "./src/assets/images/movie-16.jpg",
@@ -315,13 +435,21 @@
       "age": "13+",
       "description": "Seorang mantan marinir terlibat dalam konflik antara manusia dan penduduk Pandora.",
       "cast": "Sam Worthington, Zoe Saldaña, Sigourney Weaver",
-      "genre": ["Aksi", "Petualangan", "Fantasi"],
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Fantasi"
+      ],
       "film_maker": "James Cameron",
       "banner_url": "./src/assets/images/movie-16-banner.jpg",
-      "recommendation_movie_1": [21, 8, 10]
+      "recommendation_movie_1": [
+        21,
+        8,
+        10
+      ]
     },
     {
-      "id": 17,
+      "id": "17",
       "type": 1,
       "title": "Avatar: The Way of Water",
       "cover_url": "./src/assets/images/movie-17.jpg",
@@ -335,13 +463,21 @@
       "age": "13+",
       "description": "Jake Sully dan keluarganya mencari perlindungan di wilayah laut Pandora.",
       "cast": "Sam Worthington, Zoe Saldaña, Sigourney Weaver",
-      "genre": ["Aksi", "Petualangan", "Fantasi"],
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Fantasi"
+      ],
       "film_maker": "James Cameron",
       "banner_url": "./src/assets/images/movie-17-banner.jpg",
-      "recommendation_movie_1": [23, 30, 13]
+      "recommendation_movie_1": [
+        23,
+        30,
+        13
+      ]
     },
     {
-      "id": 18,
+      "id": "18",
       "type": 1,
       "title": "The Matrix",
       "cover_url": "./src/assets/images/movie-18.jpg",
@@ -355,13 +491,20 @@
       "age": "18+",
       "description": "Seorang peretas menemukan kenyataan mengejutkan tentang dunia yang ia tinggali.",
       "cast": "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss",
-      "genre": ["Aksi", "Fiksi Ilmiah"],
+      "genre": [
+        "Aksi",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Lana Wachowski, Lilly Wachowski",
       "banner_url": "./src/assets/images/movie-18-banner.jpg",
-      "recommendation_movie_1": [19, 21, 22]
+      "recommendation_movie_1": [
+        19,
+        21,
+        22
+      ]
     },
     {
-      "id": 19,
+      "id": "19",
       "type": 1,
       "title": "Joker",
       "cover_url": "./src/assets/images/movie-19.jpg",
@@ -375,13 +518,21 @@
       "age": "18+",
       "description": "Kehidupan seorang komedian yang kesepian berubah menjadi perjalanan menuju kekacauan.",
       "cast": "Joaquin Phoenix, Robert De Niro, Zazie Beetz",
-      "genre": ["Kriminal", "Drama", "Thriller"],
+      "genre": [
+        "Kriminal",
+        "Drama",
+        "Thriller"
+      ],
       "film_maker": "Todd Phillips",
       "banner_url": "./src/assets/images/movie-19-banner.jpg",
-      "recommendation_movie_1": [30, 5, 22]
+      "recommendation_movie_1": [
+        30,
+        5,
+        22
+      ]
     },
     {
-      "id": 20,
+      "id": "20",
       "type": 1,
       "title": "The Shawshank Redemption",
       "cover_url": "./src/assets/images/movie-20.jpg",
@@ -395,13 +546,20 @@
       "age": "18+",
       "description": "Seorang bankir yang dipenjara membangun persahabatan dan mempertahankan harapan.",
       "cast": "Tim Robbins, Morgan Freeman, Bob Gunton",
-      "genre": ["Drama", "Kriminal"],
+      "genre": [
+        "Drama",
+        "Kriminal"
+      ],
       "film_maker": "Frank Darabont",
       "banner_url": "./src/assets/images/movie-20-banner.jpg",
-      "recommendation_movie_1": [6, 1, 15]
+      "recommendation_movie_1": [
+        6,
+        1,
+        15
+      ]
     },
     {
-      "id": 21,
+      "id": "21",
       "type": 1,
       "title": "Jurassic Park",
       "cover_url": "./src/assets/images/movie-21.jpg",
@@ -415,13 +573,21 @@
       "age": "13+",
       "description": "Sebuah taman dinosaurus mengalami bencana ketika sistem keamanannya gagal.",
       "cast": "Sam Neill, Laura Dern, Jeff Goldblum",
-      "genre": ["Petualangan", "Fiksi Ilmiah", "Thriller"],
+      "genre": [
+        "Petualangan",
+        "Fiksi Ilmiah",
+        "Thriller"
+      ],
       "film_maker": "Steven Spielberg",
       "banner_url": "./src/assets/images/movie-21-banner.jpg",
-      "recommendation_movie_1": [3, 6, 25]
+      "recommendation_movie_1": [
+        3,
+        6,
+        25
+      ]
     },
     {
-      "id": 22,
+      "id": "22",
       "type": 1,
       "title": "Parasite",
       "cover_url": "./src/assets/images/movie-22.jpg",
@@ -435,13 +601,21 @@
       "age": "18+",
       "description": "Sebuah keluarga dengan kondisi ekonomi sulit menyusup ke kehidupan keluarga kaya.",
       "cast": "Song Kang-ho, Lee Sun-kyun, Cho Yeo-jeong",
-      "genre": ["Drama", "Thriller", "Komedi"],
+      "genre": [
+        "Drama",
+        "Thriller",
+        "Komedi"
+      ],
       "film_maker": "Bong Joon-ho",
       "banner_url": "./src/assets/images/movie-22-banner.jpg",
-      "recommendation_movie_1": [9, 16, 19]
+      "recommendation_movie_1": [
+        9,
+        16,
+        19
+      ]
     },
     {
-      "id": 23,
+      "id": "23",
       "type": 1,
       "title": "3 Idiots",
       "cover_url": "./src/assets/images/movie-23.jpg",
@@ -455,13 +629,20 @@
       "age": "13+",
       "description": "Tiga sahabat menjalani kehidupan kampus sambil mempertanyakan sistem pendidikan.",
       "cast": "Aamir Khan, R. Madhavan, Sharman Joshi",
-      "genre": ["Komedi", "Drama"],
+      "genre": [
+        "Komedi",
+        "Drama"
+      ],
       "film_maker": "Rajkumar Hirani",
       "banner_url": "./src/assets/images/movie-23-banner.jpg",
-      "recommendation_movie_1": [28, 7, 25]
+      "recommendation_movie_1": [
+        28,
+        7,
+        25
+      ]
     },
     {
-      "id": 24,
+      "id": "24",
       "type": 1,
       "title": "The Lord of the Rings: The Fellowship of the Ring",
       "cover_url": "./src/assets/images/movie-24.jpg",
@@ -475,13 +656,21 @@
       "age": "13+",
       "description": "Frodo memulai perjalanan berbahaya untuk menghancurkan cincin yang sangat kuat.",
       "cast": "Elijah Wood, Ian McKellen, Viggo Mortensen",
-      "genre": ["Petualangan", "Drama", "Fantasi"],
+      "genre": [
+        "Petualangan",
+        "Drama",
+        "Fantasi"
+      ],
       "film_maker": "Peter Jackson",
       "banner_url": "./src/assets/images/movie-24-banner.jpg",
-      "recommendation_movie_1": [5, 19, 23]
+      "recommendation_movie_1": [
+        5,
+        19,
+        23
+      ]
     },
     {
-      "id": 25,
+      "id": "25",
       "type": 1,
       "title": "The Intouchables",
       "cover_url": "./src/assets/images/movie-25.jpg",
@@ -495,13 +684,20 @@
       "age": "13+",
       "description": "Persahabatan tak terduga tumbuh antara seorang bangsawan dan pengasuhnya.",
       "cast": "François Cluzet, Omar Sy, Anne Le Ny",
-      "genre": ["Komedi", "Drama"],
+      "genre": [
+        "Komedi",
+        "Drama"
+      ],
       "film_maker": "Olivier Nakache, Éric Toledano",
       "banner_url": "./src/assets/images/movie-25-banner.jpg",
-      "recommendation_movie_1": [3, 4, 28]
+      "recommendation_movie_1": [
+        3,
+        4,
+        28
+      ]
     },
     {
-      "id": 26,
+      "id": "26",
       "type": 1,
       "title": "Harry Potter and the Sorcerer's Stone",
       "cover_url": "./src/assets/images/movie-26.jpg",
@@ -515,13 +711,21 @@
       "age": "7+",
       "description": "Harry Potter mengetahui bahwa dirinya penyihir dan memulai pendidikan di Hogwarts.",
       "cast": "Daniel Radcliffe, Rupert Grint, Emma Watson",
-      "genre": ["Petualangan", "Keluarga", "Fantasi"],
+      "genre": [
+        "Petualangan",
+        "Keluarga",
+        "Fantasi"
+      ],
       "film_maker": "Chris Columbus",
       "banner_url": "./src/assets/images/movie-26-banner.jpg",
-      "recommendation_movie_1": [16, 8, 3]
+      "recommendation_movie_1": [
+        16,
+        8,
+        3
+      ]
     },
     {
-      "id": 27,
+      "id": "27",
       "type": 1,
       "title": "Pirates of the Caribbean: The Curse of the Black Pearl",
       "cover_url": "./src/assets/images/movie-27.jpg",
@@ -535,13 +739,21 @@
       "age": "13+",
       "description": "Kapten Jack Sparrow berusaha merebut kembali kapalnya dan menghadapi kutukan bajak laut.",
       "cast": "Johnny Depp, Geoffrey Rush, Orlando Bloom",
-      "genre": ["Aksi", "Petualangan", "Fantasi"],
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Fantasi"
+      ],
       "film_maker": "Gore Verbinski",
       "banner_url": "./src/assets/images/movie-27-banner.jpg",
-      "recommendation_movie_1": [26, 16, 13]
+      "recommendation_movie_1": [
+        26,
+        16,
+        13
+      ]
     },
     {
-      "id": 28,
+      "id": "28",
       "type": 1,
       "title": "Forrest Gump",
       "cover_url": "./src/assets/images/movie-28.jpg",
@@ -555,13 +767,20 @@
       "age": "13+",
       "description": "Forrest Gump menceritakan perjalanan hidupnya yang bersinggungan dengan berbagai peristiwa sejarah.",
       "cast": "Tom Hanks, Robin Wright, Gary Sinise",
-      "genre": ["Drama", "Romantis"],
+      "genre": [
+        "Drama",
+        "Romantis"
+      ],
       "film_maker": "Robert Zemeckis",
       "banner_url": "./src/assets/images/movie-28-banner.jpg",
-      "recommendation_movie_1": [16, 19, 2]
+      "recommendation_movie_1": [
+        16,
+        19,
+        2
+      ]
     },
     {
-      "id": 29,
+      "id": "29",
       "type": 1,
       "title": "Spirited Away",
       "cover_url": "./src/assets/images/movie-29.jpg",
@@ -575,13 +794,21 @@
       "age": "7+",
       "description": "Seorang anak perempuan memasuki dunia roh dan berusaha menyelamatkan orang tuanya.",
       "cast": "Rumi Hiiragi, Miyu Irino, Mari Natsuki",
-      "genre": ["Animasi", "Petualangan", "Fantasi"],
+      "genre": [
+        "Animasi",
+        "Petualangan",
+        "Fantasi"
+      ],
       "film_maker": "Hayao Miyazaki",
       "banner_url": "./src/assets/images/movie-29-banner.jpg",
-      "recommendation_movie_1": [30, 5, 8]
+      "recommendation_movie_1": [
+        30,
+        5,
+        8
+      ]
     },
     {
-      "id": 30,
+      "id": "30",
       "type": 1,
       "title": "Your Name",
       "cover_url": "./src/assets/images/movie-30.jpg",
@@ -595,35 +822,46 @@
       "age": "13+",
       "description": "Dua remaja yang tidak saling mengenal mengalami pertukaran tubuh secara misterius.",
       "cast": "Ryunosuke Kamiki, Mone Kamishiraishi, Masami Nagasawa",
-      "genre": ["Animasi", "Drama", "Romantis"],
+      "genre": [
+        "Animasi",
+        "Drama",
+        "Romantis"
+      ],
       "film_maker": "Makoto Shinkai",
       "banner_url": "./src/assets/images/movie-30-banner.jpg",
-      "recommendation_movie_1": [3, 14, 24]
+      "recommendation_movie_1": [
+        3,
+        14,
+        24
+      ]
     }
   ],
-
   "series": [
     {
-      "id": 1,
+      "id": "1",
       "type": 2,
       "title": "Stranger Things",
       "cover_url": "./src/assets/images/series-01.jpg",
       "rating": "★ 4.8/5",
       "top_rating_today": true,
-      "is_new_episode": true,
+      "is_new_episode": false,
       "is_top_10": true,
       "year": 2016,
       "duration": "4 Season",
-      "is_premium": true,
+      "is_premium": false,
       "age": "16+",
       "description": "Sekelompok anak menemukan rahasia supernatural yang mengancam kota kecil mereka.",
       "cast": "Millie Bobby Brown, Finn Wolfhard, David Harbour",
-      "genre": ["Drama", "Fantasi", "Misteri"],
+      "genre": [
+        "Drama",
+        "Fantasi",
+        "Misteri"
+      ],
       "film_maker": "The Duffer Brothers",
       "banner_url": "./src/assets/images/series-01-banner.jpg"
     },
     {
-      "id": 2,
+      "id": "2",
       "type": 2,
       "title": "Wednesday",
       "cover_url": "./src/assets/images/series-02.jpg",
@@ -633,16 +871,20 @@
       "is_top_10": true,
       "year": 2022,
       "duration": "1 Season",
-      "is_premium": true,
+      "is_premium": false,
       "age": "13+",
       "description": "Wednesday Addams menyelidiki misteri pembunuhan saat bersekolah di Nevermore Academy.",
       "cast": "Jenna Ortega, Emma Myers, Catherine Zeta-Jones",
-      "genre": ["Komedi", "Fantasi", "Misteri"],
+      "genre": [
+        "Komedi",
+        "Fantasi",
+        "Misteri"
+      ],
       "film_maker": "Alfred Gough, Miles Millar",
       "banner_url": "./src/assets/images/series-02-banner.jpg"
     },
     {
-      "id": 3,
+      "id": "3",
       "type": 2,
       "title": "The Last of Us",
       "cover_url": "./src/assets/images/series-03.jpg",
@@ -652,16 +894,20 @@
       "is_top_10": true,
       "year": 2023,
       "duration": "1 Season",
-      "is_premium": true,
+      "is_premium": false,
       "age": "18+",
       "description": "Joel mengawal Ellie melintasi dunia yang hancur akibat wabah jamur mematikan.",
       "cast": "Pedro Pascal, Bella Ramsey, Gabriel Luna",
-      "genre": ["Drama", "Aksi", "Fiksi Ilmiah"],
+      "genre": [
+        "Drama",
+        "Aksi",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Craig Mazin, Neil Druckmann",
       "banner_url": "./src/assets/images/series-03-banner.jpg"
     },
     {
-      "id": 4,
+      "id": "4",
       "type": 2,
       "title": "Breaking Bad",
       "cover_url": "./src/assets/images/series-04.jpg",
@@ -671,16 +917,20 @@
       "is_top_10": true,
       "year": 2008,
       "duration": "5 Season",
-      "is_premium": true,
+      "is_premium": false,
       "age": "18+",
       "description": "Seorang guru kimia memasuki dunia kriminal setelah didiagnosis menderita penyakit serius.",
       "cast": "Bryan Cranston, Aaron Paul, Anna Gunn",
-      "genre": ["Kriminal", "Drama", "Thriller"],
+      "genre": [
+        "Kriminal",
+        "Drama",
+        "Thriller"
+      ],
       "film_maker": "Vince Gilligan",
       "banner_url": "./src/assets/images/series-04-banner.jpg"
     },
     {
-      "id": 5,
+      "id": "5",
       "type": 2,
       "title": "Squid Game",
       "cover_url": "./src/assets/images/series-05.jpg",
@@ -694,12 +944,16 @@
       "age": "18+",
       "description": "Ratusan orang yang terlilit masalah keuangan mengikuti permainan berhadiah dengan taruhan nyawa.",
       "cast": "Lee Jung-jae, Lee Byung-hun, Wi Ha-jun",
-      "genre": ["Thriller", "Drama", "Misteri"],
+      "genre": [
+        "Thriller",
+        "Drama",
+        "Misteri"
+      ],
       "film_maker": "Hwang Dong-hyuk",
       "banner_url": "./src/assets/images/series-05-banner.jpg"
     },
     {
-      "id": 6,
+      "id": "6",
       "type": 2,
       "title": "The Witcher",
       "cover_url": "./src/assets/images/series-06.jpg",
@@ -709,16 +963,20 @@
       "is_top_10": true,
       "year": 2019,
       "duration": "3 Season",
-      "is_premium": true,
+      "is_premium": false,
       "age": "18+",
       "description": "Geralt of Rivia menjalani kehidupan sebagai pemburu monster di dunia penuh konflik dan sihir.",
       "cast": "Henry Cavill, Anya Chalotra, Freya Allan",
-      "genre": ["Fantasi", "Aksi", "Petualangan"],
+      "genre": [
+        "Fantasi",
+        "Aksi",
+        "Petualangan"
+      ],
       "film_maker": "Lauren Schmidt Hissrich",
       "banner_url": "./src/assets/images/series-06-banner.jpg"
     },
     {
-      "id": 7,
+      "id": "7",
       "type": 2,
       "title": "Money Heist",
       "cover_url": "./src/assets/images/series-07.jpg",
@@ -732,12 +990,16 @@
       "age": "18+",
       "description": "Seorang dalang kriminal memimpin kelompok perampok dalam operasi besar yang direncanakan dengan teliti.",
       "cast": "Álvaro Morte, Úrsula Corberó, Pedro Alonso",
-      "genre": ["Kriminal", "Thriller", "Drama"],
+      "genre": [
+        "Kriminal",
+        "Thriller",
+        "Drama"
+      ],
       "film_maker": "Álex Pina",
       "banner_url": "./src/assets/images/series-07-banner.jpg"
     },
     {
-      "id": 8,
+      "id": "8",
       "type": 2,
       "title": "Loki",
       "cover_url": "./src/assets/images/series-08.jpg",
@@ -747,16 +1009,20 @@
       "is_top_10": true,
       "year": 2021,
       "duration": "2 Season",
-      "is_premium": true,
+      "is_premium": false,
       "age": "13+",
       "description": "Loki terlibat dalam petualangan lintas waktu bersama organisasi yang mengawasi garis waktu.",
       "cast": "Tom Hiddleston, Sophia Di Martino, Owen Wilson",
-      "genre": ["Aksi", "Fantasi", "Fiksi Ilmiah"],
+      "genre": [
+        "Aksi",
+        "Fantasi",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Michael Waldron",
       "banner_url": "./src/assets/images/series-08-banner.jpg"
     },
     {
-      "id": 9,
+      "id": "9",
       "type": 2,
       "title": "The Mandalorian",
       "cover_url": "./src/assets/images/series-09.jpg",
@@ -770,12 +1036,16 @@
       "age": "13+",
       "description": "Seorang pemburu bayaran Mandalorian melintasi galaksi bersama seorang anak misterius.",
       "cast": "Pedro Pascal, Katee Sackhoff, Carl Weathers",
-      "genre": ["Aksi", "Petualangan", "Fiksi Ilmiah"],
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Jon Favreau",
       "banner_url": "./src/assets/images/series-09-banner.jpg"
     },
     {
-      "id": 10,
+      "id": "10",
       "type": 2,
       "title": "The Umbrella Academy",
       "cover_url": "./src/assets/images/series-10.jpg",
@@ -789,12 +1059,16 @@
       "age": "16+",
       "description": "Sekelompok saudara dengan kekuatan khusus berkumpul untuk mencegah kiamat.",
       "cast": "Elliot Page, Tom Hopper, David Castañeda",
-      "genre": ["Aksi", "Komedi", "Fantasi"],
+      "genre": [
+        "Aksi",
+        "Komedi",
+        "Fantasi"
+      ],
       "film_maker": "Steve Blackman",
       "banner_url": "./src/assets/images/series-10-banner.jpg"
     },
     {
-      "id": 11,
+      "id": "11",
       "type": 2,
       "title": "Game of Thrones",
       "cover_url": "./src/assets/images/series-11.jpg",
@@ -804,16 +1078,20 @@
       "is_top_10": true,
       "year": 2011,
       "duration": "8 Season",
-      "is_premium": true,
+      "is_premium": false,
       "age": "18+",
       "description": "Keluarga-keluarga bangsawan bersaing memperebutkan kekuasaan atas takhta Westeros.",
       "cast": "Emilia Clarke, Kit Harington, Peter Dinklage",
-      "genre": ["Drama", "Fantasi", "Petualangan"],
+      "genre": [
+        "Drama",
+        "Fantasi",
+        "Petualangan"
+      ],
       "film_maker": "David Benioff, D. B. Weiss",
       "banner_url": "./src/assets/images/series-11-banner.jpg"
     },
     {
-      "id": 12,
+      "id": "12",
       "type": 2,
       "title": "House of the Dragon",
       "cover_url": "./src/assets/images/series-12.jpg",
@@ -823,16 +1101,20 @@
       "is_top_10": true,
       "year": 2022,
       "duration": "2 Season",
-      "is_premium": true,
+      "is_premium": false,
       "age": "18+",
       "description": "Keluarga Targaryen menghadapi perebutan kekuasaan yang mengancam kerajaan mereka.",
       "cast": "Emma D'Arcy, Matt Smith, Olivia Cooke",
-      "genre": ["Drama", "Fantasi", "Aksi"],
+      "genre": [
+        "Drama",
+        "Fantasi",
+        "Aksi"
+      ],
       "film_maker": "Ryan Condal, George R. R. Martin",
       "banner_url": "./src/assets/images/series-12-banner.jpg"
     },
     {
-      "id": 13,
+      "id": "13",
       "type": 2,
       "title": "The Boys",
       "cover_url": "./src/assets/images/series-13.jpg",
@@ -846,31 +1128,39 @@
       "age": "18+",
       "description": "Sekelompok manusia biasa berusaha mengungkap sisi gelap para pahlawan super.",
       "cast": "Karl Urban, Jack Quaid, Antony Starr",
-      "genre": ["Aksi", "Drama", "Komedi"],
+      "genre": [
+        "Aksi",
+        "Drama",
+        "Komedi"
+      ],
       "film_maker": "Eric Kripke",
       "banner_url": "./src/assets/images/series-13-banner.jpg"
     },
     {
-      "id": 14,
+      "id": "14",
       "type": 2,
       "title": "Peaky Blinders",
       "cover_url": "./src/assets/images/series-14.jpg",
       "rating": "★ 4.8/5",
       "top_rating_today": false,
       "is_new_episode": false,
-      "is_top_10": true,
+      "is_top_10": false,
       "year": 2013,
       "duration": "6 Season",
-      "is_premium": true,
+      "is_premium": false,
       "age": "18+",
       "description": "Tommy Shelby memimpin keluarga kriminal yang memperluas pengaruhnya di Inggris.",
       "cast": "Cillian Murphy, Paul Anderson, Sophie Rundle",
-      "genre": ["Kriminal", "Drama", "Sejarah"],
+      "genre": [
+        "Kriminal",
+        "Drama",
+        "Sejarah"
+      ],
       "film_maker": "Steven Knight",
       "banner_url": "./src/assets/images/series-14-banner.jpg"
     },
     {
-      "id": 15,
+      "id": "15",
       "type": 2,
       "title": "Dark",
       "cover_url": "./src/assets/images/series-15.jpg",
@@ -884,31 +1174,39 @@
       "age": "18+",
       "description": "Hilangnya seorang anak mengungkap rahasia perjalanan waktu di sebuah kota kecil Jerman.",
       "cast": "Louis Hofmann, Lisa Vicari, Andreas Pietschmann",
-      "genre": ["Misteri", "Drama", "Fiksi Ilmiah"],
+      "genre": [
+        "Misteri",
+        "Drama",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Baran bo Odar, Jantje Friese",
       "banner_url": "./src/assets/images/series-15-banner.jpg"
     },
     {
-      "id": 16,
+      "id": "16",
       "type": 2,
       "title": "Sherlock",
       "cover_url": "./src/assets/images/series-16.jpg",
       "rating": "★ 4.8/5",
       "top_rating_today": false,
       "is_new_episode": false,
-      "is_top_10": true,
+      "is_top_10": false,
       "year": 2010,
       "duration": "4 Season",
       "is_premium": false,
       "age": "13+",
       "description": "Sherlock Holmes dan John Watson memecahkan kasus kriminal di London modern.",
       "cast": "Benedict Cumberbatch, Martin Freeman, Andrew Scott",
-      "genre": ["Kriminal", "Drama", "Misteri"],
+      "genre": [
+        "Kriminal",
+        "Drama",
+        "Misteri"
+      ],
       "film_maker": "Mark Gatiss, Steven Moffat",
       "banner_url": "./src/assets/images/series-16-banner.jpg"
     },
     {
-      "id": 17,
+      "id": "17",
       "type": 2,
       "title": "The Crown",
       "cover_url": "./src/assets/images/series-17.jpg",
@@ -918,92 +1216,112 @@
       "is_top_10": false,
       "year": 2016,
       "duration": "6 Season",
-      "is_premium": true,
+      "is_premium": false,
       "age": "16+",
       "description": "Drama sejarah yang menggambarkan kehidupan dan pemerintahan Ratu Elizabeth II.",
       "cast": "Claire Foy, Olivia Colman, Imelda Staunton",
-      "genre": ["Drama", "Sejarah", "Biografi"],
+      "genre": [
+        "Drama",
+        "Sejarah",
+        "Biografi"
+      ],
       "film_maker": "Peter Morgan",
       "banner_url": "./src/assets/images/series-17-banner.jpg"
     },
     {
-      "id": 18,
+      "id": "18",
       "type": 2,
       "title": "Arcane",
       "cover_url": "./src/assets/images/series-18.jpg",
       "rating": "★ 4.9/5",
       "top_rating_today": true,
       "is_new_episode": false,
-      "is_top_10": true,
+      "is_top_10": false,
       "year": 2021,
       "duration": "2 Season",
       "is_premium": true,
       "age": "16+",
       "description": "Dua saudari berada di sisi berlawanan konflik antara kota Piltover dan Zaun.",
       "cast": "Hailee Steinfeld, Ella Purnell, Kevin Alejandro",
-      "genre": ["Animasi", "Aksi", "Fantasi"],
+      "genre": [
+        "Animasi",
+        "Aksi",
+        "Fantasi"
+      ],
       "film_maker": "Christian Linke, Alex Yee",
       "banner_url": "./src/assets/images/series-18-banner.jpg"
     },
     {
-      "id": 19,
+      "id": "19",
       "type": 2,
       "title": "One Piece",
       "cover_url": "./src/assets/images/series-19.jpg",
       "rating": "★ 4.7/5",
       "top_rating_today": true,
       "is_new_episode": true,
-      "is_top_10": true,
+      "is_top_10": false,
       "year": 2023,
       "duration": "2 Season",
-      "is_premium": true,
+      "is_premium": false,
       "age": "13+",
       "description": "Monkey D. Luffy dan krunya berlayar mencari harta karun legendaris.",
       "cast": "Iñaki Godoy, Emily Rudd, Mackenyu",
-      "genre": ["Aksi", "Petualangan", "Fantasi"],
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Fantasi"
+      ],
       "film_maker": "Matt Owens, Steven Maeda",
       "banner_url": "./src/assets/images/series-19-banner.jpg"
     },
     {
-      "id": 20,
+      "id": "20",
       "type": 2,
       "title": "The Walking Dead",
       "cover_url": "./src/assets/images/series-20.jpg",
       "rating": "★ 4.5/5",
       "top_rating_today": false,
       "is_new_episode": false,
-      "is_top_10": true,
+      "is_top_10": false,
       "year": 2010,
       "duration": "11 Season",
       "is_premium": true,
       "age": "18+",
       "description": "Sekelompok penyintas berjuang hidup di dunia yang dikuasai para mayat hidup.",
       "cast": "Andrew Lincoln, Norman Reedus, Melissa McBride",
-      "genre": ["Horor", "Drama", "Thriller"],
+      "genre": [
+        "Horor",
+        "Drama",
+        "Thriller"
+      ],
       "film_maker": "Frank Darabont",
       "banner_url": "./src/assets/images/series-20-banner.jpg"
     },
     {
-      "id": 21,
+      "id": "21",
       "type": 2,
       "title": "Vikings",
       "cover_url": "./src/assets/images/series-21.jpg",
       "rating": "★ 4.6/5",
       "top_rating_today": false,
       "is_new_episode": false,
-      "is_top_10": true,
+      "is_top_10": false,
       "year": 2013,
       "duration": "6 Season",
       "is_premium": true,
       "age": "18+",
       "description": "Ragnar Lothbrok dan para pejuang Viking melakukan ekspedisi dan penaklukan.",
       "cast": "Travis Fimmel, Katheryn Winnick, Gustaf Skarsgård",
-      "genre": ["Aksi", "Drama", "Sejarah"],
+      "genre": [
+        "Aksi",
+        "Drama",
+        "Sejarah"
+      ],
       "film_maker": "Michael Hirst",
       "banner_url": "./src/assets/images/series-21-banner.jpg"
     },
     {
-      "id": 22,
+      "id": "22",
       "type": 2,
       "title": "The Queen's Gambit",
       "cover_url": "./src/assets/images/series-22.jpg",
@@ -1017,50 +1335,61 @@
       "age": "16+",
       "description": "Seorang pecatur muda berbakat berjuang menghadapi tekanan dan ketergantungannya.",
       "cast": "Anya Taylor-Joy, Thomas Brodie-Sangster, Moses Ingram",
-      "genre": ["Drama", "Olahraga"],
+      "genre": [
+        "Drama",
+        "Olahraga"
+      ],
       "film_maker": "Scott Frank",
       "banner_url": "./src/assets/images/series-22-banner.jpg"
     },
     {
-      "id": 23,
+      "id": "23",
       "type": 2,
       "title": "Lupin",
       "cover_url": "./src/assets/images/series-23.jpg",
       "rating": "★ 4.5/5",
       "top_rating_today": true,
       "is_new_episode": false,
-      "is_top_10": true,
+      "is_top_10": false,
       "year": 2021,
       "duration": "3 Part",
       "is_premium": true,
       "age": "16+",
       "description": "Assane Diop menggunakan kecerdikan dan penyamaran untuk membalas ketidakadilan terhadap keluarganya.",
       "cast": "Omar Sy, Ludivine Sagnier, Clotilde Hesme",
-      "genre": ["Kriminal", "Drama", "Misteri"],
+      "genre": [
+        "Kriminal",
+        "Drama",
+        "Misteri"
+      ],
       "film_maker": "George Kay",
       "banner_url": "./src/assets/images/series-23-banner.jpg"
     },
     {
-      "id": 24,
+      "id": "24",
       "type": 2,
       "title": "The Sandman",
       "cover_url": "./src/assets/images/series-24.jpg",
       "rating": "★ 4.5/5",
       "top_rating_today": false,
       "is_new_episode": false,
-      "is_top_10": true,
+      "is_top_10": false,
       "year": 2022,
       "duration": "1 Season",
       "is_premium": true,
       "age": "18+",
       "description": "Dream berusaha memulihkan kerajaannya setelah terkurung selama lebih dari satu abad.",
       "cast": "Tom Sturridge, Boyd Holbrook, Vivienne Acheampong",
-      "genre": ["Fantasi", "Drama", "Horor"],
+      "genre": [
+        "Fantasi",
+        "Drama",
+        "Horor"
+      ],
       "film_maker": "Allan Heinberg",
       "banner_url": "./src/assets/images/series-24-banner.jpg"
     },
     {
-      "id": 25,
+      "id": "25",
       "type": 2,
       "title": "Cobra Kai",
       "cover_url": "./src/assets/images/series-25.jpg",
@@ -1074,31 +1403,39 @@
       "age": "13+",
       "description": "Persaingan lama antara Daniel LaRusso dan Johnny Lawrence kembali melalui dunia karate.",
       "cast": "Ralph Macchio, William Zabka, Xolo Maridueña",
-      "genre": ["Aksi", "Komedi", "Drama"],
+      "genre": [
+        "Aksi",
+        "Komedi",
+        "Drama"
+      ],
       "film_maker": "Josh Heald, Jon Hurwitz, Hayden Schlossberg",
       "banner_url": "./src/assets/images/series-25-banner.jpg"
     },
     {
-      "id": 26,
+      "id": "26",
       "type": 2,
       "title": "Alice in Borderland",
       "cover_url": "./src/assets/images/series-26.jpg",
       "rating": "★ 4.6/5",
       "top_rating_today": false,
       "is_new_episode": false,
-      "is_top_10": true,
+      "is_top_10": false,
       "year": 2020,
       "duration": "2 Season",
       "is_premium": true,
       "age": "18+",
       "description": "Arisu dan teman-temannya harus memenangkan permainan berbahaya untuk bertahan hidup.",
       "cast": "Kento Yamazaki, Tao Tsuchiya, Nijirō Murakami",
-      "genre": ["Aksi", "Thriller", "Fiksi Ilmiah"],
+      "genre": [
+        "Aksi",
+        "Thriller",
+        "Fiksi Ilmiah"
+      ],
       "film_maker": "Shinsuke Sato",
       "banner_url": "./src/assets/images/series-26-banner.jpg"
     },
     {
-      "id": 27,
+      "id": "27",
       "type": 2,
       "title": "The Office",
       "cover_url": "./src/assets/images/series-27.jpg",
@@ -1112,12 +1449,15 @@
       "age": "13+",
       "description": "Kehidupan sehari-hari para karyawan kantor penjualan kertas dipenuhi kejadian canggung dan lucu.",
       "cast": "Steve Carell, John Krasinski, Jenna Fischer",
-      "genre": ["Komedi", "Drama"],
+      "genre": [
+        "Komedi",
+        "Drama"
+      ],
       "film_maker": "Greg Daniels",
       "banner_url": "./src/assets/images/series-27-banner.jpg"
     },
     {
-      "id": 28,
+      "id": "28",
       "type": 2,
       "title": "Friends",
       "cover_url": "./src/assets/images/series-28.jpg",
@@ -1131,47 +1471,66 @@
       "age": "13+",
       "description": "Enam sahabat menjalani kehidupan, hubungan, dan karier mereka di New York.",
       "cast": "Jennifer Aniston, Courteney Cox, Matthew Perry",
-      "genre": ["Komedi", "Romantis"],
+      "genre": [
+        "Komedi",
+        "Romantis"
+      ],
       "film_maker": "David Crane, Marta Kauffman",
       "banner_url": "./src/assets/images/series-28-banner.jpg"
     },
     {
-      "id": 29,
+      "id": "29",
       "type": 2,
       "title": "Attack on Titan",
       "cover_url": "./src/assets/images/series-29.jpg",
       "rating": "★ 4.9/5",
       "top_rating_today": true,
       "is_new_episode": false,
-      "is_top_10": true,
+      "is_top_10": false,
       "year": 2013,
       "duration": "4 Season",
       "is_premium": true,
       "age": "18+",
       "description": "Eren Yeager dan teman-temannya melawan Titan yang mengancam umat manusia di balik tembok.",
       "cast": "Yuki Kaji, Yui Ishikawa, Marina Inoue",
-      "genre": ["Animasi", "Aksi", "Drama"],
+      "genre": [
+        "Animasi",
+        "Aksi",
+        "Drama"
+      ],
       "film_maker": "Hajime Isayama",
       "banner_url": "./src/assets/images/series-29-banner.jpg"
     },
     {
-      "id": 30,
+      "id": "30",
       "type": 2,
       "title": "Demon Slayer",
       "cover_url": "./src/assets/images/series-30.jpg",
       "rating": "★ 4.8/5",
       "top_rating_today": true,
       "is_new_episode": false,
-      "is_top_10": true,
+      "is_top_10": false,
       "year": 2019,
       "duration": "4 Season",
       "is_premium": true,
       "age": "16+",
       "description": "Tanjiro Kamado menjadi pembasmi iblis untuk menyelamatkan adiknya dan membalas tragedi keluarganya.",
       "cast": "Natsuki Hanae, Akari Kitō, Hiro Shimono",
-      "genre": ["Animasi", "Aksi", "Fantasi"],
+      "genre": [
+        "Animasi",
+        "Aksi",
+        "Fantasi"
+      ],
       "film_maker": "Koyoharu Gotouge",
       "banner_url": "./src/assets/images/series-30-banner.jpg"
     }
-  ]
+  ],
+  "users": [
+    {
+      "username": "tommy",
+      "password": "hello",
+      "id": "wYmYBRuzVCw"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

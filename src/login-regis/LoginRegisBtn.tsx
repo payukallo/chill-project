@@ -4,7 +4,6 @@ interface ILoginRegisBtn {
   upBtn: string;
   downBtn: string;
 }
-
 export function LoginRegisBtn(props: ILoginRegisBtn) {
   const { upBtn, downBtn } = props;
   return (

@@ -27,6 +27,8 @@
 }
 
 .register-container input,
+.register-container button,
+.login-container input,
 .login-container button {
   padding: 14px 20px;
   background-color: transparent;
