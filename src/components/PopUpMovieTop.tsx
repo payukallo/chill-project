@@ -1,67 +1,28 @@
 import MuteVolume from "../assets/logo/mute-volume.png";
 import { createPortal } from "react-dom";
 import type { IResponseMovie } from "./type/IResponMovies";
-import { useEffect, useState } from "react";
-import { Recommendation } from "./Recommendation";
-
-type ContentType = "movies" | "series";
 
 interface IPopUpMovie {
-  movieId: number;
-  contentType?: ContentType;
+  movie: IResponseMovie;
+  movies: IResponseMovie[];
   onClose: () => void;
+  onMovieClick: (movie: IResponseMovie) => void;
 }
 
-export function PopUpMovie(props: IPopUpMovie) {
-  const { onClose, movieId } = props;
-  const [movie, setMovie] = useState<IResponseMovie | null>(null);
-  const [activeMovieId, setActiveMovieId] = useState(movieId);
-  const [loading, setLoading] = useState(true);
-
-  const mainElement = document.querySelector(".box-pop-up-content");
-
-  useEffect(() => {
-    async function fetchMovie() {
-      setLoading(true);
-
-      try {
-        const response = await fetch(
-          `http://localhost:3000/movies/${activeMovieId}`,
-        );
-
-        if (!response.ok) {
-          throw new Error("Gagal mengambil data movie");
-        }
-
-        const data: IResponseMovie = await response.json();
-
-        console.log("URL:", response.url);
-        console.log("Data dari API:", data);
-        console.log("Judul dari API:", data.title);
-
-        setMovie(data);
-      } catch (error) {
-        console.error(error);
-        setMovie(null);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchMovie();
-  }, [activeMovieId]);
-
-  if (!mainElement || loading || !movie) {
-    return null;
-  }
-
-  console.log("ID aktif:", activeMovieId);
-  console.log("Film aktif:", movie?.title);
+export function PopUpMovieTop({
+  movie,
+  movies,
+  onClose,
+  onMovieClick,
+}: IPopUpMovie) {
+  const recommendedMovies = movies.filter((item) =>
+    movie.recommendation_movie_1?.includes(Number(item.id)),
+  );
 
   return createPortal(
-    <div className="pop-up-overlay">
+    <div className="pop-up-overlay pop-up-movie-top">
       <div className="top-pop-up-container">
-        <img src={movie.banner_url ?? ""} alt={movie.title ?? ""} />
+        <img src={movie.banner_url} alt={movie.title} />
 
         <div className="top-pop-up">
           <button className="close" onClick={onClose}>
@@ -94,7 +55,6 @@ export function PopUpMovie(props: IPopUpMovie) {
             <div className="year">
               <span>{movie.year}</span>
               <span>{movie.duration}</span>
-
               <div className="age-recommendation">
                 <span>{movie.age}</span>
               </div>
@@ -115,7 +75,7 @@ export function PopUpMovie(props: IPopUpMovie) {
               <div className="span-pop-up">
                 <span>Genre</span>
               </div>
-              <p>: {movie.genre}</p>
+              <p>: {movie.genre?.join(", ") ?? "Belum tersedia"}</p>
             </div>
 
             <div className="description-right-list">
@@ -129,12 +89,24 @@ export function PopUpMovie(props: IPopUpMovie) {
 
         <div className="pop-up-recommendation">
           <span className="heading-4">Rekomendasi Film</span>
+          <div className="box-recommendation"></div>
           <div className="box-recommendation">
-            <Recommendation showPopup={false} onMovieSelect={setActiveMovieId} />
+            {recommendedMovies.map((recommendedMovie) => (
+              <div
+                className="box"
+                key={recommendedMovie.id}
+                onClick={() => onMovieClick(recommendedMovie)}
+              >
+                <img
+                  src={recommendedMovie.cover_url}
+                  alt={recommendedMovie.title}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </div>,
-    mainElement,
+    document.body,
   );
 }

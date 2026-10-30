@@ -16,6 +16,14 @@
   border-radius: 16px;
 }
 
+.pop-up-movie-top {
+  top: 400px;
+}
+
+.pop-up-movie-bottom {
+  top: 1600px;
+}
+
 .bottom-pop-up-series {
   display: flex;
   flex-direction: column;
