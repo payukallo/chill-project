@@ -1,5 +1,3 @@
-
-
 .bottom-pop-up-series {
   display: flex;
   flex-direction: column;
@@ -9,17 +7,25 @@
   gap: 40px;
 }
 
+.pop-up-series-top {
+  top: 500px;
+}
+
+.pop-up-series-bottom {
+  top: 1800px;
+}
+
+.pop-up-my-list {
+  top: 200px;
+}
+
 .pop-up-description-series {
   display: flex;
   justify-content: space-between;
   height: 176px;
 }
 
-
-
 @media (max-width: 580px), (max-height: 900px) {
-  
-
   .bottom-pop-up-series {
     width: 320px;
     height: 172px;
@@ -31,6 +37,15 @@
     height: 175px;
   }
 
+  .pop-up-series-top {
+    top: 300px;
+  }
 
+  .pop-up-series-bottom {
+    top: 900px;
+  }
 
+  .pop-up-my-list {
+    top: 150px;
+  }
 }

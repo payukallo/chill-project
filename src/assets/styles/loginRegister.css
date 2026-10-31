@@ -71,8 +71,10 @@
     gap: 3.47px;
   }
 
-  input,
-  button {
+  .register-container input,
+  .register-container button,
+  .login-container input,
+  .login-container button {
     padding: 8.09px 11.55px;
     border-radius: 12px;
     border: 0.58px solid var(--outline-border);

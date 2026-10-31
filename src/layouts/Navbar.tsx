@@ -30,10 +30,10 @@ export function Navbar() {
           </button>
           {isOpen && (
             <div className="dropdown-profile">
-              <a href="">
+              <NavLink to="/profile">
                 <img src={Profil} alt="" />
                 Profil saya
-              </a>
+              </NavLink>
               <a href="">
                 <img src={Star} alt="" />
                 Ubah Premium

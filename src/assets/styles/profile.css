@@ -1,0 +1,135 @@
+.profile-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-container {
+  display: flex;
+  height: 649px;
+  padding: 40px 80px;
+}
+
+.user-data {
+  display: flex;
+  flex-direction: column;
+  width: 642px;
+  height: 428px;
+  margin: 32px 0px;
+  gap: 32px;
+}
+
+.user-img {
+  display: flex;
+  align-items: center;
+  height: 140px;
+  gap: 24px;
+}
+
+.img-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upload-photo {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.user-img img {
+  width: 140px;
+  border-radius: 100%;
+}
+
+.subscription {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 310px;
+  top: 210px;
+}
+
+.input-profile {
+  display: flex;
+  width: 642px;
+  height: 64px;
+  gap: 8px;
+  border-radius: 8px;
+  border-width: 1px;
+  padding: 8px 16px;
+  background-color: var(--paper-background);
+}
+
+.input-profile input,
+.input-profile button {
+  background-color: transparent;
+  border: none;
+  width: 578px;
+  color: var(--text-light-primary);
+}
+
+.input-profile label {
+  color: var(--text-light-disabled);
+}
+
+.subscription-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 558px;
+  height: 193px;
+  padding: 24px;
+  gap: 20px;
+  border-radius: 12px;
+  background-color: var(--extra-background);
+}
+
+.subscription-box :first-child {
+  display: flex;
+  align-items: center;
+}
+
+.des-text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.navlink {
+    display: flex;
+    justify-content: end;
+}
+
+.navlink :first-child{
+width: 189px;
+height: 34px;
+justify-content: center;
+background-color: var(--body-background);
+border-radius: 48px;
+}
+
+#subscription-img {
+  width: 78px;
+  height: 78px;
+}
+
+.user-update-btn {
+background-color: var(--primary-color-400);
+border: none;
+}
+
+.my-list-profile {
+  display: flex;
+  flex-direction: column;
+  width: 1440px;
+  height: 367px;
+  padding: 0px 80px;
+  margin-bottom: 80px;
+  gap: 32px;
+  overflow: hidden;
+}
+
+.my-list-profile-tittle {
+  display: flex;
+  justify-content: space-between;
+}
