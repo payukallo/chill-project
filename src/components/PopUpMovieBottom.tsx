@@ -1,6 +1,7 @@
 import MuteVolume from "../assets/logo/mute-volume.png";
 import { createPortal } from "react-dom";
 import type { IResponseMovie } from "./type/IResponMovies";
+import { useMyList } from "../assets/context/MyListContext";
 
 interface IPopUpMovie {
   movie: IResponseMovie;
@@ -18,29 +19,33 @@ export function PopUpMovieBottom({
   const recommendedMovies = movies.filter((item) =>
     movie.recommendation_movie_1?.includes(Number(item.id)),
   );
+  const { toggleMyList, isInMyList } = useMyList();
+
+  const isAdded = movie.id != null && isInMyList(movie.id);
 
   return createPortal(
-    <div className="pop-up-overlay pop-up-movie-bottom">
+    <div className="pop-up-overlay pop-up-series-bottom">
       <div className="top-pop-up-container">
         <img src={movie.banner_url} alt={movie.title} />
-
         <div className="top-pop-up">
           <button className="close" onClick={onClose}>
             x
           </button>
-
           <div className="head-pop-up">
             <span className="pop-up-title heading-3">{movie.title}</span>
-
             <div className="pop-up-btn">
               <div className="pop-up-btn-left">
                 <button className="pop-up-button-left body-medium-bold">
                   Mulai
                 </button>
 
-                <button className="add-pop-up text-light-secondary">+</button>
+                <button
+                  className="add-pop-up text-light-secondary"
+                  onClick={() => toggleMyList(movie)}
+                >
+                  {isAdded ? "-" : "+"}
+                </button>
               </div>
-
               <button id="volume">
                 <img src={MuteVolume} alt="Volume" />
               </button>

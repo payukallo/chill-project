@@ -7,6 +7,7 @@ import MyListPage from "../pages/MyList";
 import SeriesPage from "../pages/Series";
 import MoviesPage from "../pages/Movies";
 import { ProtectedRoute } from "../components/ProtectedRoute";
+import ProfilePage from "../pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "/movies",
         Component: MoviesPage,
+      },
+      {
+        path: "/profile",
+        Component: ProfilePage,
       },
     ],
   },

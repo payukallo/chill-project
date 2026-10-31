@@ -8,7 +8,8 @@ import { LoginRegisBtn } from "../login-regis/LoginRegisBtn";
 
 import type React from "react";
 import { useNavigate } from "react-router";
-import { loginUser } from "../components/type/MovieApi";
+import { loginUser } from "../components/type/UsersApi";
+
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,7 +18,6 @@ const LoginPage = () => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
 
@@ -37,7 +37,8 @@ const LoginPage = () => {
       if (error instanceof Error) {
         alert(error.message);
       }
-    }
+      
+    }  
 
     navigate("/");
   }
@@ -47,17 +48,12 @@ const LoginPage = () => {
       <form onSubmit={handleLogin}>
         <div className="login-container">
           <Logo />
-
           <Title title={"Masuk"} subTitle={"Selamat datang kembali"} />
-
           <UserName autoComplete={"on"}/>
-
           <div className="password-container">
             <Password paraPassword={"Kata Sandi"} inputName="password" />
-
             <NewAccount />
           </div>
-
           <LoginRegisBtn upBtn={"Masuk"} downBtn={"Masuk dengan Google"} />
         </div>
       </form>

@@ -1525,10 +1525,267 @@
       "banner_url": "./src/assets/images/series-30-banner.jpg"
     }
   ],
+  "myList": [
+    {
+      "type": 1,
+      "title": "Gravity",
+      "cover_url": "./src/assets/images/movie-08.jpg",
+      "rating": "★ 4.2/5",
+      "top_rating_today": false,
+      "is_new_episode": false,
+      "is_top_10": false,
+      "year": 2013,
+      "duration": "1j 31m",
+      "is_premium": false,
+      "age": "13+",
+      "description": "Dua astronaut berjuang kembali ke Bumi setelah kecelakaan menghancurkan pesawat mereka.",
+      "cast": "Sandra Bullock, George Clooney",
+      "genre": [
+        "Drama",
+        "Thriller",
+        "Fiksi Ilmiah"
+      ],
+      "film_maker": "Alfonso Cuarón",
+      "banner_url": "./src/assets/images/movie-08-banner.jpg",
+      "recommendation_movie_1": [
+        5,
+        23,
+        6
+      ],
+      "myListId": "T6iHlPGq-Ik",
+      "movieId": "T6iHlPGq-Ik",
+      "id": "Ly4HV7th-Aw"
+    },
+    {
+      "type": 1,
+      "title": "The Matrix",
+      "cover_url": "./src/assets/images/movie-18.jpg",
+      "rating": "★ 4.7/5",
+      "top_rating_today": true,
+      "is_new_episode": false,
+      "is_top_10": true,
+      "year": 1999,
+      "duration": "2j 16m",
+      "is_premium": true,
+      "age": "18+",
+      "description": "Seorang peretas menemukan kenyataan mengejutkan tentang dunia yang ia tinggali.",
+      "cast": "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss",
+      "genre": [
+        "Aksi",
+        "Fiksi Ilmiah"
+      ],
+      "film_maker": "Lana Wachowski, Lilly Wachowski",
+      "banner_url": "./src/assets/images/movie-18-banner.jpg",
+      "recommendation_movie_1": [
+        19,
+        21,
+        22
+      ],
+      "movieId": "18",
+      "id": "-w2-VExWkH8"
+    },
+    {
+      "type": 1,
+      "title": "The Intouchables",
+      "cover_url": "./src/assets/images/movie-25.jpg",
+      "rating": "★ 4.6/5",
+      "top_rating_today": true,
+      "is_new_episode": false,
+      "is_top_10": false,
+      "year": 2011,
+      "duration": "1j 52m",
+      "is_premium": false,
+      "age": "13+",
+      "description": "Persahabatan tak terduga tumbuh antara seorang bangsawan dan pengasuhnya.",
+      "cast": "François Cluzet, Omar Sy, Anne Le Ny",
+      "genre": [
+        "Komedi",
+        "Drama"
+      ],
+      "film_maker": "Olivier Nakache, Éric Toledano",
+      "banner_url": "./src/assets/images/movie-25-banner.jpg",
+      "recommendation_movie_1": [
+        3,
+        4,
+        28
+      ],
+      "movieId": "25",
+      "id": "ochiktyKQLY"
+    },
+    {
+      "type": 1,
+      "title": "The Shawshank Redemption",
+      "cover_url": "./src/assets/images/movie-20.jpg",
+      "rating": "★ 4.9/5",
+      "top_rating_today": false,
+      "is_new_episode": false,
+      "is_top_10": true,
+      "year": 1994,
+      "duration": "2j 22m",
+      "is_premium": false,
+      "age": "18+",
+      "description": "Seorang bankir yang dipenjara membangun persahabatan dan mempertahankan harapan.",
+      "cast": "Tim Robbins, Morgan Freeman, Bob Gunton",
+      "genre": [
+        "Drama",
+        "Kriminal"
+      ],
+      "film_maker": "Frank Darabont",
+      "banner_url": "./src/assets/images/movie-20-banner.jpg",
+      "recommendation_movie_1": [
+        6,
+        1,
+        15
+      ],
+      "movieId": "20",
+      "id": "2m3Jndi0maY"
+    },
+    {
+      "type": 2,
+      "title": "The Mandalorian",
+      "cover_url": "./src/assets/images/series-09.jpg",
+      "rating": "★ 4.7/5",
+      "top_rating_today": true,
+      "is_new_episode": false,
+      "is_top_10": true,
+      "year": 2019,
+      "duration": "3 Season",
+      "is_premium": true,
+      "age": "13+",
+      "description": "Seorang pemburu bayaran Mandalorian melintasi galaksi bersama seorang anak misterius.",
+      "cast": "Pedro Pascal, Katee Sackhoff, Carl Weathers",
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Fiksi Ilmiah"
+      ],
+      "film_maker": "Jon Favreau",
+      "banner_url": "./src/assets/images/series-09-banner.jpg",
+      "movieId": "9",
+      "myListId": "GXshMklqXZs",
+      "id": "B1jZkAaGcMo"
+    },
+    {
+      "type": 1,
+      "title": "Doctor Strange",
+      "cover_url": "./src/assets/images/movie-12.jpg",
+      "rating": "★ 4.4/5",
+      "top_rating_today": false,
+      "is_new_episode": false,
+      "is_top_10": false,
+      "year": 2016,
+      "duration": "1j 55m",
+      "is_premium": true,
+      "age": "13+",
+      "description": "Seorang ahli bedah mempelajari ilmu mistis setelah kecelakaan mengubah hidupnya.",
+      "cast": "Benedict Cumberbatch, Chiwetel Ejiofor, Rachel McAdams",
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Fantasi"
+      ],
+      "film_maker": "Scott Derrickson",
+      "banner_url": "./src/assets/images/movie-12-banner.jpg",
+      "recommendation_movie_1": [
+        15,
+        11,
+        3
+      ],
+      "movieId": "12",
+      "id": "HTYVd7p6ocM"
+    },
+    {
+      "type": 1,
+      "title": "Life of Pi",
+      "cover_url": "./src/assets/images/movie-15.jpg",
+      "rating": "★ 4.3/5",
+      "top_rating_today": false,
+      "is_new_episode": false,
+      "is_top_10": false,
+      "year": 2012,
+      "duration": "2j 7m",
+      "is_premium": false,
+      "age": "13+",
+      "description": "Seorang remaja bertahan hidup di laut bersama seekor harimau setelah kapal karam.",
+      "cast": "Suraj Sharma, Irrfan Khan, Tabu",
+      "genre": [
+        "Petualangan",
+        "Drama",
+        "Fantasi"
+      ],
+      "film_maker": "Ang Lee",
+      "banner_url": "./src/assets/images/movie-15-banner.jpg",
+      "recommendation_movie_1": [
+        17,
+        6,
+        30
+      ],
+      "movieId": "15",
+      "id": "R434YZdTzEc"
+    },
+    {
+      "type": 1,
+      "title": "Your Name",
+      "cover_url": "./src/assets/images/movie-30.jpg",
+      "rating": "★ 4.7/5",
+      "top_rating_today": false,
+      "is_new_episode": false,
+      "is_top_10": true,
+      "year": 2016,
+      "duration": "1j 46m",
+      "is_premium": false,
+      "age": "13+",
+      "description": "Dua remaja yang tidak saling mengenal mengalami pertukaran tubuh secara misterius.",
+      "cast": "Ryunosuke Kamiki, Mone Kamishiraishi, Masami Nagasawa",
+      "genre": [
+        "Animasi",
+        "Drama",
+        "Romantis"
+      ],
+      "film_maker": "Makoto Shinkai",
+      "banner_url": "./src/assets/images/movie-30-banner.jpg",
+      "recommendation_movie_1": [
+        3,
+        14,
+        24
+      ],
+      "movieId": "30",
+      "id": "vG4Z6YX5axA"
+    },
+    {
+      "type": 1,
+      "title": "Guardians of the Galaxy",
+      "cover_url": "./src/assets/images/movie-14.jpg",
+      "rating": "★ 4.5/5",
+      "top_rating_today": false,
+      "is_new_episode": false,
+      "is_top_10": false,
+      "year": 2014,
+      "duration": "2j 1m",
+      "is_premium": false,
+      "age": "13+",
+      "description": "Sekelompok petualang luar angkasa bersatu untuk melindungi galaksi dari ancaman.",
+      "cast": "Chris Pratt, Zoe Saldaña, Dave Bautista",
+      "genre": [
+        "Aksi",
+        "Petualangan",
+        "Komedi"
+      ],
+      "film_maker": "James Gunn",
+      "banner_url": "./src/assets/images/movie-14-banner.jpg",
+      "recommendation_movie_1": [
+        13,
+        30,
+        26
+      ],
+      "movieId": "14",
+      "id": "qy9d_m660dg"
+    }
+  ],
   "users": [
     {
-      "username": "tommy",
-      "password": "hello",
+      "username": "tommy123",
+      "password": "hello123",
       "id": "wYmYBRuzVCw"
     }
   ],

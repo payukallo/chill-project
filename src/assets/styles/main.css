@@ -2,7 +2,6 @@
 @import url("./token.css");
 @import url("./popUpMovie.css");
 
-
 *,
 html,
 body {
@@ -25,7 +24,6 @@ body {
 }
 
 /* Heading */
-
 
 button:hover {
   cursor: pointer;
@@ -223,6 +221,17 @@ button:hover {
 }
 
 /* Button */
+
+.btn-unstyle {
+  width: 102;
+  height: 42;
+  gap: 8px;
+  padding-top: 10px;
+  padding-right: 26px;
+  padding-bottom: 10px;
+  padding-left: 26px;
+  border-radius: 48px;
+}
 
 .btn-primary-contained {
   width: fit-content;

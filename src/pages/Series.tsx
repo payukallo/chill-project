@@ -9,8 +9,6 @@ import { NewRelease } from "../components/NewRelease";
 import { ContinueMovie } from "../components/Continue";
 import { TrendingMovies } from "../components/Trending";
 import { TopRatingMovies } from "../components/TopRating";
-import { PopUpMovieTop } from "../components/PopUpMovieTop";
-import { PopUpMovieBottom } from "../components/PopUpMovieBottom";
 import { MoviesFromChill } from "../components/FromChill ";
 import { PopUpSeriesBottom } from "../components/PopUpSeriesBottom";
 import { PopUpSeriesTop } from "../components/PopUpSeriesTop";
@@ -29,15 +27,17 @@ export default function SeriesPage() {
     useState<IResponseMovie | null>(null);
 
   const handleOpenPopupTop = (movie: IResponseMovie) => {
+    setSelectedMovieBottom(null);
     setSelectedMovieTop(movie);
+  };
+
+  const handleOpenPopupBottom = (movie: IResponseMovie) => {
+    setSelectedMovieTop(null);
+    setSelectedMovieBottom(movie);
   };
 
   const handleClosePopupTop = () => {
     setSelectedMovieTop(null);
-  };
-
-  const handleOpenPopupBottom = (movie: IResponseMovie) => {
-    setSelectedMovieBottom(movie);
   };
 
   const handleClosePopupBottom = () => {

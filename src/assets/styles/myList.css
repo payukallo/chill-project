@@ -2,11 +2,17 @@
 @import url("./footer.css");
 @import url("./content.css");
 
+
+.profile-container input {
+  background-color: none;
+}
+
+
 .my-list-page {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   width: 1440px;
   justify-content: space-between;
 }
@@ -15,8 +21,9 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 700px;
+  min-height: 700px;
   padding: 0px 80px;
+  padding-bottom: 80px;
   gap: 32px;
 }
 
@@ -39,6 +46,10 @@
   position: relative;
 }
 
+.list-box :hover {
+  cursor: pointer;
+}
+
 .list-box img {
   width: 100%;
   height: 100%;
@@ -56,7 +67,7 @@
   }
 
   .my-list {
-    height: 668px;
+    min-height: 468px;
     width: 320px;
     padding: 0px 0px;
     gap: 16px;

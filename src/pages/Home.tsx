@@ -26,20 +26,22 @@ export default function HomePage() {
     useState<IResponseMovie | null>(null);
 
   const handleOpenPopupTop = (movie: IResponseMovie) => {
-    setSelectedMovieTop(movie);
-  };
+  setSelectedMovieBottom(null);
+  setSelectedMovieTop(movie);
+};
 
-  const handleClosePopupTop = () => {
-    setSelectedMovieTop(null);
-  };
+const handleOpenPopupBottom = (movie: IResponseMovie) => {
+  setSelectedMovieTop(null);
+  setSelectedMovieBottom(movie);
+};
 
-  const handleOpenPopupBottom = (movie: IResponseMovie) => {
-    setSelectedMovieBottom(movie);
-  };
+const handleClosePopupTop = () => {
+  setSelectedMovieTop(null);
+};
 
-  const handleClosePopupBottom = () => {
-    setSelectedMovieBottom(null);
-  };
+const handleClosePopupBottom = () => {
+  setSelectedMovieBottom(null);
+};
 
   useEffect(() => {
     const getData = async () => {
