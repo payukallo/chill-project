@@ -3,27 +3,20 @@
 @import url("./content.css");
 
 
-.profile-container input {
-  background-color: none;
-}
-
-
 .my-list-page {
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 1200px;
   width: 1440px;
-  justify-content: space-between;
 }
 
 .my-list {
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 700px;
-  padding: 0px 80px;
-  padding-bottom: 80px;
+  min-height: 830px;
+  padding: 80px;
   gap: 32px;
 }
 
@@ -63,11 +56,11 @@
 @media (max-width: 580px), (max-height: 900px) {
   .my-list-page {
     width: 360px;
-    height: fit-content;
+    min-height: 100vh;
   }
 
   .my-list {
-    min-height: 468px;
+    min-height: 308px;
     width: 320px;
     padding: 0px 0px;
     gap: 16px;

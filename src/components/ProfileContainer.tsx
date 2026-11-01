@@ -1,13 +1,11 @@
-import type { RefObject } from "react";
+import type { ChangeEvent, RefObject } from "react";
 import { NavLink } from "react-router";
-
 import WarningImg from "../assets/logo/warning-icon.png";
-import ProfileImg from "../assets/logo/profile.png";
 
 interface IProfileContainer {
   username: string;
   password: string;
-
+  profileImage: string;
   editUsername: boolean;
   editPassword: boolean;
   isSaving: boolean;
@@ -15,9 +13,9 @@ interface IProfileContainer {
   usernameRef: RefObject<HTMLInputElement | null>;
   passwordRef: RefObject<HTMLInputElement | null>;
 
+  onPhotoChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onUsernameChange: (value: string) => void;
   onPasswordChange: (value: string) => void;
-
   onEditUsername: () => void;
   onEditPassword: () => void;
   onSave: () => void;
@@ -31,6 +29,8 @@ export function ProfileContainer({
   isSaving,
   usernameRef,
   passwordRef,
+  profileImage,
+  onPhotoChange,
   onUsernameChange,
   onPasswordChange,
   onEditUsername,
@@ -39,14 +39,13 @@ export function ProfileContainer({
 }: IProfileContainer) {
   return (
     <div className="profile-container">
-      {/* SUBSCRIPTION */}
       <div className="subscription">
         <div className="subscription-box">
           <div>
             <img src={WarningImg} alt="" id="subscription-img" />
+
             <div className="des-text">
-              <span className="heading-4">
-                Saat ini anda belum berlangganan
+              <span className="heading-4 span-subscription">
               </span>
               <p className="body-large-regular">
                 Dapatkan Akses Tak Terbatas ke Ribuan Film dan Series Kesukaan
@@ -54,6 +53,7 @@ export function ProfileContainer({
               </p>
             </div>
           </div>
+
           <div className="navlink">
             <NavLink to="/" className="body-medium-bold">
               Mulai Berlangganan
@@ -64,9 +64,11 @@ export function ProfileContainer({
 
       <div className="user-update">
         <span className="heading-3">Profil Saya</span>
+
         <div className="user-data body-medium-semiBold">
           <div className="user-img">
-            <img src={ProfileImg} alt="Foto profil" />
+            <img src={profileImage} alt="Foto profil" />
+
             <div className="img-input">
               <label
                 htmlFor="upload-photo"
@@ -74,14 +76,24 @@ export function ProfileContainer({
               >
                 Ubah Foto
               </label>
-              <input type="file" accept="image/*" id="upload-photo" hidden />
+
+              <input
+                type="file"
+                accept="image/*"
+                id="upload-photo"
+                onChange={onPhotoChange}
+                hidden
+              />
+
               <span className="body-small-regular">&#128196; Maksimal 2MB</span>
             </div>
           </div>
 
+          {/* Username */}
           <div className="input-profile">
             <div>
               <label htmlFor="username">Nama Pengguna</label>
+
               <input
                 ref={usernameRef}
                 type="text"
@@ -92,19 +104,6 @@ export function ProfileContainer({
                 onChange={(e) => onUsernameChange(e.target.value)}
               />
             </div>
-            <button
-              type="button"
-              onClick={onEditUsername}
-              title="Edit nama pengguna"
-            >
-              &#128393;
-            </button>
-          </div>
-          <div className="input-profile">
-            <div>
-              <label htmlFor="username">Email</label>
-              <input type="text" name="email" id="email" readOnly />
-            </div>
 
             <button
               type="button"
@@ -114,9 +113,20 @@ export function ProfileContainer({
               &#128393;
             </button>
           </div>
+
+          {/* Email */}
           <div className="input-profile">
             <div>
-              <label htmlFor="password">Kata Sandi</label>
+              <label htmlFor="email">Email</label>
+
+              <input type="email" name="email" id="email" readOnly />
+            </div>
+          </div>
+
+          {/* Password */}
+          <div className="input-profile">
+            <div>
+              <label htmlFor="password">Kata Sandi Baru</label>
 
               <input
                 ref={passwordRef}
@@ -124,14 +134,16 @@ export function ProfileContainer({
                 name="password"
                 id="password"
                 value={password}
+                placeholder="Masukkan kata sandi baru"
                 readOnly={!editPassword}
                 onChange={(e) => onPasswordChange(e.target.value)}
               />
             </div>
+
             <button
               type="button"
               onClick={onEditPassword}
-              title="Edit kata sandi"
+              title="Ubah kata sandi"
             >
               &#128393;
             </button>

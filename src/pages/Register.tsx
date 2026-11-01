@@ -1,83 +1,101 @@
-
+import { useNavigate } from "react-router";
 import type { FormEvent } from "react";
 import "../assets/styles/register.css";
+import { supabase } from "../components/utils/supabase";
+import { usernameToAuthEmail } from "../components/utils/authUsername";
 import { Logo } from "../login-regis/Logo";
 import { Title } from "../login-regis/Title";
-import { UserName } from "../login-regis/UserName";
 import { Password } from "../login-regis/Password";
-import { HasAccount } from "../login-regis/HasAccount";
+import { UserName } from "../login-regis/UserName";
 import { LoginRegisBtn } from "../login-regis/LoginRegisBtn";
-import { checkUsername, createUser } from "../components/type/UsersApi";
+import { HasAccount } from "../login-regis/HasAccount";
 
-const RegisterPage = () => {
+export default function RegisterPage() {
+  const navigate = useNavigate();
+
   async function handleRegister(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const username = (formData.get("username") as string).trim();
-    const password = formData.get("password") as string;
-    const confirmPassword = formData.get("confirmPassword") as string;
+    const username = String(formData.get("username") ?? "")
+      .trim()
+      .toLowerCase();
 
-    if (!username) {
-      alert("Username tidak boleh kosong!");
+    const password = String(formData.get("password") ?? "");
+    const confirmPassword = String(formData.get("confirmPassword") ?? "");
+
+    // Validasi password
+    if (!username || !password || !confirmPassword) {
+      alert("Semua kolom wajib diisi!");
       return;
     }
 
     if (password !== confirmPassword) {
-      alert("Konfirmasi password tidak cocok!");
+      alert("Konfirmasi kata sandi tidak cocok!");
+      return;
+    }
+
+    if (password.length < 8) {
+      alert("Kata sandi minimal 8 karakter!");
       return;
     }
 
     try {
-      // 1. Periksa username terlebih dahulu
-      const isUsernameTaken = await checkUsername(username);
+      // Mengubah username menjadi email internal
+      const authEmail = usernameToAuthEmail(username);
 
-      // 2. Jika sudah digunakan, hentikan proses
-      if (isUsernameTaken) {
-        alert("Username sudah terdaftar!");
-        return;
-      }
-
-      // 3. Jika belum digunakan, buat user baru
-      const newUser = await createUser({
-        username,
+      // Registrasi Supabase
+      const { data, error } = await supabase.auth.signUp({
+        email: authEmail,
         password,
+        options: {
+          data: {
+            username,
+          },
+        },
       });
 
-      console.log("User berhasil dibuat:", newUser);
+      if (error) throw error;
+
+      if (!data.user) {
+        throw new Error("Registrasi gagal. Silakan coba kembali.");
+      }
+
       alert("Registrasi berhasil!");
+
+      // Jika session tersedia, langsung masuk ke halaman utama
+      if (data.session) {
+        navigate("/");
+      } else {
+        navigate("/login");
+      }
     } catch (error) {
-      console.error(error);
-      alert("Registrasi gagal!");
+      console.error("Registrasi gagal:", error);
+
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert("Terjadi kesalahan saat registrasi.");
+      }
     }
   }
 
   return (
     <main className="register-page">
-      <form onSubmit={handleRegister}>
-        <div className="register-container">
-          <Logo />
-          <Title title={"Daftar"} subTitle={"Selamat datang!"} />
-          <UserName autoComplete={"off"}/>
+      <form className="register-container" onSubmit={handleRegister}>
+        <Logo />
+        <Title title={"Daftar"} subTitle={"Selamat datang!"} />
+        <UserName autoComplete={"username"} />
+        <Password paraPassword={"Kata Sandi"} inputName="password" />
+        <div className="password-container">
           <Password
-            paraPassword={"Kata Sandi"}
-            inputName="password"
+            paraPassword={"Konfirmasi Kata Sandi"}
+            inputName="confirmPassword"
           />
-          <div className="password-container">
-            <Password
-              paraPassword={"Konfirmasi Kata Sandi"}
-              inputName="confirmPassword"
-            />
-            <HasAccount />
-          </div>
-          <LoginRegisBtn
-            upBtn={"Daftar"}
-            downBtn={"Daftar dengan Google"}
-          />
+          <HasAccount />
         </div>
+        <LoginRegisBtn upBtn={"Daftar"} downBtn={"Daftar dengan Google"} />
       </form>
     </main>
   );
-};
-
-export default RegisterPage;
+}

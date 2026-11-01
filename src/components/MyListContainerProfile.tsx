@@ -1,8 +1,7 @@
-import { useMyList } from "../assets/context/MyListContext";
-import type { IResponseMovie } from "./type/IResponMovies";
+import { IMyListMovie, useMyList } from "./context/MyListContext";
 
 interface IMyListContainer {
-  onMovieClick: (movie: IResponseMovie) => void;
+  onMovieClick: (movie: IMyListMovie) => void;
 }
 
 export function MyListContainerProfile({ onMovieClick }: IMyListContainer) {

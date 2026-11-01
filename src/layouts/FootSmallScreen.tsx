@@ -1,4 +1,4 @@
-import { Dropdown } from "../assets/utils/dropdown";
+import { Dropdown } from "../components/utils/dropdown";
 
 export function FootSmallGenre() {
   const { isOpen, setIsOpen, dropdownRef } = Dropdown();

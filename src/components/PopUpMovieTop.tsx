@@ -1,7 +1,7 @@
 import MuteVolume from "../assets/logo/mute-volume.png";
 import { createPortal } from "react-dom";
 import type { IResponseMovie } from "./type/IResponMovies";
-import { useMyList } from "../assets/context/MyListContext";
+import { useMyList } from "./context/MyListContext";
 
 interface IPopUpMovie {
   movie: IResponseMovie;

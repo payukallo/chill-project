@@ -1,12 +1,14 @@
 .profile-page {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .profile-container {
   display: flex;
   height: 649px;
   padding: 40px 80px;
+  position: relative;
 }
 
 .user-data {
@@ -31,22 +33,28 @@
   gap: 8px;
 }
 
+.img-input label {
+  cursor: pointer;
+}
+
 .upload-photo {
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 
 .user-img img {
   width: 140px;
-  border-radius: 100%;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .subscription {
   display: flex;
   flex-direction: column;
   position: absolute;
-  right: 310px;
-  top: 210px;
+  right: 80px;
+  top: 110px;
 }
 
 .input-profile {
@@ -66,6 +74,10 @@
   border: none;
   width: 578px;
   color: var(--text-light-primary);
+}
+
+.input-profile button {
+  width: 20px;
 }
 
 .input-profile label {
@@ -89,23 +101,27 @@
   align-items: center;
 }
 
+.span-subscription::before {
+  content: "Saat ini anda belum berlangganan";
+}
+
 .des-text {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .navlink {
-    display: flex;
-    justify-content: end;
+  display: flex;
+  justify-content: end;
 }
 
-.navlink :first-child{
-width: 189px;
-height: 34px;
-justify-content: center;
-background-color: var(--body-background);
-border-radius: 48px;
+.navlink :first-child {
+  width: 189px;
+  height: 34px;
+  justify-content: center;
+  background-color: var(--body-background);
+  border-radius: 48px;
 }
 
 #subscription-img {
@@ -114,8 +130,8 @@ border-radius: 48px;
 }
 
 .user-update-btn {
-background-color: var(--primary-color-400);
-border: none;
+  background-color: var(--primary-color-400);
+  border: none;
 }
 
 .my-list-profile {
@@ -132,4 +148,128 @@ border: none;
 .my-list-profile-tittle {
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 580px), (max-height: 900px) {
+  .profile-page .heading-3 {
+    font-size: 20px;
+  }
+
+  .profile-page .heading-4 {
+    font-size: 18px;
+  }
+
+  .profile-page .body-large-regular {
+    font-size: 14px;
+  }
+
+  .profile-page .body-medium-bold {
+    font-size: 12px;
+  }
+
+  .profile-page {
+    align-items: center;
+  }
+
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    height: 633px;
+    width: 320px;
+    padding: 0;
+    gap: 20px;
+    position: static;
+  }
+
+  .user-data {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    height: 332px;
+    margin: 0px;
+    gap: 24px;
+  }
+
+  .user-img {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    gap: 24px;
+  }
+
+  .img-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .user-img img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .subscription {
+    display: flex;
+    flex-direction: column;
+    position: static;
+  }
+
+  .span-subscription::before {
+    content: "Langganan";
+  }
+
+  .input-profile {
+    display: flex;
+    width: 100%;
+    height: 56px;
+  }
+
+  .input-profile input {
+    width: 100%;
+  }
+
+  .subscription-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 191px;
+  }
+
+  .navlink :first-child {
+    width: 189px;
+    height: 34px;
+    justify-content: center;
+    background-color: var(--body-background);
+    border-radius: 48px;
+  }
+
+  label.upload-photo {
+  width: 91px;
+  height: 36px;
+  font-size: 14px;
+  text-align: center;
+  padding: 0;
+  line-height: 2.5;
+}
+
+  .my-list-profile {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    height: 184px;
+    padding: 0;
+    margin-bottom: 40px;
+    gap: 32px;
+    overflow: hidden;
+  }
+
+  .my-list-profile-tittle {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .navlink-profile {
+    display: none;
+  }
 }
