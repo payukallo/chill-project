@@ -72,7 +72,7 @@ export function ProfileContainer({
             <div className="img-input">
               <label
                 htmlFor="upload-photo"
-                className="upload-photo btn-unstyle"
+                className="upload-photo"
               >
                 Ubah Foto
               </label>
