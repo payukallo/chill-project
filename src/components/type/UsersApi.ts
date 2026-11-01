@@ -15,7 +15,6 @@ export async function createUser(user: IUser): Promise<IUser> {
   return response.json();
 }
 
-
 export interface IUser {
   id?: string;
   username: string;

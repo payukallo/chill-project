@@ -31,6 +31,14 @@ a {
 .profile img {
   border-radius: 20px;
   width: 40px;
+  border-radius: 50%;
+}
+
+img.navbar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .btn-icon {
@@ -62,14 +70,6 @@ a {
   background-color: var(--page-header-background);
   border-radius: 4px;
 }
-
-/* .dropdown-profile button{
-  display: flex;
-  background-color: transparent;
-  border: none;
-  justify-content: center;
-  padding: 8px 12px;
-} */
 
 .dropdown-profile a,
 .dropdown-profile button {
@@ -131,6 +131,11 @@ a {
   .profile img {
     width: 20px;
   }
+
+  img.navbar-img {
+  width: 20px;
+  height: 20px;
+}
 
   .dropdown-profile a img,
   .dropdown-profile button img {

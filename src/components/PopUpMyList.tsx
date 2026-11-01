@@ -1,13 +1,11 @@
 import MuteVolume from "../assets/logo/mute-volume.png";
 import { createPortal } from "react-dom";
-import type { IResponseMovie } from "./type/IResponMovies";
-import { useMyList } from "../assets/context/MyListContext";
+import { IMyListMovie, useMyList } from "./context/MyListContext";
 
 interface IPopUpMovie {
-  movie: IResponseMovie;
+  movie: IMyListMovie;
   onClose: () => void;
 }
-
 export function PopUpMyList({ movie, onClose }: IPopUpMovie) {
   const { toggleMyList, isInMyList } = useMyList();
 

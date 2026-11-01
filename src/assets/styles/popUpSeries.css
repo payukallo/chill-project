@@ -19,6 +19,10 @@
   top: 200px;
 }
 
+.pop-up-my-list-profile {
+  top: 200px;
+}
+
 .pop-up-description-series {
   display: flex;
   justify-content: space-between;
@@ -46,6 +50,10 @@
   }
 
   .pop-up-my-list {
-    top: 150px;
+    top: 250px;
+  }
+
+  .pop-up-my-list-profile {
+    top: 700px;
   }
 }

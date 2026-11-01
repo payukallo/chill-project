@@ -1,39 +1,15 @@
 import "../assets/styles/myList.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Navbar } from "../layouts/Navbar.jsx";
 import { Footer } from "../layouts/Footer.jsx";
-import type { IResponseMovie } from "../components/type/IResponMovies.js";
 import { PopUpMyList } from "../components/PopUpMyList.js";
 import { MyListContainer } from "../components/MyListContainer";
+import { IMyListMovie } from "../components/context/MyListContext.js";
 
 const MyListPage = () => {
-  const [movies, setMovies] = useState<IResponseMovie[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<IMyListMovie | null>(null);
 
-  const [selectedMovie, setSelectedMovie] = useState<IResponseMovie | null>(
-    null,
-  );
-
-  useEffect(() => {
-    async function fetchMovies() {
-      try {
-        const response = await fetch("VITE_API_MOVIES_URL");
-
-        if (!response.ok) {
-          throw new Error("Gagal mengambil data movies");
-        }
-
-        const data: IResponseMovie[] = await response.json();
-
-        setMovies(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchMovies();
-  }, []);
-
-  function handleOpenPopup(movie: IResponseMovie) {
+  function handleOpenPopup(movie: IMyListMovie) {
     setSelectedMovie(movie);
   }
 

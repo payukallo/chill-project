@@ -258,7 +258,7 @@ button.close {
 }
 
 .pop-up-movie-bottom {
-  top: 800px;
+  top: 650px;
 }
 
   .bottom-pop-up-series {
@@ -299,7 +299,7 @@ button.close {
   }
 
   .head-pop-up {
-    height: 55.3px;
+    min-height: 55.3px;
     gap: 8.3px;
     margin: 16.5px 27.5px;
   }

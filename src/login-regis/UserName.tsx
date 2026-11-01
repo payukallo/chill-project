@@ -2,12 +2,11 @@ interface IUserName {
   autoComplete: string;
 }
 
-export function UserName(props:IUserName) {
-  const {autoComplete} = props
+export function UserName({ autoComplete }: IUserName) {
   return (
     <div className="user-name body-large-medium">
-      <label htmlFor="userName">Username</label>
-      <input 
+      <label htmlFor="username">Username</label>
+      <input
         className="body-medium-regular"
         id="username"
         type="text"

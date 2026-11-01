@@ -1,29 +1,32 @@
+
 import type { IResponseMovie } from "../type/IResponMovies";
+import { supabase } from "../utils/supabase";
 
-
-const API_URL_MOVIES = import.meta.env.VITE_API_MOVIES_URL;
+interface IMovieData {
+  id: string;
+  data: IResponseMovie;
+}
 
 export async function getMovies(): Promise<IResponseMovie[]> {
-  const response = await fetch(API_URL_MOVIES, {
-    method: "GET",
-  });
-  if (!response.ok) {
-    throw new Error("Gagal mengambil data film");
+  const { data, error } = await supabase
+    .from("movies")
+    .select("id, data");
+
+  if (error) {
+    throw new Error(`Gagal mengambil data film: ${error.message}`);
   }
-  return response.json();
+
+  return (data as IMovieData[]).map((item) => item.data);
 }
-
-
-const API_URL_SERIES = import.meta.env.VITE_API_SERIES_URL;
 
 export async function getSeries(): Promise<IResponseMovie[]> {
-  const response = await fetch(API_URL_SERIES, {
-    method: "GET",
-  });
-  if (!response.ok) {
-    throw new Error("Gagal mengambil data series");
+  const { data, error } = await supabase
+    .from("series")
+    .select("id, data");
+
+  if (error) {
+    throw new Error(`Gagal mengambil data series: ${error.message}`);
   }
-  return response.json();
+
+  return (data as IMovieData[]).map((item) => item.data);
 }
-
-

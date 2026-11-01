@@ -3,14 +3,14 @@ interface IPassword {
   inputName: string;
 }
 
-
 export function Password({ paraPassword, inputName }: IPassword) {
   return (
     <div className="password body-large-medium">
-      <label >{paraPassword}</label>
+      <label htmlFor={inputName}>{paraPassword}</label>
+
       <input
         className="body-medium-regular"
-        id="password"
+        id={inputName}
         type="password"
         name={inputName}
         placeholder={paraPassword}
