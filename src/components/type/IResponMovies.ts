@@ -18,4 +18,13 @@ export interface IResponseMovie {
   top_rating_today?: boolean;
   recommendation_movie_1?: number[];
   on_click?: () => void;
+  episodes?: IEpisode[];
+}
+
+export interface IEpisode {
+  episode_number: number;
+  title: string;
+  duration: string;
+  thumbnail: string;
+  description: string;
 }

@@ -1,16 +1,18 @@
 import MuteVolume from "../assets/logo/mute-volume.png";
 import { createPortal } from "react-dom";
 import { IMyListMovie, useMyList } from "./context/MyListContext";
+import type { IResponseMovie } from "./type/IResponMovies";
 
 interface IPopUpMovie {
   movie: IMyListMovie;
+  movies: IResponseMovie[];
   onClose: () => void;
 }
-export function PopUpMyList({ movie, onClose }: IPopUpMovie) {
+
+export function PopUpMyList({ movie, movies, onClose }: IPopUpMovie) {
   const { toggleMyList, isInMyList } = useMyList();
-
   const isAdded = movie.id != null && isInMyList(movie.id);
-
+  
   return createPortal(
     <div className="pop-up-overlay pop-up-my-list">
       <div className="top-pop-up-container">
