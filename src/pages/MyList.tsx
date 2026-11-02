@@ -1,4 +1,5 @@
 import "../assets/styles/myList.css";
+import type { IResponseMovie } from "../components/type/IResponMovies";
 import { useState } from "react";
 import { Navbar } from "../layouts/Navbar.jsx";
 import { Footer } from "../layouts/Footer.jsx";
@@ -16,6 +17,7 @@ const MyListPage = () => {
   function handleClosePopup() {
     setSelectedMovie(null);
   }
+  const [allMovies, setAllMovies] = useState<IResponseMovie[]>([]);
 
   return (
     <main className="my-list-page box-pop-up-content">
@@ -25,7 +27,11 @@ const MyListPage = () => {
         <MyListContainer onMovieClick={handleOpenPopup} />
       </div>
       {selectedMovie && (
-        <PopUpMyList movie={selectedMovie} onClose={handleClosePopup} />
+        <PopUpMyList
+          movie={selectedMovie}
+          movies={allMovies}
+          onClose={handleClosePopup}
+        />
       )}
       <Footer />
     </main>
