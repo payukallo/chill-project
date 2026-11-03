@@ -15,6 +15,45 @@ export function ProtectedRoute() {
         setIsLogin(false);
         return;
       }
+      
+      setIsLogin(!!data.session);
+    }
+
+    checkSession();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsLogin(!!session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  if (isLogin === null) {
+    return <p>Memeriksa autentikasi...</p>;
+  }
+
+  if (!isLogin) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <Outlet />;
+}
+
+// Mencegah pengguna yang sudah login membuka Login dan Register
+export function PublicRoute() {
+  const [isLogin, setIsLogin] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    async function checkSession() {
+      const { data, error } = await supabase.auth.getSession();
+
+      if (error) {
+        console.error(error);
+        setIsLogin(false);
+        return;
+      }
 
       setIsLogin(!!data.session);
     }
@@ -30,9 +69,13 @@ export function ProtectedRoute() {
     return () => subscription.unsubscribe();
   }, []);
 
-  if (isLogin === null) return <p>Memeriksa autentikasi...</p>;
+  if (isLogin === null) {
+    return <p>Memeriksa autentikasi...</p>;
+  }
 
-  if (!isLogin) return <Navigate to="/login" replace />;
+  if (isLogin) {
+    return <Navigate to="/" replace />;
+  }
 
   return <Outlet />;
 }

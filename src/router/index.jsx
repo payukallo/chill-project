@@ -1,23 +1,31 @@
 import { createBrowserRouter } from "react-router";
-
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
 import HomePage from "../pages/Home";
 import MyListPage from "../pages/MyList";
 import SeriesPage from "../pages/Series";
 import MoviesPage from "../pages/Movies";
-import { ProtectedRoute } from "../components/ProtectedRoute";
 import ProfilePage from "../pages/Profile";
+import WatchMoviePage from "../pages/WatchMovie";
+import { ProtectedRoute, PublicRoute } from "../components/ProtectedRoute";
 
 export const router = createBrowserRouter([
+  // Halaman khusus pengguna yang belum login
   {
-    path: "/login",
-    Component: LoginPage,
+    Component: PublicRoute,
+    children: [
+      {
+        path: "/login",
+        Component: LoginPage,
+      },
+      {
+        path: "/register",
+        Component: RegisterPage,
+      },
+    ],
   },
-  {
-    path: "/register",
-    Component: RegisterPage,
-  },
+
+  // Halaman khusus pengguna yang sudah login
   {
     Component: ProtectedRoute,
     children: [
@@ -40,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: "/profile",
         Component: ProfilePage,
+      },
+      {
+        path: "/watch/:id",
+        Component: WatchMoviePage,
       },
     ],
   },

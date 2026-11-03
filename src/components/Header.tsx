@@ -1,33 +1,44 @@
 import { DropDownHeader } from "./Genre";
 import LogoVolume from "../assets/logo/mute-volume.png";
-import { IResponseMovie } from "./type/IResponMovies";
+import type { IResponseMovie } from "./type/IResponMovies";
 import LogoInfo from "../assets/logo/!.png";
+
 interface IHeader {
+  movie?: IResponseMovie;
   movies: IResponseMovie[];
-   on_click: (movie: IResponseMovie) => void;
+  on_click: (movie: IResponseMovie) => void;
 }
 
 export function Header({ movies, on_click }: IHeader) {
+  function handleWatchMovie(movie: IResponseMovie) {
+    window.open(`/watch/${movie.id}`, "_blank", "noopener,noreferrer");
+  }
+
   return (
     <header>
-      {movies.map((movie) => (
+      {movies.map((item) => (
         <>
-          <img src={movie.banner_url} alt={movie.title} />
+          <img src={item.banner_url} alt={item.title} />
           <div className="header">
             <DropDownHeader />
             <div className="head-bottom">
               <div className="head-text">
-                <h1 className="heading-1 head-title">{movie.title}</h1>
+                <h1 className="heading-1 head-title">{item.title}</h1>
                 <p className="body-large-medium head-description">
-                  {movie.description}
+                  {item.description}
                 </p>
               </div>
               <div className="head-btn">
                 <div className="btn-left">
-                  <button className="btn-primary-shadow">Mulai</button>
+                  <button
+                    className="btn-primary-shadow"
+                    onClick={() => handleWatchMovie(item)}
+                  >
+                    Mulai
+                  </button>
                   <button
                     className="btn-secondary-contained info"
-                     onClick={() => on_click(movie)}
+                    onClick={() => on_click(item)}
                   >
                     <img src={LogoInfo} alt="" />
                     Selengkapnya

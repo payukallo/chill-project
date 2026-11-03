@@ -3,7 +3,7 @@ export function usernameToAuthEmail(username: string) {
 
   if (!/^[a-z0-9_]{3,20}$/.test(normalizedUsername)) {
     throw new Error(
-      "Username harus 3-20 karakter dan hanya boleh menggunakan huruf, angka, atau underscore."
+      "Username harus 3-20 karakter dan hanya boleh menggunakan huruf, angka, atau underscore.",
     );
   }
 

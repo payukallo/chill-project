@@ -43,17 +43,14 @@ export function ProfileContainer({
         <div className="subscription-box">
           <div>
             <img src={WarningImg} alt="" id="subscription-img" />
-
             <div className="des-text">
-              <span className="heading-4 span-subscription">
-              </span>
+              <span className="heading-4 span-subscription"></span>
               <p className="body-large-regular">
                 Dapatkan Akses Tak Terbatas ke Ribuan Film dan Series Kesukaan
                 Kamu!
               </p>
             </div>
           </div>
-
           <div className="navlink">
             <NavLink to="/" className="body-medium-bold">
               Mulai Berlangganan
@@ -61,22 +58,15 @@ export function ProfileContainer({
           </div>
         </div>
       </div>
-
       <div className="user-update">
         <span className="heading-3">Profil Saya</span>
-
         <div className="user-data body-medium-semiBold">
           <div className="user-img">
             <img src={profileImage} alt="Foto profil" />
-
             <div className="img-input">
-              <label
-                htmlFor="upload-photo"
-                className="upload-photo"
-              >
+              <label htmlFor="upload-photo" className="upload-photo">
                 Ubah Foto
               </label>
-
               <input
                 type="file"
                 accept="image/*"
@@ -84,7 +74,6 @@ export function ProfileContainer({
                 onChange={onPhotoChange}
                 hidden
               />
-
               <span className="body-small-regular">&#128196; Maksimal 2MB</span>
             </div>
           </div>
@@ -93,7 +82,6 @@ export function ProfileContainer({
           <div className="input-profile">
             <div>
               <label htmlFor="username">Nama Pengguna</label>
-
               <input
                 ref={usernameRef}
                 type="text"
@@ -104,7 +92,6 @@ export function ProfileContainer({
                 onChange={(e) => onUsernameChange(e.target.value)}
               />
             </div>
-
             <button
               type="button"
               onClick={onEditUsername}
@@ -118,7 +105,6 @@ export function ProfileContainer({
           <div className="input-profile">
             <div>
               <label htmlFor="email">Email</label>
-
               <input type="email" name="email" id="email" readOnly />
             </div>
           </div>
@@ -127,7 +113,6 @@ export function ProfileContainer({
           <div className="input-profile">
             <div>
               <label htmlFor="password">Kata Sandi Baru</label>
-
               <input
                 ref={passwordRef}
                 type="password"
@@ -139,7 +124,6 @@ export function ProfileContainer({
                 onChange={(e) => onPasswordChange(e.target.value)}
               />
             </div>
-
             <button
               type="button"
               onClick={onEditPassword}
@@ -149,7 +133,6 @@ export function ProfileContainer({
             </button>
           </div>
         </div>
-
         <button
           className="user-update-btn btn-unstyle body-medium-bold"
           type="button"

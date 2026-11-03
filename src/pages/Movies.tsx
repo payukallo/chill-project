@@ -44,7 +44,7 @@ export default function MoviesPage() {
   const handleClosePopupBottom = () => {
     setSelectedMovieBottom(null);
   };
-  
+
   useEffect(() => {
     const getData = async () => {
       try {

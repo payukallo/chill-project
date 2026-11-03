@@ -20,5 +20,5 @@ export function Dropdown() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-   return { isOpen, setIsOpen, dropdownRef };
+  return { isOpen, setIsOpen, dropdownRef };
 }

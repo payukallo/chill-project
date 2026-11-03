@@ -1,7 +1,8 @@
 import MuteVolume from "../assets/logo/mute-volume.png";
 import { createPortal } from "react-dom";
 import type { IResponseMovie } from "./type/IResponMovies";
-import { useMyList } from "./context/MyListContext";
+import { useMyListStore } from "../stores/useMyListStore";
+import { useNavigate } from "react-router";
 
 interface IPopUpMovie {
   movie: IResponseMovie;
@@ -16,10 +17,18 @@ export function PopUpMovieBottom({
   onClose,
   onMovieClick,
 }: IPopUpMovie) {
+  const navigate = useNavigate();
+
+  function handleWatchMovie() {
+    window.open(`/watch/${movie.id}`, "_blank", "noopener,noreferrer");
+  }
+
   const recommendedMovies = movies.filter((item) =>
     movie.recommendation_movie_1?.includes(Number(item.id)),
   );
-  const { toggleMyList, isInMyList } = useMyList();
+
+  const toggleMyList = useMyListStore((state) => state.toggleMyList);
+  const isInMyList = useMyListStore((state) => state.isInMyList);
 
   const isAdded = movie.id != null && isInMyList(movie.id);
 
@@ -35,7 +44,10 @@ export function PopUpMovieBottom({
             <span className="pop-up-title heading-3">{movie.title}</span>
             <div className="pop-up-btn">
               <div className="pop-up-btn-left">
-                <button className="pop-up-button-left body-medium-bold">
+                <button
+                  className="pop-up-button-left body-medium-bold"
+                  onClick={handleWatchMovie}
+                >
                   Mulai
                 </button>
 
