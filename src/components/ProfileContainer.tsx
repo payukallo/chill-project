@@ -52,7 +52,7 @@ export function ProfileContainer({
             </div>
           </div>
           <div className="navlink">
-            <NavLink to="/" className="body-medium-bold">
+            <NavLink to="/subscription" className="body-medium-bold">
               Mulai Berlangganan
             </NavLink>
           </div>
