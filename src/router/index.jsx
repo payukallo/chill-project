@@ -8,6 +8,7 @@ import MoviesPage from "../pages/Movies";
 import ProfilePage from "../pages/Profile";
 import WatchMoviePage from "../pages/WatchMovie";
 import { ProtectedRoute, PublicRoute } from "../components/ProtectedRoute";
+import SubscriptionPage from "../pages/Subscription";
 
 export const router = createBrowserRouter([
   // Halaman khusus pengguna yang belum login
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
       {
         path: "/profile",
         Component: ProfilePage,
+      },
+       {
+        path: "/subscription",
+        Component: SubscriptionPage,
       },
       {
         path: "/watch/:id",

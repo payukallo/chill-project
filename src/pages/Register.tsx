@@ -1,6 +1,6 @@
+import "../assets/styles/register.css";
 import { useNavigate } from "react-router";
 import type { FormEvent } from "react";
-import "../assets/styles/register.css";
 import { supabase } from "../components/utils/supabase";
 import { usernameToAuthEmail } from "../components/utils/authUsername";
 import { Logo } from "../login-regis/Logo";

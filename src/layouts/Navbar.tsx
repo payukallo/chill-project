@@ -68,10 +68,10 @@ export function Navbar() {
                 />
                 Profil saya
               </NavLink>
-              <a href="">
+              <NavLink to="/subscription">
                 <img src={Star} alt="" />
                 Ubah Premium
-              </a>
+              </NavLink>
               <button onClick={logoutUser}>
                 <img src={Exit} alt="" />
                 Keluar

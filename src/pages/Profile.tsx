@@ -10,7 +10,7 @@ import { NavLink } from "react-router";
 import { useProfile } from "../components/hooks/Profile.js";
 import type { IResponseMovie } from "../components/type/IResponMovies.js";
 
-const Profile = () => {
+const ProfilePage = () => {
   const {
     username,
     password,
@@ -84,4 +84,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;
