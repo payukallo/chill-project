@@ -28,4 +28,4 @@ dist-ssr
 .env.*
 !.env.example
 *.deb
-/public/videos/*.mp4
+
