@@ -1,0 +1,304 @@
+.video-player {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80vw;
+  height: 100vh;
+  background-color: #080808;
+  color: white;
+}
+
+/* Area video */
+.video-screen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 16 / 9;
+  background-color: #080808;
+}
+
+.video-screen video {
+  display: block;
+  width: 80%;
+  object-fit: contain;
+}
+
+/* Kontrol video */
+.video-controls {
+  width: 100%;
+  padding: 12px 20px;
+  position: absolute;
+  box-sizing: border-box;
+  background-color: transparent;
+  bottom: 0px;
+}
+
+/* Progress bar */
+.video-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.video-progress input {
+  flex: 1;
+  cursor: pointer;
+  accent-color: #e50914;
+}
+
+/* Bagian bawah */
+.video-control-content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  min-height: 35px;
+}
+
+/* Kiri */
+.video-control-left,
+.video-control-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.video-control-left button,
+.video-control-right button {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.video-control-left button:hover,
+.video-control-right button:hover {
+  color: #e50914;
+}
+
+/* Volume */
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.volume-control input {
+  width: 75px;
+  accent-color: #e50914;
+  cursor: pointer;
+}
+
+/* Tengah */
+.video-control-center {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  height: 100%;
+}
+
+.video-control-center h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Kanan */
+.video-control-right {
+  justify-content: flex-end;
+}
+
+.video-control-right select {
+  color: white;
+  background-color: #222;
+  border: 1px solid #444;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Deskripsi */
+.description-control {
+  position: relative;
+}
+
+.description-popup {
+  position: absolute;
+  bottom: 40px;
+  right: 0;
+  width: 280px;
+  padding: 15px;
+  background-color: #222;
+  border: 1px solid #444;
+  border-radius: 8px;
+  z-index: 10;
+}
+
+.description-popup h4 {
+  margin: 0 0 8px;
+}
+
+.description-popup p {
+  margin: 0;
+  color: #ccc;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Fullscreen */
+.video-player:fullscreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #080808;
+}
+
+.video-player:fullscreen .video-screen {
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+.video-player:fullscreen .video-controls {
+  flex-shrink: 0;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+}
+
+.video-container video {
+  display: block;
+  width: 100%;
+}
+
+.center-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 70px;
+  height: 70px;
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  font-size: 28px;
+
+  cursor: pointer;
+  z-index: 2;
+}
+
+.video-screen {
+  position: relative;
+  width: 100%;
+}
+
+.video-screen video {
+  display: block;
+  width: 100%;
+}
+
+/* Tombol Play/Pause Tengah */
+.center-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 70px;
+  height: 70px;
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  font-size: 28px;
+
+  cursor: pointer;
+  z-index: 3;
+}
+
+/* Animasi kontrol */
+.video-controls,
+.center-play-button {
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.controls-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.controls-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 580px), (max-height: 900px) {
+  .video-controls {
+    padding: 10px;
+  }
+
+  .video-control-content {
+    row-gap: 5px;
+    font-size: 12px;
+  }
+
+  .video-control-content button {
+    font-size: 12px;
+    padding: 3px;
+  }
+
+  .video-control-left {
+    gap: 4px;
+  }
+
+  .video-control-center {
+    width: 250px;
+    height: 35px;
+  }
+
+  .video-control-center .body-large-semiBold {
+    font-size: 14px;
+  }
+
+  .video-control-left {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .video-control-right {
+    grid-column: 2;
+    grid-row: 2;
+    gap: 8px;
+  }
+
+  .video-control-right select {
+    padding: 3px 6px;
+    width: 40px;
+  }
+
+  .volume-control input {
+    width: 40px;
+  }
+
+  .video-control-center h3 {
+    font-size: 14px;
+  }
+}

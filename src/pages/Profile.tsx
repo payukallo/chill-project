@@ -5,12 +5,12 @@ import { Footer } from "../layouts/Footer.jsx";
 import { MyListContainerProfile } from "../components/MyListContainerProfile.js";
 import { ProfileContainer } from "../components/ProfileContainer.js";
 import { PopUpMyListProfile } from "../components/PopUpMyListProfile.js";
-import type { IMyListMovie } from "../components/context/MyListContext.js";
+import type { IMyListMovie } from "../stores/useMyListStore";
 import { NavLink } from "react-router";
 import { useProfile } from "../components/hooks/Profile.js";
+import type { IResponseMovie } from "../components/type/IResponMovies.js";
 
 const Profile = () => {
-  // Mengambil state dan function dari useProfile
   const {
     username,
     password,
@@ -29,15 +29,13 @@ const Profile = () => {
     handlePhotoChange,
   } = useProfile();
 
-  // State popup film
   const [selectedMovie, setSelectedMovie] = useState<IMyListMovie | null>(null);
+  const [allMovies] = useState<IResponseMovie[]>([]);
 
-  // Membuka popup film
   function handleOpenPopup(movie: IMyListMovie) {
     setSelectedMovie(movie);
   }
 
-  // Menutup popup film
   function handleClosePopup() {
     setSelectedMovie(null);
   }
@@ -45,6 +43,7 @@ const Profile = () => {
   return (
     <main className="profile-page">
       <Navbar />
+
       <ProfileContainer
         username={username}
         password={password}
@@ -61,6 +60,7 @@ const Profile = () => {
         onEditPassword={handleEditPassword}
         onSave={handleSaveProfile}
       />
+
       <div className="my-list-profile">
         <div className="my-list-profile-tittle">
           <span className="list-title heading-3">Daftar Saya</span>
@@ -70,9 +70,15 @@ const Profile = () => {
         </div>
         <MyListContainerProfile onMovieClick={handleOpenPopup} />
       </div>
+
       {selectedMovie && (
-        <PopUpMyListProfile movie={selectedMovie} onClose={handleClosePopup} />
+        <PopUpMyListProfile
+          movie={selectedMovie}
+          onClose={handleClosePopup}
+          movies={allMovies}
+        />
       )}
+
       <Footer />
     </main>
   );

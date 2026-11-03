@@ -1,6 +1,5 @@
-
 import type { IResponseMovie } from "../type/IResponMovies";
-import { supabase } from "../utils/supabase";
+import { api } from "../utils/axiosApi";
 
 interface IMovieData {
   id: string;
@@ -8,25 +7,31 @@ interface IMovieData {
 }
 
 export async function getMovies(): Promise<IResponseMovie[]> {
-  const { data, error } = await supabase
-    .from("movies")
-    .select("id, data");
+  try {
+    const response = await api.get<IMovieData[]>("/movies", {
+      params: {
+        select: "id,data",
+      },
+    });
 
-  if (error) {
-    throw new Error(`Gagal mengambil data film: ${error.message}`);
+    return response.data.map((item) => item.data);
+  } catch (error) {
+    console.error("Error mengambil film:", error);
+    throw new Error("Gagal mengambil data film");
   }
-
-  return (data as IMovieData[]).map((item) => item.data);
 }
 
 export async function getSeries(): Promise<IResponseMovie[]> {
-  const { data, error } = await supabase
-    .from("series")
-    .select("id, data");
+  try {
+    const response = await api.get<IMovieData[]>("/series", {
+      params: {
+        select: "id,data",
+      },
+    });
 
-  if (error) {
-    throw new Error(`Gagal mengambil data series: ${error.message}`);
+    return response.data.map((item) => item.data);
+  } catch (error) {
+    console.error("Error mengambil series:", error);
+    throw new Error("Gagal mengambil data series");
   }
-
-  return (data as IMovieData[]).map((item) => item.data);
 }

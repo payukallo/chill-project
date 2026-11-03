@@ -5,7 +5,7 @@ import { Navbar } from "../layouts/Navbar.jsx";
 import { Footer } from "../layouts/Footer.jsx";
 import { PopUpMyList } from "../components/PopUpMyList.js";
 import { MyListContainer } from "../components/MyListContainer";
-import { IMyListMovie } from "../components/context/MyListContext.js";
+import type { IMyListMovie } from "../stores/useMyListStore";
 
 const MyListPage = () => {
   const [selectedMovie, setSelectedMovie] = useState<IMyListMovie | null>(null);
@@ -17,15 +17,19 @@ const MyListPage = () => {
   function handleClosePopup() {
     setSelectedMovie(null);
   }
-  const [allMovies, setAllMovies] = useState<IResponseMovie[]>([]);
+
+  const [allMovies] = useState<IResponseMovie[]>([]);
 
   return (
     <main className="my-list-page box-pop-up-content">
       <Navbar />
+
       <div className="my-list">
         <span className="list-title heading-3">Daftar Saya</span>
+
         <MyListContainer onMovieClick={handleOpenPopup} />
       </div>
+
       {selectedMovie && (
         <PopUpMyList
           movie={selectedMovie}
@@ -33,6 +37,7 @@ const MyListPage = () => {
           onClose={handleClosePopup}
         />
       )}
+
       <Footer />
     </main>
   );

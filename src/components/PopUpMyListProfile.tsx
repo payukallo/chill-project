@@ -1,35 +1,43 @@
 import MuteVolume from "../assets/logo/mute-volume.png";
 import { createPortal } from "react-dom";
-import { IMyListMovie, useMyList } from "./context/MyListContext";
+import type { IMyListMovie } from "../stores/useMyListStore";
+import { useMyListStore } from "../stores/useMyListStore";
+import { IResponseMovie } from "./type/IResponMovies";
 
 interface IPopUpMovie {
   movie: IMyListMovie;
+  movies: IResponseMovie[];
   onClose: () => void;
 }
-export function PopUpMyListProfile({ movie, onClose }: IPopUpMovie) {
-  const { toggleMyList, isInMyList } = useMyList();
 
-  const isAdded = movie.id != null && isInMyList(movie.id);
+export function PopUpMyListProfile({ movie, movies, onClose }: IPopUpMovie) {
+  const toggleMyList = useMyListStore((state) => state.toggleMyList);
+  const isInMyList = useMyListStore((state) => state.isInMyList);
+
+  const isAdded = movie.id != null && isInMyList(movie.id, movie.mediaType);
+
+  function handleWatchMovie() {
+    window.open(`/watch/${movie.id}`, "_blank", "noopener,noreferrer");
+  }
 
   return createPortal(
     <div className="pop-up-overlay pop-up-my-list-profile">
       <div className="top-pop-up-container">
         <img src={movie.banner_url} alt={movie.title} />
-
         <div className="top-pop-up">
           <button className="close" onClick={onClose}>
             x
           </button>
-
           <div className="head-pop-up">
             <span className="pop-up-title heading-3">{movie.title}</span>
-
             <div className="pop-up-btn">
               <div className="pop-up-btn-left">
-                <button className="pop-up-button-left body-medium-bold">
+                <button
+                  className="pop-up-button-left body-medium-bold"
+                  onClick={handleWatchMovie}
+                >
                   Mulai
                 </button>
-
                 <button
                   className="add-pop-up text-light-secondary"
                   onClick={() => toggleMyList(movie)}
@@ -37,7 +45,6 @@ export function PopUpMyListProfile({ movie, onClose }: IPopUpMovie) {
                   {isAdded ? "-" : "+"}
                 </button>
               </div>
-
               <button id="volume">
                 <img src={MuteVolume} alt="Volume" />
               </button>
@@ -45,22 +52,18 @@ export function PopUpMyListProfile({ movie, onClose }: IPopUpMovie) {
           </div>
         </div>
       </div>
-
       <div className="bottom-pop-up-series">
         <div className="pop-up-description-series body-medium-regular">
           <div className="description-left">
             <div className="year">
               <span>{movie.year}</span>
               <span>{movie.duration}</span>
-
               <div className="age-recommendation">
                 <span>{movie.age}</span>
               </div>
             </div>
-
             <p>{movie.description}</p>
           </div>
-
           <div className="description-right">
             <div className="description-right-list">
               <div className="span-pop-up">
@@ -68,14 +71,12 @@ export function PopUpMyListProfile({ movie, onClose }: IPopUpMovie) {
               </div>
               <p>: {movie.cast}</p>
             </div>
-
             <div className="description-right-list">
               <div className="span-pop-up">
                 <span>Genre</span>
               </div>
               <p>: {movie.genre?.join(", ") ?? "Belum tersedia"}</p>
             </div>
-
             <div className="description-right-list">
               <div className="span-pop-up">
                 <span>Pembuat Film</span>

@@ -3,7 +3,8 @@ import { RouterProvider } from "react-router";
 import { router } from "./router/index";
 
 import "./assets/styles/main.css";
-import { MyListProvider } from "./components/context/MyListContext";
+
+import { initializeMyListAuthListener } from "./stores/useMyListStore";
 
 const app = document.getElementById("root");
 
@@ -11,8 +12,7 @@ if (!app) {
   throw new Error("Element root tidak ditemukan");
 }
 
-createRoot(app).render(
-  <MyListProvider>
-    <RouterProvider router={router} />
-  </MyListProvider>,
-);
+// Memulai pemantauan autentikasi Supabase
+initializeMyListAuthListener();
+
+createRoot(app).render(<RouterProvider router={router} />);

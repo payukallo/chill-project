@@ -1,19 +1,4 @@
-const API_URL_USERS = import.meta.env.VITE_API_USERS_URL;
-
-export async function createUser(user: IUser): Promise<IUser> {
-  const response = await fetch(API_URL_USERS, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  });
-
-  if (!response.ok) {
-    throw new Error("Gagal mendaftarkan user");
-  }
-  return response.json();
-}
+import { api } from "../utils/axiosApi";
 
 export interface IUser {
   id?: string;
@@ -21,40 +6,57 @@ export interface IUser {
   password: string;
 }
 
+export async function createUser(user: IUser): Promise<IUser> {
+  try {
+    const response = await api.post<IUser>("/users", user);
+
+    return response.data;
+  } catch (error) {
+    throw new Error("Gagal mendaftarkan user");
+  }
+}
+
 export async function loginUser(
   username: string,
   password: string,
 ): Promise<IUser> {
-  const response = await fetch(
-    `${API_URL_USERS}?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`,
-    {
-      method: "GET",
-    },
-  );
-  if (!response.ok) {
+  try {
+    const response = await api.get<IUser[]>("/users", {
+      params: {
+        username,
+        password,
+      },
+    });
+
+    const users = response.data;
+
+    if (users.length === 0) {
+      throw new Error("Username atau password salah");
+    }
+
+    return users[0];
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      error.message === "Username atau password salah"
+    ) {
+      throw error;
+    }
+
     throw new Error("Gagal mengambil data user");
   }
-
-  const users: IUser[] = await response.json();
-  if (users.length === 0) {
-    throw new Error("Username atau password salah");
-  }
-
-  return users[0];
 }
 
 export async function checkUsername(username: string): Promise<boolean> {
-  const response = await fetch(
-    `${API_URL_USERS}?username=${encodeURIComponent(username)}`,
-    {
-      method: "GET",
-    },
-  );
+  try {
+    const response = await api.get<IUser[]>("/users", {
+      params: {
+        username,
+      },
+    });
 
-  if (!response.ok) {
+    return response.data.length > 0;
+  } catch (error) {
     throw new Error("Gagal memeriksa username");
   }
-
-  const users = await response.json();
-  return users.length > 0;
 }

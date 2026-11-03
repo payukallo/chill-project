@@ -1,11 +1,11 @@
-import { IMyListMovie, useMyList } from "./context/MyListContext";
+import { IMyListMovie, useMyListStore } from "../stores/useMyListStore";
 
 interface IMyListContainer {
   onMovieClick: (movie: IMyListMovie) => void;
 }
 
 export function MyListContainer({ onMovieClick }: IMyListContainer) {
-  const { myMovies } = useMyList();
+  const myMovies = useMyListStore((state) => state.myMovies);
 
   return (
     <div className="list-container">
@@ -13,7 +13,7 @@ export function MyListContainer({ onMovieClick }: IMyListContainer) {
         myMovies.map((movie) => (
           <div
             className="list-box"
-            key={movie.id}
+            key={movie.myListId}
             onClick={() => onMovieClick(movie)}
           >
             <img src={movie.cover_url} alt={movie.title} />
