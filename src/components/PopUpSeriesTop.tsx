@@ -3,13 +3,15 @@ import { createPortal } from "react-dom";
 import type { IResponseMovie } from "./type/IResponMovies";
 import { useMyListStore } from "../stores/useMyListStore";
 import { useState } from "react";
+import type { IEpisode } from "./type/IResponMovies";
 
 interface IPopUpMovie {
   movie: IResponseMovie;
   onClose: () => void;
+  onPlayEpisode: (episode: IEpisode) => void;
 }
 
-export function PopUpSeriesTop({ movie, onClose }: IPopUpMovie) {
+export function PopUpSeriesTop({ movie, onClose, onPlayEpisode }: IPopUpMovie) {
   const toggleMyList = useMyListStore((state) => state.toggleMyList);
   const isInMyList = useMyListStore((state) => state.isInMyList);
 
@@ -34,10 +36,10 @@ export function PopUpSeriesTop({ movie, onClose }: IPopUpMovie) {
                 <button
                   className="pop-up-button-left body-medium-bold"
                   onClick={() => {
-                    if (!selectedEpisode) return;
-                    console.log("Memulai episode:", selectedEpisode);
+                    if (selectedEpisode) {
+                      onPlayEpisode(selectedEpisode);
+                    }
                   }}
-                  disabled={!selectedEpisode}
                 >
                   Mulai
                 </button>

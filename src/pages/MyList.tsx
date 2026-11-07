@@ -18,8 +18,6 @@ const MyListPage = () => {
     setSelectedMovie(null);
   }
 
-  const [allMovies] = useState<IResponseMovie[]>([]);
-
   return (
     <main className="my-list-page box-pop-up-content">
       <Navbar />
@@ -33,7 +31,6 @@ const MyListPage = () => {
       {selectedMovie && (
         <PopUpMyList
           movie={selectedMovie}
-          movies={allMovies}
           onClose={handleClosePopup}
         />
       )}

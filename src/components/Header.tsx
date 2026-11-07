@@ -10,8 +10,15 @@ interface IHeader {
 }
 
 export function Header({ movies, on_click }: IHeader) {
-  function handleWatchMovie(movie: IResponseMovie) {
-    window.open(`/watch/${movie.id}`, "_blank", "noopener,noreferrer");
+
+  function handleWatchMedia(item: IResponseMovie) {
+    const mediaType = item.type === 1 ? "movie" : "series";
+
+    window.open(
+      `/watch/${item.id}?type=${mediaType}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
   }
 
   return (
@@ -32,7 +39,7 @@ export function Header({ movies, on_click }: IHeader) {
                 <div className="btn-left">
                   <button
                     className="btn-primary-shadow"
-                    onClick={() => handleWatchMovie(item)}
+                    onClick={() => handleWatchMedia(item)}
                   >
                     Mulai
                   </button>
@@ -56,3 +63,4 @@ export function Header({ movies, on_click }: IHeader) {
     </header>
   );
 }
+

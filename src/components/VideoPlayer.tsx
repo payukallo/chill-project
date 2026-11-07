@@ -1,16 +1,28 @@
-import { useEffect } from "react";
+import "../assets/styles/videoPlayer.css";
+import "../assets/styles/episodePopup.css";
+import { useEffect, useState } from "react";
 import { useVideoPlayer } from "./hooks/UseVideoPlayer";
 import { useVideoPlayerStore } from "../stores/useVideoPlayerStore";
-
-import "../assets/styles/videoPlayer.css";
+import { EpisodePopup } from "./EpisodePopup";
+import type { IEpisode } from "./type/IResponMovies";
 
 interface IVideoPlayer {
   src: string;
   title: string;
   description: string;
+  episodes?: IEpisode[];
+  activeEpisode?: number;
+  onEpisodeSelect?: (episode: IEpisode) => void;
 }
 
-export default function VideoPlayer({ src, title, description }: IVideoPlayer) {
+export default function VideoPlayer({
+  src,
+  title,
+  description,
+  episodes = [],
+  activeEpisode = 1,
+  onEpisodeSelect,
+}: IVideoPlayer) {
   const {
     videoRef,
     playerRef,
@@ -39,17 +51,19 @@ export default function VideoPlayer({ src, title, description }: IVideoPlayer) {
     formatTime,
   } = useVideoPlayer();
 
-  const resetPlayer = useVideoPlayerStore((state) => state.resetPlayer);
+  const resetPlayer = useVideoPlayerStore(
+    (state) => state.resetPlayer
+  );
+
+  const [showEpisodes, setShowEpisodes] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
 
-    // Hentikan video sebelumnya
     if (video) {
       video.pause();
     }
 
-    // Reset state Zustand
     resetPlayer();
 
     return () => {
@@ -63,7 +77,7 @@ export default function VideoPlayer({ src, title, description }: IVideoPlayer) {
       ref={playerRef}
       onMouseMove={showControlsTemporarily}
       onMouseLeave={() => {
-        if (isPlaying && !showDescription) {
+        if (isPlaying && !showDescription && !showEpisodes) {
           clearControlsTimeout();
           setShowControls(false);
         }
@@ -72,6 +86,7 @@ export default function VideoPlayer({ src, title, description }: IVideoPlayer) {
     >
       <div className="video-screen">
         <video
+          key={src}
           ref={videoRef}
           src={src}
           playsInline
@@ -94,6 +109,7 @@ export default function VideoPlayer({ src, title, description }: IVideoPlayer) {
             setVolume(video.muted ? 0 : video.volume);
           }}
         />
+
         <button
           type="button"
           className={`center-play-button ${
@@ -105,6 +121,19 @@ export default function VideoPlayer({ src, title, description }: IVideoPlayer) {
           {isPlaying ? "❚❚" : "▶"}
         </button>
       </div>
+
+      {/* Popup daftar episode */}
+      {showEpisodes && episodes.length > 0 && (
+        <EpisodePopup
+          episodes={episodes}
+          activeEpisode={activeEpisode}
+          onEpisodeSelect={(episode) => {
+            onEpisodeSelect?.(episode);
+            setShowEpisodes(false);
+          }}
+          onClose={() => setShowEpisodes(false)}
+        />
+      )}
 
       <div
         className={`video-controls ${
@@ -127,17 +156,19 @@ export default function VideoPlayer({ src, title, description }: IVideoPlayer) {
         </div>
 
         <div className="video-control-content">
-
           <div className="video-control-left">
             <button type="button" onClick={handlePlayPause}>
               {isPlaying ? "❚❚" : "▶"}
             </button>
+
             <button type="button" onClick={handleRewind}>
               ↶ 10
             </button>
+
             <button type="button" onClick={handleForward}>
               10 ↷
             </button>
+
             <div className="volume-control">
               <button
                 type="button"
@@ -145,33 +176,55 @@ export default function VideoPlayer({ src, title, description }: IVideoPlayer) {
               >
                 {volume === 0 ? "🔇" : "🔊"}
               </button>
+
               <input
                 type="range"
                 min={0}
                 max={1}
                 step={0.01}
                 value={volume}
-                onChange={(e) => handleVolume(Number(e.target.value))}
+                onChange={(e) =>
+                  handleVolume(Number(e.target.value))
+                }
               />
             </div>
           </div>
 
           <div className="video-control-center">
-            <span className="body-large-semiBold">{title}</span>
+            <span className="body-large-semiBold">
+              {title}
+            </span>
           </div>
 
           <div className="video-control-right">
+            {/* Tombol episode hanya muncul untuk series */}
+            {episodes.length > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  setShowEpisodes((prev) => !prev);
+                  setShowDescription(false);
+                  setShowControls(true);
+                }}
+                title="Daftar Episode"
+              >
+                ☷
+              </button>
+            )}
+
             <div className="description-control">
               <button
                 type="button"
                 onClick={() => {
                   setShowDescription(!showDescription);
+                  setShowEpisodes(false);
                   setShowControls(true);
                 }}
-                title="Deskripsi film"
+                title="Deskripsi video"
               >
                 ⓘ
               </button>
+
               {showDescription && (
                 <div className="description-popup">
                   <h4>{title}</h4>
@@ -179,9 +232,12 @@ export default function VideoPlayer({ src, title, description }: IVideoPlayer) {
                 </div>
               )}
             </div>
+
             <select
               value={playbackRate}
-              onChange={(e) => handlePlaybackRate(Number(e.target.value))}
+              onChange={(e) =>
+                handlePlaybackRate(Number(e.target.value))
+              }
               aria-label="Kecepatan video"
             >
               <option value={0.5}>0.5x</option>
@@ -191,11 +247,14 @@ export default function VideoPlayer({ src, title, description }: IVideoPlayer) {
               <option value={1.5}>1.5x</option>
               <option value={2}>2x</option>
             </select>
-            <button type="button" onClick={handleFullscreen}>
+
+            <button
+              type="button"
+              onClick={handleFullscreen}
+            >
               ⛶
             </button>
           </div>
-          
         </div>
       </div>
     </div>

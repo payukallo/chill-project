@@ -1,10 +1,10 @@
 import "../assets/styles/index.css";
+import { useNavigate } from "react-router";
 import { Navbar } from "../layouts/Navbar";
 import { Header } from "../components/Header";
 import { Footer } from "../layouts/Footer";
 import { useEffect, useState } from "react";
 import { getSeries } from "../components/type/MovieApi";
-import type { IResponseMovie } from "../components/type/IResponMovies";
 import { NewRelease } from "../components/NewRelease";
 import { ContinueMovie } from "../components/Continue";
 import { TrendingMovies } from "../components/Trending";
@@ -12,6 +12,10 @@ import { TopRatingMovies } from "../components/TopRating";
 import { MoviesFromChill } from "../components/FromChill ";
 import { PopUpSeriesBottom } from "../components/PopUpSeriesBottom";
 import { PopUpSeriesTop } from "../components/PopUpSeriesTop";
+import type {
+  IResponseMovie,
+  IEpisode,
+} from "../components/type/IResponMovies";
 
 export default function SeriesPage() {
   const [movieHeader, setMovieHeader] = useState<IResponseMovie[]>([]);
@@ -42,6 +46,24 @@ export default function SeriesPage() {
 
   const handleClosePopupBottom = () => {
     setSelectedMovieBottom(null);
+  };
+
+  const navigate = useNavigate();
+
+  const handlePlayEpisodeTop = (episode: IEpisode) => {
+    if (!selectedMovieTop?.id) return;
+
+    const url = `/watch/${selectedMovieTop.id}?episode=${episode.episode_number}`;
+
+    window.open(url, "_blank");
+  };
+
+  const handlePlayEpisodeBottom = (episode: IEpisode) => {
+    if (!selectedMovieBottom?.id) return;
+
+    const url = `/watch/${selectedMovieBottom.id}?episode=${episode.episode_number}`;
+
+    window.open(url, "_blank");
   };
 
   useEffect(() => {
@@ -110,12 +132,14 @@ export default function SeriesPage() {
         <PopUpSeriesTop
           movie={selectedMovieTop}
           onClose={handleClosePopupTop}
+          onPlayEpisode={handlePlayEpisodeTop}
         />
       )}
       {selectedMovieBottom && (
         <PopUpSeriesBottom
           movie={selectedMovieBottom}
           onClose={handleClosePopupBottom}
+          onPlayEpisode={handlePlayEpisodeBottom}
         />
       )}
     </main>

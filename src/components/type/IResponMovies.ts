@@ -27,4 +27,5 @@ export interface IEpisode {
   duration: string;
   thumbnail: string;
   description: string;
+  video_url: string;
 }

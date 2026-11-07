@@ -50,14 +50,14 @@ export const router = createBrowserRouter([
         path: "/profile",
         Component: ProfilePage,
       },
-       {
+      {
         path: "/subscription",
         Component: SubscriptionPage,
       },
       {
         path: "/watch/:id",
         Component: WatchMoviePage,
-      },
+      }
     ],
   },
 ]);
