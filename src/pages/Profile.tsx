@@ -8,7 +8,6 @@ import { PopUpMyListProfile } from "../components/PopUpMyListProfile.js";
 import type { IMyListMovie } from "../stores/useMyListStore";
 import { NavLink } from "react-router";
 import { useProfile } from "../components/hooks/Profile.js";
-import type { IResponseMovie } from "../components/type/IResponMovies.js";
 
 const ProfilePage = () => {
   const {
@@ -30,7 +29,6 @@ const ProfilePage = () => {
   } = useProfile();
 
   const [selectedMovie, setSelectedMovie] = useState<IMyListMovie | null>(null);
-  const [allMovies] = useState<IResponseMovie[]>([]);
 
   function handleOpenPopup(movie: IMyListMovie) {
     setSelectedMovie(movie);
@@ -75,7 +73,6 @@ const ProfilePage = () => {
         <PopUpMyListProfile
           movie={selectedMovie}
           onClose={handleClosePopup}
-          movies={allMovies}
         />
       )}
 
