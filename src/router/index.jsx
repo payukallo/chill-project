@@ -9,6 +9,7 @@ import ProfilePage from "../pages/Profile";
 import WatchMoviePage from "../pages/WatchMovie";
 import { ProtectedRoute, PublicRoute } from "../components/ProtectedRoute";
 import SubscriptionPage from "../pages/Subscription";
+import PaymentPage from "../pages/Payment";
 
 export const router = createBrowserRouter([
   // Halaman khusus pengguna yang belum login
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
       {
         path: "/subscription",
         Component: SubscriptionPage,
+      },
+      {
+        path: "/payment",
+        Component: PaymentPage,
       },
       {
         path: "/watch/:id",

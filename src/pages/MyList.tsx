@@ -1,5 +1,4 @@
 import "../assets/styles/myList.css";
-import type { IResponseMovie } from "../components/type/IResponMovies";
 import { useState } from "react";
 import { Navbar } from "../layouts/Navbar.jsx";
 import { Footer } from "../layouts/Footer.jsx";
@@ -29,10 +28,7 @@ const MyListPage = () => {
       </div>
 
       {selectedMovie && (
-        <PopUpMyList
-          movie={selectedMovie}
-          onClose={handleClosePopup}
-        />
+        <PopUpMyList movie={selectedMovie} onClose={handleClosePopup} />
       )}
 
       <Footer />
