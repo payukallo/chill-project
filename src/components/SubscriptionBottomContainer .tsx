@@ -1,6 +1,22 @@
 import CheckImg from "../assets/logo/check.png";
+import { useNavigate } from "react-router";
+import { subscriptionPlans, formatRupiah } from "../data/subscriptionPlans";
 
 export function SubscriptionBottomContainer() {
+  const navigate = useNavigate();
+
+  const handleSubscribe = (planId: string) => {
+    const selectedPlan = subscriptionPlans.find((plan) => plan.id === planId);
+
+    if (!selectedPlan) return;
+
+    navigate("/payment", {
+      state: {
+        plan: selectedPlan,
+      },
+    });
+  };
+
   return (
     <div className="subscription-bottom">
       <div className="subscription-bottom-title">
@@ -9,94 +25,43 @@ export function SubscriptionBottomContainer() {
           Temukan paket sesuai kebutuhanmu!
         </span>
       </div>
+
       <div className="subscription-bottom-container">
-        <div className="subscription-bottom-box">
-          <div className="subscription-bottom-box-up">
-            <button className="body-large-semiBold">Individual</button>
-            <span className="body-small-regular">
-              Mulai dari Rp.49,990/bulan 1 Akun
-            </span>
-            <div className="body-small-regular">
-              <div>
-                <img src={CheckImg} alt="" />
-                <p>Tidak ada iklan</p>
-              </div>
-              <div>
-                <img src={CheckImg} alt="" />
-                <p>Kualitas 720p</p>
-              </div>
-              <div>
-                <img src={CheckImg} alt="" />
-                <p>Download konten pilihan</p>
+        {subscriptionPlans.map((plan) => (
+          <div className="subscription-bottom-box" key={plan.id}>
+            <div className="subscription-bottom-box-up">
+              <button className="body-large-semiBold">{plan.name}</button>
+
+              <span className="body-small-regular">
+                Mulai dari {formatRupiah(plan.price)}/bulan {plan.account}
+              </span>
+
+              <div className="body-small-regular">
+                {plan.features.map((feature) => (
+                  <div key={feature}>
+                    <img src={CheckImg} alt="" />
+                    <p>{feature}</p>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-          <span className="line"></span>
-          <div className="subscription-bottom-box-down">
-            <button className="body-medium-bold">Langganan</button>
-            <span className="caption-1-regular">
-              Syarat dan Ketentuan Berlaku
-            </span>
-          </div>
-        </div>
-        <div className="subscription-bottom-box">
-          <div className="subscription-bottom-box-up">
-            <button className="body-large-semiBold">Berdua</button>
-            <span className="body-small-regular">
-              Mulai dari Rp.79,990/bulan 2 Akun
-            </span>
-            <div className="body-small-regular">
-              <div>
-                <img src={CheckImg} alt="" />
-                <p>Tidak ada iklan</p>
-              </div>
-              <div>
-                <img src={CheckImg} alt="" />
-                <p>Kualitas 1080p</p>
-              </div>
-              <div>
-                <img src={CheckImg} alt="" />
-                <p>Download konten pilihan</p>
-              </div>
+
+            <span className="line"></span>
+
+            <div className="subscription-bottom-box-down">
+              <button
+                className="body-medium-bold"
+                onClick={() => handleSubscribe(plan.id)}
+              >
+                Langganan
+              </button>
+
+              <span className="caption-1-regular">
+                Syarat dan Ketentuan Berlaku
+              </span>
             </div>
           </div>
-          <span className="line"></span>
-          <div className="subscription-bottom-box-down">
-            <button className="body-medium-bold">Langganan</button>
-            <span className="caption-1-regular">
-              Syarat dan Ketentuan Berlaku
-            </span>
-          </div>
-        </div>
-        <div className="subscription-bottom-box">
-          <div className="subscription-bottom-box-up">
-            <button className="body-large-semiBold">Keluarga</button>
-            <span className="body-small-regular">
-              Mulai dari Rp.159,990/bulan 5-7 Akun
-            </span>
-            <div className="body-small-regular">
-              <div>
-                <img src={CheckImg} alt="" />
-                <p>Tidak ada iklan</p>
-              </div>
-              <div>
-                <img src={CheckImg} alt="" />
-                <p>Kualitas 4K</p>
-              </div>
-              <div>
-                <img src={CheckImg} alt="" />
-                <p>Download konten pilihan</p>
-              </div>
-            </div>
-          </div>
-          <span className="line"></span>
-          <div className="subscription-bottom-box-down">
-            <button className="body-medium-bold">Langganan</button>
-            <span className="caption-1-regular">
-              Syarat dan Ketentuan Berlaku
-            </span>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

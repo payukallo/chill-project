@@ -1,0 +1,240 @@
+.payment-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 1200px;
+}
+
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  width: 1440px;
+  height: 555px;
+  padding: 40px 80px;
+  gap: 40px;
+}
+
+.payment-method-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 85px;
+}
+
+.payment {
+  display: flex;
+  gap: 40px;
+}
+
+.payment-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 1004px;
+  padding: 0px 24px;
+}
+
+.payment-method {
+  display: flex;
+  gap: 29px;
+}
+
+.payment-method label {
+  display: flex;
+  align-items: center;
+  width: 470px;
+  height: 48px;
+  border: 1px solid var(--grey-scale-300);
+  border-radius: 6px;
+  padding: 4px 10px;
+  gap: 8px;
+}
+
+.payment-method label img {
+  width: 33.6px;
+  height: 24px;
+}
+
+img#bca {
+  width: 24px;
+  height: 24px;
+}
+
+.voucher-box {
+  display: flex;
+  flex-direction: column;
+  height: 91px;
+  justify-content: space-between;
+}
+
+.voucher {
+  display: flex;
+  gap: 16px;
+}
+
+.voucher input {
+  background-color: transparent;
+  width: 823px;
+  height: 46px;
+  border: 1px solid var(--grey-scale-300);
+  border-radius: 6px;
+  padding: 4px 10px;
+}
+
+.voucher button {
+  width: 117px;
+  height: 42px;
+  border-radius: 48px;
+  background-color: var(--body-background);
+  border: none;
+}
+
+.transaction {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 188px;
+}
+
+.transaction button {
+  width: 94px;
+  height: 42px;
+  background-color: var(--primary-color-400);
+  border: none;
+  border-radius: 48px;
+}
+
+.transaction-box {
+  display: flex;
+  flex-direction: column;
+  width: 480px;
+  gap: 8px;
+}
+
+.transaction-box > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.transaction-box span {
+  color: var(--text-light-secondary);
+}
+
+.transaction-box span.money {
+  width: 85px;
+  color: var(--text-light-primary);
+}
+
+@media (max-width: 580px), (max-height: 900px) {
+  .payment-page .heading-3 {
+    font-size: 20px;
+  }
+  .payment-page .body-large-semiBold,
+  .payment-page .body-medium-regular {
+    font-size: 16px;
+  }
+
+  #voucher {
+    font-size: 12px;
+  }
+
+  .payment-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 1150px;
+  }
+
+  .payment-container {
+    width: 320px;
+    height: 847px;
+    padding: 0px 0px;
+    gap: 20px;
+  }
+
+  .subscription-payment {
+    width: 320px;
+    height: 356px;
+  }
+
+  .payment {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .payment-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 320px;
+    padding: 0px;
+    gap: 16px;
+  }
+
+  .payment-method-box {
+    height: 146px;
+  }
+
+  .payment-method {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .payment-method label {
+    width: 320px;
+  }
+
+  .payment-method label img {
+    width: 23.77px;
+    height: 16px;
+  }
+
+  .voucher-box {
+  height: 83px;
+}
+
+  .voucher {
+    display: flex;
+    gap: 16px;
+  }
+
+  .voucher input {
+    width: 223px;
+    height: 41px;
+  }
+
+  .voucher button {
+    width: 81px;
+    height: 36px;
+  }
+
+  .transaction {
+    gap: 16px;
+    height: 166px;
+    width: 320px;
+  }
+
+  .transaction button {
+    width: 69px;
+    height: 36px;
+  }
+
+  .transaction-box {
+    width: 320px;
+  }
+
+  .transaction-box > div {
+    font-size: 14px;
+  }
+
+  .transaction-box span.money {
+    width: 85px;
+  }
+
+  #total-payment {
+    font-size: 16px;
+  }
+}
