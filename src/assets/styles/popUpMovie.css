@@ -1,9 +1,13 @@
 @import url(popUpSeries.css);
 
 .page-overlay {
-  position: fixed;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   inset: 0;
-  background-color: rgba(24, 26, 28, 0.45);
+  min-height: 100%;
+  background-color: rgba(24, 26, 28, 0.9);
   z-index: 100;
 }
 
@@ -254,12 +258,12 @@ button.close {
   }
 
   .pop-up-movie-top {
-  top: 300px;
-}
+    top: 300px;
+  }
 
-.pop-up-movie-bottom {
-  top: 650px;
-}
+  .pop-up-movie-bottom {
+    top: 650px;
+  }
 
   .bottom-pop-up-series {
     width: 320px;
