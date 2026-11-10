@@ -81,7 +81,7 @@ button.close {
   border-radius: 36px;
   font-size: 22px;
   border: none;
-  background-color: var(--page-header-background);
+  background-color: rgba(24, 26, 28, 1);
   color: var(--text-light-primary);
 }
 

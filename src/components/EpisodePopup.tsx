@@ -52,7 +52,7 @@ export function EpisodePopup({
                     <img
                       src={episode.thumbnail}
                       alt={episode.title}
-                      className="episode-thumbnail"
+                      className="episode-thumbnail-pop-up"
                     />
 
                     <div className="episode-info-pop-up">
