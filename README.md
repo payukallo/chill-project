@@ -1,8 +1,4 @@
 # React + Vite 
-
-VITE_SUPABASE_URL=https://ylkudsqyanshnznvnnbr.supabase.co
-VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_XdWlHWBRHJeTfJj0qNUoDg_0mSOimRj
-
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
