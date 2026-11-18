@@ -1,66 +1,96 @@
 const db = require("../db");
 
 // GET: Mengambil semua series
+
 const getAllSeries = async () => {
-  const [seriesRows] = await db.query(`
-    SELECT
-      m.*
-    FROM media_new AS m
-    INNER JOIN series_new AS s
-      ON s.media_id = m.id
-    WHERE m.media_type = 'series'
-    ORDER BY m.id
-  `);
+  const connection = await db.getConnection();
 
-  const series = [];
+  try {
+    // Query 1: Semua serial
+    const [seriesRows] = await connection.query(`
+      SELECT m.*
+      FROM media_new AS m
+      INNER JOIN series_new AS s
+        ON s.media_id = m.id
+      WHERE m.media_type = 'series'
+      ORDER BY m.id
+    `);
 
-  for (const media of seriesRows) {
-    // Ambil genre serial
-    const [genreRows] = await db.execute(
-      `SELECT g.name
-       FROM media_genres AS mg
-       INNER JOIN genres AS g
-         ON g.id = mg.genre_id
-       WHERE mg.media_id = ?
-       ORDER BY g.name`,
-      [media.id],
-    );
+    if (seriesRows.length === 0) {
+      return [];
+    }
 
-    // Ambil episode serial
-    const [episodeRows] = await db.execute(
-      `SELECT
-     id AS episode_id,
-     episode_number,
-     title,
-     description,
-     duration,
-     cover_url,
-     video_url
-   FROM episodes_new
-   WHERE series_id = ?
-   ORDER BY episode_number`,
-      [media.id],
-    );
+    // Query 2: Semua genre serial
+    const [genreRows] = await connection.query(`
+      SELECT mg.media_id, g.name
+      FROM media_genres AS mg
+      INNER JOIN genres AS g
+        ON g.id = mg.genre_id
+      INNER JOIN series_new AS s
+        ON s.media_id = mg.media_id
+      ORDER BY mg.media_id, g.name
+    `);
 
-    series.push({
-      ...media,
-      type: 1,
-      genre: genreRows.map((row) => row.name),
-      duration: `${episodeRows.length} Episodes`,
-      episodes: episodeRows.map((episode) => ({
-        episode_id: episode.episode_id,
-        episode_number: episode.episode_number,
-        title: episode.title,
-        description: episode.description,
-        duration: episode.duration === null ? null : `${episode.duration} min`,
-        thumbnail: episode.cover_url,
-        video_url: episode.video_url,
-      })),
+    // Query 3: Semua episode serial
+    const [episodeRows] = await connection.query(`
+      SELECT
+        e.series_id,
+        e.id AS episode_id,
+        e.episode_number,
+        e.title,
+        e.description,
+        e.duration,
+        e.cover_url,
+        e.video_url
+      FROM episodes_new AS e
+      INNER JOIN series_new AS s
+        ON s.media_id = e.series_id
+      ORDER BY e.series_id, e.episode_number
+    `);
+
+    const genresMap = new Map();
+    const episodesMap = new Map();
+
+    for (const row of genreRows) {
+      if (!genresMap.has(row.media_id)) {
+        genresMap.set(row.media_id, []);
+      }
+
+      genresMap.get(row.media_id).push(row.name);
+    }
+
+    for (const row of episodeRows) {
+      if (!episodesMap.has(row.series_id)) {
+        episodesMap.set(row.series_id, []);
+      }
+
+      episodesMap.get(row.series_id).push({
+        episode_id: row.episode_id,
+        episode_number: row.episode_number,
+        title: row.title,
+        description: row.description,
+        duration: row.duration === null ? null : `${row.duration} min`,
+        thumbnail: row.cover_url,
+        video_url: row.video_url,
+      });
+    }
+
+    return seriesRows.map((media) => {
+      const episodes = episodesMap.get(media.id) ?? [];
+
+      return {
+        ...media,
+        type: 1,
+        genre: genresMap.get(media.id) ?? [],
+        duration: `${episodes.length} Episodes`,
+        episodes,
+      };
     });
+  } finally {
+    connection.release();
   }
-
-  return series;
 };
+
 // POST: Menambahkan series ke database
 const createSeries = async (data) => {
   const connection = await db.getConnection();
