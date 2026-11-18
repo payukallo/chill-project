@@ -104,8 +104,14 @@
 
 .save-button {
   display: flex;
-  width: 100%;
-  gap: 20px;
+  width: 340px;
+  justify-content: space-between;
+}
+
+.save-button button {
+  width: 160px;
+  height: 40px;
+  border-radius: 18px;
 }
 
 .subscription-box {
@@ -278,6 +284,15 @@
     height: 422px;
     margin: 0px;
     gap: 24px;
+  }
+
+  .save-button {
+    width: 260px;
+  }
+
+  .save-button button {
+    width: 125px;
+    height: 35px;
   }
 
   .user-img {

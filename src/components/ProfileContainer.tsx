@@ -287,7 +287,7 @@ export function ProfileContainer({
         <div className="save-button">
           {/* Tombol Simpan Profil */}
           <button
-            className="user-update-btn btn-unstyle body-medium-bold"
+            className="user-update-btn body-medium-bold"
             type="button"
             onClick={onSaveProfile}
             disabled={isSaving}
@@ -297,7 +297,7 @@ export function ProfileContainer({
 
           {/* Tombol Ubah Password */}
           <button
-            className="user-update-btn btn-unstyle body-medium-bold"
+            className="user-update-btn body-medium-bold"
             type="button"
             onClick={onChangePassword}
             disabled={isSaving}
