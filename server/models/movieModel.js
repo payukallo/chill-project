@@ -1,4 +1,3 @@
-
 const db = require("../db");
 
 // Mengubah durasi teks menjadi angka menit
@@ -62,11 +61,7 @@ const saveGenres = async (connection, mediaId, genres) => {
 };
 
 // Menyimpan rekomendasi
-const saveRecommendations = async (
-  connection,
-  movieId,
-  recommendations,
-) => {
+const saveRecommendations = async (connection, movieId, recommendations) => {
   if (!Array.isArray(recommendations)) {
     throw new Error("Rekomendasi harus berupa array ID film");
   }
@@ -92,10 +87,12 @@ const saveRecommendations = async (
 };
 
 // Mengambil semua film
+
 const getAllMovies = async () => {
   const connection = await db.getConnection();
 
   try {
+    // Query 1: Mengambil semua film
     const [movies] = await connection.execute(
       `SELECT
           m.id,
@@ -120,22 +117,57 @@ const getAllMovies = async () => {
        ORDER BY m.id`,
     );
 
-    for (const movie of movies) {
-      movie.duration = movie.duration_minutes
-        ? `${movie.duration_minutes} min`
-        : null;
-
-      delete movie.duration_minutes;
-
-      movie.genre = await getGenres(connection, movie.id);
-
-      movie.recommendation_movie_1 = await getRecommendations(
-        connection,
-        movie.id,
-      );
+    if (movies.length === 0) {
+      return [];
     }
 
-    return movies;
+    // Query 2: Mengambil genre seluruh film
+    const [genres] = await connection.execute(
+      `SELECT mg.media_id, g.name
+       FROM media_genres mg
+       JOIN genres g ON mg.genre_id = g.id
+       JOIN movies_new mn ON mn.media_id = mg.media_id
+       ORDER BY mg.media_id, g.name`,
+    );
+
+    // Query 3: Mengambil rekomendasi seluruh film
+    const [recommendations] = await connection.execute(
+      `SELECT movie_id, recommended_movie_id
+       FROM movie_recommendations_new
+       ORDER BY movie_id, position`,
+    );
+
+    const genresMap = new Map();
+    const recommendationsMap = new Map();
+
+    for (const genre of genres) {
+      if (!genresMap.has(genre.media_id)) {
+        genresMap.set(genre.media_id, []);
+      }
+
+      genresMap.get(genre.media_id).push(genre.name);
+    }
+
+    for (const recommendation of recommendations) {
+      if (!recommendationsMap.has(recommendation.movie_id)) {
+        recommendationsMap.set(recommendation.movie_id, []);
+      }
+
+      recommendationsMap
+        .get(recommendation.movie_id)
+        .push(recommendation.recommended_movie_id);
+    }
+
+    return movies.map((movie) => {
+      const { duration_minutes, ...data } = movie;
+
+      return {
+        ...data,
+        duration: duration_minutes ? `${duration_minutes} min` : null,
+        genre: genresMap.get(movie.id) ?? [],
+        recommendation_movie_1: recommendationsMap.get(movie.id) ?? [],
+      };
+    });
   } finally {
     connection.release();
   }
@@ -192,11 +224,7 @@ const createMovie = async (movie) => {
           duration_minutes,
           video_url
        ) VALUES (?, ?, ?)`,
-      [
-        movieId,
-        durationMinutes,
-        movie.video_url ?? null,
-      ],
+      [movieId, durationMinutes, movie.video_url ?? null],
     );
 
     await saveGenres(connection, movieId, movie.genre);
@@ -278,17 +306,12 @@ const updateMovie = async (id, movie) => {
       `UPDATE movies_new
        SET duration_minutes = ?, video_url = ?
        WHERE media_id = ?`,
-      [
-        durationMinutes,
-        movie.video_url ?? null,
-        id,
-      ],
+      [durationMinutes, movie.video_url ?? null, id],
     );
 
-    await connection.execute(
-      "DELETE FROM media_genres WHERE media_id = ?",
-      [id],
-    );
+    await connection.execute("DELETE FROM media_genres WHERE media_id = ?", [
+      id,
+    ]);
 
     await saveGenres(connection, id, movie.genre);
 
@@ -348,7 +371,7 @@ const deleteMovie = async (id) => {
 
     if (history.length > 0) {
       throw new Error(
-        "Film tidak dapat dihapus karena memiliki riwayat tontonan"
+        "Film tidak dapat dihapus karena memiliki riwayat tontonan",
       );
     }
 
@@ -369,7 +392,6 @@ const deleteMovie = async (id) => {
     connection.release();
   }
 };
-
 
 module.exports = {
   getAllMovies,
