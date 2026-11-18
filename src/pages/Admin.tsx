@@ -1,3 +1,7 @@
+// ==========================================
+// Masih dalam proses pengembangan
+//  // ======================================
+
 import { useEffect, useState } from "react";
 
 interface Movie {
