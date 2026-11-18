@@ -1,27 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router";
 import VideoPlayer from "../components/VideoPlayer";
-import { supabase } from "../components/utils/supabase";
+import { getMovies, getSeries } from "../components/type/MovieApi";
 import type {
   IResponseMovie,
   IEpisode,
 } from "../components/type/IResponMovies";
 
 export type { IEpisode };
-
-interface ISeriesRecord {
-  id: number;
-  data: IResponseMovie;
-}
-
-interface IMovieRecord {
-  id: number | string;
-  data: {
-    title: string;
-    description: string;
-  };
-  video_url: string | null;
-}
 
 export default function WatchMoviePage() {
   const { id } = useParams();
@@ -30,7 +16,7 @@ export default function WatchMoviePage() {
   const mediaTypeParam = searchParams.get("type");
   const episodeParam = searchParams.get("episode");
 
-  const [movie, setMovie] = useState<IMovieRecord | null>(null);
+  const [movie, setMovie] = useState<IResponseMovie | null>(null);
   const [series, setSeries] = useState<IResponseMovie | null>(null);
   const [selectedEpisode, setSelectedEpisode] = useState<IEpisode | null>(null);
   const [loading, setLoading] = useState(true);
@@ -52,79 +38,71 @@ export default function WatchMoviePage() {
       setSeries(null);
       setSelectedEpisode(null);
 
-      // PEMUTARAN SERIES
+      try {
+        const mediaId = Number(id);
 
-      if (mediaTypeParam === "series" || episodeParam !== null) {
-        const episodeNumber = episodeParam === null ? 1 : Number(episodeParam);
-
-        if (!Number.isInteger(episodeNumber) || episodeNumber < 1) {
-          setErrorMessage("Nomor episode tidak valid.");
-          setLoading(false);
-          return;
+        if (!Number.isSafeInteger(mediaId) || mediaId <= 0) {
+          throw new Error("ID tidak valid.");
         }
 
-        const { data, error } = await supabase
-          .from("series")
-          .select("id, data")
-          .eq("id", id)
-          .single();
+        const isSeries = mediaTypeParam === "series" || episodeParam !== null;
 
-        if (!isMounted) return;
+        if (isSeries) {
+          const episodeNumber =
+            episodeParam === null ? 1 : Number(episodeParam);
 
-        if (error) {
-          console.error("Gagal mengambil series:", error);
+          if (!Number.isInteger(episodeNumber) || episodeNumber < 1) {
+            setErrorMessage("Nomor episode tidak valid.");
+            return;
+          }
 
-          setErrorMessage("Series tidak ditemukan atau gagal dimuat.");
+          const seriesData = await getSeries();
 
-          setLoading(false);
-          return;
+          if (!isMounted) return;
+
+          const selectedSeries = seriesData.find((item) => item.id === mediaId);
+
+          if (!selectedSeries) {
+            setErrorMessage("Series tidak ditemukan.");
+            return;
+          }
+
+          const episode = selectedSeries.episodes?.find(
+            (item) => item.episode_number === episodeNumber,
+          );
+
+          if (!episode) {
+            setErrorMessage("Episode tidak ditemukan.");
+            return;
+          }
+
+          setSeries(selectedSeries);
+          setSelectedEpisode(episode);
+        } else {
+          const movieData = await getMovies();
+
+          if (!isMounted) return;
+
+          const selectedMovie = movieData.find((item) => item.id === mediaId);
+
+          if (!selectedMovie) {
+            setErrorMessage("Film tidak ditemukan.");
+            return;
+          }
+
+          setMovie(selectedMovie);
         }
+      } catch (error) {
+        console.error("Gagal mengambil data pemutar:", error);
 
-        const record = data as ISeriesRecord;
-        const seriesData: IResponseMovie = {
-          ...record.data,
-          id: record.id,
-        };
-
-        setSeries(seriesData);
-
-        const episode = seriesData.episodes?.find(
-          (item) => item.episode_number === episodeNumber,
-        );
-
-        if (!episode) {
-          setErrorMessage("Episode tidak ditemukan.");
-          setLoading(false);
-          return;
+        if (isMounted) {
+          setErrorMessage("Konten tidak ditemukan atau gagal dimuat.");
         }
-
-        setSelectedEpisode(episode);
-        setLoading(false);
-
-        return;
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
-
-      // PEMUTARAN MOVIE
-
-      const { data, error } = await supabase
-        .from("movies")
-        .select("id, data, video_url")
-        .eq("id", id)
-        .single();
-
-      if (!isMounted) return;
-
-      if (error) {
-        console.error("Gagal mengambil film:", error);
-
-        setErrorMessage("Film tidak ditemukan atau gagal dimuat.");
-
-        setLoading(false);
-        return;
-      }
-
-      setMovie(data as IMovieRecord);
-      setLoading(false);
     }
 
     fetchWatchData();
@@ -133,7 +111,6 @@ export default function WatchMoviePage() {
       isMounted = false;
     };
   }, [id, episodeParam, mediaTypeParam]);
-
 
   if (loading) {
     return <p>Memuat video...</p>;
@@ -160,6 +137,8 @@ export default function WatchMoviePage() {
           src={selectedEpisode.video_url}
           title={selectedEpisode.title}
           description={selectedEpisode.description}
+          mediaId={series.id}
+          episodeId={selectedEpisode.episode_id}
           episodes={series.episodes ?? []}
           activeEpisode={selectedEpisode.episode_number}
           onEpisodeSelect={(episode) => {
@@ -188,8 +167,10 @@ export default function WatchMoviePage() {
     <section className="watch-movie">
       <VideoPlayer
         src={movie.video_url}
-        title={movie.data.title}
-        description={movie.data.description}
+        title={movie.title ?? ""}
+        description={movie.description ?? ""}
+        mediaId={movie.id}
+        episodeId={null}
       />
     </section>
   );

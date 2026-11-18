@@ -6,7 +6,7 @@
 
 .profile-container {
   display: flex;
-  height: 649px;
+  height: 720px;
   padding: 40px 80px;
   position: relative;
 }
@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   width: 642px;
-  height: 428px;
+  height: 500px;
   margin: 32px 0px;
   gap: 32px;
 }
@@ -23,7 +23,9 @@
 .user-img {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 140px;
+  width: 287px;
   gap: 24px;
 }
 
@@ -82,12 +84,28 @@
   color: var(--text-light-primary);
 }
 
+.input-profile input:focus-visible {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
 .input-profile button {
   width: 20px;
 }
 
 .input-profile label {
   color: var(--text-light-disabled);
+}
+
+.input-profile > div {
+  width: 100%;
+}
+
+.save-button {
+  display: flex;
+  width: 100%;
+  gap: 20px;
 }
 
 .subscription-box {
@@ -100,6 +118,25 @@
   gap: 20px;
   border-radius: 12px;
   background-color: var(--extra-background);
+}
+
+.premium-card {
+  background: linear-gradient(286.17deg, #192db7 0%, #5370d4 100%);
+  height: 210px;
+}
+
+.premium-card > div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.subscription-premium-badge {
+  width: fit-content;
+  padding: 6px 22px;
+  border-radius: 48px;
+  background-color: var(--text-light-secondary);
+  color: var(--primary-color-300);
 }
 
 .subscription-box :first-child {
@@ -156,6 +193,52 @@
   justify-content: space-between;
 }
 
+/* Wrapper input password */
+.profile-password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Input password */
+.profile-password-wrapper input {
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 55px;
+}
+
+/* Tombol tampilkan/sembunyikan password */
+.input-profile .profile-password-wrapper .profile-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-90%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+  padding: 0;
+
+  background: transparent;
+  border: none;
+  color: #bcbcbc;
+  cursor: pointer;
+}
+
+.input-profile .profile-password-wrapper .profile-password-toggle:hover {
+  color: #ffffff;
+}
+
+.input-profile
+  .profile-password-wrapper
+  .profile-password-toggle:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 @media (max-width: 580px), (max-height: 900px) {
   .profile-page .heading-3 {
     font-size: 20px;
@@ -165,7 +248,8 @@
     font-size: 18px;
   }
 
-  .profile-page .body-large-regular {
+  .profile-page .body-large-regular,
+  .profile-page .body-medium-medium {
     font-size: 14px;
   }
 
@@ -180,7 +264,7 @@
   .profile-container {
     display: flex;
     flex-direction: column;
-    height: 633px;
+    height: 753px;
     width: 320px;
     padding: 0;
     gap: 20px;
@@ -191,15 +275,14 @@
     display: flex;
     flex-direction: column;
     width: 320px;
-    height: 332px;
+    height: 422px;
     margin: 0px;
     gap: 24px;
   }
 
   .user-img {
-    display: flex;
-    align-items: center;
     height: 80px;
+    width: 213px;
     gap: 24px;
   }
 
@@ -207,6 +290,10 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+  }
+
+  .input-profile > div {
+    width: 100%;
   }
 
   .user-img img {
@@ -242,6 +329,10 @@
     height: 191px;
   }
 
+  .premium-card {
+    height: 214px;
+  }
+
   .navlink :first-child {
     width: 189px;
     height: 34px;
@@ -251,13 +342,13 @@
   }
 
   label.upload-photo {
-  width: 91px;
-  height: 36px;
-  font-size: 14px;
-  text-align: center;
-  padding: 0;
-  line-height: 2.5;
-}
+    width: 91px;
+    height: 36px;
+    font-size: 14px;
+    text-align: center;
+    padding: 0;
+    line-height: 2.5;
+  }
 
   .my-list-profile {
     display: flex;

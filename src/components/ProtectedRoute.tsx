@@ -1,41 +1,27 @@
-import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router";
-import { supabase } from "./utils/supabase";
 
 // Melindungi halaman yang membutuhkan login
 export function ProtectedRoute() {
-  const [isLogin, setIsLogin] = useState<boolean | null>(null);
+  const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    async function checkSession() {
-      const { data, error } = await supabase.auth.getSession();
-
-      if (error) {
-        console.error(error);
-        setIsLogin(false);
-        return;
-      }
-      
-      setIsLogin(!!data.session);
-    }
-
-    checkSession();
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsLogin(!!session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  if (isLogin === null) {
-    return <p>Memeriksa autentikasi...</p>;
+  if (!token) {
+    return <Navigate to="/login" replace />;
   }
 
-  if (!isLogin) {
+  return <Outlet />;
+}
+
+// Melindungi halaman khusus admin
+export function AdminRoute() {
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+
+  if (!token) {
     return <Navigate to="/login" replace />;
+  }
+
+  if (user?.role !== "admin") {
+    return <Navigate to="/" replace />;
   }
 
   return <Outlet />;
@@ -43,37 +29,9 @@ export function ProtectedRoute() {
 
 // Mencegah pengguna yang sudah login membuka Login dan Register
 export function PublicRoute() {
-  const [isLogin, setIsLogin] = useState<boolean | null>(null);
+  const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    async function checkSession() {
-      const { data, error } = await supabase.auth.getSession();
-
-      if (error) {
-        console.error(error);
-        setIsLogin(false);
-        return;
-      }
-
-      setIsLogin(!!data.session);
-    }
-
-    checkSession();
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsLogin(!!session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  if (isLogin === null) {
-    return <p>Memeriksa autentikasi...</p>;
-  }
-
-  if (isLogin) {
+  if (token) {
     return <Navigate to="/" replace />;
   }
 
@@ -82,16 +40,8 @@ export function PublicRoute() {
 
 // Fungsi logout
 export async function logoutUser() {
-  const { error } = await supabase.auth.signOut();
-
-  if (error) {
-    console.error("Gagal logout:", error);
-    alert("Gagal keluar dari akun!");
-    return;
-  }
-
-  localStorage.removeItem("isLogin");
-  localStorage.removeItem("username");
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
 
   window.location.href = "/login";
 }

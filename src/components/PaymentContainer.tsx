@@ -1,5 +1,5 @@
-import { useLocation, Navigate } from "react-router";
-import { ISubscriptionPlan, formatRupiah } from "../data/subscriptionPlans";
+import { formatRupiah } from "../data/subscriptionPlans";
+import type { ISubscriptionPlan } from "../data/subscriptionPlans";
 import CheckImg from "../assets/logo/check.png";
 import Visa from "../assets/logo/visa.png";
 import MasterCard from "../assets/logo/master-card.png";
@@ -9,21 +9,38 @@ import BCACard from "../assets/logo/BCA.png";
 
 const ADMIN_FEE = 3000;
 
-interface IPaymentLocationState {
-  plan: ISubscriptionPlan;
+interface IPaymentContainerProps {
+  selectedPlan: ISubscriptionPlan;
+  loading: boolean;
+  message: string;
+  paymentSuccess: boolean;
+  alreadySubscribed: boolean;
+  onPayment: () => void;
 }
 
-export function PaymentContainer() {
-  const location = useLocation();
-  const state = location.state as IPaymentLocationState | null;
-  const selectedPlan = state?.plan;
-
-  // Jika pengguna membuka halaman payment tanpa memilih paket
-  if (!selectedPlan) {
-    return <Navigate to="/subscription" replace />;
-  }
-
+export function PaymentContainer({
+  selectedPlan,
+  loading,
+  message,
+  paymentSuccess,
+  alreadySubscribed,
+  onPayment,
+}: IPaymentContainerProps) {
+  const isIndividual = selectedPlan.id === "individual";
   const totalPayment = selectedPlan.price + ADMIN_FEE;
+
+  const buttonDisabled =
+    !isIndividual || loading || paymentSuccess || alreadySubscribed;
+
+  const buttonText = alreadySubscribed
+    ? "Sudah Berlangganan"
+    : paymentSuccess
+      ? "Pembayaran Berhasil"
+      : loading
+        ? "Memproses..."
+        : isIndividual
+          ? "Bayar"
+          : "Pembayaran Belum Tersedia";
 
   return (
     <div className="payment-container">
@@ -33,11 +50,15 @@ export function PaymentContainer() {
         {/* Paket yang dipilih */}
         <div className="subscription-bottom-box subscription-payment">
           <div className="subscription-bottom-box-up">
-            <button className="body-large-semiBold">{selectedPlan.name}</button>
+            <button className="body-large-semiBold" type="button">
+              {selectedPlan.name}
+            </button>
+
             <span className="body-small-regular">
               Mulai dari {formatRupiah(selectedPlan.price)}/bulan{" "}
               {selectedPlan.account}
             </span>
+
             <div className="body-small-regular">
               {selectedPlan.features.map((feature) => (
                 <div key={feature}>
@@ -51,7 +72,9 @@ export function PaymentContainer() {
           <span className="line"></span>
 
           <div className="subscription-bottom-box-down">
-            <button className="body-medium-bold">Langganan</button>
+            <button className="body-medium-bold" type="button">
+              Langganan
+            </button>
 
             <span className="caption-1-regular">
               Syarat dan Ketentuan Berlaku
@@ -63,6 +86,7 @@ export function PaymentContainer() {
         <div className="payment-box">
           <div className="payment-method-box">
             <span className="body-large-semiBold">Metode Pembayaran</span>
+
             <form className="body-medium-regular payment-method">
               <label>
                 <input type="radio" name="choice" value="card" />
@@ -72,6 +96,7 @@ export function PaymentContainer() {
                 <img src={AmericanExpress} alt="American Express" />
                 Kartu Debit/Kredit
               </label>
+
               <label>
                 <input type="radio" name="choice" value="bca" />
                 <img src={BCACard} alt="BCA" id="bca" />
@@ -90,6 +115,7 @@ export function PaymentContainer() {
                 type="text"
                 placeholder="Masukkan kode voucher"
               />
+
               <button type="button" className="body-medium-bold">
                 Gunakan
               </button>
@@ -99,6 +125,7 @@ export function PaymentContainer() {
           {/* Ringkasan transaksi */}
           <div className="transaction">
             <span className="body-large-semiBold">Ringkasan Transaksi</span>
+
             <div className="transaction-box body-medium-regular">
               <div>
                 <span>Paket Premium {selectedPlan.name}</span>
@@ -106,16 +133,40 @@ export function PaymentContainer() {
                   {formatRupiah(selectedPlan.price)}
                 </span>
               </div>
+
               <div>
                 <span>Biaya Admin</span>
                 <span className="money">{formatRupiah(ADMIN_FEE)}</span>
               </div>
+
               <div id="total-payment">
                 <span>Total Pembayaran</span>
                 <span className="money">{formatRupiah(totalPayment)}</span>
               </div>
             </div>
-            <button className="body-medium-bold">Bayar</button>
+            <div>
+              <button
+                type="button"
+                className="body-medium-bold"
+                disabled={buttonDisabled}
+                onClick={onPayment}
+              >
+                {buttonText}
+              </button>
+
+              {message && (
+                <p className="body-small-regular" role="status">
+                  {message}
+                </p>
+              )}
+
+              {!isIndividual && (
+                <p className="body-small-regular">
+                  Pembayaran paket {selectedPlan.name} belum tersedia. Untuk
+                  sementara, hanya paket Individual yang dapat diproses.
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </div>

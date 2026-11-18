@@ -1,4 +1,5 @@
-import { IMyListMovie, useMyListStore } from "../stores/useMyListStore";
+import { useMyListStore } from "../stores/useMyListStore";
+import type { IMyListMovie } from "../stores/useMyListStore";
 
 interface IMyListContainer {
   onMovieClick: (movie: IMyListMovie) => void;

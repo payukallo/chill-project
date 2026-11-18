@@ -1,7 +1,8 @@
 import "../assets/styles/videoPlayer.css";
 import "../assets/styles/episodePopup.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useVideoPlayer } from "./hooks/UseVideoPlayer";
+import { useWatchProgress } from "./hooks/UseWatchProgress";
 import { useVideoPlayerStore } from "../stores/useVideoPlayerStore";
 import { EpisodePopup } from "./EpisodePopup";
 import type { IEpisode } from "./type/IResponMovies";
@@ -10,66 +11,97 @@ interface IVideoPlayer {
   src: string;
   title: string;
   description: string;
+  mediaId?: number;
+  episodeId?: number | null;
   episodes?: IEpisode[];
   activeEpisode?: number;
   onEpisodeSelect?: (episode: IEpisode) => void;
 }
 
 export default function VideoPlayer({
-  src,
-  title,
-  description,
-  episodes = [],
-  activeEpisode = 1,
-  onEpisodeSelect,
+  src, title, description, mediaId, episodeId = null,
+  episodes = [], activeEpisode = 1, onEpisodeSelect,
 }: IVideoPlayer) {
   const {
-    videoRef,
-    playerRef,
-    isPlaying,
-    setIsPlaying,
-    volume,
-    setVolume,
-    playbackRate,
-    currentTime,
-    setCurrentTime,
-    duration,
-    setDuration,
-    showDescription,
-    setShowDescription,
-    showControls,
-    setShowControls,
-    showControlsTemporarily,
-    clearControlsTimeout,
-    handlePlayPause,
-    handleRewind,
-    handleForward,
-    handleVolume,
-    handlePlaybackRate,
-    handleSeek,
-    handleFullscreen,
-    formatTime,
+    videoRef, playerRef, isPlaying, setIsPlaying, volume, setVolume,
+    playbackRate, currentTime, setCurrentTime, duration, setDuration,
+    showDescription, setShowDescription, showControls, setShowControls,
+    showControlsTemporarily, clearControlsTimeout, handlePlayPause,
+    handleRewind, handleForward, handleVolume, handlePlaybackRate,
+    handleSeek, handleFullscreen, formatTime,
   } = useVideoPlayer();
 
-  const resetPlayer = useVideoPlayerStore(
-    (state) => state.resetPlayer
-  );
-
+  const resetPlayer = useVideoPlayerStore((state) => state.resetPlayer);
   const [showEpisodes, setShowEpisodes] = useState(false);
+  const pendingAutoPlayRef = useRef<{ episodeId: number | null; episodeNumber: number } | null>(null);
+  const autoNextInProgressRef = useRef(false);
 
-  useEffect(() => {
-    const video = videoRef.current;
+  const {
+    handlePlay, handleTimeUpdate, handleSeeked, handlePause, handleEnded,
+    beforeEpisodeChange, restoreWatchPosition, isRestoreReady,
+  } = useWatchProgress({
+    mediaId, episodeId, src, videoRef,
+    resetPlayer, setCurrentTime, setIsPlaying,
+  });
 
-    if (video) {
-      video.pause();
+  const handleEpisodeChange = (episode: IEpisode) => {
+    pendingAutoPlayRef.current = null;
+    if (episode.episode_id === episodeId) {
+      setShowEpisodes(false);
+      return;
     }
+    beforeEpisodeChange();
+    onEpisodeSelect?.(episode);
+    setShowEpisodes(false);
+  };
 
-    resetPlayer();
+  // Episode berikutnya ditentukan dari nomor episode, bukan urutan array.
+  const playNextEpisode = async (video: HTMLVideoElement) => {
+    if (autoNextInProgressRef.current) return;
+    autoNextInProgressRef.current = true;
+    try {
+      const saved = await handleEnded(video);
+      if (!saved || !onEpisodeSelect || episodes.length === 0) return;
 
-    return () => {
-      video?.pause();
-    };
-  }, [src, resetPlayer]);
+      const nextEpisode = episodes
+        .filter((episode) => episode.episode_number > activeEpisode)
+        .sort((a, b) => a.episode_number - b.episode_number)[0];
+
+      if (!nextEpisode) return; // Episode terakhir: cukup berhenti.
+
+      pendingAutoPlayRef.current = {
+        episodeId: nextEpisode.episode_id ?? null,
+        episodeNumber: nextEpisode.episode_number,
+      };
+      beforeEpisodeChange();
+      setShowEpisodes(false);
+      onEpisodeSelect(nextEpisode);
+    } finally {
+      autoNextInProgressRef.current = false;
+    }
+  };
+
+  const attemptAutoPlay = () => {
+    const pending = pendingAutoPlayRef.current;
+    const video = videoRef.current;
+    if (!pending || !video) return;
+    if (
+      (pending.episodeId !== null && episodeId !== pending.episodeId) ||
+      activeEpisode !== pending.episodeNumber
+    ) return;
+    if (video.readyState < HTMLMediaElement.HAVE_METADATA || !isRestoreReady(video)) return;
+
+    pendingAutoPlayRef.current = null;
+    void video.play().catch((error: unknown) => {
+      // Beberapa browser memblokir autoplay; pengguna tetap dapat menekan Play.
+      console.warn("Autoplay episode berikutnya diblokir browser:", error);
+    });
+  };
+
+  // Ketika props episode berubah, coba putar video baru setelah siap.
+  useEffect(() => {
+    attemptAutoPlay();
+  }, [src, episodeId, activeEpisode]);
 
   return (
     <div
@@ -86,24 +118,23 @@ export default function VideoPlayer({
     >
       <div className="video-screen">
         <video
-          key={src}
+          key={`${mediaId ?? "unknown"}:${episodeId ?? "movie"}:${src}`}
           ref={videoRef}
           src={src}
           playsInline
-          onTimeUpdate={(event) => {
-            setCurrentTime(event.currentTarget.currentTime);
-          }}
+          onTimeUpdate={(event) => handleTimeUpdate(event.currentTarget)}
+          onSeeked={(event) => handleSeeked(event.currentTarget)}
           onLoadedMetadata={(event) => {
             const video = event.currentTarget;
-
             setDuration(video.duration);
             video.volume = volume;
             video.muted = volume === 0;
             video.playbackRate = playbackRate;
+            void restoreWatchPosition(video).then(() => attemptAutoPlay());
           }}
-          onPlay={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
-          onEnded={() => setIsPlaying(false)}
+          onPlay={(event) => handlePlay(event.currentTarget)}
+          onPause={(event) => handlePause(event.currentTarget)}
+          onEnded={(event) => { void playNextEpisode(event.currentTarget); }}
           onVolumeChange={(event) => {
             const video = event.currentTarget;
             setVolume(video.muted ? 0 : video.volume);
@@ -127,10 +158,7 @@ export default function VideoPlayer({
         <EpisodePopup
           episodes={episodes}
           activeEpisode={activeEpisode}
-          onEpisodeSelect={(episode) => {
-            onEpisodeSelect?.(episode);
-            setShowEpisodes(false);
-          }}
+          onEpisodeSelect={handleEpisodeChange}
           onClose={() => setShowEpisodes(false)}
         />
       )}
@@ -183,17 +211,13 @@ export default function VideoPlayer({
                 max={1}
                 step={0.01}
                 value={volume}
-                onChange={(e) =>
-                  handleVolume(Number(e.target.value))
-                }
+                onChange={(e) => handleVolume(Number(e.target.value))}
               />
             </div>
           </div>
 
           <div className="video-control-center">
-            <span className="body-large-semiBold">
-              {title}
-            </span>
+            <span className="body-large-semiBold">{title}</span>
           </div>
 
           <div className="video-control-right">
@@ -235,9 +259,7 @@ export default function VideoPlayer({
 
             <select
               value={playbackRate}
-              onChange={(e) =>
-                handlePlaybackRate(Number(e.target.value))
-              }
+              onChange={(e) => handlePlaybackRate(Number(e.target.value))}
               aria-label="Kecepatan video"
             >
               <option value={0.5}>0.5x</option>
@@ -248,10 +270,7 @@ export default function VideoPlayer({
               <option value={2}>2x</option>
             </select>
 
-            <button
-              type="button"
-              onClick={handleFullscreen}
-            >
+            <button type="button" onClick={handleFullscreen}>
               ⛶
             </button>
           </div>

@@ -7,9 +7,14 @@ import SeriesPage from "../pages/Series";
 import MoviesPage from "../pages/Movies";
 import ProfilePage from "../pages/Profile";
 import WatchMoviePage from "../pages/WatchMovie";
-import { ProtectedRoute, PublicRoute } from "../components/ProtectedRoute";
+import {
+  ProtectedRoute,
+  PublicRoute,
+  AdminRoute,
+} from "../components/ProtectedRoute";
 import SubscriptionPage from "../pages/Subscription";
 import PaymentPage from "../pages/Payment";
+import EditMovieSeries from "../pages/Admin";
 
 export const router = createBrowserRouter([
   // Halaman khusus pengguna yang belum login
@@ -62,7 +67,18 @@ export const router = createBrowserRouter([
       {
         path: "/watch/:id",
         Component: WatchMoviePage,
-      }
+      },
+    ],
+  },
+
+  // Halaman khusus Admin
+  {
+    Component: AdminRoute,
+    children: [
+      {
+        path: "/edit_movie_series",
+        Component: EditMovieSeries,
+      },
     ],
   },
 ]);

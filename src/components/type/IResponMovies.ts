@@ -3,6 +3,7 @@ export interface IResponseMovie {
   type: number;
   title?: string;
   cover_url?: string;
+  video_url?: string | null;
   rating?: string;
   is_new_episode?: boolean;
   is_top_10?: boolean;
@@ -22,6 +23,7 @@ export interface IResponseMovie {
 }
 
 export interface IEpisode {
+  episode_id: number;
   episode_number: number;
   title: string;
   duration: string;

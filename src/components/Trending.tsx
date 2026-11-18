@@ -1,4 +1,4 @@
-import { IResponseMovie } from "./type/IResponMovies";
+import type { IResponseMovie } from "./type/IResponMovies";
 
 interface ITrendingMovie {
   movies: IResponseMovie[];

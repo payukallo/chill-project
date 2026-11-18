@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
 import type { IResponseMovie } from "../components/type/IResponMovies";
-import { supabase } from "../components/utils/supabase";
 import { api } from "../components/utils/axiosApi";
 
 export interface IMyListMovie extends Omit<IResponseMovie, "id"> {
@@ -10,22 +9,11 @@ export interface IMyListMovie extends Omit<IResponseMovie, "id"> {
   mediaType: "movie" | "series";
 }
 
-interface IMyListRecord {
-  id: string;
-  media_id: string;
-  media_type: "movie" | "series";
-}
-
-interface IMediaRow {
-  id: string;
-  data: IResponseMovie;
-}
-
 interface IMyListStore {
   myMovies: IMyListMovie[];
 
   setMyMovies: (movies: IMyListMovie[]) => void;
-  fetchMyList: (userId: string) => Promise<void>;
+  fetchMyList: () => Promise<void>;
   toggleMyList: (movie: IResponseMovie | IMyListMovie) => Promise<void>;
 
   isInMyList: (
@@ -41,19 +29,14 @@ const pendingMovies = new Set<string>();
 let requestId = 0;
 
 async function getAuthHeaders() {
-  const {
-    data: { session },
-    error,
-  } = await supabase.auth.getSession();
+  const token = localStorage.getItem("token");
 
-  if (error) throw error;
-
-  if (!session) {
+  if (!token) {
     throw new Error("Silakan login terlebih dahulu.");
   }
 
   return {
-    Authorization: `Bearer ${session.access_token}`,
+    Authorization: `Bearer ${token}`,
   };
 }
 
@@ -66,90 +49,74 @@ export const useMyListStore = create<IMyListStore>((set, get) => ({
   // READ MY LIST
   // =========================
 
-  fetchMyList: async (userId) => {
+  fetchMyList: async () => {
     const currentRequest = ++requestId;
 
     try {
       const headers = await getAuthHeaders();
 
-      const response = await api.get<IMyListRecord[]>("/my_list", {
-        params: {
-          select: "id,media_id,media_type",
-          user_id: `eq.${userId}`,
-        },
-        headers,
-      });
+      const response = await api.get<{
+        message: string;
+        data: Array<{
+          my_list_id: number;
+          media_id: number;
+          media_type: "movie" | "series";
+          created_at: string;
+          title: string;
+          cover_url: string | null;
+          rating: string;
+          year: number;
+          is_premium: number;
+          is_top_10: number;
+          top_rating_today: number;
+          is_new_episode: number;
+          description: string | null;
+          duration: string | null;
+          banner_url: string | null;
+          video_url: string | null;
+          genre: string[] | null;
+          film_maker: string | null;
+          age_rating: string | null;
+          cast_members: string | null;
+          episodes: IMyListMovie["episodes"] | null;
+          recommendation_movie_1: number[] | null;
+        }>;
+      }>("/my-list", { headers });
 
-      const myListRecords = response.data ?? [];
+      console.log("DATA MY LIST DARI BACKEND:", response.data.data);
+      console.table(response.data.data);
 
-      const movieIds = myListRecords
-        .filter((item) => item.media_type === "movie")
-        .map((item) => item.media_id);
-
-      const seriesIds = myListRecords
-        .filter((item) => item.media_type === "series")
-        .map((item) => item.media_id);
-
-      let movieData: IMediaRow[] = [];
-
-      if (movieIds.length > 0) {
-        const response = await api.get<IMediaRow[]>("/movies", {
-          params: {
-            select: "id,data",
-            id: `in.(${movieIds.join(",")})`,
-          },
-          headers,
-        });
-
-        movieData = response.data ?? [];
-      }
-
-      let seriesData: IMediaRow[] = [];
-
-      if (seriesIds.length > 0) {
-        const response = await api.get<IMediaRow[]>("/series", {
-          params: {
-            select: "id,data",
-            id: `in.(${seriesIds.join(",")})`,
-          },
-          headers,
-        });
-
-        seriesData = response.data ?? [];
-      }
-
-      const allMedia = [
-        ...movieData.map((item) => ({
-          ...item,
-          mediaType: "movie" as const,
-        })),
-        ...seriesData.map((item) => ({
-          ...item,
-          mediaType: "series" as const,
-        })),
-      ];
-
-      const formattedData: IMyListMovie[] = myListRecords
-        .map((record) => {
-          const media = allMedia.find(
-            (item) =>
-              item.id === record.media_id &&
-              item.mediaType === record.media_type,
-          );
-
-          if (!media) return null;
-
-          return {
-            ...media.data,
-            id: record.media_id,
-            myListId: record.id,
-            mediaType: record.media_type,
-          };
-        })
-        .filter((item): item is IMyListMovie => item !== null);
+      const formattedData: IMyListMovie[] = response.data.data.map(
+        (item) =>
+          ({
+            id: String(item.media_id),
+            myListId: String(item.my_list_id),
+            mediaType: item.media_type,
+            type: item.media_type === "movie" ? 0 : 1,
+            title: item.title,
+            description: item.description ?? "",
+            rating: String(item.rating),
+            year: item.year ?? 0,
+            duration: item.duration ?? "",
+            cover_url: item.cover_url ?? undefined,
+            banner_url: item.banner_url ?? undefined,
+            video_url: item.video_url ?? undefined,
+            genre: item.genre ?? [],
+            is_premium: Boolean(item.is_premium),
+            is_top_10: Boolean(item.is_top_10),
+            top_rating_today: Boolean(item.top_rating_today),
+            is_new_episode: Boolean(item.is_new_episode),
+            film_maker: item.film_maker ?? undefined,
+            age: item.age_rating ?? undefined,
+            cast: item.cast_members ?? "",
+            episodes: item.episodes ?? [],
+            recommendation_movie_1: item.recommendation_movie_1 ?? [],
+          }) as IMyListMovie,
+      );
 
       if (currentRequest === requestId) {
         set({ myMovies: formattedData });
+        console.log("STATE MY LIST DIPERBARUI:", formattedData);
       }
     } catch (error) {
       console.error("Gagal mengambil My List:", error);
@@ -164,7 +131,14 @@ export const useMyListStore = create<IMyListStore>((set, get) => ({
     if (movie.id == null) return;
 
     const movieId = String(movie.id);
-    const mediaType: "movie" | "series" = movie.type === 1 ? "movie" : "series";
+
+    const mediaType: "movie" | "series" =
+      "mediaType" in movie
+        ? movie.mediaType
+        : movie.type === 0
+          ? "movie"
+          : "series";
+
     const pendingKey = `${mediaType}:${movieId}`;
 
     if (pendingMovies.has(pendingKey)) return;
@@ -178,7 +152,7 @@ export const useMyListStore = create<IMyListStore>((set, get) => ({
     const previousMovies = get().myMovies;
 
     try {
-      // OPTIMISTIC UI
+      const headers = await getAuthHeaders();
 
       if (existingMovie) {
         set((state) => ({
@@ -186,6 +160,14 @@ export const useMyListStore = create<IMyListStore>((set, get) => ({
             (item) => item.myListId !== existingMovie.myListId,
           ),
         }));
+
+        await api.delete("/my-list", {
+          data: {
+            mediaId: Number(movieId),
+            mediaType: mediaType,
+          },
+          headers,
+        });
       } else {
         const temporaryMovie: IMyListMovie = {
           ...movie,
@@ -197,67 +179,17 @@ export const useMyListStore = create<IMyListStore>((set, get) => ({
         set((state) => ({
           myMovies: [...state.myMovies, temporaryMovie],
         }));
-      }
 
-      // Memeriksa pengguna yang sedang login
-
-      const {
-        data: { user },
-        error: userError,
-      } = await supabase.auth.getUser();
-
-      if (userError) throw userError;
-
-      if (!user) {
-        throw new Error("Silakan login terlebih dahulu.");
-      }
-
-      const headers = await getAuthHeaders();
-
-      // DELETE
-
-      if (existingMovie) {
-        await api.delete("/my_list", {
-          params: {
-            id: `eq.${existingMovie.myListId}`,
-            user_id: `eq.${user.id}`,
-          },
-          headers,
-        });
-      } else {
-        // CREATE
-
-        const response = await api.post<IMyListRecord[]>(
-          "/my_list",
+        await api.post(
+          "/my-list",
           {
-            user_id: user.id,
-            media_id: movieId,
-            media_type: mediaType,
+            mediaId: Number(movieId),
+            mediaType: mediaType,
           },
-          {
-            headers: {
-              ...headers,
-              Prefer: "return=representation",
-            },
-          },
+          { headers },
         );
 
-        const data = response.data[0];
-
-        if (!data) {
-          throw new Error("Gagal mendapatkan ID My List.");
-        }
-
-        set((state) => ({
-          myMovies: state.myMovies.map((item) =>
-            item.myListId === `temp-${mediaType}-${movieId}`
-              ? {
-                  ...item,
-                  myListId: data.id,
-                }
-              : item,
-          ),
-        }));
+        await get().fetchMyList();
       }
     } catch (error) {
       console.error("Gagal memperbarui My List:", error);
