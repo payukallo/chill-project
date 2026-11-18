@@ -259,7 +259,8 @@
     font-size: 14px;
   }
 
-  .profile-page .body-medium-bold {
+  .profile-page .body-medium-bold,
+  .profile-page .body-small-regular {
     font-size: 12px;
   }
 
@@ -297,8 +298,8 @@
 
   .user-img {
     height: 80px;
-    width: 213px;
-    gap: 24px;
+    width: 193px;
+    gap: 10px;
   }
 
   .img-input {
