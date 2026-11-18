@@ -1,113 +1,67 @@
-import MuteVolume from "../assets/logo/mute-volume.png";
-import { createPortal } from "react-dom";
+import { useState } from "react";
 import type { IMyListMovie } from "../stores/useMyListStore";
-import { useMyListStore } from "../stores/useMyListStore";
+import type { IResponseMovie, IEpisode } from "./type/IResponMovies";
+import { PopUpMovieTop } from "./PopUpMovieTop";
+import { PopUpSeriesTop } from "./PopUpSeriesTop";
 
-interface IPopUpMovie {
+interface IPopUpMyList {
   movie: IMyListMovie;
+  movies: IResponseMovie[];
   onClose: () => void;
 }
 
-export function PopUpMyListProfile({ movie, onClose }: IPopUpMovie) {
-  const toggleMyList = useMyListStore((state) => state.toggleMyList);
-  const isInMyList = useMyListStore((state) => state.isInMyList);
+export function PopUpMyListProfile({ movie, movies, onClose }: IPopUpMyList) {
+  // ========================================
+  // DATA MOVIE / SERIES
+  // ========================================
 
-  const isAdded = isInMyList(movie.id, movie.mediaType);
+  const selectedMovie: IResponseMovie = {
+    ...movie,
+    id: Number(movie.id),
+    type: movie.mediaType === "movie" ? 0 : 1,
+  };
 
-  function handleWatchMovie() {
-    let url: string;
+  const [activeMovie, setActiveMovie] = useState<IResponseMovie>(selectedMovie);
 
-    if (movie.mediaType === "series") {
-      // Series dimulai dari episode pertama
-      url = `/watch/${movie.id}?type=series&episode=1`;
-    } else {
-      // Movie
-      url = `/watch/${movie.id}?type=movie`;
-    }
+  // ========================================
+  // MEMUTAR EPISODE DI TAB BARU
+  // ========================================
+
+  const handlePlayEpisode = (episode: IEpisode) => {
+    const url =
+      `/watch/${selectedMovie.id}` +
+      `?type=series&episode=${episode.episode_number}`;
 
     window.open(url, "_blank", "noopener,noreferrer");
+
+    onClose();
+  };
+
+  // ========================================
+  // POPUP SERIES
+  // ========================================
+
+  if (movie.mediaType === "series") {
+    return (
+      <PopUpSeriesTop
+        movie={selectedMovie}
+        onClose={onClose}
+        onPlayEpisode={handlePlayEpisode}
+        fromContinueWatching={true}
+      />
+    );
   }
 
-  return createPortal(
-    <div className="page-overlay">
-      <div className="pop-up-overlay pop-up-my-list-profile">
-        <div className="top-pop-up-container">
-          <img src={movie.banner_url} alt={movie.title} />
+  // ========================================
+  // POPUP MOVIE
+  // ========================================
 
-          <div className="top-pop-up">
-            <button className="close" onClick={onClose}>
-              x
-            </button>
-
-            <div className="head-pop-up">
-              <span className="pop-up-title heading-3">{movie.title}</span>
-
-              <div className="pop-up-btn">
-                <div className="pop-up-btn-left">
-                  <button
-                    className="pop-up-button-left body-medium-bold"
-                    onClick={handleWatchMovie}
-                  >
-                    Mulai
-                  </button>
-
-                  <button
-                    className="add-pop-up text-light-secondary"
-                    onClick={() => toggleMyList(movie)}
-                  >
-                    {isAdded ? "-" : "+"}
-                  </button>
-                </div>
-
-                <button id="volume">
-                  <img src={MuteVolume} alt="Volume" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bottom-pop-up-series">
-          <div className="pop-up-description-series body-medium-regular">
-            <div className="description-left">
-              <div className="year">
-                <span>{movie.year}</span>
-                <span>{movie.duration}</span>
-
-                <div className="age-recommendation">
-                  <span>{movie.age}</span>
-                </div>
-              </div>
-
-              <p>{movie.description}</p>
-            </div>
-
-            <div className="description-right">
-              <div className="description-right-list">
-                <div className="span-pop-up">
-                  <span>Cast</span>
-                </div>
-                <p>: {movie.cast}</p>
-              </div>
-
-              <div className="description-right-list">
-                <div className="span-pop-up">
-                  <span>Genre</span>
-                </div>
-                <p>: {movie.genre?.join(", ") ?? "Belum tersedia"}</p>
-              </div>
-
-              <div className="description-right-list">
-                <div className="span-pop-up">
-                  <span>Pembuat Film</span>
-                </div>
-                <p>: {movie.film_maker}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>,
-    document.body,
+  return (
+    <PopUpMovieTop
+      movie={activeMovie}
+      movies={movies}
+      onClose={onClose}
+      onMovieClick={setActiveMovie}
+    />
   );
 }

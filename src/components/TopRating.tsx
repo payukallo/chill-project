@@ -1,4 +1,4 @@
-import { IResponseMovie } from "./type/IResponMovies";
+import type { IResponseMovie } from "./type/IResponMovies";
 
 interface ITopRatingMovie {
   movies: IResponseMovie[];
@@ -16,7 +16,7 @@ export function TopRatingMovies({
       <h3 className="heading-3">{headTitle}</h3>
       <div className="movie-list">
         {movies.map((movie) => (
-          <div className="box">
+          <div className="box" key={`${movie.type}-${movie.id}`}>
             <img
               src={movie.cover_url}
               alt={movie.title}

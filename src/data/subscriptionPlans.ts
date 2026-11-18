@@ -7,6 +7,18 @@ export interface ISubscriptionPlan {
   features: string[];
 }
 
+export interface ISubscriptionPackageAPI {
+  id: number;
+  name: string;
+  price: string;
+  billing_interval: string;
+  min_accounts: number;
+  max_accounts: number;
+  video_quality: string;
+  ad_free: number;
+  download_enabled: number;
+}
+
 export const subscriptionPlans: ISubscriptionPlan[] = [
   {
     id: "individual",
@@ -40,4 +52,53 @@ export const formatRupiah = (price: number) => {
     currency: "IDR",
     maximumFractionDigits: 0,
   }).format(price);
+};
+
+export const mapSubscriptionPackage = (
+  pkg: ISubscriptionPackageAPI,
+): ISubscriptionPlan => {
+  const account =
+    pkg.min_accounts === pkg.max_accounts
+      ? `${pkg.max_accounts} Akun`
+      : `${pkg.min_accounts}-${pkg.max_accounts} Akun`;
+
+  const features: string[] = [];
+
+  if (pkg.ad_free === 1) {
+    features.push("Tidak ada iklan");
+  }
+
+  features.push(`Kualitas ${pkg.video_quality}`);
+
+  if (pkg.download_enabled === 1) {
+    features.push("Download konten pilihan");
+  }
+
+  return {
+    id: pkg.name.toLowerCase(),
+    name: pkg.name,
+    price: Number(pkg.price),
+    account,
+    quality: pkg.video_quality,
+    features,
+  };
+};
+
+export const fetchSubscriptionPlans = async (): Promise<
+  ISubscriptionPlan[]
+> => {
+  const response = await fetch(
+    "http://localhost:5000/api/subscriptions/packages",
+  );
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil paket langganan");
+  }
+
+  const result: {
+    message: string;
+    data: ISubscriptionPackageAPI[];
+  } = await response.json();
+
+  return result.data.map(mapSubscriptionPackage);
 };

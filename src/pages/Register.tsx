@@ -1,14 +1,19 @@
 import "../assets/styles/register.css";
 import { useNavigate } from "react-router";
 import type { FormEvent } from "react";
-import { supabase } from "../components/utils/supabase";
-import { usernameToAuthEmail } from "../components/utils/authUsername";
+import { api } from "../components/utils/axiosApi";
 import { Logo } from "../login-regis/Logo";
 import { Title } from "../login-regis/Title";
 import { Password } from "../login-regis/Password";
 import { UserName } from "../login-regis/UserName";
+import { Email } from "../login-regis/Email";
 import { LoginRegisBtn } from "../login-regis/LoginRegisBtn";
 import { HasAccount } from "../login-regis/HasAccount";
+
+interface IRegisterResponse {
+  message: string;
+  userId: number;
+}
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -17,15 +22,19 @@ export default function RegisterPage() {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
+
     const username = String(formData.get("username") ?? "")
+      .trim()
+      .toLowerCase();
+
+    const email = String(formData.get("email") ?? "")
       .trim()
       .toLowerCase();
 
     const password = String(formData.get("password") ?? "");
     const confirmPassword = String(formData.get("confirmPassword") ?? "");
 
-    // Validasi password
-    if (!username || !password || !confirmPassword) {
+    if (!username || !email || !password || !confirmPassword) {
       alert("Semua kolom wajib diisi!");
       return;
     }
@@ -35,45 +44,63 @@ export default function RegisterPage() {
       return;
     }
 
-    if (password.length < 8) {
-      alert("Kata sandi minimal 8 karakter!");
+    if (username.length < 3 || username.length > 50) {
+      alert("Username harus terdiri dari 3-50 karakter!");
+      return;
+    }
+
+    if (password.length < 8 || password.length > 72) {
+      alert("Kata sandi harus terdiri dari 8-72 karakter!");
+      return;
+    }
+
+    // Minimal satu huruf besar
+    if (!/[A-Z]/.test(password)) {
+      alert("Kata sandi harus memiliki minimal 1 huruf besar!");
+      return;
+    }
+
+    // Minimal satu huruf kecil
+    if (!/[a-z]/.test(password)) {
+      alert("Kata sandi harus memiliki minimal 1 huruf kecil!");
+      return;
+    }
+
+    // Minimal satu angka
+    if (!/[0-9]/.test(password)) {
+      alert("Kata sandi harus memiliki minimal 1 angka!");
+      return;
+    }
+
+    // Minimal satu simbol
+    if (!/[^A-Za-z0-9\s]/.test(password)) {
+      alert(
+        "Kata sandi harus memiliki minimal 1 simbol, seperti @, #, !, atau $!",
+      );
       return;
     }
 
     try {
-      // Mengubah username menjadi email internal
-      const authEmail = usernameToAuthEmail(username);
-
-      // Registrasi Supabase
-      const { data, error } = await supabase.auth.signUp({
-        email: authEmail,
+      const response = await api.post<IRegisterResponse>("/users/register", {
+        username,
+        email,
         password,
-        options: {
-          data: {
-            username,
-          },
-        },
       });
 
-      if (error) throw error;
-
-      if (!data.user) {
-        throw new Error("Registrasi gagal. Silakan coba kembali.");
-      }
-
-      alert("Registrasi berhasil!");
-
-      // Jika session tersedia, langsung masuk ke halaman utama
-      if (data.session) {
-        navigate("/");
-      } else {
-        navigate("/login");
-      }
-    } catch (error) {
+      alert(response.data.message);
+      navigate("/login");
+    } catch (error: unknown) {
       console.error("Registrasi gagal:", error);
 
-      if (error instanceof Error) {
-        alert(error.message);
+      if (typeof error === "object" && error !== null && "response" in error) {
+        const axiosError = error as {
+          response?: { data?: { message?: string } };
+        };
+
+        alert(
+          axiosError.response?.data?.message ??
+            "Terjadi kesalahan saat registrasi.",
+        );
       } else {
         alert("Terjadi kesalahan saat registrasi.");
       }
@@ -84,17 +111,22 @@ export default function RegisterPage() {
     <main className="register-page">
       <form className="register-container" onSubmit={handleRegister}>
         <Logo />
-        <Title title={"Daftar"} subTitle={"Selamat datang!"} />
-        <UserName autoComplete={"username"} />
-        <Password paraPassword={"Kata Sandi"} inputName="password" />
+        <Title title="Daftar" subTitle="Selamat datang!" />
+
+        <UserName autoComplete="username" />
+        <Email autoComplete="email" />
+
+        <Password paraPassword="Kata Sandi" inputName="password" />
+
         <div className="password-container">
           <Password
-            paraPassword={"Konfirmasi Kata Sandi"}
+            paraPassword="Konfirmasi Kata Sandi"
             inputName="confirmPassword"
           />
           <HasAccount />
         </div>
-        <LoginRegisBtn upBtn={"Daftar"} downBtn={"Daftar dengan Google"} />
+
+        <LoginRegisBtn upBtn="Daftar" downBtn="Daftar dengan Google" />
       </form>
     </main>
   );
