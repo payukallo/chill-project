@@ -142,30 +142,22 @@ export const useProfileStore = create<IProfileStore>((set, get) => ({
       throw new Error("Password baru minimal 8 karakter.");
     }
 
-    // Minimal satu huruf besar
     if (!/[A-Z]/.test(newPassword)) {
-      alert("Kata sandi harus memiliki minimal 1 huruf besar!");
-      return;
+      throw new Error("Kata sandi harus memiliki minimal 1 huruf besar!");
     }
 
-    // Minimal satu huruf kecil
     if (!/[a-z]/.test(newPassword)) {
-      alert("Kata sandi harus memiliki minimal 1 huruf kecil!");
-      return;
+      throw new Error("Kata sandi harus memiliki minimal 1 huruf kecil!");
     }
 
-    // Minimal satu angka
     if (!/[0-9]/.test(newPassword)) {
-      alert("Kata sandi harus memiliki minimal 1 angka!");
-      return;
+      throw new Error("Kata sandi harus memiliki minimal 1 angka!");
     }
 
-    // Minimal satu simbol
     if (!/[^A-Za-z0-9\s]/.test(newPassword)) {
-      alert(
+      throw new Error(
         "Kata sandi harus memiliki minimal 1 simbol, seperti @, #, !, atau $!",
       );
-      return;
     }
 
     try {
