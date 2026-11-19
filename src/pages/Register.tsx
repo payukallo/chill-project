@@ -54,25 +54,21 @@ export default function RegisterPage() {
       return;
     }
 
-    // Minimal satu huruf besar
     if (!/[A-Z]/.test(password)) {
       alert("Kata sandi harus memiliki minimal 1 huruf besar!");
       return;
     }
 
-    // Minimal satu huruf kecil
     if (!/[a-z]/.test(password)) {
       alert("Kata sandi harus memiliki minimal 1 huruf kecil!");
       return;
     }
 
-    // Minimal satu angka
     if (!/[0-9]/.test(password)) {
       alert("Kata sandi harus memiliki minimal 1 angka!");
       return;
     }
 
-    // Minimal satu simbol
     if (!/[^A-Za-z0-9\s]/.test(password)) {
       alert(
         "Kata sandi harus memiliki minimal 1 simbol, seperti @, #, !, atau $!",
