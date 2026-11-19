@@ -28,6 +28,7 @@ const createRateLimitMiddleware = (limiter) => {
       }
 
       const result = await limiter.limit(ip);
+      console.log("Rate limit IP:", ip);
 
       if (!result.success) {
         res.set(
