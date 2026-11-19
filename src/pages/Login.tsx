@@ -1,4 +1,5 @@
 import "../assets/styles/login.css";
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import type { FormEvent } from "react";
@@ -30,7 +31,7 @@ export default function LoginPage() {
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    // Mencegah submit berulang
+    // Mencegah login berulang
     if (isLoading) return;
 
     const formData = new FormData(event.currentTarget);
@@ -41,12 +42,12 @@ export default function LoginPage() {
 
     const password = String(formData.get("password") ?? "");
 
+    // Validasi input
     if (!username || !password) {
       alert("Username dan kata sandi wajib diisi!");
       return;
     }
 
-    // Aktifkan animasi loading
     setIsLoading(true);
 
     try {
@@ -66,23 +67,33 @@ export default function LoginPage() {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      // Ambil My List pengguna
+      // Ambil My List
       await useMyListStore.getState().fetchMyList();
 
       alert("Login berhasil!");
 
-      // Arahkan ke Home
+      // Redirect ke Home
       navigate("/");
     } catch (error) {
       console.error("Login gagal:", error);
 
-      if (error instanceof Error) {
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status;
+
+        if (status === 401) {
+          alert("Username atau password salah");
+        } else if (!error.response) {
+          alert("Tidak dapat terhubung ke server. Silakan coba lagi.");
+        } else {
+          alert("Terjadi kesalahan saat login. Silakan coba lagi.");
+        }
+      } else if (error instanceof Error) {
         alert(error.message);
       } else {
-        alert("Username atau kata sandi salah.");
+        alert("Terjadi kesalahan saat login. Silakan coba lagi.");
       }
     } finally {
-      // Matikan loading baik berhasil maupun gagal
+      // Matikan animasi loading
       setIsLoading(false);
     }
   }
@@ -95,30 +106,25 @@ export default function LoginPage() {
         aria-busy={isLoading}
       >
         <Logo />
-
         <Title title="Masuk" subTitle="Selamat datang kembali!" />
-
         <UserName autoComplete="username" />
-
         <div className="password-container">
           <Password paraPassword="Kata Sandi" inputName="password" />
-
           <NewAccount />
         </div>
-
-        <LoginRegisBtn upBtn="Masuk" downBtn="Masuk Dengan Google" />
-
-        {/* Animasi loading */}
-        {isLoading && (
-          <div
-            className="login-loading-overlay"
-            role="status"
-            aria-label="Sedang masuk"
-          >
-            <span className="login-spinner" aria-hidden="true" />
-          </div>
-        )}
+          <LoginRegisBtn upBtn="Masuk" downBtn="Masuk Dengan Google" />
       </form>
+
+      {/* Spinner di tengah layar */}
+      {isLoading && (
+        <div
+          className="login-loading-overlay"
+          role="status"
+          aria-label="Sedang masuk"
+        >
+          <span className="login-spinner" aria-hidden="true" />
+        </div>
+      )}
     </main>
   );
 }
