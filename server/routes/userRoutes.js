@@ -3,6 +3,10 @@ const router = express.Router();
 const restrictTo = require("../middlewares/roleMiddleware");
 const protect = require("../middlewares/authMiddleware");
 const uploadAvatar = require("../middlewares/uploadAvatar");
+const {
+  loginLimiter,
+  registerLimiter,
+} = require("../middlewares/authRateLimiter");
 
 const {
   register,

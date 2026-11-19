@@ -11,6 +11,10 @@ const subscriptionRoutes = require("./routes/subscriptionRoutes");
 const watchHistoryRoutes = require("./routes/watchHistoryRoutes");
 
 const app = express();
+// Percayai satu lapis reverse proxy saat berjalan di Vercel.
+if (process.env.VERCEL === "1") {
+  app.set("trust proxy", 1);
+}
 
 const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:5173")
   .split(",")
