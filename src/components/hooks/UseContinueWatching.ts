@@ -33,7 +33,7 @@ export function useContinueWatching({
       }
     };
 
-    loadHistory();
+    void loadHistory();
 
     return () => {
       active = false;
@@ -42,21 +42,32 @@ export function useContinueWatching({
 
   const result = useMemo(() => {
     const movieMap = new Map(movies.map((movie) => [movie.id, movie]));
-
     const seriesMap = new Map(series.map((item) => [item.id, item]));
-
     const continueMovies: IResponseMovie[] = [];
     const continueSeries: IResponseMovie[] = [];
-
+    const continueAll: IResponseMovie[] = [];
     const seen = new Set<string>();
 
-    for (const item of history) {
-      if (Number(item.is_completed) !== 0) continue;
+    // Urutkan seluruh riwayat dari yang paling baru
+    const sortedHistory = [...history].sort((a, b) => {
+      const dateA = a.last_watched_at
+        ? new Date(a.last_watched_at).getTime()
+        : 0;
 
+      const dateB = b.last_watched_at
+        ? new Date(b.last_watched_at).getTime()
+        : 0;
+
+      return dateB - dateA;
+    });
+
+    for (const item of sortedHistory) {
       const key = `${item.media_type}:${item.media_id}`;
 
-      // Satu kartu per film atau serial
+      // Satu kartu untuk setiap film atau serial
       if (seen.has(key)) continue;
+
+      if (Number(item.is_completed) !== 0) continue;
 
       const media =
         item.media_type === "movie"
@@ -66,6 +77,9 @@ export function useContinueWatching({
       if (!media) continue;
 
       seen.add(key);
+
+      // Gabungkan movie dan series sesuai urutan waktu
+      continueAll.push(media);
 
       if (item.media_type === "movie") {
         continueMovies.push(media);
@@ -77,7 +91,7 @@ export function useContinueWatching({
     return {
       continueMovies,
       continueSeries,
-      continueAll: [...continueMovies, ...continueSeries],
+      continueAll,
     };
   }, [history, movies, series]);
 
