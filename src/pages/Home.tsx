@@ -22,7 +22,7 @@ export default function HomePage() {
   // DATA KATALOG
   // ========================================
 
-  const [movieHeader, setMovieHeader] = useState<IResponseMovie[]>([]);
+  const [headerMedia, setMovieHeader] = useState<IResponseMovie[]>([]);
   const [movieNewRelease, setMovieNewRelease] = useState<IResponseMovie[]>([]);
   const [movieTopRating, setMovieTopRating] = useState<IResponseMovie[]>([]);
   const [movieTrending, setMovieTrending] = useState<IResponseMovie[]>([]);
@@ -96,12 +96,20 @@ export default function HomePage() {
   // MEMBUKA POPUP MOVIE TOP
   // ========================================
 
-  const handleOpenPopupTop = (movie: IResponseMovie) => {
+  const handleOpenPopupTop = (media: IResponseMovie) => {
     setFromContinueWatching(false);
 
+    // Tutup semua popup sebelumnya
+    setSelectedMovieTop(null);
     setSelectedMovieBottom(null);
     setSelectedSeriesTop(null);
-    setSelectedMovieTop(movie);
+
+    // Buka popup sesuai jenis media
+    if (media.type === 1) {
+      setSelectedSeriesTop(media);
+    } else {
+      setSelectedMovieTop(media);
+    }
   };
 
   // ========================================
@@ -162,9 +170,11 @@ export default function HomePage() {
         if (!active) return;
 
         // Acak film untuk Header
-        const shuffledMovies = [...movies].sort(() => Math.random() - 0.5);
+        const allMedia = [...movies, ...series];
 
-        const headerMovie = shuffledMovies.slice(0, 1);
+        const shuffledMedia = [...allMedia].sort(() => Math.random() - 0.5);
+
+        const headerMovie = shuffledMedia.slice(0, 1);
 
         // Top Rating film dan series
         const topRating = [...movies, ...series]
@@ -209,7 +219,7 @@ export default function HomePage() {
       <Navbar />
 
       {/* HEADER */}
-      <Header movies={movieHeader} on_click={handleOpenPopupTop} />
+      <Header movies={headerMedia} on_click={handleOpenPopupTop} />
 
       <div className="content">
         {!continueLoading && continueAll.length > 0 && (
