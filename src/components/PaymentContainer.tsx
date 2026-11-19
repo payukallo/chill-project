@@ -53,10 +53,10 @@ export function PaymentContainer({
               {selectedPlan.name}
             </button>
 
-            <span className="body-small-regular">
-              Mulai dari {formatRupiah(selectedPlan.price)}/bulan{" "}
-              {selectedPlan.account}
-            </span>
+            <div className="price body-small-regular">
+              <span>Mulai dari {formatRupiah(selectedPlan.price)}/bulan</span>
+              <span>{selectedPlan.account}</span>
+            </div>
 
             <div className="body-small-regular">
               {selectedPlan.features.map((feature) => (
