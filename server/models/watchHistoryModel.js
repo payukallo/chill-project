@@ -24,7 +24,8 @@ const getWatchHistoryByUserId = async (userId) => {
      LEFT JOIN episodes_new e
        ON wh.episode_id = e.id
      WHERE wh.user_id = ?
-        AND NOT EXISTS (
+      AND wh.is_completed = 0
+      AND NOT EXISTS (
          SELECT 1
          FROM watch_history newer
          WHERE newer.user_id = wh.user_id
@@ -326,6 +327,32 @@ const takeOverWatchSession = async (
   return result.affectedRows === 1;
 };
 
+// Reset Watch History ketika video selesai diputar ulang.
+// Hanya dipanggil dalam transaksi dengan Watch History terkunci.
+const resetCompletedWatchForReplay = async (
+  connection,
+  userId,
+  mediaId,
+  episodeId,
+) => {
+  const [result] = await connection.execute(
+    `UPDATE watch_history
+     SET progress_seconds = 0,
+         duration_seconds = NULL,
+         is_completed = 0,
+         progress_version = progress_version + 1,
+         active_session_id = NULL,
+         last_watched_at = CURRENT_TIMESTAMP
+     WHERE user_id = ?
+       AND media_id = ?
+       AND episode_key = IFNULL(?, 0)
+       AND is_completed = 1`,
+    [userId, mediaId, episodeId],
+  );
+
+  return result.affectedRows === 1;
+};
+
 module.exports = {
   getWatchHistoryByUserId,
   validateWatchMedia,
@@ -337,4 +364,5 @@ module.exports = {
   ensureWatchHistoryExists,
   ensureAndLockWatchHistory,
   takeOverWatchSession,
+  resetCompletedWatchForReplay,
 };

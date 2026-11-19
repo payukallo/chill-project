@@ -263,13 +263,18 @@ const registerActiveWatchSession = async ({
         episodeId,
       );
 
-      // Episode selesai: jangan membuat record sesi baru
+      // Video selesai dan diputar ulang: mulai sesi baru.
       if (history.is_completed === 1) {
-        return {
-          success: true,
-          alreadyCompleted: true,
-          sessionId,
-        };
+        const reset = await watchHistoryModel.resetCompletedWatchForReplay(
+          connection,
+          userId,
+          mediaId,
+          episodeId,
+        );
+
+        if (!reset) {
+          throw new Error("Gagal mereset progres untuk replay");
+        }
       }
 
       // Hanya episode yang belum selesai yang membuat sesi baru

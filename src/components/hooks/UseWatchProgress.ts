@@ -107,15 +107,37 @@ export function useWatchProgress({
         state.ready = true;
         setCurrentTime(video.currentTime);
         // Timer 5 detik dimulai setelah restore, bukan selama request GET.
-        playStartRef.current = video.paused ? null : Date.now();
+        if (!video.paused && !video.ended) {
+          handlePlay(video);
+        } else {
+          playStartRef.current = null;
+        }
       }
     }
   };
 
   const handlePlay = (video: HTMLVideoElement): void => {
     if (!isCurrentVideo(video)) return;
+
     setIsPlaying(true);
-    playStartRef.current = isRestoreReady(video) ? Date.now() : null;
+
+    if (!isRestoreReady(video)) {
+      playStartRef.current = null;
+      return;
+    }
+
+    const session = activeSessionRef.current;
+
+    if (
+      (!session || session.status === "completed") &&
+      mediaId !== undefined &&
+      Number.isSafeInteger(mediaId) &&
+      mediaId > 0
+    ) {
+      activeSessionRef.current = createWatchSession(mediaId, episodeId);
+    }
+
+    playStartRef.current = Date.now();
   };
 
   const handleTimeUpdate = (video: HTMLVideoElement): void => {
@@ -208,10 +230,7 @@ export function useWatchProgress({
     )
       return;
 
-    activeSessionRef.current =
-      mediaId !== undefined && Number.isSafeInteger(mediaId) && mediaId > 0
-        ? createWatchSession(mediaId, episodeId)
-        : null;
+    activeSessionRef.current = null;
   }, [mediaId, episodeId, src, resetPlayer]);
 
   return {
