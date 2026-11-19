@@ -17,8 +17,8 @@ const {
   uploadProfileImage,
 } = require("../controllers/userController");
 
-router.post("/register", register);
-router.post("/login", login);
+router.post("/register", registerLimiter, register);
+router.post("/login", loginLimiter, login);
 
 router.get("/profile", protect, getProfile);
 router.patch("/profile", protect, updateProfile);
