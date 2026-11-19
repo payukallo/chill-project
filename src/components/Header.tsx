@@ -49,7 +49,7 @@ export function Header({ movies, on_click }: IHeader) {
                       <img src={LogoInfo} alt="" />
                       Selengkapnya
                     </button>
-                    <span className="age body-large-regular">18+</span>
+                    <span className="age body-large-regular">{item.age_rating}</span>
                   </div>
                   <button id="volume">
                     <img src={LogoVolume} alt="" />

@@ -30,6 +30,9 @@ export function MoviePopupContent({
     onMovieClick,
   });
 
+  console.log("Movie:", movie.title);
+console.log("Age Rating:", movie.age_rating);
+
   return createPortal(
     <div className="page-overlay">
       <div
@@ -96,7 +99,7 @@ export function MoviePopupContent({
                 <span>{movie.duration}</span>
 
                 <div className="age-recommendation">
-                  <span>{movie.age}</span>
+                  <span>{movie.age_rating}</span>
                 </div>
               </div>
 

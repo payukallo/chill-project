@@ -42,7 +42,7 @@ export async function getMovies(): Promise<IResponseMovie[]> {
       is_top_10: Boolean(item.is_top_10),
       top_rating_today: Boolean(item.is_top_rating_today),
       film_maker: item.film_maker ?? undefined,
-      age: item.age_rating ?? undefined,
+      age_rating: item.age_rating ?? undefined,
       cast: item.cast_members ?? "",
     }));
   } catch (error) {
@@ -91,7 +91,7 @@ export async function getSeries(): Promise<IResponseMovie[]> {
       top_rating_today: Boolean(item.is_top_rating_today),
       is_new_episode: Boolean(item.is_new_episode),
       film_maker: item.film_maker ?? undefined,
-      age: item.age_rating ?? undefined,
+      age_rating: item.age_rating ?? undefined,
       cast: item.cast_members ?? "",
       episodes: item.episodes ?? [],
     }));
