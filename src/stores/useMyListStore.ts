@@ -107,7 +107,7 @@ export const useMyListStore = create<IMyListStore>((set, get) => ({
             top_rating_today: Boolean(item.top_rating_today),
             is_new_episode: Boolean(item.is_new_episode),
             film_maker: item.film_maker ?? undefined,
-            age: item.age_rating ?? undefined,
+            age_rating: item.age_rating ?? undefined,
             cast: item.cast_members ?? "",
             episodes: item.episodes ?? [],
             recommendation_movie_1: item.recommendation_movie_1 ?? [],

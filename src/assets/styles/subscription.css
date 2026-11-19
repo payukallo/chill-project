@@ -121,7 +121,7 @@
 }
 
 .line {
-    border-top: 1px solid var(--outline-border) ;
+  border-top: 1px solid var(--outline-border);
 }
 
 .subscription-bottom-box-down {

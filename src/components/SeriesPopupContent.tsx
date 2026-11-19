@@ -93,7 +93,7 @@ export function SeriesPopupContent({
                 <span>{movie.duration}</span>
 
                 <div className="age-recommendation">
-                  <span>{movie.age}</span>
+                  <span>{movie.age_rating}</span>
                 </div>
               </div>
 

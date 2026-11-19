@@ -10,7 +10,7 @@ export interface IResponseMovie {
   year: number;
   duration?: string;
   is_premium?: boolean;
-  age?: string;
+  age_rating?: string;
   description?: string;
   cast: string;
   genre: string[];
