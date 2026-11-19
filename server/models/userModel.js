@@ -74,6 +74,42 @@ const updateAvatarUrl = async (id, avatarUrl) => {
   return result;
 };
 
+const incrementSessionVersion = async (userId) => {
+  const connection = await db.getConnection();
+
+  try {
+    await connection.beginTransaction();
+
+    const [result] = await connection.execute(
+      `UPDATE users
+       SET session_version = session_version + 1,
+           last_login_at = CURRENT_TIMESTAMP
+       WHERE id = ?`,
+      [userId],
+    );
+
+    if (result.affectedRows !== 1) {
+      throw new Error("Pengguna tidak ditemukan");
+    }
+
+    const [rows] = await connection.execute(
+      `SELECT session_version
+       FROM users
+       WHERE id = ?`,
+      [userId],
+    );
+
+    await connection.commit();
+
+    return rows[0].session_version;
+  } catch (error) {
+    await connection.rollback();
+    throw error;
+  } finally {
+    connection.release();
+  }
+};
+
 module.exports = {
   createUser,
   findUserByUsername,
@@ -82,4 +118,5 @@ module.exports = {
   updateUser,
   updatePassword,
   updateAvatarUrl,
+  incrementSessionVersion,
 };
