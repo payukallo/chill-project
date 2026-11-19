@@ -103,12 +103,16 @@ const login = async (req, res, next) => {
       });
     }
 
-    // 5. Membuat JWT
+    // 5. Tingkatkan versi sesi setelah login berhasil
+    const sessionVersion = await userModel.incrementSessionVersion(user.id);
+
+    // 6. Buat JWT dengan versi sesi terbaru
     const token = jwt.sign(
       {
         id: user.id,
         username: user.username,
         role: user.role,
+        session_version: sessionVersion,
       },
       process.env.JWT_SECRET,
       {
