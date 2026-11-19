@@ -1,4 +1,3 @@
-
 import type { IEpisode } from "./type/IResponMovies";
 
 interface IEpisodePopupProps {
@@ -19,27 +18,20 @@ export function EpisodePopup({
       <div className="episode-popup-header">
         <h3>← Episode Selanjutnya</h3>
 
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Tutup episode"
-        >
+        <button type="button" onClick={onClose} aria-label="Tutup episode">
           ×
         </button>
       </div>
 
       <div className="episode-popup-list">
         {episodes.map((episode) => {
-          const isActive =
-            episode.episode_number === activeEpisode;
+          const isActive = episode.episode_number === activeEpisode;
 
           return (
             <button
               type="button"
               key={episode.episode_number}
-              className={`episode-item-pop-up ${
-                isActive ? "active" : ""
-              }`}
+              className={`episode-item-pop-up ${isActive ? "active" : ""}`}
               onClick={() => onEpisodeSelect(episode)}
             >
               {isActive ? (
@@ -56,9 +48,7 @@ export function EpisodePopup({
                     />
 
                     <div className="episode-info-pop-up">
-                      <span className="body-small-bold">
-                        {episode.title}
-                      </span>
+                      <span className="body-small-bold">{episode.title}</span>
 
                       <p className="body-small-regular">
                         {episode.description}

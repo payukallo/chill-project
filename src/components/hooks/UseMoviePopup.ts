@@ -17,9 +17,7 @@ export function useMoviePopup({
   // ========================================
 
   const toggleMyList = useMyListStore((state) => state.toggleMyList);
-
   const myMovies = useMyListStore((state) => state.myMovies);
-
   const isAdded = myMovies.some(
     (item) =>
       String(item.id) === String(movie.id) && item.mediaType === "movie",

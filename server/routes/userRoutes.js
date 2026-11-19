@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 const restrictTo = require("../middlewares/roleMiddleware");
 const protect = require("../middlewares/authMiddleware");
 const uploadAvatar = require("../middlewares/uploadAvatar");

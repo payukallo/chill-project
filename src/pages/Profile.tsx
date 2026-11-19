@@ -27,7 +27,6 @@ const ProfilePage = () => {
     editOldPassword,
     editPassword,
     isSaving,
-
     usernameRef,
     emailRef,
     oldPasswordRef,
@@ -37,7 +36,6 @@ const ProfilePage = () => {
     setEmail,
     setOldPassword,
     setNewPassword,
-
     handleEditUsername,
     handleEditEmail,
     handleEditOldPassword,

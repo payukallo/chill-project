@@ -30,9 +30,7 @@ const validateSessionMedia = (sessionId, mediaId, episodeId) => {
 const registerWatchSession = async (req, res, next) => {
   try {
     const userId = req.user.id;
-
     const { sessionId, mediaId, episodeId = null } = req.body ?? {};
-
     const validationError = validateSessionMedia(sessionId, mediaId, episodeId);
 
     if (validationError) {

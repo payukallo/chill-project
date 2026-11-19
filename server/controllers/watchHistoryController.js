@@ -7,9 +7,7 @@ const watchHistoryModel = require("../models/watchHistoryModel");
 const getWatchHistory = async (req, res, next) => {
   try {
     const userId = req.user.id;
-
     const history = await watchHistoryModel.getWatchHistoryByUserId(userId);
-
     const continueWatching = [];
 
     for (const item of history) {

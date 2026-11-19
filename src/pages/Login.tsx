@@ -25,7 +25,6 @@ interface ILoginResponse {
 
 export default function LoginPage() {
   const navigate = useNavigate();
-
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
@@ -35,7 +34,6 @@ export default function LoginPage() {
     if (isLoading) return;
 
     const formData = new FormData(event.currentTarget);
-
     const username = String(formData.get("username") ?? "")
       .trim()
       .toLowerCase();
@@ -112,7 +110,7 @@ export default function LoginPage() {
           <Password paraPassword="Kata Sandi" inputName="password" />
           <NewAccount />
         </div>
-          <LoginRegisBtn upBtn="Masuk" downBtn="Masuk Dengan Google" />
+        <LoginRegisBtn upBtn="Masuk" downBtn="Masuk Dengan Google" />
       </form>
 
       {/* Spinner di tengah layar */}

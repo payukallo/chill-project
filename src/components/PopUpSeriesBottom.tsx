@@ -1,5 +1,4 @@
 import type { IResponseMovie, IEpisode } from "./type/IResponMovies";
-
 import { SeriesPopupContent } from "./SeriesPopupContent";
 
 interface IPopUpMovie {

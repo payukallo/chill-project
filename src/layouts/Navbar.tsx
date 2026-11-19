@@ -2,7 +2,6 @@ import MovieLogo from "../assets/logo/movie.png";
 import Profile from "../assets/logo/profile.png";
 import Star from "../assets/logo/star.png";
 import Exit from "../assets/logo/keluar.png";
-
 import { NavLink } from "react-router";
 import { Dropdown } from "../components/utils/dropdown.ts";
 import { logoutUser } from "../components/ProtectedRoute.tsx";

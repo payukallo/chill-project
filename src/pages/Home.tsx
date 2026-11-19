@@ -212,10 +212,6 @@ export default function HomePage() {
       <Header movies={movieHeader} on_click={handleOpenPopupTop} />
 
       <div className="content">
-        {/* =================================
-            CONTINUE WATCHING
-           ================================= */}
-
         {!continueLoading && continueAll.length > 0 && (
           <ContinueMovie
             movies={continueAll}
@@ -224,29 +220,17 @@ export default function HomePage() {
           />
         )}
 
-        {/* =================================
-            TOP RATING
-           ================================= */}
-
         <TopRatingMovies
           movies={movieTopRating}
           on_click={handleOpenTopRating}
           headTitle="Top Rating Film dan Series Hari ini"
         />
 
-        {/* =================================
-            TRENDING
-           ================================= */}
-
         <TrendingMovies
           movies={movieTrending}
           headTitle="Film Trending"
           on_click={handleOpenPopupBottom}
         />
-
-        {/* =================================
-            RILIS BARU
-           ================================= */}
 
         <NewRelease
           movies={movieNewRelease}

@@ -7,7 +7,9 @@ export function DropDownHeader() {
   return (
     <div className="body-medium-bold dropdown-header" ref={dropdownRef}>
       <button className="btn-header" onClick={() => setIsOpen(!isOpen)}>
-        <div>Genre &ensp;<strong>v</strong></div>
+        <div>
+          Genre &ensp;<strong>v</strong>
+        </div>
       </button>
       {isOpen && (
         <div className="dropdown-genre body-small-medium">

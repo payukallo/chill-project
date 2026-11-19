@@ -1,4 +1,7 @@
-import { registerWatchSession, saveSessionProgress } from "../components/type/WatchHistoryApi";
+import {
+  registerWatchSession,
+  saveSessionProgress,
+} from "../components/type/WatchHistoryApi";
 
 export type WatchSession = {
   sessionId: string;
@@ -11,7 +14,10 @@ export type WatchSession = {
   finishing: boolean;
 };
 
-export function createWatchSession(mediaId: number, episodeId: number | null): WatchSession {
+export function createWatchSession(
+  mediaId: number,
+  episodeId: number | null,
+): WatchSession {
   const session: WatchSession = {
     sessionId: crypto.randomUUID(),
     mediaId,
@@ -122,7 +128,8 @@ export function savePeriodicProgress(
     !Number.isFinite(durationSeconds) ||
     positionSeconds <= 0 ||
     durationSeconds <= 0
-  ) return;
+  )
+    return;
 
   session.queue = session.queue.then(async () => {
     // Progres yang sudah masuk antrean sebelum video selesai tetap dieksekusi
@@ -138,13 +145,20 @@ export function completeWatchSession(
   durationSeconds: number,
 ): Promise<boolean> {
   if (session.status === "completed") return Promise.resolve(true);
-  if (session.status === "blocked" || session.finishing) return Promise.resolve(false);
-  if (!Number.isFinite(durationSeconds) || durationSeconds <= 0) return Promise.resolve(false);
+  if (session.status === "blocked" || session.finishing)
+    return Promise.resolve(false);
+  if (!Number.isFinite(durationSeconds) || durationSeconds <= 0)
+    return Promise.resolve(false);
 
   session.finishing = true;
   let completionConfirmed = false;
   session.queue = session.queue.then(async () => {
-    completionConfirmed = await sendProgress(session, durationSeconds, durationSeconds, true);
+    completionConfirmed = await sendProgress(
+      session,
+      durationSeconds,
+      durationSeconds,
+      true,
+    );
   });
   return session.queue.then(() => completionConfirmed);
 }
