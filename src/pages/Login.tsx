@@ -106,21 +106,16 @@ export default function LoginPage() {
           <NewAccount />
         </div>
 
-        {/* Tombol login dinonaktifkan saat loading */}
-        <fieldset className="login-button-fieldset" disabled={isLoading}>
-          <LoginRegisBtn upBtn="Masuk" downBtn="Masuk Dengan Google" />
-        </fieldset>
+        <LoginRegisBtn upBtn="Masuk" downBtn="Masuk Dengan Google" />
 
         {/* Animasi loading */}
         {isLoading && (
           <div
-            className="login-loading-indicator"
+            className="login-loading-overlay"
             role="status"
-            aria-live="polite"
+            aria-label="Sedang masuk"
           >
             <span className="login-spinner" aria-hidden="true" />
-
-            <span>Memproses login...</span>
           </div>
         )}
       </form>
