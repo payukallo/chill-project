@@ -55,10 +55,10 @@ export function SubscriptionBottomContainer({
                 <button className="body-large-semiBold" type="button">
                   {plan.name}
                 </button>
-
-                <span className="body-small-regular">
-                  Mulai dari {formatRupiah(plan.price)}/bulan {plan.account}
-                </span>
+                <div className="price body-small-regular">
+                  <span>Mulai dari {formatRupiah(plan.price)}/bulan</span>
+                  <span>{plan.account}</span>
+                </div>
 
                 <div className="body-small-regular">
                   {plan.features.map((feature) => (

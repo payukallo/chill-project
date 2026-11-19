@@ -91,6 +91,12 @@
   gap: 24px;
 }
 
+.subscription-bottom-box-up > .price {
+  display: flex;
+  flex-direction: column;
+  height: 44px;
+}
+
 .subscription-bottom-box-up button {
   padding: 10px 20px;
   border-radius: 24px;
