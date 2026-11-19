@@ -1,4 +1,5 @@
 import "../assets/styles/login.css";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import type { FormEvent } from "react";
 import { api } from "../components/utils/axiosApi";
@@ -24,8 +25,13 @@ interface ILoginResponse {
 export default function LoginPage() {
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // Mencegah submit berulang
+    if (isLoading) return;
 
     const formData = new FormData(event.currentTarget);
 
@@ -40,7 +46,11 @@ export default function LoginPage() {
       return;
     }
 
+    // Aktifkan animasi loading
+    setIsLoading(true);
+
     try {
+      // Login melalui Express API
       const response = await api.post<ILoginResponse>("/users/login", {
         username,
         password,
@@ -52,13 +62,16 @@ export default function LoginPage() {
         throw new Error("Respons login tidak valid.");
       }
 
+      // Simpan autentikasi
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
+      // Ambil My List pengguna
       await useMyListStore.getState().fetchMyList();
 
       alert("Login berhasil!");
 
+      // Arahkan ke Home
       navigate("/");
     } catch (error) {
       console.error("Login gagal:", error);
@@ -68,20 +81,48 @@ export default function LoginPage() {
       } else {
         alert("Username atau kata sandi salah.");
       }
+    } finally {
+      // Matikan loading baik berhasil maupun gagal
+      setIsLoading(false);
     }
   }
 
   return (
     <main className="login-page">
-      <form className="login-container" onSubmit={handleLogin}>
+      <form
+        className="login-container"
+        onSubmit={handleLogin}
+        aria-busy={isLoading}
+      >
         <Logo />
+
         <Title title="Masuk" subTitle="Selamat datang kembali!" />
+
         <UserName autoComplete="username" />
+
         <div className="password-container">
           <Password paraPassword="Kata Sandi" inputName="password" />
+
           <NewAccount />
         </div>
-        <LoginRegisBtn upBtn="Masuk" downBtn="Masuk Dengan Google" />
+
+        {/* Tombol login dinonaktifkan saat loading */}
+        <fieldset className="login-button-fieldset" disabled={isLoading}>
+          <LoginRegisBtn upBtn="Masuk" downBtn="Masuk Dengan Google" />
+        </fieldset>
+
+        {/* Animasi loading */}
+        {isLoading && (
+          <div
+            className="login-loading-indicator"
+            role="status"
+            aria-live="polite"
+          >
+            <span className="login-spinner" aria-hidden="true" />
+
+            <span>Memproses login...</span>
+          </div>
+        )}
       </form>
     </main>
   );
