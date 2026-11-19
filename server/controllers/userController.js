@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const userModel = require("../models/userModel");
 const supabase = require("../config/supabase");
 const path = require("path");
+const sharp = require("sharp");
 
 const register = async (req, res, next) => {
   try {
@@ -277,44 +278,66 @@ const uploadProfileImage = async (req, res, next) => {
       });
     }
 
-    // Tentukan ekstensi file
-    const extension = path.extname(file.originalname).toLowerCase();
+    const allowedFormats = ["jpeg", "png", "webp"];
 
-    const allowedExtensions = [".jpg", ".jpeg", ".png", ".webp"];
+    let processedImage;
 
-    if (!allowedExtensions.includes(extension)) {
+    try {
+      // Baca metadata dari isi file, bukan nama atau MIME type.
+      const metadata = await sharp(file.buffer, {
+        limitInputPixels: 25_000_000,
+      }).metadata();
+
+      if (!allowedFormats.includes(metadata.format)) {
+        return res.status(400).json({
+          status: "fail",
+          message: "Format foto harus JPG, PNG, atau WEBP.",
+        });
+      }
+
+      // Decode dan proses ulang gambar menjadi WebP.
+      processedImage = await sharp(file.buffer, {
+        limitInputPixels: 25_000_000,
+      })
+        .rotate()
+        .resize(512, 512, {
+          fit: "cover",
+          position: "centre",
+          withoutEnlargement: true,
+        })
+        .webp({ quality: 80 })
+        .toBuffer();
+    } catch {
       return res.status(400).json({
         status: "fail",
-        message: "Format foto harus JPG, JPEG, PNG, atau WEBP.",
+        message: "File gambar tidak valid atau rusak.",
       });
     }
 
-    // Buat lokasi penyimpanan berdasarkan ID pengguna
-    const filePath = `${userId}/avatar${extension}`;
+    // Gunakan ekstensi tetap untuk semua avatar.
+    const filePath = `${userId}/avatar.webp`;
 
-    // Upload foto ke Supabase Storage
     const { error: uploadError } = await supabase.storage
       .from("avatars")
-      .upload(filePath, file.buffer, {
+      .upload(filePath, processedImage, {
         upsert: true,
-        contentType: file.mimetype,
+        contentType: "image/webp",
+        cacheControl: "3600",
       });
 
     if (uploadError) {
       throw uploadError;
     }
 
-    // Ambil URL foto
     const { data: publicUrlData } = supabase.storage
       .from("avatars")
       .getPublicUrl(filePath);
 
     const avatarUrl = publicUrlData.publicUrl;
 
-    // Simpan URL ke MySQL
     await userModel.updateAvatarUrl(userId, avatarUrl);
 
-    res.status(200).json({
+    return res.status(200).json({
       status: "success",
       message: "Foto profil berhasil diperbarui.",
       avatar_url: avatarUrl,
