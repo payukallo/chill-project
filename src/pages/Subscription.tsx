@@ -6,7 +6,6 @@ import { Footer } from "../layouts/Footer.js";
 import { SubscriptionTopContainer } from "../components/SubscriptionTopContainer.js";
 import { SubscriptionBottomContainer } from "../components/SubscriptionBottomContainer .js";
 import { subscriptionPlans } from "../data/subscriptionPlans";
-
 import {
   getMySubscription,
   isSubscriptionActive,
@@ -14,7 +13,6 @@ import {
 
 const SubscriptionPage = () => {
   const navigate = useNavigate();
-
   const [alreadySubscribed, setAlreadySubscribed] = useState(false);
   const [pendingSubscription, setPendingSubscription] = useState(false);
   const [checkingSubscription, setCheckingSubscription] = useState(true);
@@ -76,9 +74,7 @@ const SubscriptionPage = () => {
   return (
     <main className="subscription-page">
       <Navbar />
-
       <SubscriptionTopContainer />
-
       <SubscriptionBottomContainer
         alreadySubscribed={alreadySubscribed}
         pendingSubscription={pendingSubscription}
@@ -86,7 +82,6 @@ const SubscriptionPage = () => {
         subscriptionError={subscriptionError}
         onSubscribe={handleSubscribe}
       />
-
       <Footer />
     </main>
   );

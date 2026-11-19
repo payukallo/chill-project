@@ -4,9 +4,8 @@ const simulatePayment = async (userId, subscriptionId) => {
   // ========================================
   // PENGAMAN SIMULASI PEMBAYARAN
   // ========================================
-  
-  const simulationEnabled = process.env.PAYMENT_SIMULATION_ENABLED === "true";
 
+  const simulationEnabled = process.env.PAYMENT_SIMULATION_ENABLED === "true";
   const allowedDatabase = process.env.PAYMENT_SIMULATION_DB;
 
   const isAllowedDatabase =

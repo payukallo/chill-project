@@ -19,29 +19,68 @@ interface IVideoPlayer {
 }
 
 export default function VideoPlayer({
-  src, title, description, mediaId, episodeId = null,
-  episodes = [], activeEpisode = 1, onEpisodeSelect,
+  src,
+  title,
+  description,
+  mediaId,
+  episodeId = null,
+  episodes = [],
+  activeEpisode = 1,
+  onEpisodeSelect,
 }: IVideoPlayer) {
   const {
-    videoRef, playerRef, isPlaying, setIsPlaying, volume, setVolume,
-    playbackRate, currentTime, setCurrentTime, duration, setDuration,
-    showDescription, setShowDescription, showControls, setShowControls,
-    showControlsTemporarily, clearControlsTimeout, handlePlayPause,
-    handleRewind, handleForward, handleVolume, handlePlaybackRate,
-    handleSeek, handleFullscreen, formatTime,
+    videoRef,
+    playerRef,
+    isPlaying,
+    setIsPlaying,
+    volume,
+    setVolume,
+    playbackRate,
+    currentTime,
+    setCurrentTime,
+    duration,
+    setDuration,
+    showDescription,
+    setShowDescription,
+    showControls,
+    setShowControls,
+    showControlsTemporarily,
+    clearControlsTimeout,
+    handlePlayPause,
+    handleRewind,
+    handleForward,
+    handleVolume,
+    handlePlaybackRate,
+    handleSeek,
+    handleFullscreen,
+    formatTime,
   } = useVideoPlayer();
 
   const resetPlayer = useVideoPlayerStore((state) => state.resetPlayer);
   const [showEpisodes, setShowEpisodes] = useState(false);
-  const pendingAutoPlayRef = useRef<{ episodeId: number | null; episodeNumber: number } | null>(null);
+  const pendingAutoPlayRef = useRef<{
+    episodeId: number | null;
+    episodeNumber: number;
+  } | null>(null);
   const autoNextInProgressRef = useRef(false);
 
   const {
-    handlePlay, handleTimeUpdate, handleSeeked, handlePause, handleEnded,
-    beforeEpisodeChange, restoreWatchPosition, isRestoreReady,
+    handlePlay,
+    handleTimeUpdate,
+    handleSeeked,
+    handlePause,
+    handleEnded,
+    beforeEpisodeChange,
+    restoreWatchPosition,
+    isRestoreReady,
   } = useWatchProgress({
-    mediaId, episodeId, src, videoRef,
-    resetPlayer, setCurrentTime, setIsPlaying,
+    mediaId,
+    episodeId,
+    src,
+    videoRef,
+    resetPlayer,
+    setCurrentTime,
+    setIsPlaying,
   });
 
   const handleEpisodeChange = (episode: IEpisode) => {
@@ -88,8 +127,13 @@ export default function VideoPlayer({
     if (
       (pending.episodeId !== null && episodeId !== pending.episodeId) ||
       activeEpisode !== pending.episodeNumber
-    ) return;
-    if (video.readyState < HTMLMediaElement.HAVE_METADATA || !isRestoreReady(video)) return;
+    )
+      return;
+    if (
+      video.readyState < HTMLMediaElement.HAVE_METADATA ||
+      !isRestoreReady(video)
+    )
+      return;
 
     pendingAutoPlayRef.current = null;
     void video.play().catch((error: unknown) => {
@@ -134,7 +178,9 @@ export default function VideoPlayer({
           }}
           onPlay={(event) => handlePlay(event.currentTarget)}
           onPause={(event) => handlePause(event.currentTarget)}
-          onEnded={(event) => { void playNextEpisode(event.currentTarget); }}
+          onEnded={(event) => {
+            void playNextEpisode(event.currentTarget);
+          }}
           onVolumeChange={(event) => {
             const video = event.currentTarget;
             setVolume(video.muted ? 0 : video.volume);

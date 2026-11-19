@@ -14,11 +14,9 @@ interface IProfileStore {
 
   setUsername: (username: string) => void;
   setEmail: (email: string) => void;
-
   fetchProfile: () => Promise<void>;
   updateProfile: (username: string, email: string) => Promise<void>;
   changePassword: (oldPassword: string, newPassword: string) => Promise<void>;
-
   uploadProfileImage: (file: File) => Promise<void>;
 }
 

@@ -9,14 +9,11 @@ export function useProfile() {
   const email = useProfileStore((state) => state.email);
   const profileImage = useProfileStore((state) => state.profileImage);
   const isSaving = useProfileStore((state) => state.isSaving);
-
   const setUsername = useProfileStore((state) => state.setUsername);
   const setEmail = useProfileStore((state) => state.setEmail);
-
   const fetchProfile = useProfileStore((state) => state.fetchProfile);
   const updateProfile = useProfileStore((state) => state.updateProfile);
   const changePassword = useProfileStore((state) => state.changePassword);
-
   const uploadProfileImage = useProfileStore(
     (state) => state.uploadProfileImage,
   );
@@ -24,7 +21,6 @@ export function useProfile() {
   // Local form
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-
   const [editUsername, setEditUsername] = useState(false);
   const [editEmail, setEditEmail] = useState(false);
   const [editOldPassword, setEditOldPassword] = useState(false);
@@ -67,12 +63,12 @@ export function useProfile() {
   }
 
   function handleEditPassword() {
-  setEditPassword(true);
+    setEditPassword(true);
 
-  setTimeout(() => {
-    newPasswordRef.current?.focus();
-  }, 0);
-}
+    setTimeout(() => {
+      newPasswordRef.current?.focus();
+    }, 0);
+  }
 
   // Simpan username dan email
   async function handleSaveProfile() {
@@ -177,7 +173,6 @@ export function useProfile() {
     editOldPassword,
     editPassword,
     isSaving,
-
     usernameRef,
     emailRef,
     oldPasswordRef,
@@ -187,7 +182,6 @@ export function useProfile() {
     setEmail,
     setOldPassword,
     setNewPassword,
-
     handleEditUsername,
     handleEditEmail,
     handleEditOldPassword,

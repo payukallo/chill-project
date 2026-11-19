@@ -22,7 +22,6 @@ export default function RegisterPage() {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-
     const username = String(formData.get("username") ?? "")
       .trim()
       .toLowerCase();
@@ -108,12 +107,9 @@ export default function RegisterPage() {
       <form className="register-container" onSubmit={handleRegister}>
         <Logo />
         <Title title="Daftar" subTitle="Selamat datang!" />
-
         <UserName autoComplete="username" />
         <Email autoComplete="email" />
-
         <Password paraPassword="Kata Sandi" inputName="password" />
-
         <div className="password-container">
           <Password
             paraPassword="Konfirmasi Kata Sandi"
@@ -121,7 +117,6 @@ export default function RegisterPage() {
           />
           <HasAccount />
         </div>
-
         <LoginRegisBtn upBtn="Daftar" downBtn="Daftar dengan Google" />
       </form>
     </main>

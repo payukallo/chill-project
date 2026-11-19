@@ -155,7 +155,7 @@ export default function SeriesPage() {
       <Header movies={movieHeader} on_click={handleOpenPopupTop} />
 
       <div className="content">
-        {/* Continue Watching khusus Series */}
+
         {!continueLoading && continueSeries.length > 0 && (
           <ContinueMovie
             movies={continueSeries}
@@ -164,28 +164,24 @@ export default function SeriesPage() {
           />
         )}
 
-        {/* Series Persembahan Chill */}
         <MoviesFromChill
           movies={movieFromChill}
           on_click={handleOpenPopupTop}
           headTitle="Series Persembahan Chill"
         />
 
-        {/* Top Rating Series */}
         <TopRatingMovies
           movies={movieTopRating}
           on_click={handleOpenPopupBottom}
           headTitle="Top Rating Series Hari ini"
         />
 
-        {/* Series Trending */}
         <TrendingMovies
           movies={movieTrending}
           headTitle="Series Trending"
           on_click={handleOpenPopupBottom}
         />
 
-        {/* Rilis Baru */}
         <NewRelease
           movies={movieNewRelease}
           headTitle="Rilis Baru"

@@ -10,14 +10,13 @@ interface IHeader {
 }
 
 export function Header({ movies, on_click }: IHeader) {
-
   function handleWatchMedia(item: IResponseMovie) {
     const mediaType = item.type === 1 ? "movie" : "series";
 
     window.open(
       `/watch/${item.id}?type=${mediaType}`,
       "_blank",
-      "noopener,noreferrer"
+      "noopener,noreferrer",
     );
   }
 
@@ -63,4 +62,3 @@ export function Header({ movies, on_click }: IHeader) {
     </header>
   );
 }
-

@@ -16,19 +16,14 @@ export function useVideoPlayer() {
 
   const isPlaying = useVideoPlayerStore((state) => state.isPlaying);
   const setIsPlaying = useVideoPlayerStore((state) => state.setIsPlaying);
-
   const volume = useVideoPlayerStore((state) => state.volume);
   const setVolume = useVideoPlayerStore((state) => state.setVolume);
-
   const playbackRate = useVideoPlayerStore((state) => state.playbackRate);
   const setPlaybackRate = useVideoPlayerStore((state) => state.setPlaybackRate);
-
   const currentTime = useVideoPlayerStore((state) => state.currentTime);
   const setCurrentTime = useVideoPlayerStore((state) => state.setCurrentTime);
-
   const duration = useVideoPlayerStore((state) => state.duration);
   const setDuration = useVideoPlayerStore((state) => state.setDuration);
-
   const showDescription = useVideoPlayerStore((state) => state.showDescription);
   const setShowDescription = useVideoPlayerStore(
     (state) => state.setShowDescription,

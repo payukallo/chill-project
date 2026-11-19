@@ -13,12 +13,10 @@ export interface IWatchHistory {
   duration_seconds: number | null;
   is_completed: number;
   last_watched_at: string | null;
-
   media_type: "movie" | "series";
   title: string;
   cover_url: string | null;
   banner_url: string | null;
-
   episode_number: number | null;
   episode_title: string | null;
 }

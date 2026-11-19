@@ -28,7 +28,6 @@ export function PaymentContainer({
 }: IPaymentContainerProps) {
   const isIndividual = selectedPlan.id === "individual";
   const totalPayment = selectedPlan.price + ADMIN_FEE;
-
   const buttonDisabled =
     !isIndividual || loading || paymentSuccess || alreadySubscribed;
 

@@ -124,7 +124,7 @@ export default function MoviesPage() {
       <Header movies={movieHeader} on_click={handleOpenPopupTop} />
 
       <div className="content">
-        {/* Continue Watching khusus Film */}
+
         {!continueLoading && continueMovies.length > 0 && (
           <ContinueMovie
             movies={continueMovies}
@@ -133,28 +133,24 @@ export default function MoviesPage() {
           />
         )}
 
-        {/* Film Persembahan Chill */}
         <MoviesFromChill
           movies={movieFromChill}
           on_click={handleOpenPopupTop}
           headTitle="Film Persembahan Chill"
         />
 
-        {/* Top Rating Film */}
         <TopRatingMovies
           movies={movieTopRating}
           on_click={handleOpenPopupBottom}
           headTitle="Top Rating Film Hari ini"
         />
 
-        {/* Film Trending */}
         <TrendingMovies
           movies={movieTrending}
           headTitle="Film Trending"
           on_click={handleOpenPopupBottom}
         />
 
-        {/* Rilis Baru */}
         <NewRelease
           movies={movieNewRelease}
           headTitle="Rilis Baru"
