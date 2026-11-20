@@ -107,14 +107,14 @@ header img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 45px;
 }
 
 .btn-left {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 350px;
-  gap: 10px;
+  width: 355px;
 }
 
 .btn-left button img {
@@ -145,7 +145,7 @@ header img {
 }
 
 .head-btn img {
-  width: 50px;
+  width: 44px;
 }
 
 #volume {
