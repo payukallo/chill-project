@@ -2,6 +2,7 @@ import MuteVolume from "../assets/logo/mute-volume.png";
 import { createPortal } from "react-dom";
 import type { IResponseMovie } from "./type/IResponMovies";
 import { useMoviePopup } from "./hooks/UseMoviePopup";
+import { formatDuration } from "./utils/formatDuration";
 
 interface MoviePopupContentProps {
   movie: IResponseMovie;
@@ -31,7 +32,7 @@ export function MoviePopupContent({
   });
 
   console.log("Movie:", movie.title);
-console.log("Age Rating:", movie.age_rating);
+  console.log("Age Rating:", movie.age_rating);
 
   return createPortal(
     <div className="page-overlay">
@@ -93,10 +94,10 @@ console.log("Age Rating:", movie.age_rating);
         <div className="bottom-pop-up">
           <div className="pop-up-description body-medium-regular">
             <div className="description-left">
-              <div className="year">
+              <div className="year body-medium-semiBold">
                 <span>{movie.year}</span>
 
-                <span>{movie.duration}</span>
+                <span>{formatDuration(movie.duration)}</span>
 
                 <div className="age-recommendation">
                   <span>{movie.age_rating}</span>

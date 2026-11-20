@@ -88,7 +88,7 @@ export function SeriesPopupContent({
         <div className="bottom-pop-up-series">
           <div className="pop-up-description-series body-medium-regular">
             <div className="description-left">
-              <div className="year">
+              <div className="year body-medium-semiBold">
                 <span>{movie.year}</span>
                 <span>{movie.duration}</span>
 
