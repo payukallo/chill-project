@@ -22,12 +22,6 @@
   display: none;
 }
 
-.movie-top::scroll-marker-group {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-}
-
 .movie-top::scroll-button(right),
 .movie-top::scroll-button(left) {
   content: "→";
@@ -55,7 +49,6 @@
   opacity: 0.5;
   cursor: auto;
 }
-
 
 .box-top {
   display: flex;
@@ -89,7 +82,6 @@
   background: linear-gradient(rgba(0, 0, 0, 0) 37.04%, rgba(0, 0, 0, 0.5) 100%);
 }
 
-
 @media (max-width: 580px), (max-height: 900px) {
   .box-top .heading-6,
   .box-top-hover .heading-6 {
@@ -121,25 +113,9 @@
     align-items: center;
   }
 
-  .movie-top::scroll-marker-group {
-    gap: 10px;
-  }
-
-  .movie-card-wrapper::scroll-marker {
-    height: 7px;
-    width: 7px;
-    border-radius: 8px;
-  }
-
   .movie-top::scroll-button(right),
   .movie-top::scroll-button(left) {
     display: none;
-  }
-
-  .movie-card-wrapper {
-    flex: 0 0 309px;
-    width: 309px;
-    height: 151px;
   }
 
   .box-top .bottom-text,
@@ -147,4 +123,3 @@
     min-height: 52px;
   }
 }
-
