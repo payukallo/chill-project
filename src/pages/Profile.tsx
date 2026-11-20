@@ -147,7 +147,7 @@ const ProfilePage = () => {
           </NavLink>
         </div>
 
-        <MyListContainerProfile onMovieClick={handleOpenPopup} />
+        <MyListContainerProfile onMovieClick={handleOpenPopup} movies={[]} />
       </div>
 
       {selectedMovie && (

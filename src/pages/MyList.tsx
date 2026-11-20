@@ -43,8 +43,7 @@ const MyListPage = () => {
 
       <div className="my-list">
         <span className="list-title heading-3">Daftar Saya</span>
-
-        <MyListContainer onMovieClick={handleOpenPopup} />
+        <MyListContainer onMovieClick={handleOpenPopup} movies={[]} />
       </div>
 
       {selectedMovie && (

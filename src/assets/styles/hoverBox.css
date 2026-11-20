@@ -1,0 +1,116 @@
+/* ========================================
+   PORTAL HOVER CARD
+======================================== */
+
+.movie-card-wrapper {
+  position: relative;
+  flex: 0 0 302px;
+  height: 162px;
+  scroll-snap-align: start;
+  cursor: pointer;
+}
+
+.movie-card-wrapper-bottom {
+  width: 234px;
+  height: 365px;
+}
+
+.movie-card-wrapper::scroll-marker {
+  content: "";
+  height: 16px;
+  width: 16px;
+  background-color: var(--text-dark-primary);
+  border-radius: 12px;
+}
+
+.movie-card-wrapper::scroll-marker:target-current {
+  background-color: var(--text-light-secondary);
+}
+
+.box-top-hover {
+  position: fixed;
+  z-index: 9;
+  cursor: pointer;
+  border-radius: 20px;
+  overflow: hidden;
+  translate: var(--hover-x) var(--hover-y);
+  --hover-x: -50px;
+  --hover-y: -150px;
+  animation: movieHoverIn 0.18s ease-out;
+}
+
+.hover-movie {
+  display: flex;
+  flex-direction: column;
+  width: 408;
+  background-color: var(--paper-background);
+}
+
+.hover-img {
+  display: flex;
+  height: 254px;
+}
+
+.hover-bottom-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 210px;
+  padding: 29px;
+  width: 100%;
+}
+
+.hover-button {
+  display: flex;
+  justify-content: space-between;
+  height: 55px;
+}
+
+.hover-button button {
+  background-color: transparent;
+  border: none;
+}
+
+.hover-button button.add-pop-up {
+  border: 1px solid var(--text-light-secondary);
+}
+
+.hover-button > div {
+  display: flex;
+  gap: 16px;
+}
+
+.hover-button img {
+  width: 54px;
+}
+
+.hover-info {
+  display: flex;
+  gap: 20px;
+  height: 35px;
+}
+
+.age-hover {
+  padding: 4px 12px;
+  border-radius: 29px;
+  background-color: var(--info-background);
+}
+
+.hover-genre {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Touch device tidak menggunakan hover */
+@media (hover: none) {
+  .box-top-hover {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .box-top-hover {
+    animation: none;
+  }
+}

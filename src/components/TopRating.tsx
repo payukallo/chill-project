@@ -1,45 +1,79 @@
+import { createPortal } from "react-dom";
 import type { IResponseMovie } from "./type/IResponMovies";
+import type { IWatchHistory } from "./type/WatchHistoryApi";
+import { useMovieCardHover } from "./hooks/UseMovieCardHover";
+import { MovieCardHover } from "./MoviesCardHover";
+import { SeriesCardHover } from "./SeriesCardHover";
+import { MovieCardContent } from "./MovieCardContent";
 
-interface ITopRatingMovie {
+interface ITopRatingMovies {
   movies: IResponseMovie[];
   headTitle: string;
   on_click: (movie: IResponseMovie) => void;
+  history?: IWatchHistory[];
 }
 
 export function TopRatingMovies({
   movies,
   headTitle,
   on_click,
-}: ITopRatingMovie) {
+  history = [],
+}: ITopRatingMovies) {
+  const {
+    hover,
+    hoverRef,
+    handleCardEnter,
+    handleCardLeave,
+    handleHoverLeave,
+  } = useMovieCardHover();
+
   return (
     <div className="movies">
       <h3 className="heading-3">{headTitle}</h3>
+
       <div className="movie-list">
         {movies.map((movie) => (
-          <div className="box" key={`${movie.type}-${movie.id}`}>
-            <img
-              src={movie.cover_url}
-              alt={movie.title}
-              onClick={() => on_click(movie)}
-            />
-            <div>
-              {movie.is_premium && (
-                <p className="premium body-small-bold">Premium</p>
-              )}
-              {movie.is_new_episode && !movie.is_premium && (
-                <p className="new-episode body-small-bold">Episode Baru</p>
-              )}
-              {movie.is_top_10 && (
-                <p className="top10 body-small-regular">Top 10</p>
-              )}
-            </div>
-            <div className="bottom-text">
-              <p className="heading-6">{movie.title}</p>
-              <p className="body-small-regular">{movie.rating}</p>
+          <div
+            key={`${movie.type}-${movie.id}`}
+            className="movie-card-wrapper-bottom"
+            onPointerEnter={(event) => handleCardEnter(event, movie)}
+            onPointerLeave={handleCardLeave}
+          >
+            <div className="box" onClick={() => on_click(movie)}>
+              <MovieCardContent movie={movie} />
             </div>
           </div>
         ))}
       </div>
+
+      {hover &&
+        createPortal(
+          <div
+            ref={hoverRef}
+            className="box-top-hover"
+            style={{
+              top: hover.top,
+              left: hover.left,
+            }}
+            onPointerLeave={handleHoverLeave}
+          >
+            {hover.movie.type === 0 ? (
+              <MovieCardHover
+                movies={movies}
+                movie={hover.movie}
+                on_click={on_click}
+              />
+            ) : hover.movie.type === 1 ? (
+              <SeriesCardHover
+                movies={movies}
+                movie={hover.movie}
+                on_click={on_click}
+                history={history}
+              />
+            ) : null}
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }

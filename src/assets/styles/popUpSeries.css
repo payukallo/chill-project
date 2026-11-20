@@ -15,12 +15,11 @@
   top: 1650px;
 }
 
-.pop-up-my-list {
+.pop-up-series-my-list,
+.pop-up-series-my-list-profile,
+.pop-up-movie-my-list,
+.pop-up-movie-my-list-profile {
   top: 150px;
-}
-
-.pop-up-my-list-profile {
-  top: 200px;
 }
 
 .pop-up-description-series {
@@ -141,12 +140,14 @@
     top: 900px;
   }
 
-  .pop-up-my-list {
-    top: 250px;
+  .pop-up-series-my-list,
+  .pop-up-movie-my-list {
+    top: 100px;
   }
 
-  .pop-up-my-list-profile {
-    top: 700px;
+  .pop-up-movie-my-list-profile,
+  .pop-up-series-my-list-profile {
+    top: 500px;
   }
 
   .episode-list-container {
@@ -201,5 +202,4 @@
   .episode-thumbnail-wrapper .episode-watch-progress {
     height: 2px;
   }
-
 }

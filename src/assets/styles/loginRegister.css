@@ -62,6 +62,7 @@ button.log {
 
 .password-input-wrapper button {
   border: none;
+  color: var(--text-light-secondary);
 }
 
 .password-input-wrapper input {
@@ -117,7 +118,6 @@ button.log {
   .login-container button {
     padding: 8.09px 11.55px;
     border-radius: 12px;
-    border: 0.58px solid var(--outline-border);
     height: 28px;
     color: var(--text-light-primary);
   }
