@@ -10,12 +10,13 @@
   cursor: pointer;
 }
 
-.movie-card-wrapper-bottom {
-  width: 234px;
+.movie-card-wrapper.bottom-wrapper {
+  flex: 0 0 234px;
   height: 365px;
 }
 
-.movie-card-wrapper::scroll-marker {
+.movie-card-wrapper::scroll-marker,
+.movie-card-wrapper-bottom::scroll-marker {
   content: "";
   height: 16px;
   width: 16px;
@@ -23,7 +24,8 @@
   border-radius: 12px;
 }
 
-.movie-card-wrapper::scroll-marker:target-current {
+.movie-card-wrapper::scroll-marker:target-current,
+.movie-card-wrapper-bottom::scroll-marker:target-current {
   background-color: var(--text-light-secondary);
 }
 
@@ -104,6 +106,9 @@
 
 /* Touch device tidak menggunakan hover */
 @media (hover: none) {
+  .box-top-hover {
+    display: none;
+  }
   .box-top-hover {
     display: none;
   }
