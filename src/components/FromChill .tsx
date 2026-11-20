@@ -35,7 +35,7 @@ export function MoviesFromChill({
         {movies.map((movie) => (
           <div
             key={`${movie.type}-${movie.id}`}
-            className="movie-card-wrapper bottom-wrapper"
+            className="movie-card-wrapper-bottom-wrapper"
             onPointerEnter={(event) => handleCardEnter(event, movie)}
             onPointerLeave={handleCardLeave}
           >

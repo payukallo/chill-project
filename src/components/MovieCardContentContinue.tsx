@@ -10,9 +10,7 @@ export function MovieCardContentContinue({ movie }: IMovieCardContent) {
       <img src={movie.banner_url} alt={movie.title} />
 
       <div>
-        {movie.is_premium && <p className="premium body-small-bold">Premium</p>}
-
-        {movie.is_new_episode && !movie.is_premium && (
+        {movie.is_new_episode && (
           <p className="new-episode body-small-bold">Episode Baru</p>
         )}
       </div>
