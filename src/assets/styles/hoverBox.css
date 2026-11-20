@@ -15,20 +15,6 @@
   height: 365px;
 }
 
-.movie-card-wrapper::scroll-marker,
-.movie-card-wrapper-bottom::scroll-marker {
-  content: "";
-  height: 16px;
-  width: 16px;
-  background-color: var(--text-dark-primary);
-  border-radius: 12px;
-}
-
-.movie-card-wrapper::scroll-marker:target-current,
-.movie-card-wrapper-bottom::scroll-marker:target-current {
-  background-color: var(--text-light-secondary);
-}
-
 .box-top-hover {
   position: fixed;
   z-index: 9;
