@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { IResponseMovie, IEpisode } from "../type/IResponMovies";
 import { getWatchHistory, getWatchProgress } from "../type/WatchHistoryApi";
 import { useMyListStore } from "../../stores/useMyListStore";
+import { getResumeSeriesEpisode } from "../utils/getResumeSeriesEpisode";
 
 export type EpisodeProgress = {
   percent: number;
@@ -178,43 +179,17 @@ export function useSeriesPopup({
 
         if (!active) return;
 
-        console.log("=== DEBUG CONTINUE WATCHING ===");
-        console.log("fromContinueWatching:", fromContinueWatching);
-        console.log("Media ID:", mediaId);
-        console.log("Watch History:", history);
-        console.log("Daftar Episode:", movie.episodes);
-
         // Cari riwayat serial
-        const currentHistory = history.find(
-          (item) =>
-            Number(item.media_id) === mediaId && item.media_type === "series",
+        const targetEpisode = getResumeSeriesEpisode(
+          movie.episodes ?? [],
+          history,
+          mediaId,
         );
 
-        console.log("Current History:", currentHistory);
-
-        if (!currentHistory) {
-          console.warn("Riwayat serial tidak ditemukan");
-          return;
-        }
-
-        // Cocokkan menggunakan ID episode terlebih dahulu
-        const targetEpisode = movie.episodes?.find(
-          (episode) =>
-            currentHistory.episode_id != null &&
-            Number(episode.episode_id) === Number(currentHistory.episode_id),
-        );
-
-        console.log("Target Episode:", targetEpisode);
+        if (!active) return;
 
         if (!targetEpisode) {
-          console.warn("Episode pada riwayat tidak ditemukan di katalog", {
-            historyEpisodeId: currentHistory.episode_id,
-            catalogEpisodes: movie.episodes?.map((episode) => ({
-              episode_id: episode.episode_id,
-              episode_number: episode.episode_number,
-            })),
-          });
-
+          console.warn("Episode tidak ditemukan");
           return;
         }
 
@@ -232,11 +207,10 @@ export function useSeriesPopup({
     // Reset saat popup menerima serial baru
     setSelectedEpisode(movie.episodes?.[0] ?? null);
     setFocusEpisodeNumber(null);
-    setResumeLoading(fromContinueWatching);
+    setResumeLoading(true);
 
-    if (fromContinueWatching) {
-      void loadResumeEpisode();
-    }
+    // Cari episode terakhir untuk semua popup Series
+    void loadResumeEpisode();
 
     return () => {
       active = false;

@@ -1,5 +1,6 @@
 import type { IResponseMovie } from "../type/IResponMovies";
 import type { IWatchHistory } from "../type/WatchHistoryApi";
+import { getResumeSeriesEpisode } from "../utils/getResumeSeriesEpisode";
 
 interface UseSeriesContinuePlayProps {
   movie: IResponseMovie;
@@ -11,23 +12,39 @@ export function useSeriesContinuePlay({
   history,
 }: UseSeriesContinuePlayProps) {
   const handleWatchSeries = () => {
-    const lastWatched = history
-      .filter(
+    console.log("=== DEBUG SERIES HOVER PLAY ===");
+
+    console.log("Series ID:", movie.id);
+
+    console.log("History:", history);
+
+    console.log(
+      "History Series:",
+      history.filter(
         (item) =>
           item.media_type === "series" &&
-          Number(item.media_id) === Number(movie.id) &&
-          Number(item.is_completed) === 0,
-      )
-      .sort(
-        (a, b) =>
-          new Date(b.last_watched_at ?? 0).getTime() -
-          new Date(a.last_watched_at ?? 0).getTime(),
-      )[0];
+          Number(item.media_id) === Number(movie.id),
+      ),
+    );
 
-    const episodeNumber = lastWatched?.episode_number ?? 1;
+    console.log(
+      "Episodes:",
+      movie.episodes?.map((episode) => ({
+        episode_id: episode.episode_id,
+        episode_number: episode.episode_number,
+      })),
+    );
+
+    const episode = getResumeSeriesEpisode(
+      movie.episodes ?? [],
+      history,
+      Number(movie.id),
+    );
+
+    if (!episode) return;
 
     window.open(
-      `/watch/${movie.id}?type=series&episode=${episodeNumber}`,
+      `/watch/${movie.id}?type=series&episode=${episode.episode_number}`,
       "_blank",
       "noopener,noreferrer",
     );

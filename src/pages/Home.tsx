@@ -47,7 +47,11 @@ export default function HomePage() {
   // ========================================
 
   const [fromContinueWatching, setFromContinueWatching] = useState(false);
-  const { continueAll, loading: continueLoading } = useContinueWatching({
+  const {
+    continueAll,
+    loading: continueLoading,
+    history,
+  } = useContinueWatching({
     movies: allMovies,
     series: allSeries,
   });
@@ -151,9 +155,10 @@ export default function HomePage() {
     if (!selectedSeriesTop?.id) return;
 
     const url =
-      `/watch/${selectedSeriesTop.id}` + `?episode=${episode.episode_number}`;
+      `/watch/${selectedSeriesTop.id}` +
+      `?type=series&episode=${episode.episode_number}`;
 
-    window.open(url, "_blank");
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   // ========================================
@@ -219,7 +224,12 @@ export default function HomePage() {
       <Navbar />
 
       {/* HEADER */}
-      <Header movies={headerMedia} on_click={handleOpenPopupTop} />
+      <Header
+        movies={headerMedia}
+        on_click={handleOpenPopupTop}
+        history={history}
+        historyLoading={continueLoading}
+      />
 
       <div className="content">
         {!continueLoading && continueAll.length > 0 && (
@@ -227,6 +237,7 @@ export default function HomePage() {
             movies={continueAll}
             on_click={handleOpenContinueWatching}
             headTitle="Melanjutkan Tonton Film dan Series"
+            history={history}
           />
         )}
 
@@ -234,6 +245,7 @@ export default function HomePage() {
           movies={movieTopRating}
           on_click={handleOpenTopRating}
           headTitle="Top Rating Film dan Series Hari ini"
+          history={history}
         />
 
         <TrendingMovies

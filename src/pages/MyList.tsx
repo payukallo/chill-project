@@ -1,41 +1,60 @@
 import "../assets/styles/myList.css";
 import { useEffect, useState } from "react";
-import { Navbar } from "../layouts/Navbar.jsx";
-import { Footer } from "../layouts/Footer.jsx";
-import { getMovies } from "../components/type/MovieApi";
-import { PopUpMyList } from "../components/PopUpMyList.js";
+import { Navbar } from "../layouts/Navbar";
+import { Footer } from "../layouts/Footer";
+import { getMovies, getSeries } from "../components/type/MovieApi";
+import { PopUpMyList } from "../components/PopUpMyList";
 import { MyListContainer } from "../components/MyListContainer";
+import { useContinueWatching } from "../components/hooks/UseContinueWatching";
 import type { IMyListMovie } from "../stores/useMyListStore";
 import type { IResponseMovie } from "../components/type/IResponMovies";
 
 const MyListPage = () => {
   const [selectedMovie, setSelectedMovie] = useState<IMyListMovie | null>(null);
-
-  function handleOpenPopup(movie: IMyListMovie) {
-    console.log("FILM DIKLIK:", movie);
-    setSelectedMovie(movie);
-  }
-
-  function handleClosePopup() {
-    setSelectedMovie(null);
-  }
-
   const [movies, setMovies] = useState<IResponseMovie[]>([]);
+  const [series, setSeries] = useState<IResponseMovie[]>([]);
 
+  // WATCH HISTORY
+  const { history, loading: historyLoading } = useContinueWatching({
+    movies,
+    series,
+  });
+
+  // POPUP
+  const handleOpenPopup = (movie: IMyListMovie) => {
+    setSelectedMovie(movie);
+  };
+
+  const handleClosePopup = () => {
+    setSelectedMovie(null);
+  };
+
+  // DATA KATALOG
   useEffect(() => {
-    async function fetchMovies() {
+    let active = true;
+
+    const fetchCatalog = async () => {
       try {
-        const data = await getMovies();
-        setMovies(data);
+        const [movieData, seriesData] = await Promise.all([
+          getMovies(),
+          getSeries(),
+        ]);
+
+        if (!active) return;
+
+        setMovies(movieData);
+        setSeries(seriesData);
       } catch (error) {
-        console.error("Gagal mengambil katalog film:", error);
+        console.error("Gagal mengambil katalog:", error);
       }
-    }
+    };
 
-    fetchMovies();
+    void fetchCatalog();
+
+    return () => {
+      active = false;
+    };
   }, []);
-
-  console.log("SELECTED MOVIE:", selectedMovie);
 
   return (
     <main className="my-list-page box-pop-up-content">
@@ -43,7 +62,14 @@ const MyListPage = () => {
 
       <div className="my-list">
         <span className="list-title heading-3">Daftar Saya</span>
-        <MyListContainer onMovieClick={handleOpenPopup} movies={[]} />
+
+        {!historyLoading && (
+          <MyListContainer
+            onMovieClick={handleOpenPopup}
+            movies={[...movies, ...series]}
+            history={history}
+          />
+        )}
       </div>
 
       {selectedMovie && (

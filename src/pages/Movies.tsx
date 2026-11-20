@@ -67,6 +67,7 @@ export default function MoviesPage() {
     setSelectedMovieBottom(null);
   };
 
+
   // ========================================
   // MENGAMBIL DATA KATALOG FILM
   // ========================================
@@ -124,7 +125,6 @@ export default function MoviesPage() {
       <Header movies={movieHeader} on_click={handleOpenPopupTop} />
 
       <div className="content">
-
         {!continueLoading && continueMovies.length > 0 && (
           <ContinueMovie
             movies={continueMovies}

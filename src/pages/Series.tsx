@@ -43,7 +43,11 @@ export default function SeriesPage() {
   // CONTINUE WATCHING SERIES
   // ========================================
 
-  const { continueSeries, loading: continueLoading } = useContinueWatching({
+  const {
+    continueSeries,
+    loading: continueLoading,
+    history,
+  } = useContinueWatching({
     movies: [],
     series: allSeries,
   });
@@ -152,15 +156,20 @@ export default function SeriesPage() {
     <main className="home-page box-pop-up-content">
       <Navbar />
 
-      <Header movies={movieHeader} on_click={handleOpenPopupTop} />
+      <Header
+        movies={movieHeader}
+        on_click={handleOpenPopupTop}
+        history={history}
+        historyLoading={continueLoading}
+      />
 
       <div className="content">
-
         {!continueLoading && continueSeries.length > 0 && (
           <ContinueMovie
             movies={continueSeries}
             on_click={handleOpenContinueSeries}
             headTitle="Melanjutkan Tonton Series"
+            history={history}
           />
         )}
 
@@ -168,24 +177,28 @@ export default function SeriesPage() {
           movies={movieFromChill}
           on_click={handleOpenPopupTop}
           headTitle="Series Persembahan Chill"
+          history={history}
         />
 
         <TopRatingMovies
           movies={movieTopRating}
           on_click={handleOpenPopupBottom}
           headTitle="Top Rating Series Hari ini"
+          history={history}
         />
 
         <TrendingMovies
           movies={movieTrending}
           headTitle="Series Trending"
           on_click={handleOpenPopupBottom}
+          history={history}
         />
 
         <NewRelease
           movies={movieNewRelease}
           headTitle="Rilis Baru"
           on_click={handleOpenPopupBottom}
+          history={history}
         />
       </div>
 
