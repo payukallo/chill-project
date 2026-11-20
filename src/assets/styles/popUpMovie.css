@@ -1,4 +1,5 @@
 @import url(popUpSeries.css);
+@import url(hoverBox.css);
 
 .page-overlay {
   position: absolute;

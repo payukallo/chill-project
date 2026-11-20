@@ -7,9 +7,16 @@ interface SeriesPopupContentProps {
   movie: IResponseMovie;
   onClose: () => void;
   onPlayEpisode: (episode: IEpisode) => void;
-  variant: "top" | "bottom";
+  variant: "top" | "bottom" | "my-list" | "my-list-profile";
   fromContinueWatching?: boolean;
 }
+
+const popupVariantClass = {
+  top: "pop-up-series-top",
+  bottom: "pop-up-series-bottom",
+  "my-list": "pop-up-series-my-list",
+  "my-list-profile": "pop-up-series-my-list-profile",
+};
 
 export function SeriesPopupContent({
   movie,
@@ -35,11 +42,7 @@ export function SeriesPopupContent({
 
   return createPortal(
     <div className="page-overlay">
-      <div
-        className={`pop-up-overlay ${
-          variant === "top" ? "pop-up-series-top" : "pop-up-series-bottom"
-        }`}
-      >
+      <div className={`pop-up-overlay ${popupVariantClass[variant]}`}>
         {/* =================================
             BANNER DAN TOMBOL
            ================================= */}

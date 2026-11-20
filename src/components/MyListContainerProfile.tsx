@@ -1,39 +1,92 @@
-import { useMyListStore } from "../stores/useMyListStore";
+import { createPortal } from "react-dom";
 import type { IMyListMovie } from "../stores/useMyListStore";
+import type { IResponseMovie } from "./type/IResponMovies";
+import type { IWatchHistory } from "./type/WatchHistoryApi";
+import { useMovieCardHover } from "./hooks/UseMovieCardHover";
+import { useMyListHover } from "./hooks/useMyListHover";
+import { MovieCardHover } from "./MoviesCardHover";
+import { SeriesCardHover } from "./SeriesCardHover";
+import { MovieCardContent } from "./MovieCardContent";
 
 interface IMyListContainer {
   onMovieClick: (movie: IMyListMovie) => void;
+  movies: IResponseMovie[];
+  history?: IWatchHistory[];
 }
 
-export function MyListContainerProfile({ onMovieClick }: IMyListContainer) {
-  const myMovies = useMyListStore((state) => state.myMovies);
+export function MyListContainerProfile({
+  onMovieClick,
+  movies,
+  history = [],
+}: IMyListContainer) {
+  const { myMovies, handleHoverMovieClick } = useMyListHover({ onMovieClick });
+
+  const {
+    hover,
+    hoverRef,
+    handleCardEnter,
+    handleCardLeave,
+    handleHoverLeave,
+  } = useMovieCardHover();
 
   return (
-    <div className="list-container profile">
-      {myMovies.length > 0 ? (
-        myMovies.map((movie) => (
+    <>
+      <div className="list-container profile">
+        {myMovies.length > 0 ? (
+          myMovies.map((movie) => {
+            const normalizedMovie = {
+              ...movie,
+              id: Number(movie.id),
+              type: movie.mediaType === "movie" ? 0 : 1,
+            } as IResponseMovie;
+
+            return (
+              <div
+                key={movie.myListId}
+                onPointerEnter={(event) =>
+                  handleCardEnter(event, normalizedMovie)
+                }
+                onPointerLeave={handleCardLeave}
+              >
+                <div className="list-box" onClick={() => onMovieClick(movie)}>
+                  <MovieCardContent movie={normalizedMovie} />
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <p>Belum ada film di Daftar Saya.</p>
+        )}
+      </div>
+
+      {hover &&
+        createPortal(
           <div
-            className="list-box"
-            key={movie.id}
-            onClick={() => onMovieClick(movie)}
+            ref={hoverRef}
+            className="box-top-hover"
+            style={{
+              top: hover.top,
+              left: hover.left,
+            }}
+            onPointerLeave={handleHoverLeave}
           >
-            <img src={movie.cover_url} alt={movie.title} />
-            <div>
-              {movie.is_premium && (
-                <p className="premium body-small-bold">Premium</p>
-              )}
-              {movie.is_new_episode && !movie.is_premium && (
-                <p className="new-episode body-small-bold">Episode Baru</p>
-              )}
-              {movie.is_top_10 && (
-                <p className="top10 body-small-regular">Top 10</p>
-              )}
-            </div>
-          </div>
-        ))
-      ) : (
-        <p>Belum ada film di Daftar Saya.</p>
-      )}
-    </div>
+            {hover.movie.type === 0 ? (
+              <MovieCardHover
+                movies={movies}
+                movie={hover.movie}
+                on_click={handleHoverMovieClick}
+              />
+            ) : hover.movie.type === 1 ? (
+              <SeriesCardHover
+                movies={movies}
+                movie={hover.movie}
+                on_click={handleHoverMovieClick}
+                history={history}
+              />
+            ) : null}
+          </div>,
+          document.body,
+        )}
+    </>
   );
 }

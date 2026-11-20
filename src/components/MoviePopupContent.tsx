@@ -9,8 +9,16 @@ interface MoviePopupContentProps {
   movies: IResponseMovie[];
   onClose: () => void;
   onMovieClick: (movie: IResponseMovie) => void;
-  variant: "top" | "bottom";
+  variant: "top" | "bottom" | "my-list" | "my-list-profile";
 }
+
+const popupVariantClass = {
+  top: "pop-up-movie-top",
+  bottom: "pop-up-movie-bottom",
+  "my-list": "pop-up-movie-my-list",
+  "my-list-profile": "pop-up-movie-my-list-profile",
+};
+
 
 export function MoviePopupContent({
   movie,
@@ -31,15 +39,10 @@ export function MoviePopupContent({
     onMovieClick,
   });
 
-  console.log("Movie:", movie.title);
-  console.log("Age Rating:", movie.age_rating);
-
   return createPortal(
     <div className="page-overlay">
       <div
-        className={`pop-up-overlay ${
-          variant === "top" ? "pop-up-movie-top" : "pop-up-movie-bottom"
-        }`}
+       className={`pop-up-overlay ${popupVariantClass[variant]}`}
       >
         {/* =================================
             BANNER DAN TOMBOL
