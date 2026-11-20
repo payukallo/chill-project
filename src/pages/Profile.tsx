@@ -2,7 +2,8 @@ import "../assets/styles/profile.css";
 import { useEffect, useState } from "react";
 import { Navbar } from "../layouts/Navbar.jsx";
 import { Footer } from "../layouts/Footer.jsx";
-import { getMovies } from "../components/type/MovieApi";
+import { getMovies, getSeries } from "../components/type/MovieApi";
+import { useContinueWatching } from "../components/hooks/UseContinueWatching";
 import { MyListContainerProfile } from "../components/MyListContainerProfile.js";
 import { ProfileContainer } from "../components/ProfileContainer.js";
 import { PopUpMyListProfile } from "../components/PopUpMyListProfile.js";
@@ -53,6 +54,21 @@ const ProfilePage = () => {
   const [subscriptionError, setSubscriptionError] = useState(false);
   const [movies, setMovies] = useState<IResponseMovie[]>([]);
 
+  const [series, setSeries] = useState<IResponseMovie[]>([]);
+
+  const { history, loading: historyLoading } = useContinueWatching({
+    movies,
+    series,
+  });
+
+  function handleOpenPopup(movie: IMyListMovie) {
+    setSelectedMovie(movie);
+  }
+
+  function handleClosePopup() {
+    setSelectedMovie(null);
+  }
+
   useEffect(() => {
     let cancelled = false;
 
@@ -84,25 +100,30 @@ const ProfilePage = () => {
   }, []);
 
   useEffect(() => {
-    async function fetchMovies() {
+    let active = true;
+
+    const fetchCatalog = async () => {
       try {
-        const data = await getMovies();
-        setMovies(data);
+        const [movieData, seriesData] = await Promise.all([
+          getMovies(),
+          getSeries(),
+        ]);
+
+        if (!active) return;
+
+        setMovies(movieData);
+        setSeries(seriesData);
       } catch (error) {
-        console.error("Gagal mengambil katalog film:", error);
+        console.error("Gagal mengambil katalog Profile:", error);
       }
-    }
+    };
 
-    fetchMovies();
+    void fetchCatalog();
+
+    return () => {
+      active = false;
+    };
   }, []);
-
-  function handleOpenPopup(movie: IMyListMovie) {
-    setSelectedMovie(movie);
-  }
-
-  function handleClosePopup() {
-    setSelectedMovie(null);
-  }
 
   return (
     <main className="profile-page">
@@ -147,7 +168,13 @@ const ProfilePage = () => {
           </NavLink>
         </div>
 
-        <MyListContainerProfile onMovieClick={handleOpenPopup} movies={[]} />
+        {!historyLoading && (
+          <MyListContainerProfile
+            onMovieClick={handleOpenPopup}
+            movies={[...movies, ...series]}
+            history={history}
+          />
+        )}
       </div>
 
       {selectedMovie && (
