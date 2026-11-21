@@ -7,14 +7,14 @@ import { ContinueMovie } from "../components/Continue";
 import { TrendingMovies } from "../components/Trending";
 import { TopRatingMovies } from "../components/TopRating";
 import { NewRelease } from "../components/NewRelease";
-import { PopUpSeries } from "../components/PopUpSeries";
 import { getMovies, getSeries } from "../components/type/MovieApi";
 import type {
   IEpisode,
   IResponseMovie,
 } from "../components/type/IResponMovies";
 import { useContinueWatching } from "../components/hooks/UseContinueWatching";
-import { PopUpMovie } from "../components/PopUpMovie";
+import { MoviePopupContent } from "../components/MoviePopupContent";
+import { SeriesPopupContent } from "../components/SeriesPopupContent";
 
 export default function HomePage() {
   // ========================================
@@ -267,7 +267,7 @@ export default function HomePage() {
          ================================= */}
 
       {selectedMovieTop && (
-        <PopUpMovie
+        <MoviePopupContent
           movie={selectedMovieTop}
           onClose={handleClosePopupTop}
           movies={allMovies}
@@ -281,7 +281,7 @@ export default function HomePage() {
          ================================= */}
 
       {selectedMovieBottom && (
-        <PopUpMovie
+        <MoviePopupContent
           movie={selectedMovieBottom}
           onClose={handleClosePopupBottom}
           movies={allMovies}
@@ -295,7 +295,7 @@ export default function HomePage() {
          ================================= */}
 
       {selectedSeriesTop && (
-        <PopUpSeries
+        <SeriesPopupContent
           movie={selectedSeriesTop}
           onClose={handleCloseSeriesTop}
           onPlayEpisode={handlePlaySeriesEpisode}

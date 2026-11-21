@@ -19,7 +19,6 @@ const popupVariantClass = {
   "my-list-profile": "pop-up-movie-my-list-profile",
 };
 
-
 export function MoviePopupContent({
   movie,
   movies,
@@ -41,9 +40,7 @@ export function MoviePopupContent({
 
   return createPortal(
     <div className="page-overlay">
-      <div
-       className={`pop-up-overlay ${popupVariantClass[variant]}`}
-      >
+      <div className={`pop-up-overlay ${popupVariantClass[variant]}`}>
         {/* =================================
             BANNER DAN TOMBOL
            ================================= */}
