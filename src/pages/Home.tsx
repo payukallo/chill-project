@@ -7,15 +7,14 @@ import { ContinueMovie } from "../components/Continue";
 import { TrendingMovies } from "../components/Trending";
 import { TopRatingMovies } from "../components/TopRating";
 import { NewRelease } from "../components/NewRelease";
-import { PopUpMovieTop } from "../components/PopUpMovieTop";
-import { PopUpMovieBottom } from "../components/PopUpMovieBottom";
-import { PopUpSeriesTop } from "../components/PopUpSeriesTop";
+import { PopUpSeries } from "../components/PopUpSeries";
 import { getMovies, getSeries } from "../components/type/MovieApi";
 import type {
   IEpisode,
   IResponseMovie,
 } from "../components/type/IResponMovies";
 import { useContinueWatching } from "../components/hooks/UseContinueWatching";
+import { PopUpMovie } from "../components/PopUpMovie";
 
 export default function HomePage() {
   // ========================================
@@ -268,11 +267,12 @@ export default function HomePage() {
          ================================= */}
 
       {selectedMovieTop && (
-        <PopUpMovieTop
+        <PopUpMovie
           movie={selectedMovieTop}
           onClose={handleClosePopupTop}
           movies={allMovies}
           onMovieClick={handleOpenPopupTop}
+          variant="top"
         />
       )}
 
@@ -281,11 +281,12 @@ export default function HomePage() {
          ================================= */}
 
       {selectedMovieBottom && (
-        <PopUpMovieBottom
+        <PopUpMovie
           movie={selectedMovieBottom}
           onClose={handleClosePopupBottom}
           movies={allMovies}
           onMovieClick={handleOpenPopupBottom}
+          variant="bottom"
         />
       )}
 
@@ -294,11 +295,12 @@ export default function HomePage() {
          ================================= */}
 
       {selectedSeriesTop && (
-        <PopUpSeriesTop
+        <PopUpSeries
           movie={selectedSeriesTop}
           onClose={handleCloseSeriesTop}
           onPlayEpisode={handlePlaySeriesEpisode}
           fromContinueWatching={fromContinueWatching}
+          variant="top"
         />
       )}
     </main>

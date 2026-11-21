@@ -10,9 +10,8 @@ import { ContinueMovie } from "../components/Continue";
 import { TrendingMovies } from "../components/Trending";
 import { TopRatingMovies } from "../components/TopRating";
 import { MoviesFromChill } from "../components/FromChill ";
-import { PopUpMovieTop } from "../components/PopUpMovieTop";
-import { PopUpMovieBottom } from "../components/PopUpMovieBottom";
 import { useContinueWatching } from "../components/hooks/UseContinueWatching";
+import { PopUpMovie } from "../components/PopUpMovie";
 
 export default function MoviesPage() {
   // ========================================
@@ -162,21 +161,23 @@ export default function MoviesPage() {
 
       {/* Popup Film Top */}
       {selectedMovieTop && (
-        <PopUpMovieTop
+        <PopUpMovie
           movie={selectedMovieTop}
           onClose={handleClosePopupTop}
           movies={allMovies}
           onMovieClick={handleOpenPopupTop}
+          variant="top"
         />
       )}
 
       {/* Popup Film Bottom */}
       {selectedMovieBottom && (
-        <PopUpMovieBottom
+        <PopUpMovie
           movie={selectedMovieBottom}
           onClose={handleClosePopupBottom}
           movies={allMovies}
           onMovieClick={handleOpenPopupBottom}
+          variant="bottom"
         />
       )}
     </main>
