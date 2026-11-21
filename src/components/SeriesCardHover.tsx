@@ -80,11 +80,16 @@ export function SeriesCardHover({
         </div>
 
         <div className="hover-genre body-large-bold">
-          {movie.genre?.slice(0, 3).map((genre, index) => (
-            <span key={`${genre}-${index}`} className="body-small-regular">
-              {index > 0 && " • "}
-              {genre}
-            </span>
+          {movie.genre?.slice(0, 1).map((genre) => (
+            <span>{genre}</span>
+          ))}
+          <span>•</span>
+          {movie.genre?.slice(1, 2).map((genre) => (
+            <span>{genre}</span>
+          ))}
+          <span>•</span>
+          {movie.genre?.slice(2, 3).map((genre) => (
+            <span>{genre}</span>
           ))}
         </div>
       </div>
