@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useVideoPlayer } from "./hooks/UseVideoPlayer";
 import { useWatchProgress } from "./hooks/UseWatchProgress";
 import { useVideoPlayerStore } from "../stores/useVideoPlayerStore";
-import { EpisodePopup } from "./EpisodePopup";
+import { EpisodePopup } from "./EpisodePopupVideoPlayer";
 import type { IEpisode } from "./type/IResponMovies";
 
 interface IVideoPlayer {
