@@ -6,13 +6,15 @@ interface IPopUpMovie {
   movies: IResponseMovie[];
   onClose: () => void;
   onMovieClick: (movie: IResponseMovie) => void;
+  variant: "top" | "bottom" | "my-list" | "my-list-profile";
 }
 
-export function PopUpMovieTop({
+export function PopUpMovie({
   movie,
   movies,
   onClose,
   onMovieClick,
+  variant,
 }: IPopUpMovie) {
   return (
     <MoviePopupContent
@@ -20,7 +22,7 @@ export function PopUpMovieTop({
       movies={movies}
       onClose={onClose}
       onMovieClick={onMovieClick}
-      variant="top"
+      variant={variant}
     />
   );
 }

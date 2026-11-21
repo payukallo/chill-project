@@ -9,8 +9,7 @@ import { ContinueMovie } from "../components/Continue";
 import { TrendingMovies } from "../components/Trending";
 import { TopRatingMovies } from "../components/TopRating";
 import { MoviesFromChill } from "../components/FromChill ";
-import { PopUpSeriesBottom } from "../components/PopUpSeriesBottom";
-import { PopUpSeriesTop } from "../components/PopUpSeriesTop";
+import { PopUpSeries } from "../components/PopUpSeries";
 import { useContinueWatching } from "../components/hooks/UseContinueWatching";
 import type {
   IResponseMovie,
@@ -206,20 +205,22 @@ export default function SeriesPage() {
 
       {/* Popup Series Top */}
       {selectedMovieTop && (
-        <PopUpSeriesTop
+        <PopUpSeries
           movie={selectedMovieTop}
           onClose={handleClosePopupTop}
           onPlayEpisode={handlePlayEpisodeTop}
           fromContinueWatching={fromContinueWatching}
+          variant="top"
         />
       )}
 
       {/* Popup Series Bottom */}
       {selectedMovieBottom && (
-        <PopUpSeriesBottom
+        <PopUpSeries
           movie={selectedMovieBottom}
           onClose={handleClosePopupBottom}
           onPlayEpisode={handlePlayEpisodeBottom}
+          variant="bottom"
         />
       )}
     </main>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import type { IMyListMovie } from "../stores/useMyListStore";
 import type { IResponseMovie, IEpisode } from "./type/IResponMovies";
-import { PopUpSeriesMyListProfile } from "./PopUpSeriesMyListProfile";
-import { PopUpMovieMyListProfile } from "./PopUpMovieMyListProfile";
+import { PopUpSeries } from "./PopUpSeries";
+import { PopUpMovie } from "./PopUpMovie";
 
 interface IPopUpMyList {
   movie: IMyListMovie;
@@ -43,11 +43,12 @@ export function PopUpMyListProfile({ movie, movies, onClose }: IPopUpMyList) {
 
   if (movie.mediaType === "series") {
     return (
-      <PopUpSeriesMyListProfile
+      <PopUpSeries
         movie={selectedMovie}
         onClose={onClose}
         onPlayEpisode={handlePlayEpisode}
         fromContinueWatching={true}
+        variant="my-list-profile"
       />
     );
   }
@@ -57,11 +58,12 @@ export function PopUpMyListProfile({ movie, movies, onClose }: IPopUpMyList) {
   // ========================================
 
   return (
-    <PopUpMovieMyListProfile
+    <PopUpMovie
       movie={activeMovie}
       movies={movies}
       onClose={onClose}
       onMovieClick={setActiveMovie}
+      variant="my-list-profile"
     />
   );
 }
