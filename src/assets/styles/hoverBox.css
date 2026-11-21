@@ -105,3 +105,15 @@
     animation: none;
   }
 }
+
+@media (max-width: 580px), (max-height: 900px) {
+  .movie-card-wrapper {
+    flex: 0 0 309px;
+    height: 151px;
+  }
+
+  .movie-card-wrapper.bottom-wrapper {
+    flex: 0 0 95px;
+    height: 145px;
+  }
+}
