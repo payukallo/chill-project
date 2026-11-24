@@ -91,6 +91,79 @@ const getAllSeries = async () => {
   }
 };
 
+// GET: Mengambil satu Series berdasarkan ID
+const getSeriesById = async (id) => {
+  const connection = await db.getConnection();
+
+  try {
+    // Query 1: Mengambil informasi Series
+    const [seriesRows] = await connection.execute(
+      `SELECT m.*
+       FROM media_new AS m
+       INNER JOIN series_new AS s
+         ON s.media_id = m.id
+       WHERE m.id = ?
+         AND m.media_type = 'series'`,
+      [id],
+    );
+
+    if (seriesRows.length === 0) {
+      return null;
+    }
+
+    // Query 2: Mengambil genre Series
+    const [genreRows] = await connection.execute(
+      `SELECT g.name
+       FROM media_genres AS mg
+       INNER JOIN genres AS g
+         ON g.id = mg.genre_id
+       WHERE mg.media_id = ?
+       ORDER BY g.name`,
+      [id],
+    );
+
+    // Query 3: Mengambil episode Series
+    const [episodeRows] = await connection.execute(
+      `SELECT
+          e.id AS episode_id,
+          e.episode_number,
+          e.title,
+          e.description,
+          e.duration,
+          e.cover_url,
+          e.video_url
+       FROM episodes_new AS e
+       WHERE e.series_id = ?
+       ORDER BY e.episode_number`,
+      [id],
+    );
+
+    // Format genre
+    const genre = genreRows.map((row) => row.name);
+
+    // Format episode agar sama dengan getAllSeries()
+    const episodes = episodeRows.map((episode) => ({
+      episode_id: episode.episode_id,
+      episode_number: episode.episode_number,
+      title: episode.title,
+      description: episode.description,
+      duration: episode.duration === null ? null : `${episode.duration} min`,
+      thumbnail: episode.cover_url,
+      video_url: episode.video_url,
+    }));
+
+    return {
+      ...seriesRows[0],
+      type: 1,
+      genre,
+      duration: `${episodes.length} Episodes`,
+      episodes,
+    };
+  } finally {
+    connection.release();
+  }
+};
+
 // POST: Menambahkan series ke database
 const createSeries = async (data) => {
   const connection = await db.getConnection();
@@ -441,6 +514,7 @@ const deleteSeries = async (id) => {
 
 module.exports = {
   getAllSeries,
+  getSeriesById,
   createSeries,
   updateSeries,
   deleteSeries,

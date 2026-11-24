@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+
 const {
   getSeries,
+  getSeriesById,
   createSeries,
   updateSeries,
   deleteSeries,
@@ -14,6 +16,9 @@ const validateSeriesId = require("../middlewares/validateSeriesId");
 
 // GET: Semua pengguna boleh melihat katalog series
 router.get("/", getSeries);
+
+// GET: Mengambil satu Series berdasarkan ID
+router.get("/:id", validateSeriesId, getSeriesById);
 
 // POST: Hanya Admin
 router.post("/", protect, restrictTo("admin"), createSeries);

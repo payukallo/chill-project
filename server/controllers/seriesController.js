@@ -11,6 +11,23 @@ const getSeries = async (req, res, next) => {
   }
 };
 
+// GET: Mengambil satu Series berdasarkan ID
+const getSeriesById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const series = await seriesModel.getSeriesById(id);
+
+    if (!series) {
+      return next(new AppError("Series tidak ditemukan", 404));
+    }
+
+    res.status(200).json(series);
+  } catch (error) {
+    next(error);
+  }
+};
+
 // POST: Menambahkan series
 const createSeries = async (req, res, next) => {
   try {
@@ -96,6 +113,7 @@ const deleteSeries = async (req, res, next) => {
 
 module.exports = {
   getSeries,
+  getSeriesById,
   createSeries,
   updateSeries,
   deleteSeries,

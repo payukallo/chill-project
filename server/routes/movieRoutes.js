@@ -4,6 +4,7 @@ const router = express.Router();
 const {
   getMovies,
   createMovie,
+  getMovieById,
   updateMovie,
   deleteMovie,
 } = require("../controllers/movieController");
@@ -14,6 +15,9 @@ const restrictTo = require("../middlewares/roleMiddleware");
 
 // GET: Semua orang boleh melihat katalog
 router.get("/", getMovies);
+
+// GET: Mengambil satu film berdasarkan ID
+router.get("/:id", validateMovieId, getMovieById);
 
 // POST: Hanya admin yang boleh menambahkan film
 router.post("/", protect, restrictTo("admin"), createMovie);

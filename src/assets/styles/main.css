@@ -11,15 +11,6 @@ body {
   color: var(--text-light-primary);
 }
 
-body .test-api {
-  background-color: black;
-}
-
-body .test-api input,
-body .test-api button {
-  color: black;
-}
-
 a {
   text-decoration: none;
 }

@@ -173,6 +173,60 @@ const getAllMovies = async () => {
   }
 };
 
+// Mengambil satu film berdasarkan ID
+const getMovieById = async (id) => {
+  const connection = await db.getConnection();
+
+  try {
+    const [movies] = await connection.execute(
+      `SELECT
+          m.id,
+          m.title,
+          m.description,
+          m.rating,
+          m.year,
+          m.cover_url,
+          m.banner_url,
+          m.is_premium,
+          m.is_top_10,
+          m.is_top_rating_today,
+          m.film_maker,
+          m.age_rating,
+          m.cast_members,
+          m.is_new_episode,
+          mn.duration_minutes,
+          mn.video_url
+       FROM media_new m
+       JOIN movies_new mn ON m.id = mn.media_id
+       WHERE m.id = ?
+         AND m.media_type = 'movie'`,
+      [id],
+    );
+
+    if (movies.length === 0) {
+      return null;
+    }
+
+    const movie = movies[0];
+
+    const [genre, recommendations] = await Promise.all([
+      getGenres(connection, id),
+      getRecommendations(connection, id),
+    ]);
+
+    const { duration_minutes, ...data } = movie;
+
+    return {
+      ...data,
+      duration: duration_minutes ? `${duration_minutes} min` : null,
+      genre,
+      recommendation_movie_1: recommendations,
+    };
+  } finally {
+    connection.release();
+  }
+};
+
 // Menambahkan film baru
 const createMovie = async (movie) => {
   const connection = await db.getConnection();
@@ -395,6 +449,7 @@ const deleteMovie = async (id) => {
 
 module.exports = {
   getAllMovies,
+  getMovieById,
   createMovie,
   updateMovie,
   deleteMovie,

@@ -11,6 +11,23 @@ const getMovies = async (req, res, next) => {
   }
 };
 
+// GET: Mengambil satu film berdasarkan ID
+const getMovieById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const movie = await movieModel.getMovieById(id);
+
+    if (!movie) {
+      return next(new AppError("Film tidak ditemukan", 404));
+    }
+
+    res.status(200).json(movie);
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Validasi data film
 const validateMovie = (movie, isUpdate = false) => {
   const { title, rating, year, genre, recommendation_movie_1 } = movie;
@@ -166,6 +183,7 @@ const deleteMovie = async (req, res, next) => {
 
 module.exports = {
   getMovies,
+  getMovieById,
   createMovie,
   updateMovie,
   deleteMovie,
