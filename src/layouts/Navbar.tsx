@@ -15,6 +15,10 @@ export function Navbar() {
   const profileImage = useProfileStore((state) => state.profileImage);
   const fetchProfile = useProfileStore((state) => state.fetchProfile);
 
+  const storedUser = localStorage.getItem("user");
+  const user = storedUser ? JSON.parse(storedUser) : null;
+  const isAdmin = user?.role === "admin";
+
   // Ambil data profil dari backend ketika Navbar pertama kali dibuka
   useEffect(() => {
     void fetchProfile().catch((error) => {
@@ -32,6 +36,7 @@ export function Navbar() {
         <NavLink to="/series">Series</NavLink>
         <NavLink to="/movies">Film</NavLink>
         <NavLink to="/my_list">Daftar Saya</NavLink>
+        {isAdmin && <NavLink to="/edit_movie_series">Admin</NavLink>}
       </div>
 
       <div className="profile">

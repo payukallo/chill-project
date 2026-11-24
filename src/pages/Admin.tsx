@@ -1,4 +1,5 @@
 import "../assets/styles/admin.css"
+import MovieLogo from "../assets/logo/movie.png";
 import { useState } from "react";
 import { MovieForm } from "../components/admin/MovieForm";
 import { MovieList } from "../components/admin/MovieList";
@@ -6,6 +7,7 @@ import { SeriesForm } from "../components/admin/SeriesForm";
 import { SeriesList } from "../components/admin/SeriesList";
 import { useAdminMovies } from "../components/hooks/useAdminMovies";
 import { useAdminSeries } from "../components/hooks/useAdminSeries";
+import { NavLink } from "react-router";
 
 type AdminTab = "movie" | "series";
 
@@ -17,6 +19,11 @@ export default function EditMovieSeries() {
 
   return (
     <div className="admin-page">
+       <div className="navbar-admin">
+        <NavLink to="/">
+          <img className="logo" src={MovieLogo} width={163} height={44} />
+        </NavLink>
+        </div>
       <h1>Kelola Movie dan Series</h1>
 
       {/* PILIHAN TAB */}
