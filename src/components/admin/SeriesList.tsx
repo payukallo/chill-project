@@ -28,7 +28,7 @@ export function SeriesList({ series, onEdit, onDelete }: SeriesListProps) {
                 <div className="bottom-text-box">
                   <p className="heading-6">{item.title}</p>
                   <p className="body-small-regular">
-                    ★&nbsp;&nbsp;{item.rating}
+                    ★&nbsp;&nbsp;{item.rating}/5
                   </p>
                 </div>
                 <div className="admin-button">

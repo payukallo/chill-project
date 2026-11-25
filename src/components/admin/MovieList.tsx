@@ -28,7 +28,7 @@ export function MovieList({ movies, onEdit, onDelete }: MovieListProps) {
                 <div className="bottom-text-box">
                   <p className="heading-6">{movie.title}</p>
                   <p className="body-small-regular">
-                    ★&nbsp;&nbsp;{movie.rating}
+                    ★&nbsp;&nbsp;{movie.rating}/5
                   </p>
                 </div>
                 <div className="admin-button">

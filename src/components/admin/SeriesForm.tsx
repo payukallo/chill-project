@@ -40,7 +40,9 @@ export function SeriesForm({
 }: SeriesFormProps) {
   return (
     <form onSubmit={handleSubmit} className="admin-form">
-      <h2>{editingId !== null ? "Edit Series" : "Tambah Series"}</h2>
+      <p className="heading-3">
+        {editingId !== null ? "Edit Series" : "Tambah Series"}
+      </p>
 
       {/* INFORMASI DASAR */}
       <span>ID Series : {form.id}</span>
@@ -60,38 +62,34 @@ export function SeriesForm({
         value={form.description}
         onChange={(e) => updateField("description", e.target.value)}
       />
-      <label htmlFor="rating">Rating 0-5</label>
-      <input
-        id="rating"
-        type="number"
-        placeholder="Rating (0-5)"
-        min="0"
-        max="5"
-        step="0.1"
-        value={form.rating}
-        onChange={(e) => updateField("rating", e.target.value)}
-        required
-      />
-      <label htmlFor="year-release">Tahun Series</label>
-      <input
-        id="year-release"
-        type="number"
-        placeholder="Tahun film"
-        min="1888"
-        max="2026"
-        value={form.year}
-        onChange={(e) => updateField("year", e.target.value)}
-      />
-
-      <label htmlFor="genre">Genre Series</label>
-      <input
-        id="genre"
-        type="text"
-        placeholder="Genre (pisahkan dengan koma)"
-        value={form.genre}
-        onChange={(e) => updateField("genre", e.target.value)}
-      />
-
+      <div className="form-rating-year-duration">
+        <div>
+          <label htmlFor="rating">Rating 0-5</label>
+          <input
+            id="rating"
+            type="number"
+            placeholder="Rating (0-5)"
+            min="0"
+            max="5"
+            step="0.1"
+            value={form.rating}
+            onChange={(e) => updateField("rating", e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="year-release">Tahun Series</label>
+          <input
+            id="year-release"
+            type="number"
+            placeholder="Tahun Series"
+            min="1888"
+            max="2026"
+            value={form.year}
+            onChange={(e) => updateField("year", e.target.value)}
+          />
+        </div>
+      </div>
       {/* GAMBAR DAN VIDEO */}
       <label htmlFor="url-cover">Link Gambar Poster</label>
       <input

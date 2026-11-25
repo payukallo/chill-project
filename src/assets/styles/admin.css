@@ -5,36 +5,54 @@
   gap: 20px;
 }
 
-.navbar-admin {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.admin-series-section {
+.admin-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+.admin-page > p {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.admin-page > div:first-of-type {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.admin-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.admin-series-episodes {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0px;
+  gap: 12px;
+}
+
 .admin-series-episode-item {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .admin-tabs {
   display: flex;
-  gap: 12px;
+  gap: 20px;
   margin-bottom: 24px;
 }
 
-.admin-tabs button {
-  padding: 10px 24px;
-  border: 1px solid #ccc;
+.admin-page .admin-tabs button {
+  padding: 12px 40px;
+  background-color: var(--info-pressed);
   border-radius: 8px;
-  background: transparent;
   cursor: pointer;
 }
 
@@ -48,17 +66,28 @@ input,
 textarea,
 button {
   background-color: transparent;
-}
-
-.admin-form {
-  display: flex;
-  flex-direction: column;
+  border: 1px solid var(--text-light-secondary);
+  min-height: 40px;
+  padding: 10px;
+  border-radius: 12px;
 }
 
 .status-movie-series {
   display: flex;
+  justify-content: space-between;
+  padding: 0px 100px;
   gap: 20px;
   width: 100%;
+}
+
+.status-movie-series label {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.status-movie-series input {
+  width: 25px;
 }
 
 .admin-list {
@@ -74,6 +103,19 @@ button {
   display: flex;
   width: 335px;
   height: 210px;
+}
+
+.form-rating-year-duration {
+  display: flex;
+  gap: 20px;
+}
+
+.form-rating-year-duration > div {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
 
 .box-series {
@@ -99,8 +141,8 @@ button {
   align-items: center;
   flex-direction: column;
   position: absolute;
-  gap: 20px;
-  bottom: -51px;
+  gap: 10px;
+  bottom: -50px;
   left: 0;
   width: 100%;
   min-height: 54px;
@@ -111,6 +153,7 @@ button {
 .bottom-text-box {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   padding: 20px;
   background: linear-gradient(rgba(0, 0, 0, 0) 37.04%, rgba(0, 0, 0, 0.7) 100%);
@@ -122,9 +165,11 @@ button {
   width: 100%;
 }
 
-.admin-page button {
+.admin-tabs button,
+.admin-section button {
   border-radius: 12px;
   padding: 5px 10px;
+  width: fit-content;
   border: none;
-  background-color: var(--text-dark-secondary);
+  background-color: var(--info-pressed);
 }

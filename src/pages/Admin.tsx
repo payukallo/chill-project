@@ -1,4 +1,4 @@
-import "../assets/styles/admin.css"
+import "../assets/styles/admin.css";
 import MovieLogo from "../assets/logo/movie.png";
 import { useState } from "react";
 import { MovieForm } from "../components/admin/MovieForm";
@@ -7,7 +7,7 @@ import { SeriesForm } from "../components/admin/SeriesForm";
 import { SeriesList } from "../components/admin/SeriesList";
 import { useAdminMovies } from "../components/hooks/useAdminMovies";
 import { useAdminSeries } from "../components/hooks/useAdminSeries";
-import { NavLink } from "react-router";
+import { Navbar } from "../layouts/Navbar";
 
 type AdminTab = "movie" | "series";
 
@@ -19,12 +19,8 @@ export default function EditMovieSeries() {
 
   return (
     <div className="admin-page">
-       <div className="navbar-admin">
-        <NavLink to="/">
-          <img className="logo" src={MovieLogo} width={163} height={44} />
-        </NavLink>
-        </div>
-      <h1>Kelola Movie dan Series</h1>
+      <Navbar />
+      <p className="heading-2">Kelola Film dan Series</p>
 
       {/* PILIHAN TAB */}
       <div className="admin-tabs">
@@ -34,7 +30,7 @@ export default function EditMovieSeries() {
           onClick={() => setActiveTab("movie")}
           aria-pressed={activeTab === "movie"}
         >
-          Movie
+          Film
         </button>
 
         <button
@@ -49,8 +45,8 @@ export default function EditMovieSeries() {
 
       {/* CRUD MOVIE */}
       {activeTab === "movie" && (
-        <section className="admin-movie-section">
-          <h2>Kelola Film</h2>
+        <section className="admin-section">
+          <p className="heading-3">Kelola Film</p>
 
           {movieAdmin.loading ? (
             <p>Memuat data film...</p>
@@ -66,7 +62,7 @@ export default function EditMovieSeries() {
                 handleSubmit={movieAdmin.handleSubmit}
                 resetForm={movieAdmin.resetForm}
               />
-
+              <p className="heading-3">Daftar Film</p>
               <MovieList
                 movies={movieAdmin.movies}
                 onEdit={movieAdmin.handleEditClick}
@@ -79,8 +75,8 @@ export default function EditMovieSeries() {
 
       {/* CRUD SERIES */}
       {activeTab === "series" && (
-        <section className="admin-series-section">
-          <h2>Kelola Series</h2>
+        <section className="admin-section">
+          <p className="heading-3">Kelola Series</p>
 
           {seriesAdmin.loading ? (
             <p>Memuat data Series...</p>
@@ -99,7 +95,7 @@ export default function EditMovieSeries() {
                 handleSubmit={seriesAdmin.handleSubmit}
                 resetForm={seriesAdmin.resetForm}
               />
-
+              <p className="heading-3">Daftar Series</p>
               <SeriesList
                 series={seriesAdmin.series}
                 onEdit={seriesAdmin.handleEditClick}

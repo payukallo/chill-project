@@ -15,7 +15,7 @@ export function MovieCardContentContinue({ movie }: IMovieCardContent) {
       </div>
       <div className="bottom-text">
         <p className="heading-6">{movie.title}</p>
-        <p className="body-small-regular">★&nbsp;&nbsp;{movie.rating}</p>
+        <p className="body-small-regular">★&nbsp;&nbsp;{movie.rating}/5</p>
       </div>
     </>
   );
