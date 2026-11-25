@@ -33,14 +33,13 @@
 .admin-series-episodes {
   display: flex;
   flex-direction: column;
-  padding: 20px 0px;
-  gap: 12px;
+  gap: 16px;
 }
 
 .admin-series-episode-item {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .admin-tabs {
@@ -88,6 +87,11 @@ button {
 
 .status-movie-series input {
   width: 25px;
+}
+
+.admin-series-actions {
+  display: flex;
+  gap: 15px;
 }
 
 .admin-list {
