@@ -61,9 +61,9 @@
   border-color: #e50914;
 }
 
-input,
-textarea,
-button {
+.admin-page input,
+.admin-page textarea,
+.admin-page button {
   background-color: transparent;
   border: 1px solid var(--text-light-secondary);
   min-height: 40px;
