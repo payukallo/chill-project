@@ -270,7 +270,84 @@ async function deleteUploadObject(kind, key) {
   );
 }
 
+
+async function readUploadBytes(
+  kind,
+  key,
+  object,
+  start,
+  length
+) {
+  const total = object.ContentLength;
+  const maxRead = 10 * 1024 * 1024;
+
+  if (
+    !Number.isSafeInteger(total) ||
+    !Number.isSafeInteger(start) ||
+    !Number.isSafeInteger(length) ||
+    start < 0 ||
+    length <= 0 ||
+    length > maxRead ||
+    start + length > total ||
+    typeof object.ETag !== "string" ||
+    !/^"[^"]+"$/.test(object.ETag)
+  ) {
+    throw new Error("INVALID_BINARY_READ");
+  }
+
+  const end = start + length - 1;
+  const expectedRange =
+    `bytes ${start}-${end}/${total}`;
+
+  const result = await getClient().send(
+    new GetObjectCommand({
+      Bucket: getUploadBucket(kind),
+      Key: normalizeObjectKey(key),
+      Range: `bytes=${start}-${end}`,
+      IfMatch: object.ETag
+    }),
+    {
+      abortSignal: AbortSignal.timeout(20000)
+    }
+  );
+
+  try {
+    if (
+      !result.Body ||
+      result.$metadata?.httpStatusCode !== 206 ||
+      result.ContentRange !== expectedRange ||
+      result.ContentLength !== length ||
+      result.ETag !== object.ETag ||
+      result.ContentType !== object.ContentType
+    ) {
+      throw new Error("INVALID_BINARY_RESPONSE");
+    }
+
+    const chunks = [];
+    let received = 0;
+
+    for await (const chunk of result.Body) {
+      received += chunk.length;
+
+      if (received > length) {
+        throw new Error("BINARY_READ_LIMIT_EXCEEDED");
+      }
+
+      chunks.push(Buffer.from(chunk));
+    }
+
+    if (received !== length) {
+      throw new Error("INCOMPLETE_BINARY_READ");
+    }
+
+    return Buffer.concat(chunks, received);
+  } finally {
+    result.Body?.destroy?.();
+  }
+}
+
 module.exports = {
+  readUploadBytes,
   deleteUploadObject,
   listUploadObjects,
   createSignedUploadUrl,

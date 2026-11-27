@@ -16,6 +16,32 @@ const {
 
 const MAX_BATCH = 10;
 
+const GRACE_SECONDS = 7 * 24 * 60 * 60;
+
+function isOldEnough(lastModified, now = Date.now()) {
+  if (!lastModified) return false;
+
+  const timestamp = new Date(lastModified).getTime();
+
+  return (
+    Number.isFinite(timestamp) &&
+    Number.isFinite(now) &&
+    now - timestamp >= GRACE_SECONDS * 1000
+  );
+}
+
+function isEligibleAge(value) {
+  if (value == null || value === "") return false;
+
+  const age = Number(value);
+
+  return (
+    Number.isFinite(age) &&
+    age >= GRACE_SECONDS
+  );
+}
+
+
 async function transaction(callback) {
   const connection = await db.getConnection();
 
@@ -101,7 +127,7 @@ async function prepareDeletion(target) {
       row.status !== "deleting" &&
       (
         row.status !== "pending" ||
-        Number(row.age_seconds) < 604800
+        !isEligibleAge(row.age_seconds)
       )
     ) {
       return null;
@@ -142,10 +168,7 @@ async function prepareDeletion(target) {
         object.ETag !== row.object_etag ||
         Number(object.ContentLength) !==
           Number(row.size_bytes) ||
-        !object.LastModified ||
-        Date.now() -
-          new Date(object.LastModified).getTime()
-          < 604800000
+        !isOldEnough(object.LastModified)
       )
     ) {
       if (row.status === "deleting") {
@@ -213,10 +236,7 @@ async function finishDeletion(target) {
         object.ETag !== row.object_etag ||
         Number(object.ContentLength) !==
           Number(row.size_bytes) ||
-        !object.LastModified ||
-        Date.now() -
-          new Date(object.LastModified).getTime()
-          < 604800000
+        !isOldEnough(object.LastModified)
       ) {
         throw new Error("DELETE_METADATA_CONFLICT");
       }
@@ -235,6 +255,11 @@ async function finishDeletion(target) {
     if (remaining) {
       throw new Error("R2_DELETE_NOT_CONFIRMED");
     }
+
+    await connection.execute(`
+      DELETE FROM r2_verified_uploads
+      WHERE bucket = ? AND object_key = ?
+    `, [row.bucket, row.object_key]);
 
     await connection.execute(`
       UPDATE r2_cleanup_candidates

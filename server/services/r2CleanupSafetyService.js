@@ -5,6 +5,11 @@ const {
 
 const AppError = require("../utils/AppError");
 
+const {
+  assertVerifiedUpload
+} = require("./r2UploadValidationService");
+
+
 async function acquireCleanupLock(connection) {
   const [rows] = await connection.execute(`
     SELECT id
@@ -114,7 +119,13 @@ async function protectCatalogUploads(
     }
 
     try {
-      await getUploadedObject(kind, key);
+      const object = await getUploadedObject(kind, key);
+
+      await assertVerifiedUpload(
+        connection,
+        reference,
+        object
+      );
     } catch (error) {
       if (error.$metadata?.httpStatusCode === 404) {
         throw new AppError(

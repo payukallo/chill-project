@@ -7,6 +7,13 @@ const {
   UPLOAD_URL_TTL_SECONDS
 } = require("../services/r2StorageService");
 
+const AppError = require("../utils/AppError");
+
+const {
+  validateUploadedBinary,
+  recordVerifiedUpload
+} = require("../services/r2UploadValidationService");
+
 const MiB = 1024 * 1024;
 
 const rules = {
@@ -188,6 +195,18 @@ async function completeUpload(req, res) {
       );
     }
 
+    await validateUploadedBinary(
+      ticket.kind,
+      ticket.key,
+      object
+    );
+
+    await recordVerifiedUpload(
+      ticket.kind,
+      ticket.key,
+      object
+    );
+
     return res.status(200).json({
       status: "success",
       message: "Upload berhasil diverifikasi",
@@ -200,6 +219,20 @@ async function completeUpload(req, res) {
   } catch (error) {
     if (error.$metadata?.httpStatusCode === 404) {
       return fail(res, 404, "File belum tersedia di R2");
+    }
+
+    if (error instanceof AppError) {
+      const status = Number(
+        error.statusCode ?? error.status
+      );
+
+      if ([400, 409, 422].includes(status)) {
+        return fail(res, status, error.message);
+      }
+    }
+
+    if (error.$metadata?.httpStatusCode === 412) {
+      return fail(res, 409, "File berubah selama verifikasi");
     }
 
     console.error(
