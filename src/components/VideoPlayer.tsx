@@ -3,6 +3,7 @@ import "../assets/styles/episodePopup.css";
 import { useEffect, useRef, useState } from "react";
 import { useVideoPlayer } from "./hooks/UseVideoPlayer";
 import { useWatchProgress } from "./hooks/UseWatchProgress";
+import { usePlaybackRefresh } from "./hooks/UsePlaybackRefresh";
 import { useVideoPlayerStore } from "../stores/useVideoPlayerStore";
 import { EpisodePopup } from "./EpisodePopupVideoPlayer";
 import type { IEpisode } from "./type/IResponMovies";
@@ -72,6 +73,8 @@ export default function VideoPlayer({
     handlePause,
     handleEnded,
     beforeEpisodeChange,
+    suspendForRefresh,
+    restoreAfterRefresh,
     restoreWatchPosition,
     isRestoreReady,
   } = useWatchProgress({
@@ -84,12 +87,34 @@ export default function VideoPlayer({
     setIsPlaying,
   });
 
+  const {
+    videoSource,
+    replacing,
+    refreshError,
+    handleRefreshMetadata,
+    handleRefreshError,
+    stopRefresh,
+  } = usePlaybackRefresh({
+    src,
+    mediaId,
+    episodeId,
+    videoRef,
+    suspend: suspendForRefresh,
+    restore: restoreAfterRefresh,
+    setPlaying: setIsPlaying,
+    blocked: Boolean(sessionError),
+  });
+
+  const playbackDisabled =
+    replacing || Boolean(sessionError || refreshError);
+
   const handleEpisodeChange = (episode: IEpisode) => {
     pendingAutoPlayRef.current = null;
     if (episode.episode_id === episodeId) {
       setShowEpisodes(false);
       return;
     }
+    stopRefresh();
     beforeEpisodeChange();
     onEpisodeSelect?.(episode);
     setShowEpisodes(false);
@@ -113,6 +138,7 @@ export default function VideoPlayer({
         episodeId: nextEpisode.episode_id ?? null,
         episodeNumber: nextEpisode.episode_number,
       };
+      stopRefresh();
       beforeEpisodeChange();
       setShowEpisodes(false);
       onEpisodeSelect(nextEpisode);
@@ -161,7 +187,7 @@ export default function VideoPlayer({
       }}
       onTouchStart={showControlsTemporarily}
     >
-      {sessionError && (
+      {(sessionError || refreshError) && (
         <div
           role="alert"
           style={{
@@ -171,7 +197,13 @@ export default function VideoPlayer({
             textAlign: "center",
           }}
         >
-          {sessionError}
+          {sessionError || refreshError}
+        </div>
+      )}
+
+      {replacing && (
+        <div role="status">
+          Memperbarui akses video...
         </div>
       )}
 
@@ -179,7 +211,8 @@ export default function VideoPlayer({
         <video
           key={`${mediaId ?? "unknown"}:${episodeId ?? "movie"}:${src}`}
           ref={videoRef}
-          src={src}
+          src={videoSource || undefined}
+          onError={handleRefreshError}
           playsInline
           onTimeUpdate={(event) => handleTimeUpdate(event.currentTarget)}
           onSeeked={(event) => handleSeeked(event.currentTarget)}
@@ -189,12 +222,16 @@ export default function VideoPlayer({
             video.volume = volume;
             video.muted = volume === 0;
             video.playbackRate = playbackRate;
+            if (handleRefreshMetadata(video)) return;
+
             void restoreWatchPosition(video).then(() => attemptAutoPlay());
           }}
           onPlay={(event) => handlePlay(event.currentTarget)}
           onPause={(event) => handlePause(event.currentTarget)}
           onEnded={(event) => {
-            void playNextEpisode(event.currentTarget);
+            if (!playbackDisabled) {
+              void playNextEpisode(event.currentTarget);
+            }
           }}
           onVolumeChange={(event) => {
             const video = event.currentTarget;
@@ -207,7 +244,7 @@ export default function VideoPlayer({
           className={`center-play-button ${
             showControls ? "controls-visible" : "controls-hidden"
           }`}
-          disabled={Boolean(sessionError)}
+          disabled={playbackDisabled}
               onClick={handlePlayPause}
           title={isPlaying ? "Pause" : "Play"}
         >
@@ -238,6 +275,7 @@ export default function VideoPlayer({
             min={0}
             max={duration || 0}
             step={0.1}
+            disabled={playbackDisabled}
             value={currentTime}
             onChange={(e) => handleSeek(Number(e.target.value))}
           />
@@ -247,16 +285,16 @@ export default function VideoPlayer({
 
         <div className="video-control-content">
           <div className="video-control-left">
-            <button type="button" disabled={Boolean(sessionError)}
+            <button type="button" disabled={playbackDisabled}
               onClick={handlePlayPause}>
               {isPlaying ? "❚❚" : "▶"}
             </button>
 
-            <button type="button" onClick={handleRewind}>
+            <button type="button" disabled={playbackDisabled} onClick={handleRewind}>
               ↶ 10
             </button>
 
-            <button type="button" onClick={handleForward}>
+            <button type="button" disabled={playbackDisabled} onClick={handleForward}>
               10 ↷
             </button>
 

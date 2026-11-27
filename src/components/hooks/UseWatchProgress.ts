@@ -232,6 +232,42 @@ export function useWatchProgress({
     );
   };
 
+  // Refresh Signed URL bukan sesi pemutaran baru.
+  const suspendForRefresh = (
+    video: HTMLVideoElement,
+  ): boolean => {
+    const ready = isRestoreReady(video);
+
+    playStartRef.current = null;
+    restoreRef.current = null;
+
+    return ready;
+  };
+
+  const restoreAfterRefresh = (
+    video: HTMLVideoElement,
+  ): boolean => {
+    if (!isCurrentVideo(video)) return false;
+
+    if (activeSessionRef.current?.status === "blocked") {
+      video.pause();
+      setIsPlaying(false);
+      return false;
+    }
+
+    restoreRef.current = {
+      video,
+      ready: true,
+    };
+
+    playStartRef.current = null;
+
+    setCurrentTime(video.currentTime);
+    setIsPlaying(false);
+
+    return true;
+  };
+
   const beforeEpisodeChange = (): void => {
     isResettingRef.current = true;
     playStartRef.current = null;
@@ -271,6 +307,8 @@ export function useWatchProgress({
     handlePause,
     handleEnded,
     beforeEpisodeChange,
+    suspendForRefresh,
+    restoreAfterRefresh,
     restoreWatchPosition,
     isRestoreReady,
   };

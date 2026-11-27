@@ -10,6 +10,7 @@ export interface IPlaybackData {
   mediaType: "movie" | "series";
   isPremium: boolean;
   videoUrl: string;
+  expiresIn: number;
 }
 
 // ========================================
@@ -28,9 +29,12 @@ interface IPlaybackResponse {
 export const getPlayback = async (
   mediaId: number,
   episodeId: number | null = null,
+  signal?: AbortSignal,
 ): Promise<IPlaybackData> => {
   const response = await api.get<IPlaybackResponse>(`/playback/${mediaId}`, {
     params: episodeId !== null ? { episodeId } : undefined,
+    signal,
+    ...(signal ? { timeout: 15000 } : {}),
   });
 
   return response.data.data;
