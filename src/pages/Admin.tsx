@@ -1,5 +1,5 @@
 import "../assets/styles/admin.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MovieForm } from "../components/admin/MovieForm";
 import { MovieList } from "../components/admin/MovieList";
 import { SeriesForm } from "../components/admin/SeriesForm";
@@ -12,6 +12,46 @@ type AdminTab = "movie" | "series";
 
 export default function EditMovieSeries() {
   const [activeTab, setActiveTab] = useState<AdminTab>("movie");
+
+  const [uploading, setUploading] = useState(false);
+  const uploadLock = useRef(false);
+  const [operationBusy, setOperationBusy] = useState(false);
+  const operationLock = useRef(false);
+
+  const runAdminOperation = async (
+    operation: () => Promise<void>,
+  ) => {
+    if (uploadLock.current || operationLock.current) {
+      return;
+    }
+
+    operationLock.current = true;
+    setOperationBusy(true);
+
+    try {
+      await operation();
+    } finally {
+      operationLock.current = false;
+      setOperationBusy(false);
+    }
+  };
+
+  const beginUpload = () => {
+    if (uploadLock.current || operationLock.current) {
+      return false;
+    }
+
+    uploadLock.current = true;
+    setUploading(true);
+
+    return true;
+  };
+
+  const onUploadBusy = (busy: boolean) => {
+    uploadLock.current = busy;
+    setUploading(busy);
+  };
+
 
   const movieAdmin = useAdminMovies();
   const seriesAdmin = useAdminSeries();
@@ -26,7 +66,12 @@ export default function EditMovieSeries() {
         <button
           type="button"
           className={activeTab === "movie" ? "active" : ""}
-          onClick={() => setActiveTab("movie")}
+          onClick={() => {
+            if (!uploadLock.current && !operationLock.current) {
+              setActiveTab("movie");
+            }
+          }}
+          disabled={uploading || operationBusy}
           aria-pressed={activeTab === "movie"}
         >
           Film
@@ -35,7 +80,12 @@ export default function EditMovieSeries() {
         <button
           type="button"
           className={activeTab === "series" ? "active" : ""}
-          onClick={() => setActiveTab("series")}
+          onClick={() => {
+            if (!uploadLock.current && !operationLock.current) {
+              setActiveTab("series");
+            }
+          }}
+          disabled={uploading || operationBusy}
           aria-pressed={activeTab === "series"}
         >
           Series
@@ -56,16 +106,38 @@ export default function EditMovieSeries() {
               <MovieForm
                 form={movieAdmin.form}
                 editingId={movieAdmin.editingId}
-                saving={movieAdmin.saving}
+                saving={movieAdmin.saving || operationBusy}
+                uploading={uploading}
+                onUploadBusy={onUploadBusy}
+                beginUpload={beginUpload}
+
                 updateField={movieAdmin.updateField}
-                handleSubmit={movieAdmin.handleSubmit}
-                resetForm={movieAdmin.resetForm}
+                handleSubmit={(event) => {
+                  event.preventDefault();
+
+                  void runAdminOperation(() =>
+                    movieAdmin.handleSubmit(event)
+                  );
+                }}
+                resetForm={() => {
+                  if (!uploadLock.current && !operationLock.current) {
+                    movieAdmin.resetForm();
+                  }
+                }}
               />
               <p className="heading-3">Daftar Film</p>
               <MovieList
                 movies={movieAdmin.movies}
-                onEdit={movieAdmin.handleEditClick}
-                onDelete={movieAdmin.handleDeleteMovie}
+                onEdit={(item) => {
+                  void runAdminOperation(() =>
+                    movieAdmin.handleEditClick(item)
+                  );
+                }}
+                onDelete={(id) => {
+                  void runAdminOperation(() =>
+                    movieAdmin.handleDeleteMovie(id)
+                  );
+                }}
               />
             </>
           )}
@@ -86,19 +158,41 @@ export default function EditMovieSeries() {
               <SeriesForm
                 form={seriesAdmin.form}
                 editingId={seriesAdmin.editingId}
-                saving={seriesAdmin.saving}
+                saving={seriesAdmin.saving || operationBusy}
+                uploading={uploading}
+                onUploadBusy={onUploadBusy}
+                beginUpload={beginUpload}
+
                 updateField={seriesAdmin.updateField}
                 updateEpisode={seriesAdmin.updateEpisode}
                 addEpisode={seriesAdmin.addEpisode}
                 removeEpisode={seriesAdmin.removeEpisode}
-                handleSubmit={seriesAdmin.handleSubmit}
-                resetForm={seriesAdmin.resetForm}
+                handleSubmit={(event) => {
+                  event.preventDefault();
+
+                  void runAdminOperation(() =>
+                    seriesAdmin.handleSubmit(event)
+                  );
+                }}
+                resetForm={() => {
+                  if (!uploadLock.current && !operationLock.current) {
+                    seriesAdmin.resetForm();
+                  }
+                }}
               />
               <p className="heading-3">Daftar Series</p>
               <SeriesList
                 series={seriesAdmin.series}
-                onEdit={seriesAdmin.handleEditClick}
-                onDelete={seriesAdmin.handleDeleteSeries}
+                onEdit={(item) => {
+                  void runAdminOperation(() =>
+                    seriesAdmin.handleEditClick(item)
+                  );
+                }}
+                onDelete={(id) => {
+                  void runAdminOperation(() =>
+                    seriesAdmin.handleDeleteSeries(id)
+                  );
+                }}
               />
             </>
           )}

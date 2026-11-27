@@ -7,7 +7,9 @@ require("dotenv").config({
 
 const {
   S3Client,
-  GetObjectCommand
+  GetObjectCommand,
+  PutObjectCommand,
+  HeadObjectCommand
 } = require("@aws-sdk/client-s3");
 
 const {
@@ -132,7 +134,65 @@ async function getSignedVideoUrl(value) {
   );
 }
 
+
+const UPLOAD_URL_TTL_SECONDS = 900;
+
+function getUploadBucket(kind) {
+  if (kind === "image") {
+    return process.env.R2_IMAGES_BUCKET;
+  }
+
+  if (kind === "video") {
+    return process.env.R2_VIDEOS_BUCKET;
+  }
+
+  throw new Error("INVALID_UPLOAD_KIND");
+}
+
+async function createSignedUploadUrl({
+  kind,
+  key,
+  contentType,
+  size
+}) {
+  const s3 = getClient();
+
+  return getSignedUrl(
+    s3,
+    new PutObjectCommand({
+      Bucket: getUploadBucket(kind),
+      Key: normalizeObjectKey(key),
+      ContentType: contentType,
+      ContentLength: size,
+      IfNoneMatch: "*"
+    }),
+    {
+      expiresIn: UPLOAD_URL_TTL_SECONDS,
+      signableHeaders: new Set([
+        "content-type",
+        "content-length",
+        "if-none-match"
+      ])
+    }
+  );
+}
+
+async function getUploadedObject(kind, key) {
+  const s3 = getClient();
+
+  return s3.send(
+    new HeadObjectCommand({
+      Bucket: getUploadBucket(kind),
+      Key: normalizeObjectKey(key)
+    })
+  );
+}
+
 module.exports = {
+  createSignedUploadUrl,
+  getUploadedObject,
+  UPLOAD_URL_TTL_SECONDS,
+
   normalizeObjectKey,
   getPublicImageUrl,
   getSignedVideoUrl,

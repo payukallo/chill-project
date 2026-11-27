@@ -1,3 +1,4 @@
+import { MediaUploadField } from "./MediaUploadField";
 import type { FormEvent } from "react";
 import type {
   IAdminSeriesForm,
@@ -8,6 +9,10 @@ interface SeriesFormProps {
   form: IAdminSeriesForm;
   editingId: number | null;
   saving: boolean;
+  uploading: boolean;
+  onUploadBusy: (busy: boolean) => void;
+  beginUpload: () => boolean;
+
 
   updateField: <K extends keyof IAdminSeriesForm>(
     field: K,
@@ -31,6 +36,9 @@ export function SeriesForm({
   form,
   editingId,
   saving,
+  uploading,
+  onUploadBusy,
+  beginUpload,
   updateField,
   updateEpisode,
   addEpisode,
@@ -39,7 +47,15 @@ export function SeriesForm({
   resetForm,
 }: SeriesFormProps) {
   return (
-    <form onSubmit={handleSubmit} className="admin-form">
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        if (!uploading && !saving) {
+          handleSubmit(event);
+        }
+      }}
+      className="admin-form"
+    >
       <p className="heading-3">
         {editingId !== null ? "Edit Series" : "Tambah Series"}
       </p>
@@ -95,18 +111,38 @@ export function SeriesForm({
       <input
         id="url-cover"
         type="text"
+        disabled={saving || uploading}
         placeholder="URL Cover / Poster"
         value={form.coverUrl}
         onChange={(e) => updateField("coverUrl", e.target.value)}
       />
+      <MediaUploadField
+        kind="image"
+        value={form.coverUrl}
+        disabled={saving || uploading}
+        onChange={(key) => updateField("coverUrl", key)}
+        onBusyChange={onUploadBusy}
+        beginUpload={beginUpload}
+      />
+
       <label htmlFor="url-banner">Link Gambar Baner</label>
       <input
         id="url-banner"
         type="text"
+        disabled={saving || uploading}
         placeholder="URL Banner"
         value={form.bannerUrl}
         onChange={(e) => updateField("bannerUrl", e.target.value)}
       />
+      <MediaUploadField
+        kind="image"
+        value={form.bannerUrl}
+        disabled={saving || uploading}
+        onChange={(key) => updateField("bannerUrl", key)}
+        onBusyChange={onUploadBusy}
+        beginUpload={beginUpload}
+      />
+
 
       {/* INFORMASI TAMBAHAN */}
       <label htmlFor="film-maker">Nama Sutradara</label>
@@ -184,7 +220,7 @@ export function SeriesForm({
         )}
 
         {form.episodes.map((episode, index) => (
-          <div key={index} className="admin-series-episode-item">
+          <div key={episode.episode_number} className="admin-series-episode-item">
             <h4>Episode {episode.episode_number}</h4>
 
             <label htmlFor="episode-title">Judul Episode</label>
@@ -217,27 +253,47 @@ export function SeriesForm({
             <input
               id="episode-thumbnail-url"
               type="text"
+              disabled={saving || uploading}
               placeholder="URL Thumbnail Episode"
               value={episode.thumbnail}
               onChange={(e) =>
                 updateEpisode(index, "thumbnail", e.target.value)
               }
             />
+            <MediaUploadField
+              kind="image"
+              value={episode.thumbnail}
+              disabled={saving || uploading}
+              onChange={(key) => updateEpisode(index, "thumbnail", key)}
+              onBusyChange={onUploadBusy}
+              beginUpload={beginUpload}
+            />
+
             <label htmlFor="episode-video-url">URL Video Episode</label>
             <input
               id="episode-video-url"
               type="text"
+              disabled={saving || uploading}
               placeholder="URL Video Episode"
               value={episode.video_url}
               onChange={(e) =>
                 updateEpisode(index, "video_url", e.target.value)
               }
             />
+            <MediaUploadField
+              kind="video"
+              value={episode.video_url}
+              disabled={saving || uploading}
+              onChange={(key) => updateEpisode(index, "video_url", key)}
+              onBusyChange={onUploadBusy}
+              beginUpload={beginUpload}
+            />
+
 
             <button
               type="button"
               onClick={() => removeEpisode(index)}
-              disabled={saving || editingId !== null}
+              disabled={saving || uploading || editingId !== null}
               title={
                 editingId !== null
                   ? "Penghapusan episode tersimpan belum didukung"
@@ -249,7 +305,7 @@ export function SeriesForm({
           </div>
         ))}
 
-        <button type="button" onClick={addEpisode} disabled={saving}>
+        <button type="button" onClick={addEpisode} disabled={saving || uploading}>
           + Tambah Episode
         </button>
 
@@ -264,7 +320,7 @@ export function SeriesForm({
       {/* TOMBOL AKSI */}
 
       <div className="admin-series-actions">
-        <button type="submit" disabled={saving}>
+        <button type="submit" disabled={saving || uploading}>
           {saving
             ? "Menyimpan..."
             : editingId !== null
@@ -273,7 +329,7 @@ export function SeriesForm({
         </button>
 
         {editingId !== null && (
-          <button type="button" onClick={resetForm} disabled={saving}>
+          <button type="button" onClick={resetForm} disabled={saving || uploading}>
             Batal
           </button>
         )}

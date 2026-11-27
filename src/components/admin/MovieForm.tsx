@@ -1,3 +1,4 @@
+import { MediaUploadField } from "./MediaUploadField";
 import type { FormEvent } from "react";
 import type { IAdminMovieForm } from "../hooks/useAdminMovies";
 
@@ -5,6 +6,10 @@ interface MovieFormProps {
   form: IAdminMovieForm;
   editingId: number | null;
   saving: boolean;
+  uploading: boolean;
+  onUploadBusy: (busy: boolean) => void;
+  beginUpload: () => boolean;
+
   updateField: <K extends keyof IAdminMovieForm>(
     field: K,
     value: IAdminMovieForm[K],
@@ -17,12 +22,23 @@ export function MovieForm({
   form,
   editingId,
   saving,
+  uploading,
+  onUploadBusy,
+  beginUpload,
   updateField,
   handleSubmit,
   resetForm,
 }: MovieFormProps) {
   return (
-    <form onSubmit={handleSubmit} className="admin-form">
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        if (!uploading && !saving) {
+          handleSubmit(event);
+        }
+      }}
+      className="admin-form"
+    >
       <p className="heading-3">
         {editingId !== null ? "Edit Film" : "Tambah Film"}
       </p>
@@ -98,26 +114,56 @@ export function MovieForm({
       <input
         id="url-cover"
         type="text"
+        disabled={saving || uploading}
         placeholder="URL Cover / Poster"
         value={form.coverUrl}
         onChange={(e) => updateField("coverUrl", e.target.value)}
       />
+      <MediaUploadField
+        kind="image"
+        value={form.coverUrl}
+        disabled={saving || uploading}
+        onChange={(key) => updateField("coverUrl", key)}
+        onBusyChange={onUploadBusy}
+        beginUpload={beginUpload}
+      />
+
       <label htmlFor="url-banner">Link Gambar Baner</label>
       <input
         id="url-banner"
         type="text"
+        disabled={saving || uploading}
         placeholder="URL Banner"
         value={form.bannerUrl}
         onChange={(e) => updateField("bannerUrl", e.target.value)}
       />
+      <MediaUploadField
+        kind="image"
+        value={form.bannerUrl}
+        disabled={saving || uploading}
+        onChange={(key) => updateField("bannerUrl", key)}
+        onBusyChange={onUploadBusy}
+        beginUpload={beginUpload}
+      />
+
       <label htmlFor="url-video">Link Vidio</label>
       <input
         id="ulr-video"
         type="text"
+        disabled={saving || uploading}
         placeholder="URL Video"
         value={form.videoUrl}
         onChange={(e) => updateField("videoUrl", e.target.value)}
       />
+      <MediaUploadField
+        kind="video"
+        value={form.videoUrl}
+        disabled={saving || uploading}
+        onChange={(key) => updateField("videoUrl", key)}
+        onBusyChange={onUploadBusy}
+        beginUpload={beginUpload}
+      />
+
 
       {/* INFORMASI TAMBAHAN */}
       <label htmlFor="film-maker">Nama Sutradara</label>
@@ -187,7 +233,7 @@ export function MovieForm({
 
       {/* TOMBOL AKSI */}
 
-      <button type="submit" disabled={saving}>
+      <button type="submit" disabled={saving || uploading}>
         {saving
           ? "Menyimpan..."
           : editingId !== null
@@ -196,7 +242,7 @@ export function MovieForm({
       </button>
 
       {editingId !== null && (
-        <button type="button" onClick={resetForm} disabled={saving}>
+        <button type="button" onClick={resetForm} disabled={saving || uploading}>
           Batal
         </button>
       )}
