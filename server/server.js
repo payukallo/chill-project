@@ -11,6 +11,8 @@ const subscriptionRoutes = require("./routes/subscriptionRoutes");
 const watchHistoryRoutes = require("./routes/watchHistoryRoutes");
 const playbackRoutes = require("./routes/playbackRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
+const r2CleanupRoutes = require("./routes/r2CleanupRoutes");
+
 
 const app = express();
 // Percayai satu lapis reverse proxy saat berjalan di Vercel.
@@ -48,6 +50,8 @@ app.use("/api/subscriptions", subscriptionRoutes);
 app.use("/api/watch-history", watchHistoryRoutes);
 app.use("/api/playback", playbackRoutes);
 app.use("/api/uploads", uploadRoutes);
+app.use("/api/cron", r2CleanupRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("Chill Backend API is running!");

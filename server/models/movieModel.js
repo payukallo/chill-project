@@ -1,4 +1,9 @@
 const db = require("../db");
+const {
+  acquireCleanupLock,
+  protectCatalogUploads
+} = require("../services/r2CleanupSafetyService");
+
 
 // Mengubah durasi teks menjadi angka menit
 const parseDuration = (duration) => {
@@ -232,7 +237,9 @@ const createMovie = async (movie) => {
   const connection = await db.getConnection();
 
   try {
-    await connection.beginTransaction();
+    await connection.query("BEGIN PESSIMISTIC");
+    await acquireCleanupLock(connection);
+    await protectCatalogUploads(connection, movie, false);
 
     const durationMinutes = parseDuration(movie.duration);
 
@@ -308,7 +315,9 @@ const updateMovie = async (id, movie) => {
   const connection = await db.getConnection();
 
   try {
-    await connection.beginTransaction();
+    await connection.query("BEGIN PESSIMISTIC");
+    await acquireCleanupLock(connection);
+    await protectCatalogUploads(connection, movie, false);
 
     const durationMinutes = parseDuration(movie.duration);
 
@@ -398,7 +407,8 @@ const deleteMovie = async (id) => {
   const connection = await db.getConnection();
 
   try {
-    await connection.beginTransaction();
+    await connection.query("BEGIN PESSIMISTIC");
+    await acquireCleanupLock(connection);
 
     // Pastikan film tersedia
     const [movies] = await connection.execute(

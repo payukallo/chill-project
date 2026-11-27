@@ -1,4 +1,9 @@
 const db = require("../db");
+const {
+  acquireCleanupLock,
+  protectCatalogUploads
+} = require("../services/r2CleanupSafetyService");
+
 
 // GET: Mengambil semua series
 
@@ -169,7 +174,9 @@ const createSeries = async (data) => {
   const connection = await db.getConnection();
 
   try {
-    await connection.beginTransaction();
+    await connection.query("BEGIN PESSIMISTIC");
+    await acquireCleanupLock(connection);
+    await protectCatalogUploads(connection, data, true);
 
     const {
       title,
@@ -308,7 +315,9 @@ const updateSeries = async (id, data) => {
   const connection = await db.getConnection();
 
   try {
-    await connection.beginTransaction();
+    await connection.query("BEGIN PESSIMISTIC");
+    await acquireCleanupLock(connection);
+    await protectCatalogUploads(connection, data, true);
 
     // Pastikan ID merupakan serial yang tersedia
     const [existing] = await connection.execute(
@@ -463,7 +472,8 @@ const deleteSeries = async (id) => {
   const connection = await db.getConnection();
 
   try {
-    await connection.beginTransaction();
+    await connection.query("BEGIN PESSIMISTIC");
+    await acquireCleanupLock(connection);
 
     // Pastikan serial tersedia
     const [series] = await connection.execute(

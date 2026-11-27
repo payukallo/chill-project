@@ -9,7 +9,9 @@ const {
   S3Client,
   GetObjectCommand,
   PutObjectCommand,
-  HeadObjectCommand
+  HeadObjectCommand,
+  ListObjectsV2Command,
+  DeleteObjectCommand
 } = require("@aws-sdk/client-s3");
 
 const {
@@ -188,7 +190,89 @@ async function getUploadedObject(kind, key) {
   );
 }
 
+async function listUploadObjects(kind) {
+  const bucket = getUploadBucket(kind);
+  const prefix = `images/uploads/${kind}/`;
+  const objects = [];
+  const tokens = new Set();
+
+  if (!bucket) {
+    throw new Error("R2_BUCKET_NOT_CONFIGURED");
+  }
+
+  let token;
+
+  do {
+    const page = await getClient().send(
+      new ListObjectsV2Command({
+        Bucket: bucket,
+        Prefix: prefix,
+        MaxKeys: 1000,
+        ContinuationToken: token
+      })
+    );
+
+    for (const object of page.Contents ?? []) {
+      if (!object.Key?.startsWith(prefix)) {
+        throw new Error("INVALID_R2_LIST_RESPONSE");
+      }
+
+      objects.push({
+        bucket,
+        kind,
+        key: object.Key,
+        etag: object.ETag,
+        size: object.Size,
+        lastModified: object.LastModified
+      });
+    }
+
+    if (!page.IsTruncated) break;
+
+    token = page.NextContinuationToken;
+
+    if (!token || tokens.has(token)) {
+      throw new Error("INVALID_R2_PAGINATION");
+    }
+
+    tokens.add(token);
+
+  } while (token);
+
+  return objects;
+}
+
+async function deleteUploadObject(kind, key) {
+  const patterns = {
+    image: /^images\/uploads\/image\/[0-9a-f-]{36}\.(jpg|png|webp|avif)$/,
+    video: /^images\/uploads\/video\/[0-9a-f-]{36}\.(mp4|webm)$/
+  };
+
+  if (
+    !Object.hasOwn(patterns, kind) ||
+    normalizeObjectKey(key) !== key ||
+    !patterns[kind].test(key)
+  ) {
+    throw new Error("UNSAFE_DELETE_SCOPE");
+  }
+
+  const bucket = getUploadBucket(kind);
+
+  if (!bucket) {
+    throw new Error("R2_BUCKET_NOT_CONFIGURED");
+  }
+
+  await getClient().send(
+    new DeleteObjectCommand({
+      Bucket: bucket,
+      Key: key
+    })
+  );
+}
+
 module.exports = {
+  deleteUploadObject,
+  listUploadObjects,
   createSignedUploadUrl,
   getUploadedObject,
   UPLOAD_URL_TTL_SECONDS,
