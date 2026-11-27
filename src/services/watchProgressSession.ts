@@ -3,7 +3,10 @@ import {
   saveSessionProgress,
 } from "../components/type/WatchHistoryApi";
 
+import axios from "axios";
+
 export type WatchSession = {
+  onBlocked?: (message: string) => void;
   sessionId: string;
   mediaId: number;
   episodeId: number | null;
@@ -14,9 +17,43 @@ export type WatchSession = {
   finishing: boolean;
 };
 
+function blockSession(
+  session: WatchSession,
+  error?: unknown,
+): void {
+  if (session.status === "blocked") return;
+
+  session.status = "blocked";
+
+  let message =
+    "Sesi pemutaran dihentikan. Buka kembali halaman video untuk melanjutkan.";
+
+  if (axios.isAxiosError(error)) {
+    const status = error.response?.status;
+    const code = error.response?.data?.code;
+
+    if (
+      status === 403 &&
+      code === "PREMIUM_REQUIRED"
+    ) {
+      message =
+        "Akses Premium tidak lagi tersedia. Periksa status langganan Anda.";
+    } else if (status === 409) {
+      message =
+        "Sesi pemutaran tidak lagi valid atau telah digantikan oleh sesi lain.";
+    } else if (status === 401) {
+      message =
+        "Sesi login tidak lagi valid. Silakan login kembali.";
+    }
+  }
+
+  session.onBlocked?.(message);
+}
+
 export function createWatchSession(
   mediaId: number,
   episodeId: number | null,
+  onBlocked?: (message: string) => void,
 ): WatchSession {
   const session: WatchSession = {
     sessionId: crypto.randomUUID(),
@@ -27,6 +64,7 @@ export function createWatchSession(
     registration: Promise.resolve(),
     queue: Promise.resolve(),
     finishing: false,
+    onBlocked,
   };
 
   session.registration = registerWatchSession({
@@ -43,19 +81,19 @@ export function createWatchSession(
         result.sessionId !== session.sessionId ||
         (result.alreadyRegistered && result.isActive === false)
       ) {
-        session.status = "blocked";
+        blockSession(session);
         return;
       }
       const lastSequence = Number(result.lastSequence ?? 0);
       if (!Number.isSafeInteger(lastSequence) || lastSequence < 0) {
-        session.status = "blocked";
+        blockSession(session);
         return;
       }
       session.sequence = lastSequence;
       session.status = "ready";
     })
     .catch((error: unknown) => {
-      session.status = "blocked";
+      blockSession(session, error);
       console.error("Gagal mendaftarkan sesi pemutaran:", error);
     });
 
@@ -83,7 +121,7 @@ async function sendProgress(
 
   const sequence = session.sequence + 1;
   if (!Number.isSafeInteger(sequence)) {
-    session.status = "blocked";
+    blockSession(session);
     return false;
   }
 
@@ -109,7 +147,7 @@ async function sendProgress(
     return true;
   } catch (error: unknown) {
     // Tidak ada rollback, retry, resync, ataupun takeover otomatis.
-    session.status = "blocked";
+    blockSession(session, error);
     console.error("Request progres gagal; sesi dihentikan:", error);
     return false;
   }

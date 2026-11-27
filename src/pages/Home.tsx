@@ -201,6 +201,7 @@ export default function HomePage() {
         movies={headerMedia}
         on_click={handleOpenPopupTop}
         historyLoading={continueLoading}
+        history={history}
       />
 
       <div className="content">
@@ -208,30 +209,35 @@ export default function HomePage() {
           movies={continueAll}
           on_click={handleOpenPopupTop}
           headTitle="Melanjutkan Tonton Film dan Series"
+          history={history}
         />
 
         <MoviesContainer
           movies={movieTopRating}
           on_click={handleOpenPopupTop}
           headTitle="Top Rating Film dan Series Hari ini"
+          history={history}
         />
 
         <MoviesContainer
           movies={movieTrending}
           headTitle="Film dan Series Trending"
           on_click={handleOpenPopupBottom}
+          history={history}
         />
 
         <MoviesContainer
           movies={movieNewRelease}
           headTitle="Rilis Baru"
           on_click={handleOpenPopupBottom}
+          history={history}
         />
 
         <MoviesContainer
           movies={mediaFree}
           headTitle="Film dan Series Gratis"
           on_click={handleOpenPopupBottom}
+          history={history}
         />
       </div>
 

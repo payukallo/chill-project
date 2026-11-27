@@ -65,6 +65,7 @@ export default function VideoPlayer({
   const autoNextInProgressRef = useRef(false);
 
   const {
+    sessionError,
     handlePlay,
     handleTimeUpdate,
     handleSeeked,
@@ -160,6 +161,20 @@ export default function VideoPlayer({
       }}
       onTouchStart={showControlsTemporarily}
     >
+      {sessionError && (
+        <div
+          role="alert"
+          style={{
+            padding: "12px 16px",
+            background: "#302020",
+            color: "#ffffff",
+            textAlign: "center",
+          }}
+        >
+          {sessionError}
+        </div>
+      )}
+
       <div className="video-screen">
         <video
           key={`${mediaId ?? "unknown"}:${episodeId ?? "movie"}:${src}`}
@@ -192,7 +207,8 @@ export default function VideoPlayer({
           className={`center-play-button ${
             showControls ? "controls-visible" : "controls-hidden"
           }`}
-          onClick={handlePlayPause}
+          disabled={Boolean(sessionError)}
+              onClick={handlePlayPause}
           title={isPlaying ? "Pause" : "Play"}
         >
           {isPlaying ? "❚❚" : "▶"}
@@ -231,7 +247,8 @@ export default function VideoPlayer({
 
         <div className="video-control-content">
           <div className="video-control-left">
-            <button type="button" onClick={handlePlayPause}>
+            <button type="button" disabled={Boolean(sessionError)}
+              onClick={handlePlayPause}>
               {isPlaying ? "❚❚" : "▶"}
             </button>
 

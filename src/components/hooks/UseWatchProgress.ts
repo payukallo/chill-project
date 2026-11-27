@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { RefObject } from "react";
 import { getWatchProgress } from "../type/WatchHistoryApi";
 import {
@@ -45,6 +45,9 @@ export function useWatchProgress({
 }: Options) {
   const activeVideoRef = useRef<VideoIdentity>({ mediaId, episodeId, src });
   const activeSessionRef = useRef<WatchSession | null>(null);
+
+  const [sessionError, setSessionError] =
+    useState<string | null>(null);
   const playStartRef = useRef<number | null>(null);
   const isResettingRef = useRef(false);
   const restoreRef = useRef<RestoreState | null>(null);
@@ -119,6 +122,13 @@ export function useWatchProgress({
   const handlePlay = (video: HTMLVideoElement): void => {
     if (!isCurrentVideo(video)) return;
 
+    if (activeSessionRef.current?.status === "blocked") {
+      video.pause();
+      playStartRef.current = null;
+      setIsPlaying(false);
+      return;
+    }
+
     setIsPlaying(true);
 
     if (!isRestoreReady(video)) {
@@ -134,7 +144,26 @@ export function useWatchProgress({
       Number.isSafeInteger(mediaId) &&
       mediaId > 0
     ) {
-      activeSessionRef.current = createWatchSession(mediaId, episodeId);
+      const newSession: WatchSession = createWatchSession(
+        mediaId,
+        episodeId,
+        (message) => {
+          // Respons sesi lama tidak boleh menghentikan episode baru.
+          if (
+            activeSessionRef.current !== newSession ||
+            !isCurrentVideo(video)
+          ) {
+            return;
+          }
+
+          playStartRef.current = null;
+          video.pause();
+          setIsPlaying(false);
+          setSessionError(message);
+        },
+      );
+
+      activeSessionRef.current = newSession;
     }
 
     playStartRef.current = Date.now();
@@ -215,6 +244,7 @@ export function useWatchProgress({
     const next: VideoIdentity = { mediaId, episodeId, src };
     const changed = !sameVideo(activeVideoRef.current, next);
     if (changed) {
+      setSessionError(null);
       playStartRef.current = null;
       restoreRef.current = null;
       resetPlayer();
@@ -234,6 +264,7 @@ export function useWatchProgress({
   }, [mediaId, episodeId, src, resetPlayer]);
 
   return {
+    sessionError,
     handlePlay,
     handleTimeUpdate,
     handleSeeked,

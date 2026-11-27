@@ -37,7 +37,7 @@ export default function MoviesPage() {
   // CONTINUE WATCHING KHUSUS FILM
   // ========================================
 
-  const { continueMovies, loading: continueLoading } = useContinueWatching({
+  const { continueMovies, history, loading: continueLoading } = useContinueWatching({
     movies: allMovies,
     series: [],
   });
@@ -129,6 +129,7 @@ export default function MoviesPage() {
             movies={continueMovies}
             on_click={handleOpenPopupTop}
             headTitle="Melanjutkan Tonton Film"
+            history={history}
           />
         )}
 
@@ -136,30 +137,35 @@ export default function MoviesPage() {
           movies={movieFromChill}
           on_click={handleOpenPopupTop}
           headTitle="Film Persembahan Chill"
+          history={history}
         />
 
         <MoviesContainer
           movies={movieTopRating}
           on_click={handleOpenPopupBottom}
           headTitle="Top Rating Film Hari ini"
+          history={history}
         />
 
         <MoviesContainer
           movies={movieTrending}
           headTitle="Film Trending"
           on_click={handleOpenPopupBottom}
+          history={history}
         />
 
         <MoviesContainer
           movies={movieNewRelease}
           headTitle="Rilis Baru"
           on_click={handleOpenPopupBottom}
+          history={history}
         />
 
         <MoviesContainer
           movies={movieFree}
           headTitle="Film Gratis"
           on_click={handleOpenPopupBottom}
+          history={history}
         />
       </div>
 
