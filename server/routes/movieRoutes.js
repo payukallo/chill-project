@@ -3,8 +3,10 @@ const router = express.Router();
 
 const {
   getMovies,
-  createMovie,
   getMovieById,
+  getAdminMovies,
+  getAdminMovieById,
+  createMovie,
   updateMovie,
   deleteMovie,
 } = require("../controllers/movieController");
@@ -13,19 +15,44 @@ const validateMovieId = require("../middlewares/validateMovieId");
 const protect = require("../middlewares/authMiddleware");
 const restrictTo = require("../middlewares/roleMiddleware");
 
-// GET: Semua orang boleh melihat katalog
+// ========================================
+// GET: ADMIN MOVIES
+// ========================================
+
+router.get("/admin", protect, restrictTo("admin"), getAdminMovies);
+
+router.get(
+  "/admin/:id",
+  protect,
+  restrictTo("admin"),
+  validateMovieId,
+  getAdminMovieById,
+);
+
+// ========================================
+// GET: PUBLIC CATALOG
+// ========================================
+
 router.get("/", getMovies);
 
-// GET: Mengambil satu film berdasarkan ID
 router.get("/:id", validateMovieId, getMovieById);
 
-// POST: Hanya admin yang boleh menambahkan film
+// ========================================
+// POST: ADMIN ONLY
+// ========================================
+
 router.post("/", protect, restrictTo("admin"), createMovie);
 
-// PUT: Hanya admin yang boleh memperbarui film
+// ========================================
+// PUT: ADMIN ONLY
+// ========================================
+
 router.put("/:id", protect, restrictTo("admin"), validateMovieId, updateMovie);
 
-// DELETE: Hanya admin yang boleh menghapus film
+// ========================================
+// DELETE: ADMIN ONLY
+// ========================================
+
 router.delete(
   "/:id",
   protect,

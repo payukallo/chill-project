@@ -14,7 +14,6 @@ export async function getMovies(): Promise<IResponseMovie[]> {
         cover_url: string | null;
         banner_url: string | null;
         recommendation_movie_1: number[] | null;
-        video_url: string | null;
         genre: string[] | null;
         is_premium: number;
         is_top_10: number;
@@ -29,7 +28,6 @@ export async function getMovies(): Promise<IResponseMovie[]> {
       id: item.id,
       type: 0,
       title: item.title,
-      video_url: item.video_url ?? null,
       description: item.description ?? "",
       rating: String(item.rating),
       year: item.year ?? 0,

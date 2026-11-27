@@ -15,7 +15,7 @@ export function MovieList({ movies, onEdit, onDelete }: MovieListProps) {
         movies.map((movie) => (
           <div key={movie.id} className="series-admin-item">
             <div className="box-series">
-              <img src={movie.banner_url} alt={movie.title} />
+              <img src={movie.banner_url ?? undefined} alt={movie.title} />
               <div>
                 {movie.is_premium ? (
                   <p className="premium body-small-bold">Premium</p>

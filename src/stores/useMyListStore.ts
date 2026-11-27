@@ -73,7 +73,6 @@ export const useMyListStore = create<IMyListStore>((set, get) => ({
           description: string | null;
           duration: string | null;
           banner_url: string | null;
-          video_url: string | null;
           genre: string[] | null;
           film_maker: string | null;
           age_rating: string | null;
@@ -82,9 +81,6 @@ export const useMyListStore = create<IMyListStore>((set, get) => ({
           recommendation_movie_1: number[] | null;
         }>;
       }>("/my-list", { headers });
-
-      console.log("DATA MY LIST DARI BACKEND:", response.data.data);
-      console.table(response.data.data);
 
       const formattedData: IMyListMovie[] = response.data.data.map(
         (item) =>
@@ -100,7 +96,6 @@ export const useMyListStore = create<IMyListStore>((set, get) => ({
             duration: item.duration ?? "",
             cover_url: item.cover_url ?? undefined,
             banner_url: item.banner_url ?? undefined,
-            video_url: item.video_url ?? undefined,
             genre: item.genre ?? [],
             is_premium: Boolean(item.is_premium),
             is_top_10: Boolean(item.is_top_10),
@@ -116,7 +111,6 @@ export const useMyListStore = create<IMyListStore>((set, get) => ({
 
       if (currentRequest === requestId) {
         set({ myMovies: formattedData });
-        console.log("STATE MY LIST DIPERBARUI:", formattedData);
       }
     } catch (error) {
       console.error("Gagal mengambil My List:", error);

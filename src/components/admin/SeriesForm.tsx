@@ -187,7 +187,7 @@ export function SeriesForm({
           <div key={index} className="admin-series-episode-item">
             <h4>Episode {episode.episode_number}</h4>
 
-            <label htmlFor="episode-title"></label>
+            <label htmlFor="episode-title">Judul Episode</label>
             <input
               id="episode-title"
               type="text"

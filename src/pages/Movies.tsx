@@ -5,11 +5,8 @@ import { Header } from "../components/Header";
 import { Footer } from "../layouts/Footer";
 import { getMovies } from "../components/type/MovieApi";
 import type { IResponseMovie } from "../components/type/IResponMovies";
-import { NewRelease } from "../components/NewRelease";
 import { ContinueMovie } from "../components/Continue";
-import { TrendingMovies } from "../components/Trending";
-import { TopRatingMovies } from "../components/TopRating";
-import { MoviesFromChill } from "../components/FromChill ";
+import { MoviesContainer } from "../components/MoviesContainer";
 import { useContinueWatching } from "../components/hooks/UseContinueWatching";
 import { MoviePopupContent } from "../components/MoviePopupContent";
 
@@ -24,6 +21,7 @@ export default function MoviesPage() {
   const [movieTrending, setMovieTrending] = useState<IResponseMovie[]>([]);
   const [movieNewRelease, setMovieNewRelease] = useState<IResponseMovie[]>([]);
   const [allMovies, setAllMovies] = useState<IResponseMovie[]>([]);
+  const [movieFree, setMovieFree] = useState<IResponseMovie[]>([]);
 
   // ========================================
   // POPUP
@@ -66,7 +64,6 @@ export default function MoviesPage() {
     setSelectedMovieBottom(null);
   };
 
-
   // ========================================
   // MENGAMBIL DATA KATALOG FILM
   // ========================================
@@ -92,6 +89,8 @@ export default function MoviesPage() {
           .sort((a, b) => b.year - a.year)
           .slice(0, 10);
 
+        const free = movies.filter((movie) => movie.is_premium === false);
+
         // Katalog lengkap untuk pencocokan Watch History
         setAllMovies(movies);
 
@@ -101,6 +100,7 @@ export default function MoviesPage() {
         setMovieTopRating(topRating);
         setMovieTrending(trending);
         setMovieNewRelease(newRelease);
+        setMovieFree(free);
       } catch (error) {
         console.error("Gagal mengambil katalog Movies:", error);
       }
@@ -132,27 +132,33 @@ export default function MoviesPage() {
           />
         )}
 
-        <MoviesFromChill
+        <MoviesContainer
           movies={movieFromChill}
           on_click={handleOpenPopupTop}
           headTitle="Film Persembahan Chill"
         />
 
-        <TopRatingMovies
+        <MoviesContainer
           movies={movieTopRating}
           on_click={handleOpenPopupBottom}
           headTitle="Top Rating Film Hari ini"
         />
 
-        <TrendingMovies
+        <MoviesContainer
           movies={movieTrending}
           headTitle="Film Trending"
           on_click={handleOpenPopupBottom}
         />
 
-        <NewRelease
+        <MoviesContainer
           movies={movieNewRelease}
           headTitle="Rilis Baru"
+          on_click={handleOpenPopupBottom}
+        />
+
+        <MoviesContainer
+          movies={movieFree}
+          headTitle="Film Gratis"
           on_click={handleOpenPopupBottom}
         />
       </div>

@@ -1,5 +1,6 @@
 const db = require("../db");
 const watchHistoryModel = require("./watchHistoryModel");
+const premiumAccessService = require("../services/premiumAccessService");
 
 // Memeriksa apakah nomor urut request lebih baru
 const isValidWatchSequence = (sequence, lastSequence) => {
@@ -115,6 +116,37 @@ const saveSessionWatchProgress = async ({
       throw error;
     }
 
+    // ========================================
+    // VALIDASI MEDIA DAN AKSES PREMIUM
+    // ========================================
+
+    const validation = await watchHistoryModel.validateWatchMedia(
+      mediaId,
+      episodeId,
+      connection,
+    );
+
+    if (!validation.valid) {
+      const error = new Error(validation.message);
+      error.statusCode = 400;
+      throw error;
+    }
+
+    const hasAccess = await premiumAccessService.hasPremiumAccess(
+      userId,
+      validation.isPremium,
+      connection,
+    );
+
+    if (!hasAccess) {
+      const error = new Error("Konten ini khusus pengguna premium");
+
+      error.statusCode = 403;
+      error.code = "PREMIUM_REQUIRED";
+
+      throw error;
+    }
+
     // Pastikan nomor urut request lebih baru
     if (!isValidWatchSequence(sequence, session.last_sequence)) {
       const error = new Error("Nomor urut request sudah kedaluwarsa");
@@ -212,11 +244,31 @@ const registerActiveWatchSession = async ({
       const validation = await watchHistoryModel.validateWatchMedia(
         mediaId,
         episodeId,
+        connection,
       );
 
       if (!validation.valid) {
         const error = new Error(validation.message);
         error.statusCode = 400;
+        throw error;
+      }
+
+      // ========================================
+      // VALIDASI AKSES PREMIUM
+      // ========================================
+
+      const hasAccess = await premiumAccessService.hasPremiumAccess(
+        userId,
+        validation.isPremium,
+        connection,
+      );
+
+      if (!hasAccess) {
+        const error = new Error("Konten ini khusus pengguna premium");
+
+        error.statusCode = 403;
+        error.code = "PREMIUM_REQUIRED";
+
         throw error;
       }
 

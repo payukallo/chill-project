@@ -4,11 +4,8 @@ import { Navbar } from "../layouts/Navbar";
 import { Header } from "../components/Header";
 import { Footer } from "../layouts/Footer";
 import { getSeries } from "../components/type/MovieApi";
-import { NewRelease } from "../components/NewRelease";
 import { ContinueMovie } from "../components/Continue";
-import { TrendingMovies } from "../components/Trending";
-import { TopRatingMovies } from "../components/TopRating";
-import { MoviesFromChill } from "../components/FromChill ";
+import { MoviesContainer } from "../components/MoviesContainer";
 import { useContinueWatching } from "../components/hooks/UseContinueWatching";
 import type {
   IResponseMovie,
@@ -28,6 +25,7 @@ export default function SeriesPage() {
   const [movieNewRelease, setMovieNewRelease] = useState<IResponseMovie[]>([]);
   const [allSeries, setAllSeries] = useState<IResponseMovie[]>([]);
   const [fromContinueWatching, setFromContinueWatching] = useState(false);
+  const [movieFree, setMovieFree] = useState<IResponseMovie[]>([]);
 
   // ========================================
   // POPUP
@@ -125,6 +123,7 @@ export default function SeriesPage() {
         const newRelease = [...series]
           .sort((a, b) => b.year - a.year)
           .slice(0, 10);
+        const free = series.filter((item) => item.is_premium === false);
 
         // Katalog lengkap untuk mencocokkan Watch History
         setAllSeries(series);
@@ -135,6 +134,7 @@ export default function SeriesPage() {
         setMovieTopRating(topRating);
         setMovieTrending(trending);
         setMovieNewRelease(newRelease);
+        setMovieFree(free);
       } catch (error) {
         console.error("Gagal mengambil katalog Series:", error);
       }
@@ -172,30 +172,37 @@ export default function SeriesPage() {
           />
         )}
 
-        <MoviesFromChill
+        <MoviesContainer
           movies={movieFromChill}
           on_click={handleOpenPopupTop}
           headTitle="Series Persembahan Chill"
           history={history}
         />
 
-        <TopRatingMovies
+        <MoviesContainer
           movies={movieTopRating}
           on_click={handleOpenPopupBottom}
           headTitle="Top Rating Series Hari ini"
           history={history}
         />
 
-        <TrendingMovies
+        <MoviesContainer
           movies={movieTrending}
           headTitle="Series Trending"
           on_click={handleOpenPopupBottom}
           history={history}
         />
 
-        <NewRelease
+        <MoviesContainer
           movies={movieNewRelease}
           headTitle="Rilis Baru"
+          on_click={handleOpenPopupBottom}
+          history={history}
+        />
+
+         <MoviesContainer
+          movies={movieFree}
+          headTitle="Series Gratis"
           on_click={handleOpenPopupBottom}
           history={history}
         />

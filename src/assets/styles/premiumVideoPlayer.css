@@ -1,0 +1,274 @@
+/* ========================================
+   PREMIUM VIDEO PLAYER
+======================================== */
+
+.premium-video-player {
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+  background-color: #181a1c;
+}
+
+/* Background */
+
+.premium-player-screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.premium-player-background {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+.premium-player-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.82);
+}
+
+/* ========================================
+   PREMIUM CONTENT
+======================================== */
+
+.premium-player-content {
+  position: absolute;
+  inset: 0 0 96px;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 24px;
+  gap: 48px;
+  text-align: center;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Header */
+
+.premium-player-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.premium-player-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(20px, 2.22cqw, 32px);
+  font-weight: 700;
+}
+
+.premium-player-header p {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(12px, 1.11cqw, 16px);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* ========================================
+   PREMIUM BENEFITS
+======================================== */
+
+.premium-player-benefits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.premium-player-benefits h3 {
+  margin: 0;
+  font-size: clamp(14px, 1.39cqw, 20px);
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.premium-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(100%, 640px);
+  gap: 32px 24px;
+}
+
+.premium-benefit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.premium-benefit-item svg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  color: #ffffff;
+}
+
+.premium-benefit-item p {
+  margin: 0;
+  max-width: 180px;
+  color: #c1c2c4;
+  font-size: clamp(11px, 1.11cqw, 16px);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* ========================================
+   PREMIUM BUTTON
+======================================== */
+
+.premium-upgrade-button {
+  width: 193px;
+  min-height: 42px;
+  border-radius: 21px;
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  background-color: #09147a;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.premium-upgrade-button:hover {
+  background-color: #1929a8;
+}
+
+.premium-upgrade-button:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
+}
+
+/* ========================================
+   LOCKED VIDEO CONTROLS
+======================================== */
+
+.premium-video-player .premium-locked-controls {
+  z-index: 3;
+  bottom: 0;
+  min-height: 96px;
+
+  display: flex;
+  align-items: center;
+
+  background-color: rgba(24, 26, 28, 0.6);
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.premium-locked-controls .video-control-content {
+  opacity: 0.35;
+}
+
+.premium-locked-controls button:disabled {
+  cursor: not-allowed;
+  color: #ffffff;
+}
+
+.premium-locked-controls select:disabled {
+  cursor: not-allowed;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@container (max-width: 900px) {
+  .premium-player-content {
+    gap: 24px;
+    bottom: 70px;
+  }
+
+  .premium-player-benefits {
+    gap: 18px;
+  }
+
+  .premium-benefits-grid {
+    gap: 24px 12px;
+  }
+
+  .premium-benefit-item {
+    gap: 8px;
+  }
+
+  .premium-benefit-item svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .premium-video-player .premium-locked-controls {
+    min-height: 70px;
+  }
+}
+
+@media (max-height: 700px) {
+  .premium-player-content {
+    gap: 20px;
+    bottom: 60px;
+  }
+
+  .premium-benefits-grid {
+    gap: 16px;
+  }
+
+  .premium-player-benefits {
+    gap: 14px;
+  }
+
+  .premium-benefit-item svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .premium-video-player .premium-locked-controls {
+    min-height: 60px;
+  }
+}
+
+@media (max-width: 580px) {
+  .premium-video-player {
+    width: 100%;
+    min-height: 500px;
+  }
+
+  .premium-player-content {
+    padding: 16px;
+    gap: 24px;
+  }
+
+  .premium-benefits-grid {
+    gap: 20px 10px;
+  }
+
+  .premium-benefit-item p {
+    font-size: 11px;
+  }
+
+  .premium-locked-controls .video-control-center {
+    display: none;
+  }
+}

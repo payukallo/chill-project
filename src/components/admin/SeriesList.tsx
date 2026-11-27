@@ -15,7 +15,7 @@ export function SeriesList({ series, onEdit, onDelete }: SeriesListProps) {
         series.map((item) => (
           <div key={item.id} className="series-admin-item">
             <div className="box-series">
-              <img src={item.banner_url} alt={item.title} />
+              <img src={item.banner_url ?? undefined} alt={item.title} />
               <div>
                 {item.is_premium ? (
                   <p className="premium body-small-bold">Premium</p>

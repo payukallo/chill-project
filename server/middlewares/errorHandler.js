@@ -13,6 +13,18 @@ const errorHandler = (err, req, res, next) => {
     });
   }
 
+  // ========================================
+  // PREMIUM ACCESS REQUIRED
+  // ========================================
+
+  if (err.code === "PREMIUM_REQUIRED" && Number(err.statusCode) === 403) {
+    return res.status(403).json({
+      status: "fail",
+      code: "PREMIUM_REQUIRED",
+      message: "Konten ini khusus pengguna premium",
+    });
+  }
+
   // Pastikan status code selalu berupa angka
   const statusCode = Number(err.statusCode) || 500;
 

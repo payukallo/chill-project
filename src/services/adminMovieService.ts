@@ -2,17 +2,18 @@ import { api } from "../components/utils/axiosApi";
 import type { IAdminMovie } from "../components/type/IAdminMovie";
 
 const API_URL = "/movies";
+const ADMIN_API_URL = `${API_URL}/admin`;
 
-// GET: Mengambil semua Movie
+// GET: Mengambil semua Movie khusus Admin
 export const getAllAdminMovies = async (): Promise<IAdminMovie[]> => {
-  const response = await api.get<IAdminMovie[]>(API_URL);
+  const response = await api.get<IAdminMovie[]>(ADMIN_API_URL);
 
   return response.data;
 };
 
-// GET: Mengambil Movie berdasarkan ID
+// GET: Mengambil detail Movie khusus Admin
 export const getAdminMovieById = async (id: number): Promise<IAdminMovie> => {
-  const response = await api.get<IAdminMovie>(`${API_URL}/${id}`);
+  const response = await api.get<IAdminMovie>(`${ADMIN_API_URL}/${id}`);
 
   return response.data;
 };

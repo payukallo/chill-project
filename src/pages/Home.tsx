@@ -4,17 +4,15 @@ import { Navbar } from "../layouts/Navbar";
 import { Footer } from "../layouts/Footer";
 import { Header } from "../components/Header";
 import { ContinueMovie } from "../components/Continue";
-import { TrendingMovies } from "../components/Trending";
-import { TopRatingMovies } from "../components/TopRating";
-import { NewRelease } from "../components/NewRelease";
+import { MoviesContainer } from "../components/MoviesContainer";
 import { getMovies, getSeries } from "../components/type/MovieApi";
+import { useContinueWatching } from "../components/hooks/UseContinueWatching";
+import { MoviePopupContent } from "../components/MoviePopupContent";
+import { SeriesPopupContent } from "../components/SeriesPopupContent";
 import type {
   IEpisode,
   IResponseMovie,
 } from "../components/type/IResponMovies";
-import { useContinueWatching } from "../components/hooks/UseContinueWatching";
-import { MoviePopupContent } from "../components/MoviePopupContent";
-import { SeriesPopupContent } from "../components/SeriesPopupContent";
 
 export default function HomePage() {
   // ========================================
@@ -25,6 +23,7 @@ export default function HomePage() {
   const [movieNewRelease, setMovieNewRelease] = useState<IResponseMovie[]>([]);
   const [movieTopRating, setMovieTopRating] = useState<IResponseMovie[]>([]);
   const [movieTrending, setMovieTrending] = useState<IResponseMovie[]>([]);
+  const [mediaFree, setMediaFree] = useState<IResponseMovie[]>([]);
   const [allMovies, setAllMovies] = useState<IResponseMovie[]>([]);
   const [allSeries, setAllSeries] = useState<IResponseMovie[]>([]);
 
@@ -41,11 +40,13 @@ export default function HomePage() {
   const [selectedSeriesTop, setSelectedSeriesTop] =
     useState<IResponseMovie | null>(null);
 
+  const [selectedSeriesBottom, setSelectedSeriesBottom] =
+    useState<IResponseMovie | null>(null);
+
   // ========================================
   // CONTINUE WATCHING
   // ========================================
 
-  const [fromContinueWatching, setFromContinueWatching] = useState(false);
   const {
     continueAll,
     loading: continueLoading,
@@ -56,56 +57,15 @@ export default function HomePage() {
   });
 
   // ========================================
-  // MEMBUKA POPUP CONTINUE WATCHING
-  // ========================================
-
-  const handleOpenContinueWatching = (media: IResponseMovie) => {
-    // Tutup popup sebelumnya
-    setSelectedMovieTop(null);
-    setSelectedMovieBottom(null);
-    setSelectedSeriesTop(null);
-
-    // Tandai popup berasal dari Continue Watching
-    setFromContinueWatching(true);
-
-    // type 0 = movie
-    // type 1 = series
-    if (media.type === 1) {
-      setSelectedSeriesTop(media);
-    } else {
-      setSelectedMovieTop(media);
-    }
-  };
-
-  // ========================================
-  // MEMBUKA POPUP TOP RATING
-  // ========================================
-
-  const handleOpenTopRating = (media: IResponseMovie) => {
-    setFromContinueWatching(false);
-
-    setSelectedMovieTop(null);
-    setSelectedMovieBottom(null);
-    setSelectedSeriesTop(null);
-
-    if (media.type === 1) {
-      setSelectedSeriesTop(media);
-    } else {
-      setSelectedMovieTop(media);
-    }
-  };
-
-  // ========================================
   // MEMBUKA POPUP MOVIE TOP
   // ========================================
 
   const handleOpenPopupTop = (media: IResponseMovie) => {
-    setFromContinueWatching(false);
-
     // Tutup semua popup sebelumnya
     setSelectedMovieTop(null);
     setSelectedMovieBottom(null);
     setSelectedSeriesTop(null);
+    setSelectedSeriesBottom(null);
 
     // Buka popup sesuai jenis media
     if (media.type === 1) {
@@ -119,12 +79,19 @@ export default function HomePage() {
   // MEMBUKA POPUP MOVIE BOTTOM
   // ========================================
 
-  const handleOpenPopupBottom = (movie: IResponseMovie) => {
-    setFromContinueWatching(false);
-
+  const handleOpenPopupBottom = (media: IResponseMovie) => {
+    // Tutup semua popup sebelumnya
     setSelectedMovieTop(null);
+    setSelectedMovieBottom(null);
     setSelectedSeriesTop(null);
-    setSelectedMovieBottom(movie);
+    setSelectedSeriesBottom(null);
+
+    // Buka popup sesuai jenis media
+    if (media.type === 1) {
+      setSelectedSeriesBottom(media);
+    } else {
+      setSelectedMovieBottom(media);
+    }
   };
 
   // ========================================
@@ -133,17 +100,18 @@ export default function HomePage() {
 
   const handleClosePopupTop = () => {
     setSelectedMovieTop(null);
-    setFromContinueWatching(false);
   };
 
   const handleClosePopupBottom = () => {
     setSelectedMovieBottom(null);
-    setFromContinueWatching(false);
   };
 
   const handleCloseSeriesTop = () => {
     setSelectedSeriesTop(null);
-    setFromContinueWatching(false);
+  };
+
+  const handleCloseSeriesBottom = () => {
+    setSelectedSeriesBottom(null);
   };
 
   // ========================================
@@ -175,23 +143,28 @@ export default function HomePage() {
 
         // Acak film untuk Header
         const allMedia = [...movies, ...series];
-
         const shuffledMedia = [...allMedia].sort(() => Math.random() - 0.5);
-
         const headerMovie = shuffledMedia.slice(0, 1);
 
         // Top Rating film dan series
-        const topRating = [...movies, ...series]
+        const topRating = [...allMedia]
           .filter((media) => media.top_rating_today === true)
           .sort((a, b) => Number(b.rating) - Number(a.rating));
 
         // Trending film
-        const trending = movies.filter((movie) => movie.is_top_10 === true);
+        const trending = [...allMedia]
+          .filter((movie) => movie.is_top_10 === true)
+          .sort(() => Math.random() - 0.5);
 
         // Rilis terbaru
-        const newRelease = [...movies]
+        const newRelease = [...allMedia]
           .sort((a, b) => b.year - a.year)
           .slice(0, 10);
+
+        // Film dan series gratis
+        const free = [...allMedia]
+          .filter((media) => media.is_premium === false)
+          .sort(() => Math.random() - 0.5);
 
         // Data lengkap untuk Watch History
         setAllMovies(movies);
@@ -202,6 +175,7 @@ export default function HomePage() {
         setMovieTopRating(topRating);
         setMovieTrending(trending);
         setMovieNewRelease(newRelease);
+        setMediaFree(free);
       } catch (error) {
         console.error("Gagal mengambil katalog Home:", error);
       }
@@ -226,36 +200,37 @@ export default function HomePage() {
       <Header
         movies={headerMedia}
         on_click={handleOpenPopupTop}
-        history={history}
         historyLoading={continueLoading}
       />
 
       <div className="content">
-        {!continueLoading && continueAll.length > 0 && (
-          <ContinueMovie
-            movies={continueAll}
-            on_click={handleOpenContinueWatching}
-            headTitle="Melanjutkan Tonton Film dan Series"
-            history={history}
-          />
-        )}
-
-        <TopRatingMovies
-          movies={movieTopRating}
-          on_click={handleOpenTopRating}
-          headTitle="Top Rating Film dan Series Hari ini"
-          history={history}
+        <ContinueMovie
+          movies={continueAll}
+          on_click={handleOpenPopupTop}
+          headTitle="Melanjutkan Tonton Film dan Series"
         />
 
-        <TrendingMovies
+        <MoviesContainer
+          movies={movieTopRating}
+          on_click={handleOpenPopupTop}
+          headTitle="Top Rating Film dan Series Hari ini"
+        />
+
+        <MoviesContainer
           movies={movieTrending}
-          headTitle="Film Trending"
+          headTitle="Film dan Series Trending"
           on_click={handleOpenPopupBottom}
         />
 
-        <NewRelease
+        <MoviesContainer
           movies={movieNewRelease}
           headTitle="Rilis Baru"
+          on_click={handleOpenPopupBottom}
+        />
+
+        <MoviesContainer
+          movies={mediaFree}
+          headTitle="Film dan Series Gratis"
           on_click={handleOpenPopupBottom}
         />
       </div>
@@ -263,7 +238,7 @@ export default function HomePage() {
       <Footer />
 
       {/* =================================
-          POPUP MOVIE TOP
+          POPUP MOVIE
          ================================= */}
 
       {selectedMovieTop && (
@@ -276,10 +251,6 @@ export default function HomePage() {
         />
       )}
 
-      {/* =================================
-          POPUP MOVIE BOTTOM
-         ================================= */}
-
       {selectedMovieBottom && (
         <MoviePopupContent
           movie={selectedMovieBottom}
@@ -291,7 +262,7 @@ export default function HomePage() {
       )}
 
       {/* =================================
-          POPUP SERIES TOP
+          POPUP SERIES
          ================================= */}
 
       {selectedSeriesTop && (
@@ -299,8 +270,16 @@ export default function HomePage() {
           movie={selectedSeriesTop}
           onClose={handleCloseSeriesTop}
           onPlayEpisode={handlePlaySeriesEpisode}
-          fromContinueWatching={fromContinueWatching}
           variant="top"
+        />
+      )}
+
+      {selectedSeriesBottom && (
+        <SeriesPopupContent
+          movie={selectedSeriesBottom}
+          onClose={handleCloseSeriesBottom}
+          onPlayEpisode={handlePlaySeriesEpisode}
+          variant="bottom"
         />
       )}
     </main>

@@ -6,17 +6,18 @@ import type {
 } from "../components/type/IAdminSeries";
 
 const API_URL = "/series";
+const ADMIN_API_URL = `${API_URL}/admin`;
 
-// GET: Mengambil semua Series
+// GET: Mengambil semua Series khusus Admin
 export const getAllAdminSeries = async (): Promise<IAdminSeries[]> => {
-  const response = await api.get<IAdminSeries[]>(API_URL);
+  const response = await api.get<IAdminSeries[]>(ADMIN_API_URL);
 
   return response.data;
 };
 
-// GET: Mengambil Series berdasarkan ID
+// GET: Mengambil detail Series khusus Admin
 export const getAdminSeriesById = async (id: number): Promise<IAdminSeries> => {
-  const response = await api.get<IAdminSeries>(`${API_URL}/${id}`);
+  const response = await api.get<IAdminSeries>(`${ADMIN_API_URL}/${id}`);
 
   return response.data;
 };

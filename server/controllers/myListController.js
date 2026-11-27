@@ -20,16 +20,21 @@ const getMyList = async (req, res, next) => {
 const addToMyList = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const { mediaId, mediaType } = req.body;
+    const { mediaId, mediaType } = req.body || {};
 
-    if (!mediaId || !mediaType) {
-      return next(new AppError("mediaId dan mediaType wajib diisi", 400));
+    // Validasi Media ID
+    if (!Number.isSafeInteger(mediaId) || mediaId <= 0) {
+      return next(
+        new AppError("mediaId harus berupa bilangan bulat positif", 400),
+      );
     }
 
+    // Validasi jenis media
     if (!["movie", "series"].includes(mediaType)) {
       return next(new AppError("Jenis media harus movie atau series", 400));
     }
 
+    // Validasi keberadaan dan kecocokan jenis media
     const mediaExists = await myListModel.checkMediaExists(mediaId, mediaType);
 
     if (!mediaExists) {
@@ -42,6 +47,7 @@ const addToMyList = async (req, res, next) => {
       if (error.code === "ER_DUP_ENTRY") {
         return next(new AppError("Media sudah ada di My List", 409));
       }
+
       throw error;
     }
 
@@ -57,14 +63,25 @@ const addToMyList = async (req, res, next) => {
 const removeFromMyList = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const { mediaId, mediaType } = req.body;
+    const { mediaId, mediaType } = req.body || {};
 
-    if (!mediaId || !mediaType) {
-      return next(new AppError("mediaId dan mediaType wajib diisi", 400));
+    // Validasi Media ID
+    if (!Number.isSafeInteger(mediaId) || mediaId <= 0) {
+      return next(
+        new AppError("mediaId harus berupa bilangan bulat positif", 400),
+      );
     }
 
+    // Validasi jenis media
     if (!["movie", "series"].includes(mediaType)) {
       return next(new AppError("Jenis media harus movie atau series", 400));
+    }
+
+    // Validasi keberadaan dan kecocokan jenis media
+    const mediaExists = await myListModel.checkMediaExists(mediaId, mediaType);
+
+    if (!mediaExists) {
+      return next(new AppError("Film atau series tidak ditemukan", 404));
     }
 
     const deletedRows = await myListModel.removeFromMyList(

@@ -28,7 +28,6 @@ const getMyListByUserId = async (userId) => {
           END AS duration,
           m.cover_url,
           m.banner_url,
-          mv.video_url,
           m.is_premium,
           m.is_top_10,
           m.is_top_rating_today AS top_rating_today,
@@ -70,8 +69,7 @@ const getMyListByUserId = async (userId) => {
             WHEN e.duration IS NULL THEN NULL
             ELSE CONCAT(e.duration, ' min')
           END AS duration,
-          e.cover_url AS thumbnail,
-          e.video_url
+          e.cover_url AS thumbnail
        FROM episodes_new e
        JOIN my_list_new ml ON ml.media_id = e.series_id
        WHERE ml.user_id = ?
@@ -124,7 +122,6 @@ const getMyListByUserId = async (userId) => {
 
       if (row.media_type === "series") {
         row.episodes = episodeMap.get(row.media_id) ?? [];
-        row.video_url = null;
         row.recommendation_movie_1 = null;
       } else {
         row.episodes = null;
@@ -168,8 +165,14 @@ const removeFromMyList = async (userId, mediaId, mediaType) => {
   const [result] = await db.execute(
     `DELETE FROM my_list_new
      WHERE user_id = ?
-       AND media_id = ?`,
-    [userId, mediaId],
+       AND media_id = ?
+       AND EXISTS (
+         SELECT 1
+         FROM media_new
+         WHERE id = ?
+           AND media_type = ?
+       )`,
+    [userId, mediaId, mediaId, mediaType],
   );
 
   return result.affectedRows;

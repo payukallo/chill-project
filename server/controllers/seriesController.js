@@ -1,19 +1,70 @@
 const AppError = require("../utils/AppError");
 const seriesModel = require("../models/seriesModel");
 
-// GET: Mengambil semua series
+// Menghapus URL video dari katalog Series publik
+const sanitizePublicSeries = (series) => {
+  const { video_url, episodes, ...publicSeries } = series;
+
+  return {
+    ...publicSeries,
+    episodes: Array.isArray(episodes)
+      ? episodes.map((episode) => {
+          const { video_url, ...publicEpisode } = episode;
+
+          return publicEpisode;
+        })
+      : [],
+  };
+};
+
+// GET: Mengambil semua Series untuk katalog publik
 const getSeries = async (req, res, next) => {
   try {
     const series = await seriesModel.getAllSeries();
-    res.json(series);
+
+    const publicSeries = series.map(sanitizePublicSeries);
+
+    res.status(200).json(publicSeries);
   } catch (error) {
     next(error);
   }
 };
 
-// GET: Mengambil satu Series berdasarkan ID
+// GET: Mengambil detail Series untuk katalog publik
 const getSeriesById = async (req, res, next) => {
   try {
+    const { id } = req.params;
+
+    const series = await seriesModel.getSeriesById(id);
+
+    if (!series) {
+      return next(new AppError("Series tidak ditemukan", 404));
+    }
+
+    res.status(200).json(sanitizePublicSeries(series));
+  } catch (error) {
+    next(error);
+  }
+};
+
+// GET ADMIN: Mengambil semua Series
+const getAdminSeries = async (req, res, next) => {
+  try {
+    res.set("Cache-Control", "private, no-store");
+
+    const series = await seriesModel.getAllSeries();
+
+    res.status(200).json(series);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// GET ADMIN: Mengambil detail Series berdasarkan ID
+const getAdminSeriesById = async (req, res, next) => {
+  try {
+    res.set("Cache-Control", "private, no-store");
+
     const { id } = req.params;
 
     const series = await seriesModel.getSeriesById(id);
@@ -114,6 +165,8 @@ const deleteSeries = async (req, res, next) => {
 module.exports = {
   getSeries,
   getSeriesById,
+  getAdminSeries,
+  getAdminSeriesById,
   createSeries,
   updateSeries,
   deleteSeries,

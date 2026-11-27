@@ -169,12 +169,13 @@ const getAvailablePackageById = async (packageId) => {
 // CHECK ACTIVE SUBSCRIPTION
 // ========================================
 
-const hasActiveSubscription = async (userId) => {
-  const [rows] = await db.execute(
+const hasActiveSubscription = async (userId, connection = db) => {
+  const [rows] = await connection.execute(
     `SELECT id
      FROM user_subscriptions
      WHERE user_id = ?
        AND status = 'active'
+       AND start_date <= NOW()
        AND end_date > NOW()
      LIMIT 1`,
     [userId],

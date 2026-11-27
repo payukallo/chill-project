@@ -1,6 +1,6 @@
 const db = require("../db");
 
-// Mengambil riwayat tontonan yang belum selesai
+// Mengambil riwayat tontonan terbaru yang sudah diputar
 const getWatchHistoryByUserId = async (userId) => {
   const [rows] = await db.execute(
     `SELECT
@@ -24,12 +24,19 @@ const getWatchHistoryByUserId = async (userId) => {
      LEFT JOIN episodes_new e
        ON wh.episode_id = e.id
      WHERE wh.user_id = ?
-      AND wh.is_completed = 0
+       AND (
+         wh.progress_seconds > 0
+         OR wh.is_completed = 1
+       )
       AND NOT EXISTS (
          SELECT 1
          FROM watch_history newer
          WHERE newer.user_id = wh.user_id
            AND newer.media_id = wh.media_id
+           AND (
+             newer.progress_seconds > 0
+             OR newer.is_completed = 1
+           )
            AND (
              newer.last_watched_at > wh.last_watched_at
              OR (
@@ -46,12 +53,13 @@ const getWatchHistoryByUserId = async (userId) => {
 };
 
 // Memvalidasi media dan episode sebelum menyimpan progres
-const validateWatchMedia = async (mediaId, episodeId) => {
-  const [rows] = await db.execute(
+const validateWatchMedia = async (mediaId, episodeId, connection = db) => {
+  const [rows] = await connection.execute(
     `SELECT
-        m.id,
-        m.media_type,
-        e.id AS valid_episode_id
+      m.id,
+      m.media_type,
+      m.is_premium,
+      e.id AS valid_episode_id
      FROM media_new m
      LEFT JOIN episodes_new e
        ON e.series_id = m.id
@@ -94,6 +102,7 @@ const validateWatchMedia = async (mediaId, episodeId) => {
   return {
     valid: true,
     mediaType: media.media_type,
+    isPremium: media.is_premium,
   };
 };
 
@@ -104,8 +113,7 @@ const getNextEpisode = async (mediaId, episodeId) => {
         next_episode.id AS episode_id,
         next_episode.episode_number,
         next_episode.title AS episode_title,
-        next_episode.duration AS duration_minutes,
-        next_episode.video_url
+        next_episode.duration AS duration_minutes
      FROM episodes_new current_episode
      JOIN episodes_new next_episode
        ON next_episode.series_id = current_episode.series_id

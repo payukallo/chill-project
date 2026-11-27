@@ -6,19 +6,19 @@ import { MovieCardHover } from "./MoviesCardHover";
 import { SeriesCardHover } from "./SeriesCardHover";
 import { MovieCardContent } from "./MovieCardContent";
 
-interface IMoviesFromChill {
+interface IMovies {
   movies: IResponseMovie[];
   headTitle: string;
   on_click: (movie: IResponseMovie) => void;
   history?: IWatchHistory[];
 }
 
-export function MoviesFromChill({
+export function MoviesContainer({
   movies,
   headTitle,
   on_click,
   history = [],
-}: IMoviesFromChill) {
+}: IMovies) {
   const {
     hover,
     hoverRef,

@@ -1,5 +1,4 @@
 import "../assets/styles/admin.css";
-import MovieLogo from "../assets/logo/movie.png";
 import { useState } from "react";
 import { MovieForm } from "../components/admin/MovieForm";
 import { MovieList } from "../components/admin/MovieList";

@@ -1,19 +1,67 @@
 const movieModel = require("../models/movieModel");
 const AppError = require("../utils/AppError");
 
-// GET: Mengambil semua film
+// Menghapus URL video dari data katalog publik
+const sanitizePublicMovie = (movie) => {
+  const { video_url, ...publicMovie } = movie;
+
+  return publicMovie;
+};
+
+// GET: Mengambil semua film untuk katalog publik
 const getMovies = async (req, res, next) => {
   try {
     const movies = await movieModel.getAllMovies();
-    res.json(movies);
+
+    const publicMovies = movies.map(sanitizePublicMovie);
+
+    res.status(200).json(publicMovies);
   } catch (error) {
     next(error);
   }
 };
 
-// GET: Mengambil satu film berdasarkan ID
+// GET: Mengambil detail film untuk katalog publik
 const getMovieById = async (req, res, next) => {
   try {
+    const { id } = req.params;
+
+    const movie = await movieModel.getMovieById(id);
+
+    if (!movie) {
+      return next(new AppError("Film tidak ditemukan", 404));
+    }
+
+    res.status(200).json(sanitizePublicMovie(movie));
+  } catch (error) {
+    next(error);
+  }
+};
+
+// ========================================
+// GET ADMIN: Mengambil semua film
+// ========================================
+
+const getAdminMovies = async (req, res, next) => {
+  try {
+    res.set("Cache-Control", "private, no-store");
+
+    const movies = await movieModel.getAllMovies();
+
+    res.status(200).json(movies);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// ========================================
+// GET ADMIN: Mengambil detail film
+// ========================================
+
+const getAdminMovieById = async (req, res, next) => {
+  try {
+    res.set("Cache-Control", "private, no-store");
+
     const { id } = req.params;
 
     const movie = await movieModel.getMovieById(id);
@@ -184,6 +232,8 @@ const deleteMovie = async (req, res, next) => {
 module.exports = {
   getMovies,
   getMovieById,
+  getAdminMovies,
+  getAdminMovieById,
   createMovie,
   updateMovie,
   deleteMovie,
