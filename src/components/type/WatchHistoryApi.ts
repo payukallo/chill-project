@@ -1,3 +1,4 @@
+import { resolveImageUrl } from "../utils/r2ImageUrl";
 import { api } from "../utils/axiosApi";
 
 // ========================================
@@ -82,7 +83,11 @@ export async function getWatchHistory(): Promise<IWatchHistory[]> {
     data: IWatchHistory[];
   }>("/watch-history");
 
-  return response.data.data;
+  return response.data.data.map((item) => ({
+    ...item,
+    cover_url: resolveImageUrl(item.cover_url),
+    banner_url: resolveImageUrl(item.banner_url),
+  }));
 }
 
 // Mengambil progres terakhir satu film atau episode

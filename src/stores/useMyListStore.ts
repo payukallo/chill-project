@@ -1,3 +1,4 @@
+import { resolveImageUrl } from "../components/utils/r2ImageUrl";
 import { create } from "zustand";
 import axios from "axios";
 import type { IResponseMovie } from "../components/type/IResponMovies";
@@ -94,8 +95,8 @@ export const useMyListStore = create<IMyListStore>((set, get) => ({
             rating: String(item.rating),
             year: item.year ?? 0,
             duration: item.duration ?? "",
-            cover_url: item.cover_url ?? undefined,
-            banner_url: item.banner_url ?? undefined,
+            cover_url: resolveImageUrl(item.cover_url) ?? undefined,
+            banner_url: resolveImageUrl(item.banner_url) ?? undefined,
             genre: item.genre ?? [],
             is_premium: Boolean(item.is_premium),
             is_top_10: Boolean(item.is_top_10),
@@ -104,7 +105,10 @@ export const useMyListStore = create<IMyListStore>((set, get) => ({
             film_maker: item.film_maker ?? undefined,
             age_rating: item.age_rating ?? undefined,
             cast: item.cast_members ?? "",
-            episodes: item.episodes ?? [],
+            episodes: (item.episodes ?? []).map((episode) => ({
+        ...episode,
+        thumbnail: resolveImageUrl(episode.thumbnail),
+      })),
             recommendation_movie_1: item.recommendation_movie_1 ?? [],
           }) as IMyListMovie,
       );

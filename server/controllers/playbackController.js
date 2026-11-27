@@ -1,5 +1,6 @@
 const playbackModel = require("../models/playbackModel");
 const premiumAccessService = require("../services/premiumAccessService");
+const r2StorageService = require("../services/r2StorageService");
 // ========================================
 // GET PLAYBACK ACCESS
 // ========================================
@@ -106,6 +107,10 @@ const getPlayback = async (req, res, next) => {
     // PLAYBACK ACCESS GRANTED
     // ========================================
 
+    const videoUrl = await r2StorageService.getSignedVideoUrl(
+      media.video_url,
+    );
+
     return res.status(200).json({
       message: "Akses pemutaran diizinkan",
       data: {
@@ -113,7 +118,8 @@ const getPlayback = async (req, res, next) => {
         episodeId: media.episode_id,
         mediaType: media.media_type,
         isPremium: Number(media.is_premium) !== 0,
-        videoUrl: media.video_url,
+        videoUrl,
+        expiresIn: r2StorageService.VIDEO_URL_TTL_SECONDS,
       },
     });
   } catch (error) {

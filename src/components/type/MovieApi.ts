@@ -1,3 +1,4 @@
+import { resolveImageUrl } from "../utils/r2ImageUrl";
 import type { IResponseMovie } from "../type/IResponMovies";
 import { api } from "../utils/axiosApi";
 
@@ -32,8 +33,8 @@ export async function getMovies(): Promise<IResponseMovie[]> {
       rating: String(item.rating),
       year: item.year ?? 0,
       duration: item.duration ?? "",
-      cover_url: item.cover_url ?? undefined,
-      banner_url: item.banner_url ?? undefined,
+      cover_url: resolveImageUrl(item.cover_url) ?? undefined,
+      banner_url: resolveImageUrl(item.banner_url) ?? undefined,
       recommendation_movie_1: item.recommendation_movie_1 ?? [],
       genre: item.genre ?? [],
       is_premium: Boolean(item.is_premium),
@@ -81,8 +82,8 @@ export async function getSeries(): Promise<IResponseMovie[]> {
       rating: String(item.rating),
       year: item.year ?? 0,
       duration: item.duration ?? "",
-      cover_url: item.cover_url ?? undefined,
-      banner_url: item.banner_url ?? undefined,
+      cover_url: resolveImageUrl(item.cover_url) ?? undefined,
+      banner_url: resolveImageUrl(item.banner_url) ?? undefined,
       genre: item.genre ?? [],
       is_premium: Boolean(item.is_premium),
       is_top_10: Boolean(item.is_top_10),
@@ -91,7 +92,10 @@ export async function getSeries(): Promise<IResponseMovie[]> {
       film_maker: item.film_maker ?? undefined,
       age_rating: item.age_rating ?? undefined,
       cast: item.cast_members ?? "",
-      episodes: item.episodes ?? [],
+      episodes: (item.episodes ?? []).map((episode) => ({
+        ...episode,
+        thumbnail: resolveImageUrl(episode.thumbnail),
+      })),
     }));
   } catch (error) {
     console.error("Error mengambil series:", error);
