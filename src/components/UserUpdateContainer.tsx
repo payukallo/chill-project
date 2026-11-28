@@ -80,7 +80,8 @@ export function UserUpdateContainer({
 
             <input
               type="file"
-              accept="image/*"
+              accept="image/jpeg,image/png,image/webp,image/avif"
+              disabled={isSaving}
               id="upload-photo"
               onChange={onPhotoChange}
               hidden

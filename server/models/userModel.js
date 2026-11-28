@@ -74,6 +74,37 @@ const updateAvatarUrl = async (id, avatarUrl) => {
   return result;
 };
 
+
+// Ganti avatar hanya jika referensi sebelumnya belum berubah.
+const compareAndSwapAvatarUrl = async (
+  id,
+  previousUrl,
+  newUrl
+) => {
+  const [result] = await db.execute(
+    `UPDATE users
+     SET avatar_url = ?
+     WHERE id = ?
+       AND (BINARY avatar_url <=> BINARY ?)`,
+    [newUrl, id, previousUrl]
+  );
+
+  return result.affectedRows === 1;
+};
+
+
+const isAvatarUrlReferenced = async (avatarUrl) => {
+  const [rows] = await db.execute(
+    `SELECT 1
+     FROM users
+     WHERE BINARY avatar_url = BINARY ?
+     LIMIT 1`,
+    [avatarUrl]
+  );
+
+  return rows.length > 0;
+};
+
 const incrementSessionVersion = async (userId) => {
   const connection = await db.getConnection();
 
@@ -118,5 +149,7 @@ module.exports = {
   updateUser,
   updatePassword,
   updateAvatarUrl,
+  compareAndSwapAvatarUrl,
+  isAvatarUrlReferenced,
   incrementSessionVersion,
 };

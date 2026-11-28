@@ -28,7 +28,7 @@ router.patch("/change-password", protect, changePassword);
 router.patch(
   "/profile/avatar",
   protect,
-  uploadAvatar.single("avatar"),
+  uploadAvatar,
   uploadProfileImage,
 );
 

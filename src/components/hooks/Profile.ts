@@ -128,8 +128,13 @@ export function useProfile() {
 
     if (!file) return;
 
-    if (!file.type.startsWith("image/")) {
-      alert("File harus berupa gambar!");
+    if (![
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/avif",
+    ].includes(file.type)) {
+      alert("Format foto harus JPG, PNG, WEBP, atau AVIF.");
       event.target.value = "";
       return;
     }

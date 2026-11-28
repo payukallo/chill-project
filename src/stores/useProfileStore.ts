@@ -38,6 +38,29 @@ interface IAvatarResponse {
   avatar_url: string;
 }
 
+// Avatar R2 menggunakan UUID baru setiap penggantian foto.
+// Avatar legacy tetap menggunakan cache busting.
+function formatAvatarUrl(avatarUrl: string): string {
+  try {
+    const url = new URL(avatarUrl);
+
+    if (
+      url.protocol === "https:" &&
+      /^\/images\/avatars\/[1-9]\d*\/[0-9a-f-]{36}\.webp$/.test(
+        url.pathname
+      ) &&
+      !url.search
+    ) {
+      return avatarUrl;
+    }
+
+    url.searchParams.set("t", String(Date.now()));
+    return url.toString();
+  } catch {
+    return avatarUrl;
+  }
+}
+
 export const useProfileStore = create<IProfileStore>((set, get) => ({
   userId: null,
   username: "",
@@ -71,7 +94,7 @@ export const useProfileStore = create<IProfileStore>((set, get) => ({
         originalUsername: user.username,
         originalEmail: user.email,
         profileImage: user.avatar_url
-          ? `${user.avatar_url}?t=${Date.now()}`
+          ? formatAvatarUrl(user.avatar_url)
           : ProfileImg,
       });
     } catch (error) {
@@ -183,6 +206,10 @@ export const useProfileStore = create<IProfileStore>((set, get) => ({
   // =========================
 
   uploadProfileImage: async (file) => {
+    if (get().isSaving) {
+      throw new Error("Proses penyimpanan masih berlangsung.");
+    }
+
     try {
       const userId = get().userId;
 
@@ -209,7 +236,7 @@ export const useProfileStore = create<IProfileStore>((set, get) => ({
       const avatarUrl = response.data.avatar_url;
 
       set({
-        profileImage: `${avatarUrl}?t=${Date.now()}`,
+        profileImage: formatAvatarUrl(avatarUrl),
       });
     } catch (error) {
       console.error("Gagal mengubah foto profil:", error);

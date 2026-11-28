@@ -346,7 +346,87 @@ async function readUploadBytes(
   }
 }
 
+
+async function putAvatarObject(userId, key, buffer) {
+  const id = Number(userId);
+
+  const pattern =
+    /^images\/avatars\/([1-9]\d*)\/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\.webp$/;
+
+  const match = typeof key === "string"
+    ? pattern.exec(key)
+    : null;
+
+  if (
+    !Number.isSafeInteger(id) ||
+    id <= 0 ||
+    !match ||
+    match[1] !== String(id) ||
+    normalizeObjectKey(key) !== key ||
+    !Buffer.isBuffer(buffer) ||
+    buffer.length === 0 ||
+    buffer.length > 2 * 1024 * 1024
+  ) {
+    throw new Error("INVALID_AVATAR_UPLOAD");
+  }
+
+  const s3 = getClient();
+
+  const publicUrl = getPublicImageUrl(key);
+
+  await s3.send(
+    new PutObjectCommand({
+      Bucket: process.env.R2_IMAGES_BUCKET,
+      Key: key,
+      Body: buffer,
+      ContentType: "image/webp",
+      ContentLength: buffer.length,
+      CacheControl: "public, max-age=86400",
+      IfNoneMatch: "*"
+    }),
+    {
+      abortSignal: AbortSignal.timeout(20000)
+    }
+  );
+
+  return publicUrl;
+}
+
+
+async function deleteAvatarObject(userId, key) {
+  const id = Number(userId);
+
+  const pattern =
+    /^images\/avatars\/([1-9]\d*)\/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\.webp$/;
+
+  const match = typeof key === "string"
+    ? pattern.exec(key)
+    : null;
+
+  if (
+    !Number.isSafeInteger(id) ||
+    id <= 0 ||
+    !match ||
+    match[1] !== String(id) ||
+    normalizeObjectKey(key) !== key
+  ) {
+    throw new Error("UNSAFE_AVATAR_DELETE_SCOPE");
+  }
+
+  await getClient().send(
+    new DeleteObjectCommand({
+      Bucket: process.env.R2_IMAGES_BUCKET,
+      Key: key
+    }),
+    {
+      abortSignal: AbortSignal.timeout(10000)
+    }
+  );
+}
+
 module.exports = {
+  deleteAvatarObject,
+  putAvatarObject,
   readUploadBytes,
   deleteUploadObject,
   listUploadObjects,

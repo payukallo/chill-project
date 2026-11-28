@@ -1,9 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const userModel = require("../models/userModel");
-const supabase = require("../config/supabase");
-const path = require("path");
-const sharp = require("sharp");
+const avatarStorage = require("../services/avatarStorageService");
 
 const register = async (req, res, next) => {
   try {
@@ -278,64 +276,11 @@ const uploadProfileImage = async (req, res, next) => {
       });
     }
 
-    const allowedFormats = ["jpeg", "png", "webp"];
-
-    let processedImage;
-
-    try {
-      // Baca metadata dari isi file, bukan nama atau MIME type.
-      const metadata = await sharp(file.buffer, {
-        limitInputPixels: 25_000_000,
-      }).metadata();
-
-      if (!allowedFormats.includes(metadata.format)) {
-        return res.status(400).json({
-          status: "fail",
-          message: "Format foto harus JPG, PNG, atau WEBP.",
-        });
-      }
-
-      // Decode dan proses ulang gambar menjadi WebP.
-      processedImage = await sharp(file.buffer, {
-        limitInputPixels: 25_000_000,
-      })
-        .rotate()
-        .resize(512, 512, {
-          fit: "cover",
-          position: "centre",
-          withoutEnlargement: true,
-        })
-        .webp({ quality: 80 })
-        .toBuffer();
-    } catch {
-      return res.status(400).json({
-        status: "fail",
-        message: "File gambar tidak valid atau rusak.",
-      });
-    }
-
-    // Gunakan ekstensi tetap untuk semua avatar.
-    const filePath = `${userId}/avatar.webp`;
-
-    const { error: uploadError } = await supabase.storage
-      .from("avatars")
-      .upload(filePath, processedImage, {
-        upsert: true,
-        contentType: "image/webp",
-        cacheControl: "3600",
-      });
-
-    if (uploadError) {
-      throw uploadError;
-    }
-
-    const { data: publicUrlData } = supabase.storage
-      .from("avatars")
-      .getPublicUrl(filePath);
-
-    const avatarUrl = publicUrlData.publicUrl;
-
-    await userModel.updateAvatarUrl(userId, avatarUrl);
+    const avatarUrl = await avatarStorage.replaceAvatar(
+      userId,
+      file.buffer,
+      file.mimetype
+    );
 
     return res.status(200).json({
       status: "success",
