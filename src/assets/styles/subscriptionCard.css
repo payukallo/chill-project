@@ -1,0 +1,77 @@
+.subscription-bottom-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 236px;
+  height: 100%;
+  border-radius: 12px;
+  padding: 24px;
+  gap: 38px;
+  background: linear-gradient(286.17deg, #192db7 0%, #5370d4 100%);
+}
+
+.subscription-bottom-box-up {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.subscription-bottom-box-up > .price {
+  display: flex;
+  flex-direction: column;
+  height: 44px;
+}
+
+.subscription-bottom-box-up button {
+  padding: 10px 20px;
+  border-radius: 24px;
+  border: none;
+  background-color: var(--extra-background);
+}
+
+.subscription-bottom-box-up > div {
+  display: flex;
+  flex-direction: column;
+  height: 76px;
+  gap: 8px;
+}
+
+.subscription-bottom-box-up > div > div {
+  display: flex;
+}
+
+.subscription-bottom-box-up img {
+  width: 20px;
+  margin-right: 8px;
+}
+
+.subscription-bottom-box .line {
+  border-top: 1px solid var(--outline-border);
+}
+
+.subscription-bottom-box-down {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 4px;
+}
+
+.subscription-bottom-box-down button {
+  height: 42px;
+  border-radius: 48px;
+  border: none;
+  color: var(--primary-color-300);
+  background-color: var(--text-light-primary);
+}
+
+@media (max-width: 580px), (max-height: 900px) {
+  .subscription-bottom-box {
+    height: 361px;
+    gap: 24px;
+  }
+
+  .subscription-bottom-box-down button {
+    height: 40px;
+  }
+}

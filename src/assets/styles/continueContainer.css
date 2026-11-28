@@ -112,9 +112,9 @@
   }
 
   .box-top {
-  width: 309px;
-  height: 151px;
-}
+    width: 309px;
+    height: 151px;
+  }
 
   .movie-top::scroll-button(right),
   .movie-top::scroll-button(left) {

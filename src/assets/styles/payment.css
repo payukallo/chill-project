@@ -1,3 +1,5 @@
+@import url("./subscriptionCard.css");
+
 .payment-page {
   display: flex;
   flex-direction: column;

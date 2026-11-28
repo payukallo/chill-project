@@ -1,7 +1,4 @@
-@import url("./navbar.css");
-@import url("./footer.css");
-@import url("./content.css");
-
+@import url("./myListCards.css");
 
 .my-list-page {
   display: flex;
@@ -18,35 +15,6 @@
   min-height: 830px;
   padding: 80px;
   gap: 32px;
-}
-
-.list-title {
-  color: var(--text-light-primary);
-}
-
-.list-container {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  row-gap: 32px;
-  column-gap: 16px;
-}
-
-.list-box {
-  display: flex;
-  width: 200px;
-  height: 300px;
-  position: relative;
-}
-
-.list-box :hover {
-  cursor: pointer;
-}
-
-.list-box img {
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
 }
 
 .my-list-page .top10 {
@@ -68,28 +36,7 @@
     margin-bottom: 40px;
   }
 
-  span.list-title {
-    font-size: 20px;
-  }
-
-  .list-container {
-    gap: 16px;
-  }
-
-  .list-box {
-    width: 95px;
-    height: 145px;
-  }
-
   .list-box .body-small-regular,
-  .list-box .body-small-bold {
-    font-size: 10px;
-  }
-
-  .list-box img {
-    border-radius: 3.8px;
-  }
-
   .my-list-page .top10 {
     right: 0px;
   }
@@ -97,5 +44,4 @@
   .my-list-page .new-episode {
     left: 1px;
   }
-
 }

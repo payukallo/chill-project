@@ -31,7 +31,7 @@ export function MyListContainerProfile({
 
   return (
     <>
-      <div className="list-container profile">
+      <div className="list-container profile-list">
         {myMovies.length > 0 ? (
           myMovies.map((movie) => {
             const normalizedMovie = {

@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 @import url("./token.css");
 @import url("./popUpMovie.css");
+@import url("./navbar.css");
+@import url("./header.css");
+@import url("./content.css");
+@import url("./footer.css");
 
 *,
 html,
@@ -349,4 +353,9 @@ button:hover {
   border-width: 1px;
   border-radius: 48px;
   border-color: var(--dark-disable);
+}
+
+/* Shared application background */
+body {
+  background-color: var(--page-header-background);
 }
