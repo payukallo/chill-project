@@ -194,21 +194,66 @@
 }
 
 /* ========================================
-   RESPONSIVE
+   MOBILE PREMIUM VIDEO PLAYER
 ======================================== */
 
-@container (max-width: 900px) {
-  .premium-player-content {
-    gap: 24px;
-    bottom: 70px;
+@media (max-width: 580px) {
+  .premium-video-player {
+    width: 100%;
+    min-height: 0;
+    height: 100dvh;
   }
 
+  .premium-player-background {
+    object-fit: contain;
+    filter: blur(3px);
+  }
+
+  .premium-player-overlay {
+    background-color: rgba(0, 0, 0, 0.82);
+  }
+
+  /* Premium Content */
+
+  .premium-player-content {
+    inset: 0 0 60px;
+    padding: 16px;
+    gap: 24px;
+    justify-content: safe center;
+    overflow-y: auto;
+  }
+
+  /* Header */
+
+  .premium-player-header {
+    gap: 6px;
+  }
+
+  .premium-player-header h2 {
+    font-size: 18px;
+  }
+
+  .premium-player-header p {
+    font-size: 11px;
+    max-width: 280px;
+    line-height: 1.5;
+  }
+
+  /* Benefits */
+
   .premium-player-benefits {
-    gap: 18px;
+    gap: 16px;
+  }
+
+  .premium-player-benefits h3 {
+    font-size: 13px;
   }
 
   .premium-benefits-grid {
-    gap: 24px 12px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    max-width: 360px;
+    gap: 20px 10px;
   }
 
   .premium-benefit-item {
@@ -216,59 +261,116 @@
   }
 
   .premium-benefit-item svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .premium-video-player .premium-locked-controls {
-    min-height: 70px;
-  }
-}
-
-@media (max-height: 700px) {
-  .premium-player-content {
-    gap: 20px;
-    bottom: 60px;
-  }
-
-  .premium-benefits-grid {
-    gap: 16px;
-  }
-
-  .premium-player-benefits {
-    gap: 14px;
-  }
-
-  .premium-benefit-item svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .premium-video-player .premium-locked-controls {
-    min-height: 60px;
-  }
-}
-
-@media (max-width: 580px) {
-  .premium-video-player {
-    width: 100%;
-    min-height: 500px;
-  }
-
-  .premium-player-content {
-    padding: 16px;
-    gap: 24px;
-  }
-
-  .premium-benefits-grid {
-    gap: 20px 10px;
+    width: 20px;
+    height: 20px;
   }
 
   .premium-benefit-item p {
-    font-size: 11px;
+    font-size: 10px;
+    line-height: 1.4;
+    max-width: 110px;
+  }
+
+  /* Upgrade Button */
+
+  .premium-upgrade-button {
+    width: 160px;
+    min-height: 36px;
+    font-size: 12px;
+    border-radius: 20px;
+  }
+
+  /* Locked Video Controls */
+
+  .premium-video-player .premium-locked-controls {
+    min-height: 60px;
+    height: 60px;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+
+  .premium-locked-controls .video-control-content {
+    width: 100%;
+    gap: 8px;
   }
 
   .premium-locked-controls .video-control-center {
     display: none;
+  }
+
+  .premium-locked-controls button {
+    padding: 4px;
+  }
+
+  .premium-locked-controls svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .premium-locked-controls select {
+    font-size: 10px;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .premium-video-player {
+    height: 100dvh;
+    min-height: 0;
+  }
+
+  .premium-player-content {
+    padding: 12px;
+    gap: 12px;
+    bottom: 44px;
+  }
+
+  .premium-player-header {
+    gap: 4px;
+  }
+
+  .premium-player-header h2 {
+    font-size: 16px;
+  }
+
+  .premium-player-header p {
+    font-size: 11px;
+  }
+
+  .premium-player-benefits {
+    gap: 10px;
+  }
+
+  .premium-player-benefits h3 {
+    font-size: 12px;
+  }
+
+  .premium-benefits-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    max-width: 720px;
+    gap: 8px;
+  }
+
+  .premium-benefit-item {
+    gap: 6px;
+  }
+
+  .premium-benefit-item svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .premium-benefit-item p {
+    font-size: 9px;
+  }
+
+  .premium-upgrade-button {
+    width: 150px;
+    min-height: 32px;
+    font-size: 11px;
+  }
+
+  .premium-video-player .premium-locked-controls {
+    min-height: 44px;
+    height: 44px;
   }
 }
