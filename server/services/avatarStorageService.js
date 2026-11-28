@@ -101,11 +101,15 @@ function getOwnedAvatarKey(userId, avatarUrl) {
     return null;
   }
 
-  const base = process.env.R2_IMAGES_PUBLIC_URL;
+  let base;
 
-  if (!base) return null;
+  try {
+    base = r2Storage.getPublicImageBaseUrl();
+  } catch {
+    return null;
+  }
 
-  const prefix = base.replace(/\/$/, "") + "/";
+  const prefix = base + "/";
 
   if (!avatarUrl.startsWith(prefix)) {
     return null;

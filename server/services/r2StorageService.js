@@ -91,6 +91,54 @@ function normalizeObjectKey(value) {
   return key;
 }
 
+function getPublicImageBaseUrl() {
+  const raw = process.env.R2_IMAGES_PUBLIC_URL;
+
+  if (!raw || !raw.trim()) {
+    throw new Error("R2_IMAGE_URL_NOT_CONFIGURED");
+  }
+
+  const value = raw.trim();
+
+  // Hanya HTTPS origin, dengan optional trailing slash.
+  if (!/^https:\/\/[a-zA-Z0-9.-]+\/?$/.test(value)) {
+    throw new Error("INVALID_R2_IMAGE_PUBLIC_URL");
+  }
+
+  let parsed;
+
+  try {
+    parsed = new URL(value);
+  } catch {
+    throw new Error("INVALID_R2_IMAGE_PUBLIC_URL");
+  }
+
+  const hostname = parsed.hostname;
+
+  const validHostname =
+    /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/i
+      .test(hostname);
+
+  if (
+    parsed.protocol !== "https:" ||
+    !validHostname ||
+    hostname === "r2.cloudflarestorage.com" ||
+    hostname.endsWith(".r2.cloudflarestorage.com") ||
+    hostname === "localhost" ||
+    hostname.endsWith(".localhost") ||
+    parsed.username ||
+    parsed.password ||
+    parsed.port ||
+    parsed.search ||
+    parsed.hash ||
+    parsed.pathname !== "/"
+  ) {
+    throw new Error("INVALID_R2_IMAGE_PUBLIC_URL");
+  }
+
+  return parsed.origin;
+}
+
 function getPublicImageUrl(value) {
   if (!value) return value;
 
@@ -103,13 +151,9 @@ function getPublicImageUrl(value) {
     throw new Error("INVALID_IMAGE_TYPE");
   }
 
-  const base = process.env.R2_IMAGES_PUBLIC_URL;
+  const base = getPublicImageBaseUrl();
 
-  if (!base) {
-    throw new Error("R2_IMAGE_URL_NOT_CONFIGURED");
-  }
-
-  return base.replace(/\/$/, "") + "/" +
+  return base + "/" +
     key.split("/").map(encodeURIComponent).join("/");
 }
 
@@ -157,6 +201,10 @@ async function createSignedUploadUrl({
   contentType,
   size
 }) {
+  if (kind === "image") {
+    getPublicImageBaseUrl();
+  }
+
   const s3 = getClient();
 
   return getSignedUrl(
@@ -370,9 +418,9 @@ async function putAvatarObject(userId, key, buffer) {
     throw new Error("INVALID_AVATAR_UPLOAD");
   }
 
-  const s3 = getClient();
-
   const publicUrl = getPublicImageUrl(key);
+
+  const s3 = getClient();
 
   await s3.send(
     new PutObjectCommand({
@@ -435,6 +483,7 @@ module.exports = {
   UPLOAD_URL_TTL_SECONDS,
 
   normalizeObjectKey,
+  getPublicImageBaseUrl,
   getPublicImageUrl,
   getSignedVideoUrl,
   VIDEO_URL_TTL_SECONDS
