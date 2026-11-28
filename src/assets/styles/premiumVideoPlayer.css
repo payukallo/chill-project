@@ -194,6 +194,62 @@
 }
 
 /* ========================================
+   RESPONSIVE
+======================================== */
+
+@container (max-width: 900px) {
+  .premium-player-content {
+    gap: 24px;
+    bottom: 70px;
+  }
+
+  .premium-player-benefits {
+    gap: 18px;
+  }
+
+  .premium-benefits-grid {
+    gap: 24px 12px;
+  }
+
+  .premium-benefit-item {
+    gap: 8px;
+  }
+
+  .premium-benefit-item svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .premium-video-player .premium-locked-controls {
+    min-height: 70px;
+  }
+}
+
+@media (max-height: 700px) {
+  .premium-player-content {
+    gap: 20px;
+    bottom: 60px;
+  }
+
+  .premium-benefits-grid {
+    gap: 16px;
+  }
+
+  .premium-player-benefits {
+    gap: 14px;
+  }
+
+  .premium-benefit-item svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .premium-video-player .premium-locked-controls {
+    min-height: 60px;
+  }
+}
+
+/* ========================================
    MOBILE PREMIUM VIDEO PLAYER
 ======================================== */
 
