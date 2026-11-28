@@ -1,20 +1,34 @@
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router";
-import LoginPage from "../pages/Login";
-import RegisterPage from "../pages/Register";
-import HomePage from "../pages/Home";
-import MyListPage from "../pages/MyList";
-import SeriesPage from "../pages/Series";
-import MoviesPage from "../pages/Movies";
-import ProfilePage from "../pages/Profile";
-import WatchMoviePage from "../pages/WatchMovie";
+
+
+
+
+
+
+
+
 import {
   ProtectedRoute,
   PublicRoute,
   AdminRoute,
 } from "../components/ProtectedRoute";
-import SubscriptionPage from "../pages/Subscription";
-import PaymentPage from "../pages/Payment";
-import EditMovieSeries from "../pages/Admin";
+
+
+
+
+// Route-based lazy loading
+const LoginPage = lazy(() => import("../pages/Login"));
+const RegisterPage = lazy(() => import("../pages/Register"));
+const HomePage = lazy(() => import("../pages/Home"));
+const MyListPage = lazy(() => import("../pages/MyList"));
+const SeriesPage = lazy(() => import("../pages/Series"));
+const MoviesPage = lazy(() => import("../pages/Movies"));
+const ProfilePage = lazy(() => import("../pages/Profile"));
+const WatchMoviePage = lazy(() => import("../pages/WatchMovie"));
+const SubscriptionPage = lazy(() => import("../pages/Subscription"));
+const PaymentPage = lazy(() => import("../pages/Payment"));
+const EditMovieSeries = lazy(() => import("../pages/Admin"));
 
 export const router = createBrowserRouter([
   // Halaman khusus pengguna yang belum login
